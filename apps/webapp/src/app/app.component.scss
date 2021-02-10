@@ -4,36 +4,24 @@
   vertical-align: top;
   height: 100%;
 
-  .speek-container {
+  main {
     flex: 1;
-  }
-
-  .speek-content {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    // overflow: hidden;
-    position: relative;
-    &::before {
-      content: ' ';
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      background-image: url('/assets/images/spitfire.svg');
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: 50%;
-      opacity: 0.012;
-      transition: opacity 10s ease-in-out;
-    }
-    &:hover::before {
-      opacity: 0.1;
-    }
-    > main {
+
+    > section {
       flex: 1;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
+    }
+  }
+  router-outlet {
+    display: block;
+    height: 0px;
+    + * {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

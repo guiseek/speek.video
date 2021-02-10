@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-flow: column;
+
+  .mat-form-field {
+    flex: 1;
+  }
+
+  .mat-dialog-actions {
+    flex: 1;
+    justify-content: space-between;
+  }
+}

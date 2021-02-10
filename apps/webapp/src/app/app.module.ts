@@ -1,28 +1,24 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
 import { RouterModule, Routes } from '@angular/router'
+import { LayoutModule } from '@angular/cdk/layout'
 import { NgModule } from '@angular/core'
 
+import { UiComponentsModule, NavbarModule, WaveModule } from '@speek/ui/components'
 import { MaterialModule } from './shared/material.module'
 import { FormsModule } from './shared/forms/forms.module'
 import { DialModule } from './shared/dial/dial.module'
-import { NavbarModule } from './navbar/navbar.module'
-import { AppComponent } from './app.component'
+import { PeerAdapter, SignalingAdapter, StreamAdapter } from './adapters'
+import { DialUpComponent } from './pages/dial-up/dial-up.component'
 import { HomeComponent } from './pages/home/home.component'
 import { RoomComponent } from './pages/room/room.component'
-import { createSpeekIcon } from './utils/speek-icon'
-import { PeerAdapter, SignalingAdapter } from './adapters'
 import { SetupComponent } from './pages/setup/setup.component'
-import { DialUpComponent } from './pages/dial-up/dial-up.component'
+import { createSpeekIcon } from '@speek/util/format'
 import { PortalModule } from '@angular/cdk/portal'
-
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'dial-up', component: DialUpComponent },
-  { path: 'setup/:room', component: SetupComponent },
-  { path: ':room', component: RoomComponent },
-]
+import { AppComponent } from './app.component'
+import { routes } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -34,19 +30,23 @@ const routes: Routes = [
   ],
   imports: [
     PortalModule,
+    WaveModule,
+    NavbarModule,
+    LayoutModule,
     FormsModule,
     DialModule,
     BrowserModule,
     MaterialModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes, {
       useHash: true,
       initialNavigation: 'enabled',
       relativeLinkResolution: 'legacy',
     }),
-    NavbarModule,
+    UiComponentsModule,
     BrowserAnimationsModule,
   ],
-  providers: [PeerAdapter, SignalingAdapter],
+  providers: [PeerAdapter, SignalingAdapter, StreamAdapter],
   bootstrap: [AppComponent],
 })
 export class AppModule {

@@ -1,6 +1,6 @@
 import { BehaviorSubject, Subject } from 'rxjs'
 import { FormControl } from '@angular/forms'
-import { Voice } from '../../../utils/voice'
+import { Voice } from '@speek/core/stream'
 import { takeUntil } from 'rxjs/operators'
 import {
   AfterViewInit,

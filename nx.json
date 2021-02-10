@@ -20,6 +20,9 @@
     "webapp-e2e": { "tags": [], "implicitDependencies": ["webapp"] },
     "gateway": { "tags": [] },
     "core-entity": { "tags": [] },
-    "core-stream": { "tags": [] }
+    "core-stream": { "tags": [] },
+    "ui-components": { "tags": [] },
+    "util-format": { "tags": [] },
+    "ui-stylesheets": { "tags": [] }
   }
 }

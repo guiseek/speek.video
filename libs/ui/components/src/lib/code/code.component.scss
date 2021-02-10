@@ -1,0 +1,14 @@
+:host {
+  display: block;
+  width: 100%;
+  .mat-form-field {
+    width: 100%;
+
+    kbd {
+      display: inline-flex;
+      margin-left: 2px;
+      font-size: 128%;
+      color: white;
+    }
+  }
+}

@@ -1,24 +1,24 @@
-<mat-drawer-container class="speek-container" autosize>
-  <mat-drawer #drawer class="speek-sidenav" position="end" mode="over">
-    <mat-list>
-      <mat-list-item></mat-list-item>
-    </mat-list>
-  </mat-drawer>
-
-  <mat-drawer-content class="speek-content">
+<speek-drawer-shell>
+  <mat-nav-list>
+    <a mat-list-item *ngFor="let nav of fillerNav">
+      {{ nav }}
+    </a>
+  </mat-nav-list>
+  <main>
     <mat-toolbar>
       <a routerLink="/" mat-icon-button>
         <mat-icon svgIcon="speek-dark"></mat-icon>
       </a>
       <span class="spacer"></span>
-      <button mat-icon-button (click)="drawer.toggle()">
+      <button mat-icon-button (click)="drawerShell.toggle()">
         <mat-icon>menu_vert</mat-icon>
       </button>
     </mat-toolbar>
-    <main
+    <section
       [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path"
     >
       <router-outlet #o="outlet"></router-outlet>
-    </main>
-  </mat-drawer-content>
-</mat-drawer-container>
+    </section>
+    <speek-navbar></speek-navbar>
+  </main>
+</speek-drawer-shell>

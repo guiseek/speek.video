@@ -1,5 +1,9 @@
-import { Injectable } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
+import { CodeDialog } from '@speek/ui/components'
+import { Injectable } from '@angular/core'
+import { switchMap } from 'rxjs/operators'
+import { UUID } from '@speek/util/format'
+import { Observable } from 'rxjs'
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -7,26 +11,22 @@ import {
   UrlTree,
   Router,
 } from '@angular/router'
-import { peekCode, validatePeekCode } from '@peek/core/model'
-import { PeekCodeDialog } from '@peek/shared/elements'
-import { Observable } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
-export class MeetGuard implements CanActivate {
+export class RoomGuard implements CanActivate {
   constructor(private _dialog: MatDialog, private _router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | boolean {
     const code = route.paramMap.get('code')
-    if (validatePeekCode(code)) {
+    if (UUID.isValid(code)) {
       return true
     }
     return this._dialog
-      .open(PeekCodeDialog, { data: peekCode() })
+      .open(CodeDialog, { data: UUID.long() })
       .afterClosed()
       .pipe(
         switchMap((response) => this._router.navigate(['/', response ?? '']))

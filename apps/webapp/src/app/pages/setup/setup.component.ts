@@ -1,11 +1,10 @@
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
-import { isDefined, notNull } from '../../utils/util/validations'
 import { PeerAdapter, SignalingAdapter } from '../../adapters'
+import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import { Voice } from '@speek/core/stream'
-import { UUID } from '../../utils/uuid'
 import {
   AfterViewInit,
   Component,

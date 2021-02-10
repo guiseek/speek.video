@@ -9,13 +9,11 @@ import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { WaveComponent } from './wave'
 
 @NgModule({
-  declarations: [CheckboxComponent, WaveComponent, DevicesComponent],
+  declarations: [CheckboxComponent, DevicesComponent],
   exports: [
     CheckboxComponent,
-    WaveComponent,
     DevicesComponent,
     ReactiveFormsModule,
   ],

@@ -4,5 +4,7 @@ module.exports = {
     '<rootDir>/apps/gateway',
     '<rootDir>/libs/core/entity',
     '<rootDir>/libs/core/stream',
+    '<rootDir>/libs/ui/components',
+    '<rootDir>/libs/util/format',
   ],
 }

@@ -9,7 +9,7 @@ import {
 
 export const routerTransition = trigger('routerTransition', [
   transition('* <=> *', [
-    query(':enter, :leave', style({ position: 'fixed', width: '100%' }), {
+    query(':enter, :leave', style({ position: 'fixed', width: '100%', height: '100%' }), {
       optional: true,
     }),
     group([

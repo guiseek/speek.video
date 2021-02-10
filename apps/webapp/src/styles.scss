@@ -4,7 +4,7 @@
 @include mat-core();
 
 $client-primary: mat-palette($speek-black);
-$client-accent: mat-palette($mat-gray);
+$client-accent: mat-palette($mat-orange);
 $client-warn: mat-palette($mat-red);
 
 $peek-typography: mat-typography-config(
@@ -40,7 +40,9 @@ body {
 body .mat-drawer-backdrop.mat-drawer-shown {
   background-color: rgba(0, 0, 0, 0.6);
 }
-
+body .mat-drawer-content {
+  overflow: unset;
+}
 .spacer {
   flex: 1 1 auto;
 }
@@ -52,5 +54,31 @@ body .mat-drawer-backdrop.mat-drawer-shown {
   .mat-expansion-panel-header-title,
   .mat-expansion-panel-header-description {
     flex-basis: 0;
+  }
+}
+
+.flex {
+  display: flex;
+
+  &.row {
+    flex-direction: row;
+  }
+  &.col {
+    flex-direction: column;
+  }
+  > .full {
+    flex: 1;
+  }
+
+  &.align-center {
+    align-items: center;
+  }
+  &.justify-center {
+    justify-content: space-between;
+  }
+
+  &.center-center {
+    align-items: center;
+    justify-content: space-between;
   }
 }

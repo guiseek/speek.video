@@ -24,7 +24,8 @@
     "@nrwl/angular:library": {
       "style": "scss",
       "linter": "eslint",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "strict": true
     },
     "@nrwl/angular:component": {
       "style": "scss"
@@ -49,6 +50,11 @@
             "aot": true,
             "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets"],
             "styles": ["apps/webapp/src/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "libs/ui/stylesheets"
+              ]
+            },
             "allowedCommonJsDependencies": ["socket.io-client"],
             "scripts": []
           },
@@ -234,6 +240,77 @@
           "options": {
             "jestConfig": "libs/core/stream/jest.config.js",
             "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-components": {
+      "projectType": "library",
+      "root": "libs/ui/components",
+      "sourceRoot": "libs/ui/components/src",
+      "prefix": "speek",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "tsConfig": "libs/ui/components/tsconfig.lib.json",
+            "project": "libs/ui/components/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ui/components/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/components/src/**/*.ts",
+              "libs/ui/components/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/components"],
+          "options": {
+            "jestConfig": "libs/ui/components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "util-format": {
+      "root": "libs/util/format",
+      "sourceRoot": "libs/util/format/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/util/format/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/util/format"],
+          "options": {
+            "jestConfig": "libs/util/format/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-stylesheets": {
+      "root": "libs/ui/stylesheets",
+      "sourceRoot": "libs/ui/stylesheets/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui/stylesheets/**/*.ts"]
           }
         }
       }

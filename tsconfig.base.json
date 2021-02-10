@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@speek/core/entity": ["libs/core/entity/src/index.ts"],
-      "@speek/core/stream": ["libs/core/stream/src/index.ts"]
+      "@speek/core/stream": ["libs/core/stream/src/index.ts"],
+      "@speek/ui/components": ["libs/ui/components/src/index.ts"],
+      "@speek/util/format": ["libs/util/format/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
