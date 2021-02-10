@@ -49,6 +49,7 @@
             "aot": true,
             "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets"],
             "styles": ["apps/webapp/src/styles.scss"],
+            "allowedCommonJsDependencies": ["socket.io-client"],
             "scripts": []
           },
           "configurations": {
@@ -84,7 +85,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "webapp:build"
+            "browserTarget": "webapp:build",
+            "proxyConfig": "apps/webapp/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -139,6 +141,99 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/webapp-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "gateway": {
+      "root": "apps/gateway",
+      "sourceRoot": "apps/gateway/src",
+      "projectType": "application",
+      "prefix": "gateway",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/gateway",
+            "main": "apps/gateway/src/main.ts",
+            "tsConfig": "apps/gateway/tsconfig.app.json",
+            "assets": ["apps/gateway/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/gateway/src/environments/environment.ts",
+                  "with": "apps/gateway/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "gateway:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/gateway/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/gateway"],
+          "options": {
+            "jestConfig": "apps/gateway/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-entity": {
+      "root": "libs/core/entity",
+      "sourceRoot": "libs/core/entity/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/entity/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/entity"],
+          "options": {
+            "jestConfig": "libs/core/entity/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core-stream": {
+      "root": "libs/core/stream",
+      "sourceRoot": "libs/core/stream/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/stream/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/stream"],
+          "options": {
+            "jestConfig": "libs/core/stream/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

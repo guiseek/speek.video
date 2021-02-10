@@ -1,6 +1,6 @@
 {
   "npmScope": "speek",
-  "affected": { "defaultBase": "master" },
+  "affected": { "defaultBase": "main" },
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": { "dependencies": "*", "devDependencies": "*" },
@@ -17,6 +17,9 @@
   },
   "projects": {
     "webapp": { "tags": [] },
-    "webapp-e2e": { "tags": [], "implicitDependencies": ["webapp"] }
+    "webapp-e2e": { "tags": [], "implicitDependencies": ["webapp"] },
+    "gateway": { "tags": [] },
+    "core-entity": { "tags": [] },
+    "core-stream": { "tags": [] }
   }
 }

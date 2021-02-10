@@ -1,0 +1,11 @@
+<button
+  type="button"
+  mat-icon-button
+  [color]="color"
+  (click)="clicked.emit(digit)"
+>
+  <ng-container *ngIf="icon; else digitTmpl">
+    <mat-icon>{{ icon }}</mat-icon>
+  </ng-container>
+  <ng-template #digitTmpl>{{ digit }}</ng-template>
+</button>

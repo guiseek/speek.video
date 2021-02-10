@@ -1,0 +1,26 @@
+@import '../../../../theming/palette';
+
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  canvas {
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    bottom: 6px;
+  }
+  .mat-toolbar {
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: $background;
+    justify-content: space-between;
+    .mat-slider {
+      flex: 1;
+    }
+  }
+}

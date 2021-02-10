@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@speek/core/entity": ["libs/core/entity/src/index.ts"],
+      "@speek/core/stream": ["libs/core/stream/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -1,0 +1,17 @@
+<canvas #theCanvas id="theCanvas" width="1024" height="256"></canvas>
+<mat-toolbar>
+  <mat-slider
+    min="-1"
+    max="2"
+    step="0.1"
+    thumbLabel
+    [formControl]="shiftSlider"
+  ></mat-slider>
+  <button
+    mat-icon-button
+    [ngClass]="{ off: !(audio | async) }"
+    (click)="toggleAudio()"
+  >
+    <mat-icon> {{ (audio | async) ? 'mic' : 'mic_off' }} </mat-icon>
+  </button>
+</mat-toolbar>

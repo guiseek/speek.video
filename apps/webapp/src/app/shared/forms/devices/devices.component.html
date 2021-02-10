@@ -1,0 +1,14 @@
+<mat-form-field>
+  <mat-label>{{ label || 'Device' }}</mat-label>
+  <mat-select
+    name="devices"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    (selectionChange)="deviceChange($event.value)"
+  >
+    <mat-option *ngFor="let choice of choices$ | async" [value]="choice">
+      {{ choice.label }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="required && ngControl.invalid">Inválido</mat-error>
+</mat-form-field>

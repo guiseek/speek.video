@@ -1,1 +1,56 @@
+@import '~@angular/material/theming';
+@import 'app/app.theme.scss';
+@import 'theming/palette';
+@include mat-core();
+
+$client-primary: mat-palette($speek-black);
+$client-accent: mat-palette($mat-gray);
+$client-warn: mat-palette($mat-red);
+
+$peek-typography: mat-typography-config(
+  $font-family: '"Montserrat", sans-serif',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500),
+);
+@include angular-material-typography($peek-typography);
+
+$client-theme: mat-dark-theme(
+  (
+    color: (
+      primary: $client-primary,
+      accent: $client-accent,
+      warn: $client-warn,
+    ),
+  )
+);
+
+@include angular-material-theme($client-theme);
+@include app-theme($client-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+body .mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+.headers-align {
+  .mat-expansion-panel-header-title {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mat-expansion-panel-header-title,
+  .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+}
