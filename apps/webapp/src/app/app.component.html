@@ -1,18 +1,13 @@
 <speek-drawer-shell>
-  <mat-nav-list>
-    <a mat-list-item *ngFor="let nav of fillerNav">
-      {{ nav }}
-    </a>
-  </mat-nav-list>
   <main>
     <mat-toolbar>
       <a routerLink="/" mat-icon-button>
         <mat-icon svgIcon="speek-dark"></mat-icon>
       </a>
       <span class="spacer"></span>
-      <button mat-icon-button (click)="drawerShell.toggle()">
+      <!-- <button mat-icon-button (click)="drawerShell.toggle()">
         <mat-icon>menu_vert</mat-icon>
-      </button>
+      </button> -->
     </mat-toolbar>
     <section
       [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path"

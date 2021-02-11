@@ -1,11 +1,11 @@
-@import '../../../../stylesheets/theming';
+// @import '../../../../stylesheets/theming';
 
 :host {
   flex: 1;
   display: flex;
   flex-direction: column;
   position: relative;
-
+  min-height: 80px;
   canvas {
     width: 100%;
     max-width: 100%;
@@ -17,7 +17,8 @@
     max-width: 100%;
     position: absolute;
     bottom: 0;
-    background-color: $background;
+    background-color: transparent;
+    // background-color: $background;
     justify-content: space-between;
     .mat-slider {
       flex: 1;

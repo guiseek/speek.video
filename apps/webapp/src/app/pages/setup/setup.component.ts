@@ -1,9 +1,8 @@
-import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
+import { StreamAdapter } from './../../adapters/stream.adapter'
 import { PeerAdapter, SignalingAdapter } from '../../adapters'
-import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
+import { SpeekPayload } from '@speek/core/entity'
 import { BehaviorSubject, Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
 import { Voice } from '@speek/core/stream'
 import {
   AfterViewInit,
@@ -22,132 +21,74 @@ import {
 export class SetupComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy = new Subject<void>()
 
-  @ViewChild('audioCanvas')
-  _audio = new BehaviorSubject<boolean>(true)
-  audio = this._audio.asObservable()
+  @ViewChild('video')
+  videoRef: ElementRef<HTMLVideoElement>
+  video: HTMLVideoElement
+  videoStream: MediaStream
 
-  @ViewChild('local')
-  localRef: ElementRef<HTMLVideoElement>
-  local: HTMLVideoElement
-  localStream: MediaStream
+  @ViewChild('audio')
+  audioRef: ElementRef<HTMLVideoElement>
+  audio: HTMLVideoElement
+  audioStream: MediaStream
 
-  @ViewChild('remote')
-  remoteRef: ElementRef<HTMLVideoElement>
-  remote: HTMLVideoElement
-  remoteStream: MediaStream
-
-  peer: PeerAdapter
-  sender = UUID.short()
   room: string
-
-  private state = new Subject<RTCSignalingState>()
-  onState = this.state.asObservable()
-
-  private track = new Subject<MediaStream>()
-  onTrack = this.track.asObservable()
 
   constructor(
     private router: Router,
+    private stream: StreamAdapter,
     private route: ActivatedRoute,
     readonly signaling: SignalingAdapter
-    ) {
-      const { room } = this.route.snapshot.params
-      if (room === 'newcode') {
-        this.router.navigate(['/setup', UUID.long()])
-      }
-      this.room = room
-      this.peer = new PeerAdapter()
+  ) {
+    const { room } = this.route.snapshot.params
+    // if (room === 'newcode') {
+    //   this.router.navigate(['/setup', UUID.long()])
+    // }
+    this.room = room
   }
 
-  ngOnInit(): void {
-    this.signaling
-      .on(SpeekAction.Offer)
-      .pipe(takeUntil(this.destroy))
-      .subscribe((payload) => this.handle(payload))
-
-    const payload = new SpeekPayload(this.sender, this.room)
-    this.signaling.send(SpeekAction.CreateOrJoin, payload)
-
-    this.peer.onChange.subscribe((state) => {
-      this.state.next(state.signalingState)
-    })
-
-    this.peer.onCandidate
-      .pipe(takeUntil(this.destroy))
-      .subscribe((candidate) => {
-        if (candidate) {
-          this.sendOffer({ ice: candidate })
-        }
-      })
-
-    this.peer.onTrack.pipe(takeUntil(this.destroy)).subscribe((track) => {
-      this.track.next(track)
-      if (track) {
-        this.remote.srcObject = track
-        track.onremovetrack = (ev) => {
-          this.remote.srcObject = null
-        }
-      }
-    })
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.local = this.localRef.nativeElement
-    this.remote = this.remoteRef.nativeElement
-
-    this.signaling
-      .on(SpeekAction.Created)
-      .subscribe((payload) => this.setLocal(payload))
-
-    this.signaling
-      .on(SpeekAction.Joined)
-      .subscribe((payload) => this.setLocal(payload))
-  }
-
-  async handle({ data, sender }: SpeekPayload) {
-    try {
-      if (sender !== this.sender) {
-        if (notNull(this.peer.connection) && isDefined(data.ice)) {
-          this.peer.addCandidate(data.ice)
-        }
-        if (data.sdp) {
-          this.makeChoice(data.sdp)
-        }
-      }
-    } catch (error) {
-      throw new Error('handle-message: ' + error)
-    }
-  }
-
-  async makeChoice(sdp: RTCSessionDescription) {
-    switch (sdp.type) {
-      case SpeekAction.Offer:
-        return this.peer.createAnswer(sdp).then((answer) => {
-          this.sendOffer({ sdp: answer })
-        })
-      case SpeekAction.Answer:
-        return this.peer.setRemote(sdp)
-    }
+    this.video = this.videoRef.nativeElement
+    this.audio = this.audioRef.nativeElement
   }
 
   setLocal(payload?: SpeekPayload) {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
+        this.video.muted = true
+        this.video.srcObject = stream
+      })
+  }
 
-        this.local.muted = true
-        this.localStream = stream
-        this.local.srcObject = stream
+  onVideoChange(input: MediaDeviceInfo) {
+    console.log(input)
+    this.stream
+      .getStream({
+        video: {
+          optional: [{
+            sourceId: input.deviceId
+          }]
+        }
+      } as MediaStreamConstraints)
+      .then((stream) => {
+        this.videoStream = stream
+        this.video.srcObject = stream
+      })
+  }
 
-        const destination = this.gotVoice(stream)
-
-        const audio = destination.stream.getAudioTracks()
-        this.peer.connection.addTrack(audio.shift(), destination.stream)
-
-        const video = stream.getVideoTracks()
-        this.peer.connection.addTrack(video.shift(), destination.stream)
-
-        this.peer.createOffer().then((sdp) => this.sendOffer({ sdp }))
+  onAudioChange(input: MediaDeviceInfo) {
+    console.log(input)
+    navigator.mediaDevices.getUserMedia({
+        audio: {
+          optional: {
+            sourceId: input.deviceId,
+          },
+        },
+      } as MediaStreamConstraints)
+      .then((stream) => {
+        this.audioStream = stream
       })
   }
 
@@ -173,27 +114,11 @@ export class SetupComponent implements OnInit, AfterViewInit, OnDestroy {
     return destination
   }
 
-  sendOffer(data: SpeekData) {
-    this.signaling.send(
-      SpeekAction.Offer,
-      new SpeekPayload(this.sender, this.room, data)
-    )
-  }
-
-  hangup() {
-
-  }
+  hangup() {}
 
   ngOnDestroy(): void {
-    this.localStream.getTracks().forEach((t) => t.stop())
+    this.stream.currentStream.getTracks().forEach((t) => t.stop())
     this.destroy.next()
     this.destroy.complete()
-    // this.peer.connection.close()
-    if (this.peer?.connection) {
-      console.log('close');
-
-      // this.peer.connection = null
-    }
-    // this.peer = null
   }
 }

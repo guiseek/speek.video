@@ -39,6 +39,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   peer: PeerAdapter
   sender = UUID.short()
   code: string
+  pitch: number
 
   private state = new Subject<RTCSignalingState>()
   onState = this.state.asObservable()
@@ -50,13 +51,17 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     readonly signaling: SignalingAdapter
-    ) {
-      const { code } = this.route.snapshot.params
-      if (code === 'newcode') {
-        this.router.navigate(['/', UUID.long()])
-      }
-      this.code = code
-      this.peer = new PeerAdapter()
+  ) {
+    const { code } = this.route.snapshot.params
+    const { pitch } = this.route.snapshot.queryParams
+    this.pitch = +pitch ?? 1
+    console.log(this.route.snapshot.queryParams)
+
+    if (code === 'newcode') {
+      this.router.navigate(['/', UUID.long()])
+    }
+    this.code = code
+    this.peer = new PeerAdapter()
   }
 
   ngOnInit(): void {
@@ -134,7 +139,6 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
-
         this.local.muted = true
         this.localStream = stream
         this.local.srcObject = stream
@@ -165,7 +169,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     source.connect(delay)
 
     const voice = new Voice(context)
-    voice.setPitchOffset(1)
+    voice.setPitchOffset(this.pitch)
 
     delay.connect(voice.input)
     voice.output.connect(destination)
@@ -183,16 +187,14 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   /**
    * @todo
    */
-  hangup() {
-
-  }
+  hangup() {}
 
   ngOnDestroy(): void {
     this.localStream.getTracks().forEach((t) => t.stop())
     this.destroy.next()
     this.destroy.complete()
     if (this.peer?.connection) {
-      console.log('close');
+      console.log('close')
     }
   }
 }

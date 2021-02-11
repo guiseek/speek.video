@@ -5,15 +5,18 @@ import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms'
 import { WaveComponent } from './wave.component'
 import { CommonModule } from '@angular/common'
-import { NgModule } from '@angular/core'
+import { NgModule } from '@angular/core';
+import { WaveDialog } from './wave.dialog'
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
-  declarations: [WaveComponent],
-  exports: [WaveComponent],
+  declarations: [WaveComponent, WaveDialog],
+  exports: [WaveComponent, WaveDialog],
   imports: [
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
+    MatDialogModule,
     MatIconModule,
     MatSliderModule,
     ReactiveFormsModule,

@@ -20,30 +20,31 @@ import {
 })
 export class WaveComponent implements AfterViewInit, OnDestroy {
   @ViewChild('theCanvas')
-  private _canvas: ElementRef<HTMLCanvasElement>
-  canvas: HTMLCanvasElement
+  private _canvas!: ElementRef<HTMLCanvasElement>
+  canvas!: HTMLCanvasElement
 
   private _audio = new BehaviorSubject<boolean>(true)
   audio = this._audio.asObservable()
 
   destroy = new Subject<void>()
 
-  audioContext: AudioContext
-  mediaStreamSource: MediaStreamAudioSourceNode
-  delay: DelayNode
-  voice: Voice
+  audioContext!: AudioContext
+  mediaStreamSource!: MediaStreamAudioSourceNode
+  delay!: DelayNode
+  voice!: Voice
 
   shiftSlider = new FormControl(1)
 
-  canvasContext: CanvasRenderingContext2D
+  canvasContext!: CanvasRenderingContext2D | null
 
-  dataArray: Uint8Array
-  analyser: AnalyserNode
+  dataArray!: Uint8Array
+  analyser!: AnalyserNode
 
   @Input() color = 'rgba(25, 25, 25, 1)'
   analyserMethod = 'getByteTimeDomainData'
 
   @Output() onStream = new EventEmitter<MediaStream>()
+  @Output() valueChange = new EventEmitter<number>()
 
   ngAfterViewInit(): void {
     this.canvas = this._canvas.nativeElement
@@ -83,6 +84,7 @@ export class WaveComponent implements AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.destroy))
       .subscribe((value) => {
         this.voice.setPitchOffset(value)
+        this.valueChange.emit(value)
       })
 
     if (this.canvasContext) {
@@ -98,28 +100,38 @@ export class WaveComponent implements AfterViewInit, OnDestroy {
     this.analyser.fftSize = 2048
     const bufferLength = this.analyser.frequencyBinCount
     this.dataArray = new Uint8Array(bufferLength)
-    this.canvasContext.lineWidth = 1
-    this.canvasContext.strokeStyle = this.color
-    const drawAgain = () => {
-      this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height)
-      requestAnimationFrame(drawAgain)
-      this.analyser[this.analyserMethod](this.dataArray)
-      for (let i = 0; i < bufferLength; i++) {
-        this.canvasContext.beginPath()
-        this.canvasContext.moveTo(i, 255)
-        this.canvasContext.lineTo(i, 255 - this.dataArray[i])
-        this.canvasContext.closePath()
-        this.canvasContext.stroke()
-      }
-    }
 
-    drawAgain()
+    if (this.canvasContext) {
+      this.canvasContext.lineWidth = 1
+      this.canvasContext.strokeStyle = this.color
+      const drawAgain = () => {
+        if (this.canvasContext) {
+          this.canvasContext.clearRect(
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height
+          )
+          requestAnimationFrame(drawAgain)
+          this.analyser.getByteTimeDomainData(this.dataArray)
+          for (let i = 0; i < bufferLength; i++) {
+            this.canvasContext.beginPath()
+            this.canvasContext.moveTo(i, 255)
+            this.canvasContext.lineTo(i, 255 - this.dataArray[i])
+            this.canvasContext.closePath()
+            this.canvasContext.stroke()
+          }
+        }
+      }
+
+      drawAgain()
+    }
   }
 
   setTracksState(enabled?: boolean) {
     const stream = this.mediaStreamSource?.mediaStream
     if (stream) {
-      stream.getTracks().forEach((t) => (t.enabled = enabled))
+      stream.getTracks().forEach((t) => (t.enabled = !!enabled))
     }
   }
 

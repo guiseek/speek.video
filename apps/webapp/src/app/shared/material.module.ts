@@ -8,6 +8,7 @@ import { MatStepperModule } from '@angular/material/stepper'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
+import { MatGridListModule } from '@angular/material/grid-list'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
@@ -24,6 +25,7 @@ import { MatSliderModule } from '@angular/material/slider'
     MatTabsModule,
     MatIconModule,
     MatSliderModule,
+    MatGridListModule,
     MatInputModule,
     MatButtonModule,
     ScrollingModule,

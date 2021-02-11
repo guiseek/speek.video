@@ -1,3 +1,18 @@
+<mat-grid-list
+  cols="4"
+  rowHeight="fit"
+  [gutterSize]="'1px'"
+  [style.height]="'100px'"
+>
+  <mat-grid-tile *ngFor="let tile of tiles" [colspan]="1" [rowspan]="1">
+    Tile content
+  </mat-grid-tile>
+</mat-grid-list>
+
+<!-- <figure>
+  <img src="assets/images/network-dark.svg" alt="Network">
+</figure> -->
+
 <!-- <speek-wave></speek-wave> -->
 <!-- <mat-horizontal-stepper #stepper labelPosition="bottom" color="accent">
   <mat-step [stepControl]="videoGroup" label="Vídeo" state="video">

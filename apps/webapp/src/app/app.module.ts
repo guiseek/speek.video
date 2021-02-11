@@ -19,6 +19,7 @@ import { createSpeekIcon } from '@speek/util/format'
 import { PortalModule } from '@angular/cdk/portal'
 import { AppComponent } from './app.component'
 import { routes } from './app.routing';
+import { HallComponent } from './pages/hall/hall.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { routes } from './app.routing';
     RoomComponent,
     SetupComponent,
     DialUpComponent,
+    HallComponent,
   ],
   imports: [
     PortalModule,

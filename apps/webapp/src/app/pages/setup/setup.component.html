@@ -1,3 +1,26 @@
+<section>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-subtitle>Vídeoa</mat-card-subtitle>
+    </mat-card-header>
 
-<video class="local" #local autoplay playsinline muted></video>
-<video class="remote" #remote autoplay playsinline muted></video>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <speek-devices
+      kind="videoinput"
+      (valueChange)="onVideoChange($event)"
+      ></speek-devices>
+    </mat-card-content>
+    <video class="video" poster="assets/images/speek-dark.svg" #video autoplay playsinline muted></video>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Áudio</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <audio class="audio" #audio autoplay playsinline muted></audio>
+    </mat-card-content>
+  </mat-card>
+</section>

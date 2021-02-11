@@ -1,0 +1,17 @@
+<h1 matDialogTitle>Sua voz</h1>
+
+<mat-dialog-content>
+  <speek-wave (valueChange)="onChange($event)"></speek-wave>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button matDialogClose>Pular</button>
+  <button
+    type="button"
+    color="accent"
+    mat-stroked-button
+    (click)="onConfirm()"
+  >
+    Continuar
+  </button>
+</mat-dialog-actions>

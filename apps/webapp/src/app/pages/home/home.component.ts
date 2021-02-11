@@ -29,6 +29,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   isLinear = false
 
+  tiles = [
+    { path: '/newcode', label: 'Room', icon: 'meeting_room' },
+    { path: '/newcode/hall', label: 'Hall', icon: 'mic' }
+  ]
+
   videoGroup: FormGroup = this._fb.group({
     video: ['', Validators.required],
   })
