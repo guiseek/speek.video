@@ -15,6 +15,13 @@ export class StreamAdapter {
     }
   }
 
+  /**
+   * Return user available devices
+   *
+   * @param {MediaDeviceKind} [deviceKind]
+   * @returns
+   * @memberof StreamAdapter
+   */
   async getDevices(deviceKind?: MediaDeviceKind) {
     const filter = ({ kind }: MediaDeviceInfo) => kind === deviceKind
     const devices = await navigator.mediaDevices.enumerateDevices()
