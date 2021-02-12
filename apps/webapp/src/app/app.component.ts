@@ -1,8 +1,6 @@
-import {
-  Component,
-} from '@angular/core'
+import { DrawerService } from '@speek/ui/components'
 import { routerTransition } from './app.animation'
-import { DrawerShellService } from '@speek/ui/components'
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'speek-root',
@@ -11,5 +9,5 @@ import { DrawerShellService } from '@speek/ui/components'
   animations: [routerTransition],
 })
 export class AppComponent {
-  constructor(readonly drawerShell: DrawerShellService) {}
+  constructor(readonly drawer: DrawerService) {}
 }

@@ -1,5 +1,3 @@
-// @import '../../../../stylesheets/theming';
-
 :host {
   flex: 1;
   display: flex;
@@ -10,7 +8,7 @@
     width: 100%;
     max-width: 100%;
     position: absolute;
-    bottom: 6px;
+    bottom: 0;
   }
   .mat-toolbar {
     width: 100%;
@@ -18,7 +16,6 @@
     position: absolute;
     bottom: 0;
     background-color: transparent;
-    // background-color: $background;
     justify-content: space-between;
     .mat-slider {
       flex: 1;

@@ -1,4 +1,4 @@
-import { SpeekData } from "./speek-data";
+import { SpeekData } from './speek-data'
 
 export interface SpeekPayload {
   sender: string

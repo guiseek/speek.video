@@ -1,13 +1,13 @@
-<speek-drawer-shell>
+<speek-drawer>
   <main>
     <mat-toolbar>
       <a routerLink="/" mat-icon-button>
         <mat-icon svgIcon="speek-dark"></mat-icon>
       </a>
       <span class="spacer"></span>
-      <!-- <button mat-icon-button (click)="drawerShell.toggle()">
+      <button mat-icon-button (click)="drawer.toggle()">
         <mat-icon>menu_vert</mat-icon>
-      </button> -->
+      </button>
     </mat-toolbar>
     <section
       [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path"
@@ -16,4 +16,4 @@
     </section>
     <speek-navbar></speek-navbar>
   </main>
-</speek-drawer-shell>
+</speek-drawer>

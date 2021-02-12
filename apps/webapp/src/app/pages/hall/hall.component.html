@@ -1,1 +1,8 @@
-<p>hall works!</p>
+<section>
+  <h3 class="mat-display-1">
+    Ajuste sua voz deslizando o para esquerda e direita
+  </h3>
+
+  <button type="button" (click)="onClick()" mat-stroked-button>Entrar</button>
+</section>
+<speek-wave (valueChange)="onChange($event)"></speek-wave>

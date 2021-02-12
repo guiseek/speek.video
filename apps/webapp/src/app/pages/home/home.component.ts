@@ -1,37 +1,26 @@
-import { takeUntil, takeWhile } from 'rxjs/operators'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core'
-import { MatHorizontalStepper } from '@angular/material/stepper'
-import { StreamAdapter } from './../../adapters/stream.adapter'
-import { from, Subject } from 'rxjs'
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { BehaviorSubject, Subject } from 'rxjs'
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
+import { tap } from 'rxjs/operators'
+import { MatInput } from '@angular/material/input'
 
 @Component({
   selector: 'speek-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [
-    {
-      provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { displayDefaultIndicatorType: false },
-    },
-  ],
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
   // @ViewChild('stepper') stepper: MatHorizontalStepper
   destroy = new Subject<void>()
 
-  isLinear = false
+  code = new FormControl('', Validators.required)
+
+  enter = false
+  doorOpen = false
 
   tiles = [
     { path: '/newcode', label: 'Room', icon: 'meeting_room' },
-    { path: '/newcode/hall', label: 'Hall', icon: 'mic' }
+    { path: '/newcode/hall', label: 'Hall', icon: 'mic' },
   ]
 
   videoGroup: FormGroup = this._fb.group({
@@ -44,34 +33,24 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     pitch: [1, Validators.required],
   })
 
-  constructor(private _fb: FormBuilder, private _stream: StreamAdapter) {}
+  @ViewChild(MatInput)
+  private input: MatInput
+
+  comeInOut = new BehaviorSubject<boolean>(false)
+
+  constructor(private _fb: FormBuilder) {}
 
   ngAfterViewInit(): void {
-    console.log(this._stream)
-    // console.log(this.stepper)
-    // from(this.stepper.selectionChange)
-    //   .pipe(
-    //     takeUntil(this.destroy),
-    //     takeWhile((v) => v.selectedIndex === 1)
-    //   )
-    //   .subscribe(() => {})
-    // this.stepper.selectionChange
-    //   .pipe(takeUntil(this.destroy))
-    //   .subscribe(async ({ selectedIndex }) => {
-    //     console.log(selectedIndex)
-    //     if (selectedIndex === 0) {
-    //       this._stream.getStream({ video: true }).then((stream) => {
-    //         console.log(stream)
-    //       })
-    //     } else {
-    //       this._stream.stopStream()
-    //     }
-    //     if (selectedIndex === 1) {
-    //       this._stream.getStream({ audio: true })
-    //     } else {
-    //       this._stream.stopStream()
-    //     }
-    //   })
+    this.comeInOut
+      .pipe(
+        tap((v) => {
+          console.log(v, this.input)
+          if (v) {
+            setTimeout(() => this.input.focus(), 500)
+          }
+        })
+      )
+      .subscribe()
   }
 
   ngOnInit() {}

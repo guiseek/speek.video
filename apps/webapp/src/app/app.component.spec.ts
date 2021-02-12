@@ -1,4 +1,4 @@
-import { UiComponentsModule } from '@speek/ui/components';
+import { UiComponentsModule } from '@speek/ui/components'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatIconRegistry } from '@angular/material/icon'
 import { RouterTestingModule } from '@angular/router/testing'

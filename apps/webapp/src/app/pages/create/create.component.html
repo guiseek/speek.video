@@ -1,0 +1,11 @@
+<p>create works!</p>
+
+<speek-door [comeInOut]="comeInOut"></speek-door>
+
+<mat-form-field [ngClass]="{ active: (comeInOut | async) }">
+  <input type="text" matInput [formControl]="code" />
+</mat-form-field>
+
+<button type="button" mat-button (click)="comeInOut.next(!comeInOut.value)">
+  {{ (comeInOut | async) ? 'Sair' : 'Entrar' }}
+</button>

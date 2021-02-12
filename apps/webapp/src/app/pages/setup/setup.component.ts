@@ -1,9 +1,8 @@
-import { StreamAdapter } from './../../adapters/stream.adapter'
-import { PeerAdapter, SignalingAdapter } from '../../adapters'
+import { SignalingAdapter, StreamAdapter } from '@speek/core/adapter'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SpeekPayload } from '@speek/core/entity'
-import { BehaviorSubject, Subject } from 'rxjs'
 import { Voice } from '@speek/core/stream'
+import { Subject } from 'rxjs'
 import {
   AfterViewInit,
   Component,
@@ -67,10 +66,12 @@ export class SetupComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stream
       .getStream({
         video: {
-          optional: [{
-            sourceId: input.deviceId
-          }]
-        }
+          optional: [
+            {
+              sourceId: input.deviceId,
+            },
+          ],
+        },
       } as MediaStreamConstraints)
       .then((stream) => {
         this.videoStream = stream
@@ -80,7 +81,8 @@ export class SetupComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onAudioChange(input: MediaDeviceInfo) {
     console.log(input)
-    navigator.mediaDevices.getUserMedia({
+    navigator.mediaDevices
+      .getUserMedia({
         audio: {
           optional: {
             sourceId: input.deviceId,

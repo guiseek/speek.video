@@ -3,10 +3,10 @@ import {
   FormControl,
   NgControl,
   NG_VALUE_ACCESSOR,
-} from '@angular/forms';
-import { ControlAccessor } from '../control-accessor';
-import { EventInputTarget } from '../event-input';
-import { Subject } from 'rxjs';
+} from '@angular/forms'
+import { ControlAccessor } from '../control-accessor'
+import { EventInputTarget } from '../event-input'
+import { Subject } from 'rxjs'
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -21,7 +21,7 @@ import {
   Output,
   Self,
   ViewChild,
-} from '@angular/core';
+} from '@angular/core'
 
 @Injectable()
 export class CheckboxAccessor extends ControlAccessor {}
@@ -30,9 +30,9 @@ const CheckboxProvider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => CheckboxAccessor),
   multi: true,
-};
+}
 
-let nextId = 0;
+let nextId = 0
 
 @Component({
   selector: 'speek-checkbox',
@@ -67,65 +67,66 @@ let nextId = 0;
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CheckboxAccessor, CheckboxProvider],
 })
-export class CheckboxComponent extends CheckboxAccessor
+export class CheckboxComponent
+  extends CheckboxAccessor
   implements AfterContentInit, OnDestroy {
-  destroy$ = new Subject<void>();
+  destroy$ = new Subject<void>()
 
-  @ViewChild('input', { static: true }) _el!: ElementRef<HTMLInputElement>;
+  @ViewChild('input', { static: true }) _el!: ElementRef<HTMLInputElement>
   get el() {
-    return this._el.nativeElement;
+    return this._el.nativeElement
   }
 
-  private _id = `form-checkbox-${nextId++}`;
+  private _id = `form-checkbox-${nextId++}`
 
   @Input()
   public set value(value: any) {
-    this._value = value;
+    this._value = value
   }
   public get value(): any {
-    return this._value;
+    return this._value
   }
 
   @Input()
   public set id(value: string) {
-    this._id = value;
+    this._id = value
   }
   public get id(): string {
-    return this._id;
+    return this._id
   }
 
   @Input()
   public set disabled(value: boolean) {
-    this._disabled = value;
+    this._disabled = value
   }
 
   @Output()
-  valueChange = new EventEmitter<any>();
+  valueChange = new EventEmitter<any>()
 
   @Output()
-  checkedChange = new EventEmitter<CheckboxComponent>();
+  checkedChange = new EventEmitter<CheckboxComponent>()
 
-  control!: AbstractControl;
+  control!: AbstractControl
 
   constructor(@Optional() @Self() public ngControl: NgControl) {
-    super();
+    super()
   }
 
   ngAfterContentInit() {
     this.control = this.ngControl?.control
       ? this.ngControl?.control
-      : new FormControl();
+      : new FormControl()
   }
 
   onChangeEvent({ target }: EventInputTarget) {
     if (target.value) {
-      this.onChange(target.value);
+      this.onChange(target.value)
     }
-    this.checkedChange.emit(this);
-    this.valueChange.emit(target.value);
+    this.checkedChange.emit(this)
+    this.valueChange.emit(target.value)
   }
 
   ngOnDestroy() {
-    this.destroy$.complete();
+    this.destroy$.complete()
   }
 }

@@ -100,7 +100,7 @@ export class DevicesComponent extends ControlAccessor implements OnInit {
   }
 
   setUpChoices(deviceKind?: MediaDeviceKind) {
-    console.log(deviceKind);
+    console.log(deviceKind)
 
     getDevices(deviceKind).then((devices) => this._choices.next(devices))
   }

@@ -1,7 +1,7 @@
-import { DrawerShellComponent } from './drawer-shell/drawer-shell.component'
 import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatSidenavModule } from '@angular/material/sidenav'
+import { DrawerComponent } from './drawer/drawer.component'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatButtonModule } from '@angular/material/button'
 import { ClipboardModule } from '@angular/cdk/clipboard'
@@ -26,7 +26,7 @@ import { NgModule } from '@angular/core'
     ReactiveFormsModule,
     MatSidenavModule,
   ],
-  declarations: [DrawerShellComponent, CodeComponent, CodeDialog],
-  exports: [DrawerShellComponent, CodeComponent, CodeDialog],
+  declarations: [CodeComponent, CodeDialog, DrawerComponent],
+  exports: [CodeComponent, CodeDialog, DrawerComponent],
 })
 export class UiComponentsModule {}

@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  gateway: 'http://localhost:3000',
+  gateway: {
+    url: 'http://localhost:3000',
+  },
   configs: {
     iceServers: [{ urls: 'stun:stun.stunprotocol.org:3478' }],
   },
