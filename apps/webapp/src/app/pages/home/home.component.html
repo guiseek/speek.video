@@ -1,10 +1,14 @@
-<mat-card color="primary">
-  <mat-nav-list>
-    <h3 mat-subheader>Chamadas</h3>
-    <a mat-list-item routerLink="/newcode">
-      <mat-icon mat-list-icon>voice_chat</mat-icon>
-      <h3 mat-line>Crie uma sala</h3>
-      <small class="mat-small mat-hint" mat-line>Áudio e vídeo</small>
-    </a>
-  </mat-nav-list>
+<mat-card>
+  <mat-card-header>
+    <h3 mat-card-subtitle>Frequência</h3>
+  </mat-card-header>
+  <speek-frequency></speek-frequency>
 </mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <h3 mat-card-subtitle>Osciloscópio</h3>
+  </mat-card-header>
+  <speek-oscilloscope></speek-oscilloscope>
+</mat-card>
+

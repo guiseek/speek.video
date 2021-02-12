@@ -27,6 +27,7 @@ import {
   NetworkModule,
   DoorModule,
   DialpadModule,
+  AudioModule,
 } from '@speek/ui/components'
 
 @NgModule({
@@ -43,6 +44,7 @@ import {
     PortalModule,
     WaveModule,
     DoorModule,
+    AudioModule,
     DialpadModule,
     NetworkModule,
     NavbarModule,

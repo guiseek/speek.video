@@ -1,5 +1,6 @@
 export * from './lib/drawer/drawer.service'
 export * from './lib/ui-components.module'
+export * from './lib/audio'
 export * from './lib/network'
 export * from './lib/dialpad'
 export * from './lib/options'

@@ -74,6 +74,7 @@
     "@nrwl/node": "11.2.10",
     "@nrwl/tao": "11.2.10",
     "@nrwl/workspace": "11.2.10",
+    "@types/dom-mediacapture-record": "^1.0.7",
     "@types/jest": "26.0.8",
     "@types/node": "12.12.38",
     "@types/socket.io": "^2.1.13",
