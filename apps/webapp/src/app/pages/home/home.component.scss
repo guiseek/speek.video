@@ -5,10 +5,13 @@
   position: relative;
 
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 
   .mat-card {
     padding: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: rgba(0,0,0,0.2);
   }
 
   .mat-form-field {

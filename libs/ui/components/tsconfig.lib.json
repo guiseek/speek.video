@@ -6,7 +6,7 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": [],
+    "types": ["node", "dom-mediacapture-record"],
     "lib": ["dom", "es2018"]
   },
   "angularCompilerOptions": {

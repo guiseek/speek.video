@@ -38,9 +38,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   comeInOut = new BehaviorSubject<boolean>(false)
 
+  ready = false
   constructor(private _fb: FormBuilder) {}
 
   ngAfterViewInit(): void {
+    this.ready = true
     this.comeInOut
       .pipe(
         tap((v) => {
