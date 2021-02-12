@@ -19,9 +19,12 @@ export class RoomGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> | boolean {
     const code = route.paramMap.get('code')
-    if (UUID.isValid(code)) {
+    // if (UUID.isValid(code)) {
+    if (typeof code === 'string' && code !== 'newcode') {
       return true
     }
-    return this._router.navigate(['/', code, 'hall'])
+    return this._router.navigate(['/', UUID.short(), 'hall'], {
+      queryParams: { pitch: 0 },
+    })
   }
 }

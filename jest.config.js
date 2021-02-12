@@ -6,5 +6,6 @@ module.exports = {
     '<rootDir>/libs/core/stream',
     '<rootDir>/libs/ui/components',
     '<rootDir>/libs/util/format',
+    '<rootDir>/libs/core/adapter',
   ],
 }

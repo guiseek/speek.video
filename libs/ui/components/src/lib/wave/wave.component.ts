@@ -27,30 +27,22 @@ export class WaveComponent implements AfterViewInit, OnDestroy {
   audio = this._audio.asObservable()
 
   destroy = new Subject<void>()
+  shiftSlider = new FormControl(1)
 
   audioContext!: AudioContext
   mediaStreamSource!: MediaStreamAudioSourceNode
   delay!: DelayNode
   voice!: Voice
 
-  shiftSlider = new FormControl(1)
-
-  canvasContext!: CanvasRenderingContext2D | null
-
-  dataArray!: Uint8Array
   analyser!: AnalyserNode
 
-  @Input() color = 'rgba(25, 25, 25, 1)'
-  analyserMethod = 'getByteTimeDomainData'
+  @Input() color = '#212121'
 
   @Output() onStream = new EventEmitter<MediaStream>()
   @Output() valueChange = new EventEmitter<number>()
 
   ngAfterViewInit(): void {
     this.canvas = this._canvas.nativeElement
-    if (this.canvas) {
-      this.canvasContext = this.canvas.getContext('2d')
-    }
 
     this.audioContext = new AudioContext()
 
@@ -87,9 +79,7 @@ export class WaveComponent implements AfterViewInit, OnDestroy {
         this.valueChange.emit(value)
       })
 
-    if (this.canvasContext) {
-      this.startDrawing()
-    }
+    this.startDrawing()
   }
 
   error = (message: Error) => {
@@ -97,34 +87,33 @@ export class WaveComponent implements AfterViewInit, OnDestroy {
   }
 
   startDrawing() {
-    this.analyser.fftSize = 2048
-    const bufferLength = this.analyser.frequencyBinCount
-    this.dataArray = new Uint8Array(bufferLength)
+    let canvasContext: CanvasRenderingContext2D | null
+    if (this.canvas) {
+      canvasContext = this.canvas.getContext('2d')
 
-    if (this.canvasContext) {
-      this.canvasContext.lineWidth = 1
-      this.canvasContext.strokeStyle = this.color
-      const drawAgain = () => {
-        if (this.canvasContext) {
-          this.canvasContext.clearRect(
-            0,
-            0,
-            this.canvas.width,
-            this.canvas.height
-          )
-          requestAnimationFrame(drawAgain)
-          this.analyser.getByteTimeDomainData(this.dataArray)
-          for (let i = 0; i < bufferLength; i++) {
-            this.canvasContext.beginPath()
-            this.canvasContext.moveTo(i, 255)
-            this.canvasContext.lineTo(i, 255 - this.dataArray[i])
-            this.canvasContext.closePath()
-            this.canvasContext.stroke()
+      this.analyser.fftSize = 2048
+      const bufferLength = this.analyser.frequencyBinCount
+      const dataArray = new Uint8Array(bufferLength)
+
+      if (canvasContext) {
+        canvasContext.lineWidth = 1
+        canvasContext.strokeStyle = this.color
+        const drawAgain = () => {
+          if (canvasContext) {
+            canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height)
+            requestAnimationFrame(drawAgain)
+            this.analyser.getByteTimeDomainData(dataArray)
+            for (let i = 0; i < bufferLength; i++) {
+              canvasContext.beginPath()
+              canvasContext.moveTo(i, 255)
+              canvasContext.lineTo(i, 255 - dataArray[i])
+              canvasContext.closePath()
+              canvasContext.stroke()
+            }
           }
         }
+        drawAgain()
       }
-
-      drawAgain()
     }
   }
 

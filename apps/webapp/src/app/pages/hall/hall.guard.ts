@@ -10,13 +10,30 @@ import {
   RouterStateSnapshot,
   UrlTree,
   Router,
+  CanDeactivate,
 } from '@angular/router'
+import { HallComponent } from './hall.component'
 
 @Injectable({
   providedIn: 'root',
 })
-export class HallGuard implements CanActivate {
+export class HallGuard implements CanActivate, CanDeactivate<HallComponent> {
   constructor(private _dialog: MatDialog, private _router: Router) {}
+  canDeactivate(
+    component: HallComponent,
+    currentRoute: ActivatedRouteSnapshot,
+    currentState: RouterStateSnapshot,
+    nextState?: RouterStateSnapshot
+  ):
+    | boolean
+    | UrlTree
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree> {
+    console.log(currentRoute)
+    console.log(currentState)
+    console.log(nextState)
+    return true
+  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -34,8 +51,8 @@ export class HallGuard implements CanActivate {
       .afterClosed()
       .pipe(
         switchMap(({ response, pitch }) => {
-          console.log('response: ', response);
-          console.log('pitch: ', pitch);
+          console.log('response: ', response)
+          console.log('pitch: ', pitch)
 
           return this._router.navigate(['/', response ?? ''], {
             queryParams: { pitch },

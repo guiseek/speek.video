@@ -1,6 +1,6 @@
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
 import { isDefined, notNull, UUID } from '@speek/util/format'
-import { PeerAdapter, SignalingAdapter } from '../../adapters'
+import { PeerAdapter, SignalingAdapter } from '@speek/core/adapter'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -36,7 +36,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   remote: HTMLVideoElement
   remoteStream: MediaStream
 
-  peer: PeerAdapter
+  // peer: PeerAdapter
   sender = UUID.short()
   code: string
   pitch: number
@@ -49,6 +49,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private peer: PeerAdapter,
     private route: ActivatedRoute,
     readonly signaling: SignalingAdapter
   ) {
@@ -61,7 +62,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
       this.router.navigate(['/', UUID.long()])
     }
     this.code = code
-    this.peer = new PeerAdapter()
+    // this.peer = new PeerAdapter()
   }
 
   ngOnInit(): void {

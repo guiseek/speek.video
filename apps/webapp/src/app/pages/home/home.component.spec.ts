@@ -1,4 +1,4 @@
-import { StreamAdapter } from './../../adapters/stream.adapter';
+import { StreamAdapter } from './../../adapters/stream.adapter'
 import { MaterialModule } from './../../shared/material.module'
 import { ReactiveFormsModule } from '@angular/forms'
 import { ComponentFixture, TestBed } from '@angular/core/testing'

@@ -1,6 +1,8 @@
 @import '~@angular/material/theming';
 @import 'app/app.theme.scss';
 @import 'theming/palette';
+@import 'animtions';
+
 @include mat-core();
 
 $client-primary: mat-palette($speek-black);

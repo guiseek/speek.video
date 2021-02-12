@@ -7,11 +7,18 @@
     <mat-divider></mat-divider>
     <mat-card-content>
       <speek-devices
-      kind="videoinput"
-      (valueChange)="onVideoChange($event)"
+        kind="videoinput"
+        (valueChange)="onVideoChange($event)"
       ></speek-devices>
     </mat-card-content>
-    <video class="video" poster="assets/images/speek-dark.svg" #video autoplay playsinline muted></video>
+    <video
+      class="video"
+      poster="assets/images/speek-dark.svg"
+      #video
+      autoplay
+      playsinline
+      muted
+    ></video>
   </mat-card>
 
   <mat-card>

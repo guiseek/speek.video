@@ -1,12 +1,8 @@
-:root {
-
-}
-
 :host {
-  --hack-color-cyan: #93C2DB;
-  --hack-color-pink: #FF8AE2;
-  --hack-color-blue: #072540;
-  --hack-color-wine: #9C4668;
+  --speek-color-cyan: #93c2db;
+  --speek-color-pink: #ff8ae2;
+  --speek-color-blue: #072540;
+  --speek-color-wine: #9c4668;
 
   display: block;
 
@@ -70,19 +66,21 @@
 
   svg path {
     // stroke: rgba(255, 138, 226, 1);
-    stroke: var(--hack-color-pink);
+    stroke: var(--speek-color-pink);
     stroke-width: 13px;
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
-    transition: 0.8s stroke-dasharray ease, 0.8s stroke-dashoffset ease, 0.8s stroke ease;
+    transition: 0.8s stroke-dasharray ease, 0.8s stroke-dashoffset ease,
+      0.8s stroke ease;
   }
 
   /* Check */
   .speek-checkbox-container input[type='checkbox'] + label svg path {
     stroke-dasharray: 100px 200px;
     stroke-dashoffset: 101px;
-    transition: 0.2s stroke-dasharray ease, 0.2s stroke-dashoffset ease, 0.2s stroke ease;
+    transition: 0.2s stroke-dasharray ease, 0.2s stroke-dashoffset ease,
+      0.2s stroke ease;
   }
 
   .speek-checkbox-container input[type='checkbox']:checked + label svg path {

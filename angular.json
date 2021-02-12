@@ -51,9 +51,7 @@
             "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets"],
             "styles": ["apps/webapp/src/styles.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "libs/ui/stylesheets"
-              ]
+              "includePaths": ["libs/ui/stylesheets"]
             },
             "allowedCommonJsDependencies": ["socket.io-client"],
             "scripts": []
@@ -311,6 +309,27 @@
           "builder": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["libs/ui/stylesheets/**/*.ts"]
+          }
+        }
+      }
+    },
+    "core-adapter": {
+      "root": "libs/core/adapter",
+      "sourceRoot": "libs/core/adapter/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/core/adapter/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/core/adapter"],
+          "options": {
+            "jestConfig": "libs/core/adapter/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

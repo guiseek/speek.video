@@ -1,25 +1,33 @@
-import { ReactiveFormsModule } from '@angular/forms';
+import { PeerProvider, SignalingProvider, StreamProvider } from './app.adapter'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
-import { RouterModule, Routes } from '@angular/router'
+import { ReactiveFormsModule } from '@angular/forms'
 import { LayoutModule } from '@angular/cdk/layout'
+import { RouterModule} from '@angular/router'
 import { NgModule } from '@angular/core'
 
-import { UiComponentsModule, NavbarModule, WaveModule } from '@speek/ui/components'
+import { environment } from './../environments/environment'
+import { DialupComponent } from './pages/dialup/dialup.component'
+import { CreateComponent } from './pages/create/create.component'
 import { MaterialModule } from './shared/material.module'
 import { FormsModule } from './shared/forms/forms.module'
-import { DialModule } from './shared/dial/dial.module'
-import { PeerAdapter, SignalingAdapter, StreamAdapter } from './adapters'
-import { DialUpComponent } from './pages/dial-up/dial-up.component'
 import { HomeComponent } from './pages/home/home.component'
 import { RoomComponent } from './pages/room/room.component'
 import { SetupComponent } from './pages/setup/setup.component'
+import { HallComponent } from './pages/hall/hall.component'
 import { createSpeekIcon } from '@speek/util/format'
 import { PortalModule } from '@angular/cdk/portal'
 import { AppComponent } from './app.component'
-import { routes } from './app.routing';
-import { HallComponent } from './pages/hall/hall.component';
+import { routes } from './app.routing'
+import {
+  UiComponentsModule,
+  NavbarModule,
+  WaveModule,
+  NetworkModule,
+  DoorModule,
+  DialpadModule,
+} from '@speek/ui/components'
 
 @NgModule({
   declarations: [
@@ -27,16 +35,19 @@ import { HallComponent } from './pages/hall/hall.component';
     HomeComponent,
     RoomComponent,
     SetupComponent,
-    DialUpComponent,
     HallComponent,
+    DialupComponent,
+    CreateComponent,
   ],
   imports: [
     PortalModule,
     WaveModule,
+    DoorModule,
+    DialpadModule,
+    NetworkModule,
     NavbarModule,
     LayoutModule,
     FormsModule,
-    DialModule,
     BrowserModule,
     MaterialModule,
     ReactiveFormsModule,
@@ -48,7 +59,11 @@ import { HallComponent } from './pages/hall/hall.component';
     UiComponentsModule,
     BrowserAnimationsModule,
   ],
-  providers: [PeerAdapter, SignalingAdapter, StreamAdapter],
+  providers: [
+    PeerProvider.config(environment.configs),
+    StreamProvider.config(environment.constraints),
+    SignalingProvider.config(environment.gateway),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

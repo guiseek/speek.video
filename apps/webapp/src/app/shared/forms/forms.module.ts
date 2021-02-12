@@ -12,11 +12,7 @@ import { NgModule } from '@angular/core'
 
 @NgModule({
   declarations: [CheckboxComponent, DevicesComponent],
-  exports: [
-    CheckboxComponent,
-    DevicesComponent,
-    ReactiveFormsModule,
-  ],
+  exports: [CheckboxComponent, DevicesComponent, ReactiveFormsModule],
   imports: [
     CommonModule,
     MatIconModule,
