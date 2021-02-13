@@ -11,6 +11,11 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'dialup', component: DialupComponent },
   // { path: 'new', canDeactivate: [CreateGuard], component: CreateComponent },
+  {
+    path: 'setup',
+    loadChildren: () =>
+      import('./pages/setup/setup.module').then((m) => m.SetupModule),
+  },
   { path: 'hall', canDeactivate: [HallGuard], component: HallComponent },
   { path: 'setup/:room', component: SetupComponent },
   { path: ':code', canActivate: [RoomGuard], component: RoomComponent },

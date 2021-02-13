@@ -2,18 +2,15 @@
   <main>
     <mat-toolbar>
       <a routerLink="/" mat-icon-button>
-        <mat-icon svgIcon="speek-dark"></mat-icon>
+        <mat-icon svgIcon="speek-logo"></mat-icon>
       </a>
       <span class="spacer"></span>
-      <button mat-icon-button (click)="drawer.toggle()">
-        <mat-icon>menu_vert</mat-icon>
-      </button>
+      <span class="brand-name">speek</span>
     </mat-toolbar>
     <section
       [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path"
     >
       <router-outlet #o="outlet"></router-outlet>
     </section>
-    <speek-navbar></speek-navbar>
   </main>
 </speek-drawer>
