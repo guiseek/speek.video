@@ -1,4 +1,8 @@
-import { SignalingAdapter, StreamAdapter } from '@speek/core/adapter'
+import {
+  SignalingAdapter,
+  StreamAdapter,
+  UserSetupAdapter,
+} from '@speek/core/adapter'
 import { ActivatedRoute, Router } from '@angular/router'
 import { SpeekPayload } from '@speek/core/entity'
 import { Voice } from '@speek/core/stream'
@@ -20,6 +24,8 @@ import {
 export class SetupComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy = new Subject<void>()
 
+  activeLink = 'audio'
+
   @ViewChild('video')
   videoRef: ElementRef<HTMLVideoElement>
   video: HTMLVideoElement
@@ -30,26 +36,21 @@ export class SetupComponent implements OnInit, AfterViewInit, OnDestroy {
   audio: HTMLVideoElement
   audioStream: MediaStream
 
-  room: string
-
   constructor(
-    private router: Router,
     private stream: StreamAdapter,
     private route: ActivatedRoute,
-    readonly signaling: SignalingAdapter
-  ) {
-    const { room } = this.route.snapshot.params
-    // if (room === 'newcode') {
-    //   this.router.navigate(['/setup', UUID.long()])
-    // }
-    this.room = room
+    readonly userSetup: UserSetupAdapter
+  ) {}
+
+  ngOnInit(): void {
+    this.userSetup.camera.subscribe((camera) => {
+      console.log(camera)
+    })
   }
 
-  ngOnInit(): void {}
-
   ngAfterViewInit(): void {
-    this.video = this.videoRef.nativeElement
-    this.audio = this.audioRef.nativeElement
+    // this.video = this.videoRef.nativeElement
+    // this.audio = this.audioRef.nativeElement
   }
 
   setLocal(payload?: SpeekPayload) {
@@ -78,6 +79,8 @@ export class SetupComponent implements OnInit, AfterViewInit, OnDestroy {
         this.video.srcObject = stream
       })
   }
+
+  getFromDevice(source) {}
 
   onAudioChange(input: MediaDeviceInfo) {
     console.log(input)
@@ -119,7 +122,7 @@ export class SetupComponent implements OnInit, AfterViewInit, OnDestroy {
   hangup() {}
 
   ngOnDestroy(): void {
-    this.stream.currentStream.getTracks().forEach((t) => t.stop())
+    // this.stream.currentStream.getTracks().forEach((t) => t.stop())
     this.destroy.next()
     this.destroy.complete()
   }

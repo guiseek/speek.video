@@ -1,33 +1,26 @@
-<section>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-subtitle>Vídeoa</mat-card-subtitle>
-    </mat-card-header>
+<mat-card>
+  <nav mat-stretch-tabs mat-tab-nav-bar backgroundColor="primary">
+    <a
+      mat-tab-link
+      (click)="activeLink = 'audio'"
+      [active]="activeLink == 'audio'"
+      routerLink="audio"
+    >
+      Áudio
+    </a>
+    <a
+      mat-tab-link
+      (click)="activeLink = 'video'"
+      [active]="activeLink == 'video'"
+      routerLink="video"
+    >
+      Vídeo
+    </a>
+  </nav>
 
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <speek-devices
-        kind="videoinput"
-        (valueChange)="onVideoChange($event)"
-      ></speek-devices>
-    </mat-card-content>
-    <video
-      class="video"
-      poster="assets/images/speek-dark.svg"
-      #video
-      autoplay
-      playsinline
-      muted
-    ></video>
-  </mat-card>
+  <router-outlet></router-outlet>
 
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Áudio</mat-card-title>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <audio class="audio" #audio autoplay playsinline muted></audio>
-    </mat-card-content>
-  </mat-card>
-</section>
+  <mat-card-content>
+
+  </mat-card-content>
+</mat-card>

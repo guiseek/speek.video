@@ -1,35 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="116" height="132" viewBox="0 0 116 132">
   <g id="Black" transform="translate(-741 -472)">
     <g id="Connections" transform="translate(745.311 476.311)">
-      <line id="Linha_1" data-name="Linha 1" x2="52.521" y2="8.623" transform="translate(54.873 23.517)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_2" data-name="Linha 2" y1="8.623" x2="54.873" transform="translate(0 23.517)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_3" data-name="Linha 3" x1="21.165" y1="48.602" transform="translate(0 32.14)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_4" data-name="Linha 4" y1="12.542" x2="21.949" transform="translate(0 80.741)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_5" data-name="Linha 5" x1="54.873" y1="30.572" transform="translate(0 93.284)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_6" data-name="Linha 6" x1="52.521" y2="30.572" transform="translate(54.873 93.284)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_7" data-name="Linha 7" y2="61.144" transform="translate(107.394 32.14)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_8" data-name="Linha 8" x2="52.521" y2="32.14" transform="translate(54.873)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_9" data-name="Linha 9" y1="32.14" x2="54.873" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_10" data-name="Linha 10" y1="23.517" transform="translate(54.873)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_11" data-name="Linha 11" y1="57.225" x2="33.708" transform="translate(21.165 23.517)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_12" data-name="Linha 12" x1="65.847" transform="translate(21.165 80.741)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_13" data-name="Linha 13" x1="20.381" y2="48.602" transform="translate(87.013 32.14)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_14" data-name="Linha 14" x2="32.14" y2="57.225" transform="translate(54.873 23.517)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_15" data-name="Linha 15" x2="32.924" y2="43.114" transform="translate(21.165 80.741)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_16" data-name="Linha 16" y2="61.144" transform="translate(0 32.14)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_17" data-name="Linha 17" x2="20.381" y2="12.542" transform="translate(87.013 80.741)" fill="none" stroke="#000" stroke-width="2"/>
-      <line id="Linha_18" data-name="Linha 18" x1="32.924" y2="43.114" transform="translate(54.089 80.741)" fill="none" stroke="#000" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_1" data-name="Linha 1" x2="52.521" y2="8.623" transform="translate(54.873 23.517)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_2" data-name="Linha 2" y1="8.623" x2="54.873" transform="translate(0 23.517)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_3" data-name="Linha 3" x1="21.165" y1="48.602" transform="translate(0 32.14)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_4" data-name="Linha 4" y1="12.542" x2="21.949" transform="translate(0 80.741)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_5" data-name="Linha 5" x1="54.873" y1="30.572" transform="translate(0 93.284)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_6" data-name="Linha 6" x1="52.521" y2="30.572" transform="translate(54.873 93.284)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_7" data-name="Linha 7" y2="61.144" transform="translate(107.394 32.14)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_8" data-name="Linha 8" x2="52.521" y2="32.14" transform="translate(54.873)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_9" data-name="Linha 9" y1="32.14" x2="54.873" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_10" data-name="Linha 10" y1="23.517" transform="translate(54.873)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_11" data-name="Linha 11" y1="57.225" x2="33.708" transform="translate(21.165 23.517)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_12" data-name="Linha 12" x1="65.847" transform="translate(21.165 80.741)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_13" data-name="Linha 13" x1="20.381" y2="48.602" transform="translate(87.013 32.14)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_14" data-name="Linha 14" x2="32.14" y2="57.225" transform="translate(54.873 23.517)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_15" data-name="Linha 15" x2="32.924" y2="43.114" transform="translate(21.165 80.741)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_16" data-name="Linha 16" y2="61.144" transform="translate(0 32.14)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_17" data-name="Linha 17" x2="20.381" y2="12.542" transform="translate(87.013 80.741)" stroke-width="2"/>
+      <line fill="none" stroke="#000" id="Linha_18" data-name="Linha 18" x1="32.924" y2="43.114" transform="translate(54.089 80.741)" stroke-width="2"/>
     </g>
     <g id="Peers" transform="translate(741 472)">
-      <ellipse id="Elipse_8" data-name="Elipse 8" cx="4.5" cy="4" rx="4.5" ry="4" transform="translate(21 81)"/>
-      <circle id="Elipse_9" data-name="Elipse 9" cx="4" cy="4" r="4" transform="translate(55 124)"/>
-      <circle id="Elipse_10" data-name="Elipse 10" cx="4.5" cy="4.5" r="4.5" transform="translate(107 32)"/>
-      <ellipse id="Elipse_11" data-name="Elipse 11" cx="4.5" cy="4" rx="4.5" ry="4" transform="translate(87 81)"/>
-      <circle id="Elipse_12" data-name="Elipse 12" cx="4.5" cy="4.5" r="4.5" transform="translate(107 93)"/>
-      <circle id="Elipse_13" data-name="Elipse 13" cx="4.5" cy="4.5" r="4.5" transform="translate(0 32)"/>
-      <circle id="Elipse_14" data-name="Elipse 14" cx="4" cy="4" r="4" transform="translate(55 24)"/>
-      <ellipse id="Elipse_15" data-name="Elipse 15" cx="4" cy="4.5" rx="4" ry="4.5" transform="translate(55)"/>
-      <circle id="Elipse_16" data-name="Elipse 16" cx="4.5" cy="4.5" r="4.5" transform="translate(0 93)"/>
+      <ellipse fill="#000" id="Elipse_8" data-name="Elipse 8" cx="4.5" cy="4" rx="4.5" ry="4" transform="translate(21 81)"/>
+      <circle fill="#000" id="Elipse_9" data-name="Elipse 9" cx="4" cy="4" r="4" transform="translate(55 124)"/>
+      <circle fill="#000" id="Elipse_10" data-name="Elipse 10" cx="4.5" cy="4.5" r="4.5" transform="translate(107 32)"/>
+      <ellipse fill="#000" id="Elipse_11" data-name="Elipse 11" cx="4.5" cy="4" rx="4.5" ry="4" transform="translate(87 81)"/>
+      <circle fill="#000" id="Elipse_12" data-name="Elipse 12" cx="4.5" cy="4.5" r="4.5" transform="translate(107 93)"/>
+      <circle fill="#000" id="Elipse_13" data-name="Elipse 13" cx="4.5" cy="4.5" r="4.5" transform="translate(0 32)"/>
+      <circle fill="#000" id="Elipse_14" data-name="Elipse 14" cx="4" cy="4" r="4" transform="translate(55 24)"/>
+      <ellipse fill="#000" id="Elipse_15" data-name="Elipse 15" cx="4" cy="4.5" rx="4" ry="4.5" transform="translate(55)"/>
+      <circle fill="#000" id="Elipse_16" data-name="Elipse 16" cx="4.5" cy="4.5" r="4.5" transform="translate(0 93)"/>
     </g>
   </g>
 </svg>

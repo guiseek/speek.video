@@ -1,14 +1,26 @@
 <mat-card>
   <mat-card-header>
-    <h3 mat-card-subtitle>Frequência</h3>
+    <h3 mat-card-subtitle>Como quer começar?</h3>
   </mat-card-header>
-  <speek-frequency></speek-frequency>
+  <mat-card-content>
+    <mat-nav-list>
+      <h3 mat-subheader>Áudio & vídeo</h3>
+      <a mat-list-item routerLink="/newcode">Convidar alguém</a>
+      <a mat-list-item routerLink="/newcode">Sou um convidado</a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <h3 mat-subheader>Somente áudio</h3>
+      <a mat-list-item routerLink="/newcode">Convidar alguém</a>
+      <a mat-list-item routerLink="/newcode">Sou um convidado</a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <h3 mat-subheader>Configurar</h3>
+      <a mat-list-item routerLink="/setup">
+        <mat-icon>video_settings</mat-icon>
+      <span>Câmera</span>
+      </a>
+    </mat-nav-list>
+  </mat-card-content>
 </mat-card>
-
-<mat-card>
-  <mat-card-header>
-    <h3 mat-card-subtitle>Osciloscópio</h3>
-  </mat-card-header>
-  <speek-oscilloscope></speek-oscilloscope>
-</mat-card>
-

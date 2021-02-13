@@ -1,4 +1,4 @@
-@import '../../../theming/mixins';
+// @import '../../../theming/mixins';
 
 :host {
   flex: 1;
@@ -7,14 +7,14 @@
   justify-content: center;
   align-items: center;
 
-  .mat-card {
-    width: 400px;
-    margin: 10px;
+  // .mat-card {
+  //   width: 400px;
+  //   margin: 10px;
 
-    &-content {
-      margin: 10px;
-    }
-  }
+  //   &-content {
+  //     margin: 10px;
+  //   }
+  // }
 
   video {
     width: 100%;

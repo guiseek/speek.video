@@ -24,6 +24,7 @@
     "ui-components": { "tags": [] },
     "util-format": { "tags": [] },
     "ui-stylesheets": { "tags": [] },
-    "core-adapter": { "tags": [] }
+    "core-adapter": { "tags": [] },
+    "data-storage": { "tags": ["type:data"] }
   }
 }
