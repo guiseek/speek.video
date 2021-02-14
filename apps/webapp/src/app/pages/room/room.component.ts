@@ -3,7 +3,7 @@ import { isDefined, notNull, UUID } from '@speek/util/format'
 import { PeerAdapter, SignalingAdapter } from '@speek/core/adapter'
 import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject, Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { takeUntil, takeWhile } from 'rxjs/operators'
 import { Voice } from '@speek/core/stream'
 import {
   AfterViewInit,
@@ -13,6 +13,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
+import { UserSetupStorage } from '../../shared/data/user-setup.storage'
 
 @Component({
   selector: 'speek-room',
@@ -51,16 +52,19 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private peer: PeerAdapter,
     private route: ActivatedRoute,
+    readonly userSetup: UserSetupStorage,
     readonly signaling: SignalingAdapter
   ) {
     const { code } = this.route.snapshot.params
-    const { pitch } = this.route.snapshot.queryParams
-    this.pitch = +pitch ?? 1
+    // const { pitch } = this.route.snapshot.queryParams
+    // const { pitch } = this.userSetup.getStoredValue()
+    // this.pitch = +pitch || 1.5
+
     console.log(this.route.snapshot.queryParams)
 
-    if (code === 'newcode') {
-      this.router.navigate(['/', UUID.long()])
-    }
+    // if (code === 'newcode') {
+    //   this.router.navigate(['/', UUID.long()])
+    // }
     this.code = code
     // this.peer = new PeerAdapter()
   }
@@ -170,7 +174,10 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     source.connect(delay)
 
     const voice = new Voice(context)
-    voice.setPitchOffset(this.pitch)
+    // const value = this.userSetup.getStoredValue()
+    const { pitch = 1.5 } = this.userSetup.getStoredValue()
+    // 3d60769c-2ecd-4167-a538-948b37b67a86
+    voice.setPitchOffset(pitch)
 
     delay.connect(voice.input)
     voice.output.connect(destination)

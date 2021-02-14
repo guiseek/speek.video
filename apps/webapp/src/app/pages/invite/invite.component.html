@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Entre com o código</mat-label>
+    <input matInput autofocus cdkFocusInitial [formControl]="code" />
+    <mat-hint>Códgo de acesso</mat-hint>
+    <mat-error>Código inválido</mat-error>
+  </mat-form-field>
+
+  <mat-card-content>
+    <canvas #canvas></canvas>
+
+    <mat-divider></mat-divider>
+
+    <form [formGroup]="form">
+      <mat-slider
+        min="-1"
+        max="2"
+        step="0.1"
+        thumbLabel
+        formControlName="pitch"
+      ></mat-slider>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<button type="button" [disabled]="code.invalid" mat-fab (click)="onSubmit()">
+  <mat-icon>phone_forwarded</mat-icon>
+</button>
