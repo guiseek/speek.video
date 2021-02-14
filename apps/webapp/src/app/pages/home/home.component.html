@@ -12,15 +12,18 @@
   <mat-card-content>
     <mat-nav-list>
       <h2 mat-subheader>Conversar</h2>
-      <a mat-list-item routerLink="/create" aria-label="">Criar sala</a>
-      <a mat-list-item routerLink="/newcode">Convidar alguém</a>
-      <a mat-list-item routerLink="/invite">Sou convidado</a>
+      <a mat-list-item routerLink="/create" aria-label="Criar sala">Criar sala</a>
+      <a mat-list-item routerLink="/invite" aria-label="Sou convidado">Sou convidado</a>
       <mat-divider></mat-divider>
       <h3 mat-subheader>Configurar</h3>
-      <a mat-list-item routerLink="/voice">
+      <a mat-list-item routerLink="/voice" aria-label="Tom de voz">
         <mat-icon>settings_voice</mat-icon>
         <span>Tom de voz</span>
       </a>
     </mat-nav-list>
   </mat-card-content>
 </mat-card>
+
+<button mat-fab (click)="share()">
+  <mat-icon>share</mat-icon>
+</button>

@@ -25,6 +25,7 @@
     "util-format": { "tags": [] },
     "ui-stylesheets": { "tags": [] },
     "core-adapter": { "tags": [] },
-    "data-storage": { "tags": ["type:data"] }
+    "data-storage": { "tags": ["type:data"] },
+    "util-share": { "tags": [] }
   }
 }

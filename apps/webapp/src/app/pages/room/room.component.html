@@ -1,2 +1,24 @@
-<video class="local" #local autoplay playsinline muted></video>
 <video class="remote" #remote autoplay playsinline muted></video>
+
+<mat-card>
+  <video class="local" #local autoplay playsinline muted></video>
+
+  <mat-card-actions>
+    <button mat-button (click)="toggleAudio()">
+      <mat-icon>{{ (audio | async) ? 'mic' : 'mic_off' }}</mat-icon>
+    </button>
+    <button mat-button (click)="toggleVideo()">
+      <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<button
+  mat-fab
+  [disabled]="(onState | async) != 'stable'"
+  (click)="hangup()"
+  class="call-end"
+  color="warn"
+>
+  <mat-icon>call_end</mat-icon>
+</button>
