@@ -34,7 +34,8 @@ import { UserSetupAdapter } from '@speek/core/adapter'
 import { VoiceComponent } from './pages/voice/voice.component'
 import { InviteComponent } from './pages/invite/invite.component'
 import { UserSetupStorage } from './shared/data/user-setup.storage'
-import { A11yModule } from '@angular/cdk/a11y'
+import { A11yModule } from '@angular/cdk/a11y';
+import { ServiceWorkerModule } from '@angular/service-worker'
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { A11yModule } from '@angular/cdk/a11y'
     }),
     UiComponentsModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     UserSetupStorage,

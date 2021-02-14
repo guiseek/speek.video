@@ -48,7 +48,7 @@
             "polyfills": "apps/webapp/src/polyfills.ts",
             "tsConfig": "apps/webapp/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/webapp/src/favicon.ico", "apps/webapp/src/assets", "apps/webapp/src/CNAME"],
+            "assets": ["apps/webapp/src/assets", "apps/webapp/src/CNAME", "apps/webapp/src/manifest.webmanifest"],
             "styles": ["apps/webapp/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["libs/ui/stylesheets"]
@@ -82,7 +82,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "apps/webapp/ngsw-config.json"
             }
           }
         },
