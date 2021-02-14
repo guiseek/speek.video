@@ -8,12 +8,6 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-
-    > section {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
   }
   router-outlet {
     display: block;

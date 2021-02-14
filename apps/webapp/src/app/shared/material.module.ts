@@ -3,6 +3,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling'
 import { MatIconModule } from '@angular/material/icon'
 import { MatCardModule } from '@angular/material/card'
 import { MatTabsModule } from '@angular/material/tabs'
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatToolbarModule } from '@angular/material/toolbar'
@@ -26,6 +27,7 @@ import { MatSliderModule } from '@angular/material/slider'
     MatIconModule,
     MatSliderModule,
     MatGridListModule,
+    MatTooltipModule,
     MatInputModule,
     MatButtonModule,
     ScrollingModule,

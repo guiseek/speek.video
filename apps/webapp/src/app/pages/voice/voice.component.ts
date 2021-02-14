@@ -1,5 +1,5 @@
 import { takeUntil } from 'rxjs/operators'
-import { Voice } from '@speek/core/stream'
+import { stopStream, Voice } from '@speek/core/stream'
 import { UserSetupStorage } from './../../shared/data/user-setup.storage'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable, Subject } from 'rxjs'
@@ -23,6 +23,8 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('canvas')
   private canvas: ElementRef<HTMLCanvasElement>
 
+  stream: MediaStream
+
   private _destroy = new Subject<void>()
   form = this._fb.group({
     pitch: [0, [Validators.min(-2), Validators.max(2)]],
@@ -37,7 +39,6 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     const value = this.userSetup.getStoredValue()
-    console.log(value)
     this.form.patchValue(!!value ? value : {})
   }
 
@@ -48,6 +49,7 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   gotStream(stream: MediaStream) {
+    this.stream = stream
     const audioContext = new AudioContext()
     const microphone = audioContext.createMediaStreamSource(stream)
 
@@ -79,12 +81,12 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.form.valid) {
       this.userSetup.store(this.form.value)
       this.form.markAsPristine()
-      this._router.navigate(['/', 'newcode'])
-      console.log(this.form.value)
+      // this._router.navigate(['/', 'newcode'])
     }
   }
 
   ngOnDestroy(): void {
+    stopStream(this.stream)
     this._destroy.next()
     this._destroy.complete()
   }

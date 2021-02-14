@@ -1,0 +1,11 @@
+:host {
+  top: 0;
+  height: 64px;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  width: 100%;
+  .mat-toolbar {
+    width: 100%;
+  }
+}
