@@ -1,8 +1,9 @@
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { BehaviorSubject, Subject } from 'rxjs'
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core'
-import { tap } from 'rxjs/operators'
+import { ShareService } from '@speek/ui/components'
 import { MatInput } from '@angular/material/input'
+import { BehaviorSubject, Subject } from 'rxjs'
+import { tap } from 'rxjs/operators'
 
 @Component({
   selector: 'speek-home',
@@ -39,7 +40,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   comeInOut = new BehaviorSubject<boolean>(false)
 
   ready = false
-  constructor(private _fb: FormBuilder) {}
+  constructor(private _fb: FormBuilder, private _share: ShareService) {}
 
   ngAfterViewInit(): void {
     this.ready = true
@@ -56,6 +57,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {}
+
+  share() {
+    this._share.open([]).subscribe()
+  }
 
   ngOnDestroy(): void {
     this.destroy.next()

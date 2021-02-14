@@ -48,7 +48,11 @@
             "polyfills": "apps/webapp/src/polyfills.ts",
             "tsConfig": "apps/webapp/tsconfig.app.json",
             "aot": true,
-            "assets": ["apps/webapp/src/assets", "apps/webapp/src/CNAME", "apps/webapp/src/manifest.webmanifest"],
+            "assets": [
+              "apps/webapp/src/assets",
+              "apps/webapp/src/CNAME",
+              "apps/webapp/src/manifest.webmanifest"
+            ],
             "styles": ["apps/webapp/src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["libs/ui/stylesheets"]
@@ -352,6 +356,27 @@
           "outputs": ["coverage/libs/data/storage"],
           "options": {
             "jestConfig": "libs/data/storage/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "util-share": {
+      "root": "libs/util/share",
+      "sourceRoot": "libs/util/share/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/util/share/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/util/share"],
+          "options": {
+            "jestConfig": "libs/util/share/jest.config.js",
             "passWithNoTests": true
           }
         }

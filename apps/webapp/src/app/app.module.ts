@@ -28,6 +28,7 @@ import {
   DoorModule,
   DialpadModule,
   AudioModule,
+  ShareModule,
   ToolbarModule,
 } from '@speek/ui/components'
 import { UserSetupAdapter } from '@speek/core/adapter'
@@ -52,6 +53,7 @@ import { ServiceWorkerModule } from '@angular/service-worker'
     A11yModule,
     PortalModule,
     WaveModule,
+    ShareModule,
     ToolbarModule,
     DoorModule,
     AudioModule,
