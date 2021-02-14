@@ -1,10 +1,12 @@
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
-import { isDefined, notNull, UUID } from '@speek/util/format'
+import { UserSetupStorage } from '../../shared/data/user-setup.storage'
 import { PeerAdapter, SignalingAdapter } from '@speek/core/adapter'
+import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
-import { BehaviorSubject, Subject } from 'rxjs'
+import { stopStream, Voice } from '@speek/core/stream'
 import { takeUntil, takeWhile } from 'rxjs/operators'
-import { Voice } from '@speek/core/stream'
+import { ShareService } from '@speek/ui/components'
+import { BehaviorSubject, Subject } from 'rxjs'
 import {
   AfterViewInit,
   Component,
@@ -13,7 +15,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
-import { UserSetupStorage } from '../../shared/data/user-setup.storage'
 
 @Component({
   selector: 'speek-room',
@@ -23,9 +24,11 @@ import { UserSetupStorage } from '../../shared/data/user-setup.storage'
 export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy = new Subject<void>()
 
-  @ViewChild('audioCanvas')
   _audio = new BehaviorSubject<boolean>(true)
   audio = this._audio.asObservable()
+
+  _video = new BehaviorSubject<boolean>(true)
+  video = this._video.asObservable()
 
   @ViewChild('local')
   localRef: ElementRef<HTMLVideoElement>
@@ -51,22 +54,16 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private router: Router,
     private peer: PeerAdapter,
+    private share: ShareService,
     private route: ActivatedRoute,
     readonly userSetup: UserSetupStorage,
     readonly signaling: SignalingAdapter
   ) {
     const { code } = this.route.snapshot.params
-    // const { pitch } = this.route.snapshot.queryParams
-    // const { pitch } = this.userSetup.getStoredValue()
-    // this.pitch = +pitch || 1.5
-
-    console.log(this.route.snapshot.queryParams)
-
     // if (code === 'newcode') {
     //   this.router.navigate(['/', UUID.long()])
     // }
     this.code = code
-    // this.peer = new PeerAdapter()
   }
 
   ngOnInit(): void {
@@ -104,7 +101,6 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.local = this.localRef.nativeElement
     this.remote = this.remoteRef.nativeElement
-
     this.signaling
       .on(SpeekAction.Created)
       .subscribe((payload) => this.setLocal(payload))
@@ -161,11 +157,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   gotVoice(stream: MediaStream) {
-    let context: AudioContext
-    if (!context) {
-      context = new AudioContext()
-    }
-
+    const context = new AudioContext()
     const source = context.createMediaStreamSource(stream)
     const destination = context.createMediaStreamDestination()
 
@@ -174,9 +166,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     source.connect(delay)
 
     const voice = new Voice(context)
-    // const value = this.userSetup.getStoredValue()
-    const { pitch = 1.5 } = this.userSetup.getStoredValue()
-    // 3d60769c-2ecd-4167-a538-948b37b67a86
+    const { pitch = 1.5 } = this.userSetup.getStoredValue() ?? {}
     voice.setPitchOffset(pitch)
 
     delay.connect(voice.input)
@@ -192,10 +182,23 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   }
 
-  /**
-   * @todo
-   */
-  hangup() {}
+  toggleAudio() {
+    const enabled = !this._audio.getValue()
+    const tracks = this.localStream.getAudioTracks()
+    tracks.forEach((t) => (t.enabled = enabled))
+    this._audio.next(enabled)
+  }
+
+  toggleVideo() {
+    const enabled = !this._video.getValue()
+    const tracks = this.localStream.getVideoTracks()
+    tracks.forEach((t) => (t.enabled = enabled))
+    this._video.next(enabled)
+  }
+
+  hangup() {
+    this.router.navigate(['/'])
+  }
 
   ngOnDestroy(): void {
     this.localStream.getTracks().forEach((t) => t.stop())
