@@ -1,5 +1,5 @@
 <speek-toolbar>
-  <a routerLink="/" mat-icon-button>
+  <a routerLink="/" aria-label="Home" mat-icon-button>
     <mat-icon svgIcon="speek-logo"></mat-icon>
   </a>
   <span class="brand-name">speek</span>
@@ -7,17 +7,15 @@
 
 <mat-card>
   <mat-card-header>
-    <h3 mat-card-subtitle>Como quer começar?</h3>
+    <h1 mat-card-subtitle>Como quer começar?</h1>
   </mat-card-header>
   <mat-card-content>
     <mat-nav-list>
-      <h3 mat-subheader>Conversar</h3>
-      <a mat-list-item routerLink="/create">Criar sala</a>
+      <h2 mat-subheader>Conversar</h2>
+      <a mat-list-item routerLink="/create" aria-label="">Criar sala</a>
       <a mat-list-item routerLink="/newcode">Convidar alguém</a>
       <a mat-list-item routerLink="/invite">Sou convidado</a>
-    </mat-nav-list>
-    <mat-divider></mat-divider>
-    <mat-nav-list>
+      <mat-divider></mat-divider>
       <h3 mat-subheader>Configurar</h3>
       <a mat-list-item routerLink="/voice">
         <mat-icon>settings_voice</mat-icon>

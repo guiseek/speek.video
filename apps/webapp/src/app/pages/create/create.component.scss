@@ -5,6 +5,15 @@
   justify-content: space-evenly;
   align-items: center;
 
+  .mat-card {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 1500ms ease-in-out, opacity 1500ms ease-in-out;
+    &.hide {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
   .mat-form-field {
     width: 300px;
     margin: 10px;
