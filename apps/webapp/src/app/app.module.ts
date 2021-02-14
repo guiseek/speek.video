@@ -1,4 +1,4 @@
-import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ClipboardModule } from '@angular/cdk/clipboard'
 import { PeerProvider, SignalingProvider, StreamProvider } from './app.adapter'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
@@ -28,12 +28,13 @@ import {
   DoorModule,
   DialpadModule,
   AudioModule,
-  ToolbarModule
+  ToolbarModule,
 } from '@speek/ui/components'
-import { UserSetupAdapter } from '@speek/core/adapter';
-import { VoiceComponent } from './pages/voice/voice.component';
+import { UserSetupAdapter } from '@speek/core/adapter'
+import { VoiceComponent } from './pages/voice/voice.component'
 import { InviteComponent } from './pages/invite/invite.component'
 import { UserSetupStorage } from './shared/data/user-setup.storage'
+import { A11yModule } from '@angular/cdk/a11y'
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { UserSetupStorage } from './shared/data/user-setup.storage'
     InviteComponent,
   ],
   imports: [
+    A11yModule,
     PortalModule,
     WaveModule,
     ToolbarModule,

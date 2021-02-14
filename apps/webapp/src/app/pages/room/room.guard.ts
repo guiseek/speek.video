@@ -27,7 +27,7 @@ export class RoomGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | boolean {
     const code = route.paramMap.get('code')
-    if (UUID.isValid(code)) {
+    if (UUID.isValid(code) || /^[a-z\d\-_\s]+$/i.test(code)) {
       return true
     }
     return this._dialog
