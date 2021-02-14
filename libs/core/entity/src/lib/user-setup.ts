@@ -4,15 +4,15 @@ export type UserPermissions = Pick<
 >
 
 export class UserSetup {
-  permissions: UserPermissions = {
-    camera: 'prompt',
-    microphone: 'prompt',
-    speaker: 'prompt',
-  }
-  devices: DevicePermissionDescriptor
-  constructor() {}
+  constructor(public pitch: number) {}
+  // permissions?: UserPermissions = {
+  //   camera: 'prompt',
+  //   microphone: 'prompt',
+  //   speaker: 'prompt',
+  // }
+  // devices: DevicePermissionDescriptor
 
-  setPermission(name?: PermissionName, state?: PermissionState) {
-    this.permissions.camera
-  }
+  // setPermission(name?: PermissionName, state?: PermissionState) {
+  //   this.permissions.camera
+  // }
 }

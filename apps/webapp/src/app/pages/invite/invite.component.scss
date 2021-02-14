@@ -1,0 +1,30 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .mat-card {
+    display: flex;
+    flex-direction: column;
+  }
+  canvas {
+    width: 100%
+  }
+
+  .mat-form-field {
+    width: 300px;
+    margin: 10px;
+  }
+
+  .mat-slider {
+    width: 100%;
+  }
+
+  .mat-fab {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
+}

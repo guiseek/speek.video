@@ -5,25 +5,25 @@ export abstract class Storage<T = any> {
 
   protected abstract key: string
 
-  store(key: string, value: T) {
+  store(value: T) {
     try {
-      localStorage.setItem(key, JSON.stringify(value))
+      localStorage.setItem(this.key, JSON.stringify(value))
     } catch {}
 
     this.onUpdate.next(value)
   }
 
-  getStoredValue(key: string): T | null {
+  getStoredValue(): T | null {
     try {
-      return JSON.parse(localStorage.getItem(key))
+      return JSON.parse(localStorage.getItem(this.key))
     } catch {
       return null
     }
   }
 
-  clearStorage(key: string) {
+  clearStorage() {
     try {
-      localStorage.removeItem(key)
+      localStorage.removeItem(this.key)
     } catch {}
   }
 }

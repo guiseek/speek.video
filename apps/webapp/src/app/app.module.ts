@@ -28,7 +28,10 @@ import {
   DialpadModule,
   AudioModule,
 } from '@speek/ui/components'
-import { UserSetupAdapter } from '@speek/core/adapter'
+import { UserSetupAdapter } from '@speek/core/adapter';
+import { VoiceComponent } from './pages/voice/voice.component';
+import { InviteComponent } from './pages/invite/invite.component'
+import { UserSetupStorage } from './shared/data/user-setup.storage'
 
 @NgModule({
   declarations: [
@@ -38,6 +41,8 @@ import { UserSetupAdapter } from '@speek/core/adapter'
     HallComponent,
     DialupComponent,
     CreateComponent,
+    VoiceComponent,
+    InviteComponent,
   ],
   imports: [
     PortalModule,
@@ -61,6 +66,7 @@ import { UserSetupAdapter } from '@speek/core/adapter'
     BrowserAnimationsModule,
   ],
   providers: [
+    UserSetupStorage,
     UserSetupAdapter,
     PeerProvider.config(environment.configs),
     StreamProvider.config(environment.constraints),
