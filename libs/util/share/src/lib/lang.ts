@@ -1,9 +1,8 @@
-import { ShareLanguage, ShareSocial } from './types'
+import { ShareLanguage, ShareSocial, Lang } from './types'
 
-export function getLang() {
-  return navigator.language
-    ? navigator.language.substr(0, 2).toLowerCase()
-    : 'en'
+export function getLang(): Lang {
+  const lang = navigator.language
+  return lang ? (lang.substr(0, 2).toLowerCase() as Lang) : 'en'
 }
 
 export const shareOption: ShareSocial = {

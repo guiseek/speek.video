@@ -4,14 +4,12 @@
   </a>
   <span class="brand-name">convidado</span>
 </speek-toolbar>
-<mat-card>
-  <mat-form-field appearance="outline" color="accent">
-    <mat-label>Entre com o código</mat-label>
-    <input matInput autofocus cdkFocusInitial [formControl]="code" />
-    <mat-hint>Códgo de acesso</mat-hint>
-    <mat-error>Código inválido</mat-error>
-  </mat-form-field>
 
+<ng-container *ngIf="code.valid">
+  <speek-door [comeInOut]="comeInOut" [opened]="code.valid"></speek-door>
+</ng-container>
+
+<mat-card>
   <mat-card-content>
     <canvas #canvas></canvas>
 
@@ -26,6 +24,15 @@
         formControlName="pitch"
       ></mat-slider>
     </form>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Entre com o código</mat-label>
+      <input matInput autofocus cdkFocusInitial [formControl]="code" />
+      <mat-hint>Códgo de acesso</mat-hint>
+      <mat-error>Código inválido</mat-error>
+    </mat-form-field>
   </mat-card-content>
 </mat-card>
 

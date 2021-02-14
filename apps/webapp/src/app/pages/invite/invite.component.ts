@@ -5,7 +5,7 @@ import { stopStream, Voice } from '@speek/core/stream'
 import { takeUntil } from 'rxjs/operators'
 import { UUID } from '@speek/util/format'
 import { Router } from '@angular/router'
-import { Subject } from 'rxjs'
+import { BehaviorSubject, Subject } from 'rxjs'
 import {
   AfterViewInit,
   Component,
@@ -36,6 +36,9 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
   form = this._fb.group({
     pitch: [0, [Validators.min(-2), Validators.max(2)]],
   })
+
+  comeInOut = new BehaviorSubject<boolean>(false)
+  enter = false
 
   constructor(
     private _fb: FormBuilder,
@@ -89,6 +92,19 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
       this.form.markAsPristine()
       this._router.navigate(['/', 'newcode'])
       console.log(this.form.value)
+    }
+  }
+
+  onLogin() {
+    if (this.code.valid) {
+      this.comeInOut.next(!this.comeInOut.value)
+      this.enter = true
+      setTimeout(() => {
+        this._router.navigate(['/', this.code.value])
+      }, 3000)
+    } else {
+      this.comeInOut.next(!this.comeInOut.value)
+      this.comeInOut.next(!this.comeInOut.value)
     }
   }
 
