@@ -1,3 +1,10 @@
+<speek-toolbar>
+  <a routerLink="/" mat-icon-button>
+    <mat-icon svgIcon="speek-logo"></mat-icon>
+  </a>
+  <span class="brand-name">speek</span>
+</speek-toolbar>
+
 <mat-card>
   <mat-card-header>
     <h3 mat-card-subtitle>Como quer começar?</h3>
@@ -5,6 +12,7 @@
   <mat-card-content>
     <mat-nav-list>
       <h3 mat-subheader>Conversar</h3>
+      <a mat-list-item routerLink="/create">Criar sala</a>
       <a mat-list-item routerLink="/newcode">Convidar alguém</a>
       <a mat-list-item routerLink="/invite">Sou convidado</a>
     </mat-nav-list>

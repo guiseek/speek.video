@@ -9,17 +9,6 @@ export function getFire(color: string) {
 </svg>`
 }
 
-// export function createSpeekIcon(
-//   registry: MatIconRegistry,
-//   sanitizer: DomSanitizer
-// ) {
-//   const speekDarkIcon = sanitizer.bypassSecurityTrustHtml(getFire('#d32f2f'))
-//   registry.addSvgIconLiteral('speek-dark', speekDarkIcon)
-
-//   const speekLightIcon = sanitizer.bypassSecurityTrustHtml(getFire('#03a9f4'))
-//   registry.addSvgIconLiteral('speek-light', speekLightIcon)
-// }
-
 export function createSpeekIcon(
   registry: MatIconRegistry,
   sanitizer: DomSanitizer,

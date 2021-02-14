@@ -1,3 +1,4 @@
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { PeerProvider, SignalingProvider, StreamProvider } from './app.adapter'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
@@ -27,6 +28,7 @@ import {
   DoorModule,
   DialpadModule,
   AudioModule,
+  ToolbarModule
 } from '@speek/ui/components'
 import { UserSetupAdapter } from '@speek/core/adapter';
 import { VoiceComponent } from './pages/voice/voice.component';
@@ -47,6 +49,7 @@ import { UserSetupStorage } from './shared/data/user-setup.storage'
   imports: [
     PortalModule,
     WaveModule,
+    ToolbarModule,
     DoorModule,
     AudioModule,
     DialpadModule,
@@ -56,6 +59,7 @@ import { UserSetupStorage } from './shared/data/user-setup.storage'
     FormsModule,
     BrowserModule,
     MaterialModule,
+    ClipboardModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes, {
       useHash: true,

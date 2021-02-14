@@ -1,11 +1,45 @@
-<p>create works!</p>
+<speek-toolbar>
+  <a routerLink="/" mat-icon-button>
+    <mat-icon>arrow_backward</mat-icon>
+  </a>
+  <span class="brand-name">convidar</span>
+</speek-toolbar>
 
 <speek-door [comeInOut]="comeInOut"></speek-door>
 
-<mat-form-field [ngClass]="{ active: (comeInOut | async) }">
+<mat-card>
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Escreva seu código</mat-label>
+    <input type="url" matInput name="url" [formControl]="key" readonly />
+    <mat-hint>Clique ao lado para copiar o código</mat-hint>
+    <button
+      matSuffix
+      type="button"
+      mat-icon-button
+      (click)="onCopy(tip)"
+      [cdkCopyToClipboard]="key.value"
+    >
+      <mat-icon
+        #tip="matTooltip"
+        matTooltip="Copiado"
+        matTooltipPosition="above"
+      >
+        content_copy
+      </mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-card-content>
+  </mat-card-content>
+</mat-card>
+
+<button type="button" [disabled]="code.invalid" mat-fab>
+  <mat-icon>phone_forwarded</mat-icon>
+</button>
+
+<!-- <mat-form-field [ngClass]="{ active: (comeInOut | async) }">
   <input type="text" matInput [formControl]="code" />
 </mat-form-field>
 
 <button type="button" mat-button (click)="comeInOut.next(!comeInOut.value)">
   {{ (comeInOut | async) ? 'Sair' : 'Entrar' }}
-</button>
+</button> -->

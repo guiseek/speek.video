@@ -8,10 +8,12 @@ import { InviteGuard } from './pages/invite/invite.guard'
 import { RoomGuard } from './pages/room/room.guard'
 import { HallGuard } from './pages/hall/hall.guard'
 import { Routes } from '@angular/router'
+import { CreateComponent } from './pages/create/create.component'
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'dialup', component: DialupComponent },
+  { path: 'create', component: CreateComponent },
   { path: 'voice', component: VoiceComponent },
   { path: 'invite', canActivate: [InviteGuard], component: InviteComponent },
   { path: ':code', canActivate: [RoomGuard], component: RoomComponent },
