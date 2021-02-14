@@ -39,7 +39,7 @@ export interface ShareConfig {
   language?: ShareLanguage
 }
 
-type Lang =
+export type Lang =
   | 'cs'
   | 'sk'
   | 'ja'
