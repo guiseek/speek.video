@@ -66,6 +66,9 @@ MIT
 @angular/router
 MIT
 
+@angular/service-worker
+MIT
+
 @speek/ui/components
 
 after

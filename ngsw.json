@@ -1,0 +1,103 @@
+{
+  "configVersion": 1,
+  "timestamp": 1613282204315,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/icons/icon-8.png",
+        "/index.html",
+        "/main.e321a99dc8253d4aec70.js",
+        "/manifest.webmanifest",
+        "/polyfills.89e0e3a0918a2b154670.js",
+        "/runtime.0e49e2b53282f40c8925.js",
+        "/styles.544d838a025969ed0999.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assets/arrow.svg",
+        "/assets/icons/flag.svg",
+        "/assets/icons/icon-1.png",
+        "/assets/icons/icon-2.png",
+        "/assets/icons/icon-3.png",
+        "/assets/icons/icon-4.png",
+        "/assets/icons/icon-5.png",
+        "/assets/icons/icon-6.png",
+        "/assets/icons/icon-7.png",
+        "/assets/images/logo.svg",
+        "/assets/images/network-dark.svg",
+        "/assets/images/network-light.svg",
+        "/assets/images/network.svg",
+        "/assets/images/speek-dark.svg",
+        "/assets/images/speek-light.svg",
+        "/assets/images/speek.svg",
+        "/assets/images/spheers.svg",
+        "/assets/images/spitfire.svg",
+        "/assets/images/terminal.svg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assets/arrow.svg": "8f57dc3d0f7ff532ef2d8d25d73e5cf06a194b05",
+    "/assets/icons/flag.svg": "dc6403dcc062cacdd56fe75f7f48750c55e3a117",
+    "/assets/icons/icon-1.png": "d330fd4ad83a92c2f012a89f27ef9769f7956b96",
+    "/assets/icons/icon-2.png": "2f335cf2d094d91a89ae92cfea05ccdf98cfcd73",
+    "/assets/icons/icon-3.png": "7b6a8064de9dc60beb26293e24c8343a603360ad",
+    "/assets/icons/icon-4.png": "4e0cd083b55bae2808b0bab5514e848c0694f033",
+    "/assets/icons/icon-5.png": "cc544ffb0a75a778856968aed7596c7b1b84f1c2",
+    "/assets/icons/icon-6.png": "dca005c5fe358ab37ad4a3c2e02139a6b3e61e33",
+    "/assets/icons/icon-7.png": "7fa2750b0b5630a4b014077f7db7a709a763c869",
+    "/assets/icons/icon-8.png": "08a846742fffb39d11c566db1c4165a3e7f97558",
+    "/assets/images/logo.svg": "b9c92c5bd0cfe3c57dc3326684c52197a0421f3b",
+    "/assets/images/network-dark.svg": "d5ba745509a9e22aa13f0fb0f1b981795eda64df",
+    "/assets/images/network-light.svg": "7b26b0b0f0f323a18017efd8a82cb56deaa9a2b9",
+    "/assets/images/network.svg": "4428fbba5f9939bae6bab1d862421f54d5b44bbb",
+    "/assets/images/speek-dark.svg": "674a69f5ec65780fb9eea9c8b895a15254c1b485",
+    "/assets/images/speek-light.svg": "ba510ff0cfec0d714bdd427dfc16a38bf1029d40",
+    "/assets/images/speek.svg": "e51de86e116762ba2bd72a884bc5e45d4d7d207b",
+    "/assets/images/spheers.svg": "b102c971f907c4fead273231c389a3e4fcda3f2e",
+    "/assets/images/spitfire.svg": "0d013c5f89a72f6bdefabeb77e5793271b01b7a9",
+    "/assets/images/terminal.svg": "27aee2bff975eca24295f220acacd1602527b836",
+    "/index.html": "410ba5046970f8a68a017821f90e75f694da5337",
+    "/main.e321a99dc8253d4aec70.js": "454d7b029f0ff56be33e68c70d3cd13c1ddafa05",
+    "/manifest.webmanifest": "abc6d87192f6a9073c70ac5a646feb015b035d03",
+    "/polyfills.89e0e3a0918a2b154670.js": "0bfc995eed6d8570cac2d221e0462cc45dbf7156",
+    "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/styles.544d838a025969ed0999.css": "c957d6394546c6d0afe3e39b6071b8e5defee540"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
