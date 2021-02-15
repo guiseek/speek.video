@@ -5,11 +5,18 @@
 
 import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
+import { readFileSync } from 'fs'
 
 import { AppModule } from './app.module'
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule)
+  const httpsOptions = {
+    key: readFileSync('./server/private/localhost.key.pem'),
+    cert: readFileSync('./server/private/localhost.cert.pem'),
+  }
+  const app = await NestFactory.create(AppModule, {
+    httpsOptions,
+  })
   const globalPrefix = 'gateway'
   app.setGlobalPrefix(globalPrefix)
   const port = process.env.PORT || 3333

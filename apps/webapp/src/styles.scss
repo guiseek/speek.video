@@ -71,6 +71,11 @@ body.spheers speek-root section::before {
   opacity: 0.2;
   background-size: 180%;
 }
+
+body .mat-fab.mat-accent {
+  color: black;
+}
+
 .spacer {
   flex: 1 1 auto;
 }

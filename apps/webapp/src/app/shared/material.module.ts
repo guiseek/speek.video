@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatSelectModule } from '@angular/material/select'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSidenavModule } from '@angular/material/sidenav'
@@ -27,6 +28,7 @@ import { MatSliderModule } from '@angular/material/slider'
     MatIconModule,
     MatSliderModule,
     MatGridListModule,
+    MatSelectModule,
     MatTooltipModule,
     MatInputModule,
     MatButtonModule,

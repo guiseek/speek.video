@@ -4,9 +4,11 @@
   display: flex;
   position: absolute;
   flex-direction: column;
+  justify-content: center;
   width: 100%;
   z-index: 10;
   .mat-toolbar {
     width: 100%;
+    align-items: center;
   }
 }

@@ -1,0 +1,39 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .mat-card {
+    display: flex;
+    flex-direction: column;
+
+    > section {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+
+      video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .mat-form-field {
+    bottom: 0;
+    width: 300px;
+    margin: 10px;
+  }
+
+
+  .mat-fab {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+  }
+}

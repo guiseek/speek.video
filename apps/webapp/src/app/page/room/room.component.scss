@@ -1,0 +1,73 @@
+// @import 'libs/ui/stylesheets/src/mixins';
+
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #090909;
+  video {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    vertical-align: top;
+    flex: 1;
+  }
+
+  .mat-card {
+    border-top-left-radius: 12px;
+    position: absolute;
+    min-width: 220px;
+    width: 25%;
+    bottom: 10px;
+    right: 0px;
+    video {
+      width: 100%;
+    }
+    video.remote {
+      object-fit: cover;
+    }
+    &-actions {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      &:last-child {
+        margin-bottom: 0px;
+      }
+      padding-bottom: 0;
+      .mat-button-base {
+        flex: 1;
+        padding: 6px;
+      }
+    }
+  }
+
+  // .mat-card {
+  //   @include media(">=phone", "<tablet") {
+  //     min-width: 220px;
+  //     width: 40%;
+  //   }
+  // }
+
+  // .mat-card {
+  //   @include respond-to('medium') {
+  //     min-width: 220px;
+  //     width: 40%;
+  //   }
+  // }
+
+  // .mat-card {
+  //   @include respond-to('small') {
+  //     min-width: 220px;
+  //     width: 40%;
+  //   }
+  // }
+
+  .call-end {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+}

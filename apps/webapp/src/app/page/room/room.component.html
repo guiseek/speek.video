@@ -17,6 +17,9 @@
     <button mat-button (click)="toggleVideo()">
       <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
     </button>
+    <button mat-button (click)="drawer.toggle()">
+      <mat-icon>settings</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>
 

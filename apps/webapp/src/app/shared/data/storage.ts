@@ -15,7 +15,7 @@ export abstract class Storage<T = any> {
 
   getStoredValue(): T | null {
     try {
-      return JSON.parse(localStorage.getItem(this.key))
+      return JSON.parse(localStorage.getItem(this.key)) ?? {}
     } catch {
       return null
     }

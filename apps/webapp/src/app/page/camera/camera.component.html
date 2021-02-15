@@ -1,0 +1,43 @@
+<speek-toolbar>
+  <a routerLink="/" mat-icon-button>
+    <mat-icon>arrow_backward</mat-icon>
+  </a>
+  <span class="brand-name">câmera</span>
+</speek-toolbar>
+<mat-card>
+  <section>
+    <video
+      muted
+      #video
+      autoplay
+      playsinline
+      poster="/assets/images/logo.svg"
+    ></video>
+  </section>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-form-field
+        color="accent"
+        appearance="outline"
+        formGroupName="devices"
+      >
+        <mat-label>Entrada de vídeo</mat-label>
+        <mat-select
+          formControlName="video"
+          [compareWith]="compareFn"
+          (selectionChange)="onDeviceChange($event.value)"
+        >
+          <mat-option value=""> Selecione um dispositivo </mat-option>
+          <mat-option *ngFor="let d of devices$ | async" [value]="d">
+            {{ d.label }}
+          </mat-option>
+        </mat-select>
+        <mat-error>Selecione um dispositivo</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<button type="button" [disabled]="form.invalid" mat-fab (click)="onSave()">
+  <mat-icon>check</mat-icon>
+</button>

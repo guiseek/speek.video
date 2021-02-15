@@ -4,7 +4,7 @@ import { drawOscilloscope } from '@speek/ui/components'
 import { stopStream, Voice } from '@speek/core/stream'
 import { takeUntil } from 'rxjs/operators'
 import { UUID } from '@speek/util/format'
-import { Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { BehaviorSubject, Subject } from 'rxjs'
 import {
   AfterViewInit,
@@ -43,8 +43,15 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
+    private _route: ActivatedRoute,
     readonly userSetup: UserSetupStorage
-  ) {}
+  ) {
+    const { code } = this._route.snapshot.params
+    console.log(code)
+    if (code) {
+      this.code.setValue(code)
+    }
+  }
 
   ngOnInit(): void {
     const value = this.userSetup.getStoredValue()

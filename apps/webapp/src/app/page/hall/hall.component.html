@@ -1,0 +1,25 @@
+<speek-toolbar>
+  <a routerLink="/" mat-icon-button>
+    <mat-icon>arrow_backward</mat-icon>
+  </a>
+  <span class="brand-name">convidado</span>
+</speek-toolbar>
+
+<ng-container *ngIf="code.valid">
+  <speek-door [comeInOut]="comeInOut" [opened]="code.valid"></speek-door>
+</ng-container>
+
+<mat-card>
+  <mat-card-content>
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>Entre com o código</mat-label>
+      <input matInput autofocus cdkFocusInitial [formControl]="code" />
+      <mat-hint>Códgo de acesso</mat-hint>
+      <mat-error>Código inválido</mat-error>
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
+
+<button type="button" [disabled]="code.invalid" mat-fab (click)="onSubmit()">
+  <mat-icon>phone_forwarded</mat-icon>
+</button>
