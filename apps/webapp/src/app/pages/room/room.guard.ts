@@ -38,8 +38,7 @@ export class RoomGuard implements CanActivate, CanDeactivate<RoomComponent> {
     | Promise<boolean | UrlTree> {
     const data: DialogConfirmData = {
       header: 'Finalizar chamada',
-      body:
-        'Cancele para continuar na chamada ou encerre confirmando',
+      body: 'Cancele para continuar na chamada ou encerre confirmando',
     }
     return component.localStream.active
       ? this._dialog.open(ConfirmDialog, { data }).afterClosed()
@@ -48,17 +47,23 @@ export class RoomGuard implements CanActivate, CanDeactivate<RoomComponent> {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | boolean {
+  ): Observable<boolean | UrlTree> | Promise<boolean> | boolean {
     const code = route.paramMap.get('code')
+
     if (UUID.isValid(code) || /^[a-z\d\-_\s]+$/i.test(code)) {
-      return true
+      const { pitch } = this.userSetup.getStoredValue()
+      if (!pitch) {
+        return this._router.navigate(['/', 'invite', code])
+      } else {
+        return true
+      }
     }
-    return this._dialog
-      .open(CodeDialog, { data: UUID.long() })
-      .afterClosed()
-      .pipe(
-        switchMap((response) => this._router.navigate(['/', response ?? '']))
-      )
+    // return this._dialog
+    //   .open(CodeDialog, { data: UUID.long() })
+    //   .afterClosed()
+    //   .pipe(
+    //     switchMap((response) => this._router.navigate(['/', response ?? '']))
+    //   )
 
     // const code = route.paramMap.get('code')
     // const setup = this.userSetup.getStoredValue()

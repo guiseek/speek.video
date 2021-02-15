@@ -3,8 +3,13 @@ export type UserPermissions = Pick<
   'camera' | 'speaker' | 'microphone'
 >
 
+export type UserDevices = Partial<
+  Record<MediaDeviceKind, Omit<MediaDeviceInfo, 'toJSON'>>
+>
+
 export class UserSetup {
-  constructor(public pitch: number) {}
+  constructor(public pitch: number, public devices: UserDevices) {}
+
   // permissions?: UserPermissions = {
   //   camera: 'prompt',
   //   microphone: 'prompt',

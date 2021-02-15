@@ -6,21 +6,34 @@ import {
   RouterStateSnapshot,
   UrlTree,
   Router,
+  CanDeactivate,
 } from '@angular/router'
+import { InviteComponent } from './invite.component'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
 })
-export class InviteGuard implements CanActivate {
+export class InviteGuard
+  implements CanActivate, CanDeactivate<InviteComponent> {
   constructor(readonly userSetup: UserSetupStorage, private _router: Router) {}
+  canDeactivate(
+    component: InviteComponent,
+    currentRoute: ActivatedRouteSnapshot,
+    currentState: RouterStateSnapshot,
+    nextState?: RouterStateSnapshot
+  ):
+    | boolean
+    | UrlTree
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree> {
+    return component.code.valid && component.form.valid
+  }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> | boolean {
-    const setup = this.userSetup.getStoredValue()
-    if (setup?.pitch) {
-      return true
-    }
-    return this._router.navigate(['/', 'voice'])
+    const { pitch } = this.userSetup.getStoredValue()
+    return !!pitch
   }
 }

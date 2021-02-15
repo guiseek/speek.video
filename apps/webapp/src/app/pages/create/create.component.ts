@@ -17,7 +17,7 @@ export class CreateComponent implements AfterViewInit {
   data = ''
   enter = false
   get url() {
-    return `https://speek.video/#/${this.code.value}`
+    return `https://speek.video/#/invite/${this.code.value}`
   }
   form = new FormGroup(
     {

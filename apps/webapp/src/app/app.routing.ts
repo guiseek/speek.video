@@ -1,3 +1,4 @@
+import { CameraComponent } from './pages/camera/camera.component'
 import { DialupComponent } from './pages/dialup/dialup.component'
 import { HomeComponent } from './pages/home/home.component'
 import { RoomComponent } from './pages/room/room.component'
@@ -15,7 +16,9 @@ export const routes: Routes = [
   { path: 'dialup', component: DialupComponent },
   { path: 'create', component: CreateComponent },
   { path: 'voice', component: VoiceComponent },
+  { path: 'camera', component: CameraComponent },
   { path: 'invite', component: InviteComponent },
+  { path: 'invite/:code', component: InviteComponent },
   {
     path: ':code',
     canActivate: [RoomGuard],

@@ -36,7 +36,8 @@ import { VoiceComponent } from './pages/voice/voice.component'
 import { InviteComponent } from './pages/invite/invite.component'
 import { UserSetupStorage } from './shared/data/user-setup.storage'
 import { A11yModule } from '@angular/cdk/a11y';
-import { ServiceWorkerModule } from '@angular/service-worker'
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { CameraComponent } from './pages/camera/camera.component'
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ServiceWorkerModule } from '@angular/service-worker'
     CreateComponent,
     VoiceComponent,
     InviteComponent,
+    CameraComponent,
   ],
   imports: [
     A11yModule,
