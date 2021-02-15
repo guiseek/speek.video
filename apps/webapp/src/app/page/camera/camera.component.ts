@@ -54,6 +54,14 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  toggleVideo() {
+    if (this.stream?.active) {
+      stopStream(this.stream)
+    } else {
+      this.getStream(this.form.get('devices.video').value)
+    }
+  }
+
   async getStream(device: MediaDeviceInfo) {
     return navigator.mediaDevices
       .getUserMedia(configVideoSource(device))

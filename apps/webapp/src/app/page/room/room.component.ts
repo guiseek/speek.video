@@ -5,6 +5,7 @@ import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
 import { stopStream, Voice } from '@speek/core/stream'
 import { UserSetupStorage } from '@speek/data/storage'
+import { UserRoomStorage } from '@speek/data/storage'
 import { takeUntil, takeWhile } from 'rxjs/operators'
 import { BehaviorSubject, Subject } from 'rxjs'
 import {
@@ -57,13 +58,11 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     private share: ShareService,
     private route: ActivatedRoute,
     readonly drawer: DrawerService,
+    readonly userRoom: UserRoomStorage,
     readonly userSetup: UserSetupStorage,
     readonly signaling: SignalingAdapter
   ) {
     const { code } = this.route.snapshot.params
-    // if (code === 'newcode') {
-    //   this.router.navigate(['/', UUID.long()])
-    // }
     this.code = code
   }
 
@@ -202,9 +201,11 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.localStream.getTracks().forEach((t) => t.stop())
     this.destroy.next()
     this.destroy.complete()
+    if (this.localStream) {
+      stopStream(this.localStream)
+    }
     if (this.peer?.connection) {
       console.log('close')
     }

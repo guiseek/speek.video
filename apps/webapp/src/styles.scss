@@ -47,31 +47,6 @@ body .mat-drawer-content {
   overflow: unset;
 }
 
-body speek-root main {
-  position: relative;
-
-  &::before {
-    content: ' ';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-image: url('/assets/images/spheers.svg');
-    background-position-x: center;
-    background-position-y: center;
-    background-repeat: no-repeat;
-    background-size: 400%;
-    filter: blur(10px);
-    opacity: 0;
-    transition: filter 250ms ease-in-out, opacity 500ms ease-in-out,
-      background-size 400ms ease-in-out;
-  }
-}
-body.spheers speek-root section::before {
-  filter: blur(0px);
-  opacity: 0.2;
-  background-size: 180%;
-}
-
 body .mat-fab.mat-accent {
   color: black;
 }
@@ -118,4 +93,11 @@ body .mat-fab.mat-accent {
 
 .mat-form-field {
   width: 100%;
+}
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
