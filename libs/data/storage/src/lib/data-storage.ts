@@ -1,3 +1,4 @@
+import { isDefined, notNull } from '@speek/util/format'
 import { deepMerge } from '@speek/util/format'
 import { Subject } from 'rxjs'
 export abstract class DataStorage<T = any> {
@@ -7,7 +8,7 @@ export abstract class DataStorage<T = any> {
 
   merge(data: Partial<T>) {
     try {
-      return deepMerge(this.getStoredValue(), data)
+      return deepMerge(this.getStoredValue() ?? {}, data)
     } catch (err) {
       console.error(err)
     }
@@ -34,7 +35,8 @@ export abstract class DataStorage<T = any> {
 
   getStoredValue(): T | null {
     try {
-      return JSON.parse(localStorage.getItem(this.key)) ?? {}
+      const value = JSON.parse(localStorage.getItem(this.key))
+      return isDefined(value) && notNull(value) ? value : null
     } catch {
       return null
     }

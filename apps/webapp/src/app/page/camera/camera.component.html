@@ -12,7 +12,7 @@
         <h3 mat-line>Vídeo</h3>
         <button type="button" mat-icon-button (click)="toggleVideo()">
           <mat-icon>
-            {{ stream?.active ? 'videocam_off' : 'videocam' }}
+            {{ stream?.active ? 'videocam' : 'videocam_off' }}
           </mat-icon>
         </button>
       </mat-list-item>
@@ -29,11 +29,7 @@
     </section>
     <mat-divider></mat-divider>
     <form [formGroup]="form">
-      <mat-form-field
-        color="accent"
-        appearance="outline"
-        formGroupName="devices"
-      >
+      <mat-form-field color="accent" appearance="outline">
         <mat-label>Entrada de vídeo</mat-label>
         <mat-select
           formControlName="video"

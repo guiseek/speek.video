@@ -1,9 +1,7 @@
+import { UserSetupForm, drawOscilloscope } from '@speek/ui/components'
 import { BehaviorSubject, Observable, Subject } from 'rxjs'
-import { FormBuilder, Validators } from '@angular/forms'
-import { drawOscilloscope } from '@speek/ui/components'
 import { stopStream, Voice } from '@speek/core/stream'
 import { UserSetupStorage } from '@speek/data/storage'
-import { configAudioSource, getMediaDevices } from '@speek/util/device'
 import { takeUntil } from 'rxjs/operators'
 import {
   AfterViewInit,
@@ -29,26 +27,21 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
   private _devices = new BehaviorSubject<MediaDeviceInfo[]>([])
   devices$ = this._devices.asObservable()
 
-  form = this._fb.group({
-    pitch: [0, [Validators.min(-2), Validators.max(2)]],
-    devices: this._fb.group({
-      audio: ['', Validators.required],
-    }),
-  })
+  form = new UserSetupForm()
 
   private _destroy = new Subject<void>()
-  constructor(private _fb: FormBuilder, readonly userSetup: UserSetupStorage) {}
+  constructor(readonly userSetup: UserSetupStorage) {}
 
   ngOnInit(): void {
     const value = this.userSetup.getStoredValue()
     this.form.patchValue(!!value ? value : {})
-    if (this.form.get('devices.audio').value) {
-      this.getStream(this.form.get('devices.audio').value)
+    if (this.form.get('audio').value) {
+      this.getStream(this.form.get('audio').value)
     }
   }
 
   ngAfterViewInit(): void {
-    getMediaDevices('audioinput').then((devices) => {
+    this.form.getDevices('audioinput').then((devices) => {
       this._devices.next(devices.map((d) => d.toJSON()))
     })
     navigator.mediaDevices
@@ -65,7 +58,7 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async getStream(device: MediaDeviceInfo) {
     return navigator.mediaDevices
-      .getUserMedia(configAudioSource(device))
+      .getUserMedia(this.form.config(device))
       .then((stream) => this.gotStream(stream))
   }
 
@@ -104,7 +97,7 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSave() {
     if (this.form.valid) {
-      this.userSetup.update(this.form.value)
+      this.userSetup.update(this.form.getUserSetup())
       this.form.markAsPristine()
     }
   }
