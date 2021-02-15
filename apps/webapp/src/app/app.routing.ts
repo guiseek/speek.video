@@ -15,7 +15,12 @@ export const routes: Routes = [
   { path: 'dialup', component: DialupComponent },
   { path: 'create', component: CreateComponent },
   { path: 'voice', component: VoiceComponent },
-  { path: 'invite', canActivate: [InviteGuard], component: InviteComponent },
-  { path: ':code', canActivate: [RoomGuard], component: RoomComponent },
+  { path: 'invite', component: InviteComponent },
+  {
+    path: ':code',
+    canActivate: [RoomGuard],
+    canDeactivate: [RoomGuard],
+    component: RoomComponent,
+  },
   { path: ':code/hall', canDeactivate: [HallGuard], component: HallComponent },
 ]

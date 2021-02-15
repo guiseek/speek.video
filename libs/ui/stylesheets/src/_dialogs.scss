@@ -8,6 +8,10 @@ body .mat-dialog {
     padding-left: 24px;
     padding-right: 24px;
   }
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+  }
   &-content,
   &-actions {
     background-color: rgba(18, 18, 18, 1);

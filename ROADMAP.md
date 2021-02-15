@@ -2,9 +2,9 @@
 
 ### @ToDo
 
-- [ ] botão sair da chamada
-  - [ ] mat-fab warn canto left bottom room component
-  - [ ] guard canDeactivate room component
+- [x] botão sair da chamada
+  - [x] mat-fab warn canto left bottom room component
+  - [x] guard canDeactivate room component
 
 - [x] Tela Filtro de voz
   - [x] Melhorar design
@@ -13,15 +13,16 @@
 
 
 - [ ] MediaStream
-  - [ ] Áudio e vídeo
+  - [x] Áudio e vídeo
   - [ ] Salvar em storage local a permissão
-- [ ] Validar permissões de acesso
+  - [ ] Validar permissões de acesso
+  - [x] Adicionar select com devices, separados por áudio e vídeo
 
 - [ ] Chamada de áudio e vídeo
   - [x] Não precisar dar refresh
-  - [ ] Hablitar/desabilitar áudio
-  - [ ] Hablitar/desabilitar vídeo
-  - [ ] Crop do vídeo remoto (aproveitar a tela na vertical)
+  - [x] Hablitar/desabilitar áudio
+  - [x] Hablitar/desabilitar vídeo
+  - [x] Crop do vídeo remoto (aproveitar a tela na vertical)
 
 
 - [ ] Auth (senha opcional)
@@ -31,9 +32,9 @@
 
 - [ ] Compartilhar link da reunião em várias mídias
   - [ ] Enviar link por email
-  - [ ] Whatsapp
-  - [ ] Telegram
-  - [ ] Messenger
+  - [x] Whatsapp
+  - [x] Telegram
+  - [ ] SMS
   - [ ] Contatos
 
 - [ ] Recursos

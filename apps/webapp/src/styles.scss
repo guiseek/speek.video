@@ -46,31 +46,34 @@ body .mat-drawer-backdrop.mat-drawer-shown {
 body .mat-drawer-content {
   overflow: unset;
 }
-
-body speek-root main {
-  position: relative;
-
-  &::before {
-    content: ' ';
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-image: url('/assets/images/spheers.svg');
-    background-position-x: center;
-    background-position-y: center;
-    background-repeat: no-repeat;
-    background-size: 400%;
-    filter: blur(10px);
-    opacity: 0;
-    transition: filter 250ms ease-in-out, opacity 500ms ease-in-out,
-      background-size 400ms ease-in-out;
-  }
+body .mat-fab.mat-accent {
+  color: black;
 }
-body.spheers speek-root section::before {
-  filter: blur(0px);
-  opacity: 0.2;
-  background-size: 180%;
-}
+
+// body speek-root main {
+//   position: relative;
+
+//   &::before {
+//     content: ' ';
+//     width: 100%;
+//     height: 100%;
+//     position: absolute;
+//     background-image: url('/assets/images/spheers.svg');
+//     background-position-x: center;
+//     background-position-y: center;
+//     background-repeat: no-repeat;
+//     background-size: 400%;
+//     filter: blur(10px);
+//     opacity: 0;
+//     transition: filter 250ms ease-in-out, opacity 500ms ease-in-out,
+//       background-size 400ms ease-in-out;
+//   }
+// }
+// body.spheers speek-root section::before {
+//   filter: blur(0px);
+//   opacity: 0.2;
+//   background-size: 180%;
+// }
 .spacer {
   flex: 1 1 auto;
 }

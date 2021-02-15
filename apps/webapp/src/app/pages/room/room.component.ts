@@ -201,7 +201,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.localStream.getTracks().forEach((t) => t.stop())
+    // this.localStream.getTracks().forEach((t) => t.stop())
     this.destroy.next()
     this.destroy.complete()
     if (this.peer?.connection) {
