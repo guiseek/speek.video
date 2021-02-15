@@ -1,10 +1,10 @@
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
-import { UserSetupStorage } from '../../shared/data/user-setup.storage'
 import { PeerAdapter, SignalingAdapter } from '@speek/core/adapter'
 import { DrawerService, ShareService } from '@speek/ui/components'
 import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
 import { stopStream, Voice } from '@speek/core/stream'
+import { UserSetupStorage } from '@speek/data/storage'
 import { takeUntil, takeWhile } from 'rxjs/operators'
 import { BehaviorSubject, Subject } from 'rxjs'
 import {

@@ -39,13 +39,13 @@ export function getLogo(color: string) {
   </g>
 </svg>`
 }
-export function createSpeekLogo(
-  registry: MatIconRegistry,
-  sanitizer: DomSanitizer
-) {
-  const speekDarkIcon = sanitizer.bypassSecurityTrustHtml(getLogo('#d32f2f'))
-  registry.addSvgIconLiteral('speek-dark', speekDarkIcon)
+// export function createSpeekLogo(
+//   registry: MatIconRegistry,
+//   sanitizer: DomSanitizer
+// ) {
+//   const speekDarkIcon = sanitizer.bypassSecurityTrustHtml(getLogo('#d32f2f'))
+//   registry.addSvgIconLiteral('speek-dark', speekDarkIcon)
 
-  const speekLightIcon = sanitizer.bypassSecurityTrustHtml(getLogo('#03a9f4'))
-  registry.addSvgIconLiteral('speek-light', speekLightIcon)
-}
+//   const speekLightIcon = sanitizer.bypassSecurityTrustHtml(getLogo('#03a9f4'))
+//   registry.addSvgIconLiteral('speek-light', speekLightIcon)
+// }

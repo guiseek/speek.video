@@ -1,6 +1,6 @@
-import { UserSetupStorage } from '../../shared/data/user-setup.storage'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { drawOscilloscope } from '@speek/ui/components'
+import { UserSetupStorage } from '@speek/data/storage'
 import { stopStream, Voice } from '@speek/core/stream'
 import { takeUntil } from 'rxjs/operators'
 import { UUID } from '@speek/util/format'

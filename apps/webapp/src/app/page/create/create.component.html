@@ -5,12 +5,12 @@
   <span class="brand-name">começar</span>
 </speek-toolbar>
 
-<speek-door [comeInOut]="comeInOut" [opened]="code.valid"></speek-door>
+<speek-door [opened]="comeInOut | async"></speek-door>
 
-<mat-card [ngClass]="{ hide: enter }">
+<mat-card [ngClass]="{ hide: comeInOut | async }">
   <form [formGroup]="form">
     <mat-form-field appearance="outline" color="accent">
-      <mat-label>Qual será o código chave?</mat-label>
+      <mat-label>Esta é a chave da reunião</mat-label>
       <input
         matInput
         autofocus
@@ -21,15 +21,6 @@
         formControlName="code"
       />
       <mat-hint>Clique ao lado para copiar o código</mat-hint>
-      <button matPrefix type="button" mat-icon-button (click)="onAutofix()">
-        <mat-icon
-          #autoFix="matTooltip"
-          matTooltip="Gerar código"
-          matTooltipPosition="above"
-        >
-          auto_fix_high
-        </mat-icon>
-      </button>
       <button
         matSuffix
         type="button"
@@ -48,15 +39,3 @@
     </mat-form-field>
   </form>
 </mat-card>
-
-<button type="button" mat-fab (click)="onLogin()">
-  <mat-icon>login</mat-icon>
-</button>
-
-<!-- <mat-form-field [ngClass]="{ active: (comeInOut | async) }">
-  <input type="text" matInput [formControl]="code" />
-</mat-form-field>
-
-<button type="button" mat-button (click)="comeInOut.next(!comeInOut.value)">
-  {{ (comeInOut | async) ? 'Sair' : 'Entrar' }}
-</button> -->

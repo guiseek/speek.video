@@ -5,6 +5,11 @@
   justify-content: space-evenly;
   align-items: center;
 
+  transition: transform 3000ms ease-in-out;
+  &.zoom {
+    transform: scale(4);
+  }
+
   .mat-card {
     visibility: visible;
     opacity: 1;
@@ -14,19 +19,9 @@
       opacity: 0;
     }
   }
+
   .mat-form-field {
     width: 300px;
     margin: 10px;
-  }
-
-  .mat-fab {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-  }
-
-  .mat-dialog-actions {
-    flex: 1;
-    justify-content: space-between;
   }
 }
