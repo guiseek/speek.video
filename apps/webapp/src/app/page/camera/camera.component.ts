@@ -1,6 +1,5 @@
 import { UserSetupStorage } from '@speek/data/storage'
-import { getMediaDevices, configVideoSource } from '@speek/util/device'
-import { FormBuilder, Validators } from '@angular/forms'
+import { UserSetupForm } from '@speek/ui/components'
 import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject } from 'rxjs'
 import {
@@ -26,25 +25,22 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
   private _devices = new BehaviorSubject<MediaDeviceInfo[]>([])
   devices$ = this._devices.asObservable()
 
-  form = this._fb.group({
-    pitch: [0, [Validators.min(-2), Validators.max(2)]],
-    devices: this._fb.group({
-      video: ['', Validators.required],
-    }),
-  })
+  form = new UserSetupForm()
 
-  constructor(private _fb: FormBuilder, readonly userSetup: UserSetupStorage) {}
+  constructor(readonly userSetup: UserSetupStorage) {}
 
   ngOnInit(): void {
     const value = this.userSetup.getStoredValue()
     this.form.patchValue(!!value ? value : {})
-    if (this.form.get('devices.video').value) {
-      this.getStream(this.form.get('devices.video').value)
+    if (this.form.video.value) {
+      this.getStream(this.form.video.value)
     }
   }
 
   ngAfterViewInit(): void {
-    getMediaDevices('videoinput').then((devices) => this._devices.next(devices))
+    this.form
+      .getDevices('videoinput')
+      .then((devices) => this._devices.next(devices))
   }
 
   onDeviceChange(device: MediaDeviceInfo) {
@@ -58,13 +54,13 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.stream?.active) {
       stopStream(this.stream)
     } else {
-      this.getStream(this.form.get('devices.video').value)
+      this.getStream(this.form.video.value)
     }
   }
 
   async getStream(device: MediaDeviceInfo) {
     return navigator.mediaDevices
-      .getUserMedia(configVideoSource(device))
+      .getUserMedia(this.form.config(device))
       .then((stream) => this.gotStream(this.video, stream))
   }
 
@@ -79,7 +75,7 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSave() {
     if (this.form.valid) {
-      this.userSetup.update(this.form.value)
+      this.userSetup.update(this.form.getUserSetup())
       this.form.markAsPristine()
     }
   }

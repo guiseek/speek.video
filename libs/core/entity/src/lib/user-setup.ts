@@ -8,16 +8,34 @@ export type UserDevices = Partial<
 >
 
 export class UserSetup {
-  constructor(public pitch: number, public devices: UserDevices) {}
+  pitch: number
+  audio: Omit<MediaDeviceInfo, 'toJSON'>
+  video: Omit<MediaDeviceInfo, 'toJSON'>
+  constructor(setup?: Partial<UserSetup>) {
+    if (setup) {
+      this.pitch = setup.pitch ?? 0
+      this.audio = setup.audio ?? null
+      this.video = setup.video ?? null
+    }
+  }
 
-  // permissions?: UserPermissions = {
-  //   camera: 'prompt',
-  //   microphone: 'prompt',
-  //   speaker: 'prompt',
-  // }
-  // devices: DevicePermissionDescriptor
+  static fromJson(json: UserSetup) {
+    return new UserSetup(json)
+  }
 
-  // setPermission(name?: PermissionName, state?: PermissionState) {
-  //   this.permissions.camera
-  // }
+  serialize() {
+    return {
+      pitch: this.pitch,
+      audio: this.audio,
+      video: this.video,
+    }
+  }
+
+  toJSON() {
+    return {
+      pitch: this.pitch,
+      audio: this.audio,
+      video: this.video,
+    }
+  }
 }
