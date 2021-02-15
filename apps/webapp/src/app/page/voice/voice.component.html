@@ -16,11 +16,7 @@
       <mat-divider></mat-divider>
       <canvas #canvas></canvas>
       <mat-divider></mat-divider>
-      <mat-form-field
-        color="accent"
-        appearance="outline"
-        formGroupName="devices"
-      >
+      <mat-form-field color="accent" appearance="outline">
         <mat-label>Entrada de áudio</mat-label>
         <mat-select
           formControlName="audio"
@@ -42,11 +38,11 @@
       <section>
         <span>-1</span>
         <mat-slider
-        min="-1"
-        max="1"
-        step="0.1"
-        thumbLabel
-        formControlName="pitch"
+          min="-1"
+          max="1"
+          step="0.1"
+          thumbLabel
+          formControlName="pitch"
         ></mat-slider>
         <span>1</span>
       </section>
