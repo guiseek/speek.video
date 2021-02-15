@@ -6,6 +6,10 @@
   - [x] mat-fab warn canto left bottom room component
   - [x] guard canDeactivate room component
 
+- [ ] Chamadas
+  - [ ] ID da chamada
+  - [ ] Chamada sem alteração no tom de voz
+
 - [x] Tela Filtro de voz
   - [x] Melhorar design
   - [x] Salvar em storage local

@@ -9,5 +9,6 @@ module.exports = {
     '<rootDir>/libs/core/adapter',
     '<rootDir>/libs/data/storage',
     '<rootDir>/libs/util/share',
+    '<rootDir>/libs/util/device',
   ],
 }

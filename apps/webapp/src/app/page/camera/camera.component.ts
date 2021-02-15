@@ -1,7 +1,8 @@
 import { UserSetupStorage } from '../../shared/data/user-setup.storage'
-import { BehaviorSubject, Observable, Subject } from 'rxjs'
+import { getMediaDevices, configVideoSource } from '@speek/util/device'
 import { FormBuilder, Validators } from '@angular/forms'
 import { stopStream } from '@speek/core/stream'
+import { BehaviorSubject } from 'rxjs'
 import {
   AfterViewInit,
   Component,
@@ -10,19 +11,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
-
-const getDevices = async (params: MediaDeviceKind) => {
-  const filter = ({ kind }: MediaDeviceInfo) => kind === params
-  const devices = await navigator.mediaDevices.enumerateDevices()
-  return params ? devices.filter(filter) : devices
-}
-
-const getVideoDeviceConfig = (device: MediaDeviceInfo) =>
-  ({
-    video: {
-      optional: [{ sourceId: device }],
-    },
-  } as MediaStreamConstraints)
 
 @Component({
   selector: 'speek-camera',
@@ -41,27 +29,34 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
   form = this._fb.group({
     pitch: [0, [Validators.min(-2), Validators.max(2)]],
     devices: this._fb.group({
-      videoinput: ['', Validators.required],
+      video: ['', Validators.required],
     }),
   })
 
-  constructor(
-    private _fb: FormBuilder,
-    readonly userSetup: UserSetupStorage
-  ) {}
+  constructor(private _fb: FormBuilder, readonly userSetup: UserSetupStorage) {}
 
   ngOnInit(): void {
     const value = this.userSetup.getStoredValue()
     this.form.patchValue(!!value ? value : {})
+    if (this.form.get('devices.video').value) {
+      this.getStream(this.form.get('devices.video').value)
+    }
   }
 
   ngAfterViewInit(): void {
-    getDevices('videoinput').then((devices) => this._devices.next(devices))
+    getMediaDevices('videoinput').then((devices) => this._devices.next(devices))
   }
 
   onDeviceChange(device: MediaDeviceInfo) {
-    navigator.mediaDevices
-      .getUserMedia(getVideoDeviceConfig(device))
+    stopStream(this.stream)
+    if (device) {
+      this.getStream(device)
+    }
+  }
+
+  async getStream(device: MediaDeviceInfo) {
+    return navigator.mediaDevices
+      .getUserMedia(configVideoSource(device))
       .then((stream) => this.gotStream(this.video, stream))
   }
 

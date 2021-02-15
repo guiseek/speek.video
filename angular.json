@@ -413,6 +413,27 @@
           }
         }
       }
+    },
+    "util-device": {
+      "root": "libs/util/device",
+      "sourceRoot": "libs/util/device/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/util/device/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/util/device"],
+          "options": {
+            "jestConfig": "libs/util/device/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

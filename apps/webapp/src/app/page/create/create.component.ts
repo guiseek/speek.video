@@ -5,6 +5,7 @@ import { Platform } from '@angular/cdk/platform'
 import { UUID } from '@speek/util/format'
 import { Router } from '@angular/router'
 import { BehaviorSubject } from 'rxjs'
+import { UserSetupStorage } from '../../shared/data/user-setup.storage'
 
 @Component({
   selector: 'speek-create',
@@ -35,7 +36,11 @@ export class CreateComponent implements AfterViewInit {
 
   comeInOut = new BehaviorSubject<boolean>(false)
 
-  constructor(private _router: Router, private _platform: Platform) {}
+  constructor(
+    private _router: Router,
+    private _platform: Platform,
+    readonly userSetup: UserSetupStorage
+  ) {}
 
   ngAfterViewInit(): void {
     if (this.autoFix) {
@@ -44,7 +49,7 @@ export class CreateComponent implements AfterViewInit {
         const hide = setTimeout(() => {
           this.autoFix.hide()
           clearTimeout(hide)
-        }, 1500)
+        }, 1250)
         clearTimeout(show)
       }, 250)
     }
@@ -57,7 +62,7 @@ export class CreateComponent implements AfterViewInit {
           clearTimeout(hide)
         }, 1500)
         clearTimeout(show)
-      }, 2000)
+      }, 1750)
     }
   }
 

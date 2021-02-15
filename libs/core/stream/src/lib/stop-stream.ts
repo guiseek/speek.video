@@ -1,3 +1,3 @@
 export function stopStream(stream: MediaStream) {
-  return stream.getTracks().forEach((track) => track.stop())
+  return stream && stream.getTracks().forEach((track) => track.stop())
 }

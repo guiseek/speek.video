@@ -1,11 +1,11 @@
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
 import { UserSetupStorage } from '../../shared/data/user-setup.storage'
 import { PeerAdapter, SignalingAdapter } from '@speek/core/adapter'
+import { DrawerService, ShareService } from '@speek/ui/components'
 import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
 import { stopStream, Voice } from '@speek/core/stream'
 import { takeUntil, takeWhile } from 'rxjs/operators'
-import { ShareService } from '@speek/ui/components'
 import { BehaviorSubject, Subject } from 'rxjs'
 import {
   AfterViewInit,
@@ -56,6 +56,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     private peer: PeerAdapter,
     private share: ShareService,
     private route: ActivatedRoute,
+    readonly drawer: DrawerService,
     readonly userSetup: UserSetupStorage,
     readonly signaling: SignalingAdapter
   ) {
