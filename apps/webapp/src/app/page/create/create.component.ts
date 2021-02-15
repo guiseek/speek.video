@@ -1,12 +1,16 @@
+import { delay, take } from 'rxjs/operators'
+import { UserRoom } from '@speek/core/entity'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatTooltip } from '@angular/material/tooltip'
+import { UserRoomStorage } from '@speek/data/storage'
 import { UUID } from '@speek/util/format'
 import { Router } from '@angular/router'
-import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, merge, timer } from 'rxjs'
 import {
   AfterViewInit,
   Component,
   HostBinding,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core'
@@ -16,8 +20,11 @@ import {
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
 })
-export class CreateComponent implements OnInit, AfterViewInit {
+export class CreateComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('tip') tip: MatTooltip
+  showTip: number
+  hideTip: number
+  toggleTip: number
 
   url = `https://speek.video/#/invite`
 
@@ -39,7 +46,7 @@ export class CreateComponent implements OnInit, AfterViewInit {
     return this.form.get('code') as FormControl
   }
 
-  constructor(private _router: Router) {}
+  constructor(private _router: Router, private _userRoom: UserRoomStorage) {}
 
   ngOnInit(): void {
     const code = UUID.long()
@@ -49,22 +56,33 @@ export class CreateComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (this.tip) {
-      const show = setTimeout(() => {
+      this.showTip = window.setTimeout(() => {
         this.tip.show()
-        const hide = setTimeout(() => {
+
+        this.hideTip = window.setTimeout(() => {
           this.tip.hide()
           this.tip.message = 'Copiado'
-          clearTimeout(hide)
-        }, 1250)
-        clearTimeout(show)
-      }, 250)
+
+          window.clearTimeout(this.hideTip)
+        }, 2250)
+        window.clearTimeout(this.showTip)
+      }, 750)
     }
   }
 
   onCopy(toolTip: MatTooltip) {
     toolTip.show()
+
+    this._userRoom.update(UserRoom.fromJson(this.form.value))
+
     setTimeout(() => toolTip.hide(), 750)
     setTimeout(() => this.comeInOut.next(true), 1000)
     setTimeout(() => this._router.navigate(['/', this.code.value]), 3000)
+  }
+
+  ngOnDestroy(): void {
+    if (this.toggleTip) {
+      window.clearInterval(this.toggleTip)
+    }
   }
 }

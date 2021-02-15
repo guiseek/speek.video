@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core'
 
 import { DrawerModule, UiComponentsModule } from '@speek/ui/components'
 import { createSpeekIcon, getFire, getLogo } from '@speek/util/format'
-import { UserSetupStorage } from '@speek/data/storage'
+import { UserSetupStorage, UserRoomStorage } from '@speek/data/storage'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { UserSetupAdapter } from '@speek/core/adapter'
 import { AppComponent } from './app.component'
@@ -43,6 +43,7 @@ import { environment } from './../environments/environment'
     }),
   ],
   providers: [
+    UserRoomStorage,
     UserSetupStorage,
     UserSetupAdapter,
     PeerProvider.config(environment.configs),
@@ -56,11 +57,8 @@ export class AppModule {
     readonly iconRegistry: MatIconRegistry,
     readonly sanitizer: DomSanitizer
   ) {
-    createSpeekIcon(iconRegistry, sanitizer, [getFire('#d32f2f'), 'speek-dark'])
-    createSpeekIcon(iconRegistry, sanitizer, [
-      getFire('#03a9f4'),
-      'speek-light',
-    ])
-    createSpeekIcon(iconRegistry, sanitizer, [getLogo('#ffffff'), 'speek-logo'])
+    const name = 'speek-logo'
+    const icon = getLogo('#ffffff')
+    createSpeekIcon(iconRegistry, sanitizer, [icon, name])
   }
 }

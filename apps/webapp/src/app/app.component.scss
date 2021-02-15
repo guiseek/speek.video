@@ -9,6 +9,17 @@
     display: flex;
     flex-direction: column;
   }
+
+  section.app-sidenav {
+    padding: 25px;
+
+    kbd {
+      display: inline-flex;
+      padding-left: 8px;
+      font-size: 160%;
+    }
+  }
+
   router-outlet {
     display: block;
     height: 0px;

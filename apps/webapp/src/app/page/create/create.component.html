@@ -10,7 +10,7 @@
 <mat-card [ngClass]="{ hide: comeInOut | async }">
   <form [formGroup]="form">
     <mat-form-field appearance="outline" color="accent">
-      <mat-label>Esta é a chave da reunião</mat-label>
+      <mat-label>Copie sua chave clicando ao lado</mat-label>
       <input
         matInput
         autofocus
@@ -20,7 +20,7 @@
         spellcheck="false"
         formControlName="code"
       />
-      <mat-hint>Clique ao lado para copiar o código</mat-hint>
+      <mat-hint>Você precisa copiar a chave antes de entrar</mat-hint>
       <button
         matSuffix
         type="button"
@@ -30,7 +30,7 @@
       >
         <mat-icon
           #tip="matTooltip"
-          matTooltip="Copiar código"
+          matTooltip="Copiar chave"
           matTooltipPosition="above"
         >
           content_copy

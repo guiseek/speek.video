@@ -31,7 +31,7 @@ export class ShareComponent {
   shareLink(item: ShareTool) {
     const data = {
       title: 'Speek',
-      url: `https://speek.video/${this.data}`,
+      url: `https://speek.video/#/${this.data}`,
       text: 'Pode falar? Clica aqui por favor',
     }
     share(data, item).then((value) => {

@@ -6,6 +6,9 @@
   flex-direction: column;
   overflow: hidden;
   background: #090909;
+  .brand-name {
+    opacity: 0.5;
+  }
   video {
     width: 100%;
     max-width: 100%;
@@ -20,7 +23,7 @@
     position: absolute;
     min-width: 220px;
     width: 25%;
-    bottom: 10px;
+    bottom: 16px;
     right: 0px;
     video {
       width: 100%;
@@ -39,7 +42,7 @@
       padding-bottom: 0;
       .mat-button-base {
         flex: 1;
-        padding: 6px;
+        padding: 3px;
       }
     }
   }

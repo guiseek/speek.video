@@ -8,6 +8,10 @@
     flex: 1;
   }
 
+  .speek-sidenav {
+    max-width: calc(100% - 60px);
+  }
+
   .speek-content {
     display: flex;
     flex-direction: column;
