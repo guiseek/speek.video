@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core'
 
 import { DrawerModule, UiComponentsModule } from '@speek/ui/components'
 import { createSpeekIcon, getFire, getLogo } from '@speek/util/format'
-import { UserSetupStorage } from './shared/data/user-setup.storage'
+import { UserSetupStorage } from '@speek/data/storage'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { UserSetupAdapter } from '@speek/core/adapter'
 import { AppComponent } from './app.component'

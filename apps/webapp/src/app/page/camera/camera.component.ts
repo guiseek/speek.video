@@ -1,4 +1,4 @@
-import { UserSetupStorage } from '../../shared/data/user-setup.storage'
+import { UserSetupStorage } from '@speek/data/storage'
 import { getMediaDevices, configVideoSource } from '@speek/util/device'
 import { FormBuilder, Validators } from '@angular/forms'
 import { stopStream } from '@speek/core/stream'
@@ -71,7 +71,7 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onSave() {
     if (this.form.valid) {
-      this.userSetup.store(this.form.value)
+      this.userSetup.update(this.form.value)
       this.form.markAsPristine()
     }
   }

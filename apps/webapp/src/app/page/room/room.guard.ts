@@ -1,5 +1,5 @@
 import { ConfirmDialog, DialogConfirmData } from '@speek/ui/components'
-import { UserSetupStorage } from '../../shared/data/user-setup.storage'
+import { UserSetupStorage } from '@speek/data/storage'
 import { MatDialog } from '@angular/material/dialog'
 import { RoomComponent } from './room.component'
 import { isDefined } from '@speek/util/format'

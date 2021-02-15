@@ -1,4 +1,4 @@
-import { UserSetupStorage } from '../../shared/data/user-setup.storage'
+import { UserSetupStorage } from '@speek/data/storage'
 import { Injectable } from '@angular/core'
 import {
   CanActivate,

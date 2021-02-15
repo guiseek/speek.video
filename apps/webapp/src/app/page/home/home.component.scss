@@ -31,8 +31,11 @@
     background-size: 180%;
   }
 
-  .mat-nav-list .mat-icon {
-    margin-right: 12px;
+  .mat-nav-list {
+    letter-spacing: 1.2px;
+    .mat-icon {
+      margin-right: 12px;
+    }
   }
 
   .mat-form-field {
