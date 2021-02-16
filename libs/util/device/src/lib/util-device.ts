@@ -5,6 +5,10 @@ export function utilDevice(): string {
 type DeviceKind = keyof Omit<MediaStreamConstraints, 'peerIdentity'>
 type MediaDeviceConfig = Pick<MediaStreamConstraints, 'video' | 'audio'>
 
+const echoCancellation = { echoCancellation: true }
+const noiseSuppression = { noiseSuppression: true }
+const defaultAudioConfig = Object.assign(echoCancellation, noiseSuppression)
+
 /**
  *
  *
@@ -29,6 +33,16 @@ export const configAudioSource = (
     echoCancellation: true,
     noiseSuppression: true,
   } as MediaTrackConstraints
+}
+
+export function getAudioConfig(deviceId?: string): MediaTrackConstraints {
+  return deviceId ? { deviceId, ...defaultAudioConfig } : defaultAudioConfig
+}
+
+export const getVideoConfig = (
+  deviceId?: string
+): MediaTrackConstraints | boolean => {
+  return deviceId ? { deviceId } : true
 }
 
 export const getMediaDevices = async (params: MediaDeviceKind) => {

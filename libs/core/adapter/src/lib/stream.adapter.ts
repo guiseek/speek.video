@@ -1,14 +1,20 @@
+import { BehaviorSubject } from 'rxjs'
 export type StreamConfig = MediaStreamConstraints
 
 export class StreamAdapter {
   public currentStream: MediaStream
+  private _active = new BehaviorSubject<boolean>(false)
+  active$ = this._active.asObservable()
 
   constructor(public config: StreamConfig) {}
 
   getStream(constraints?: MediaStreamConstraints) {
-    return navigator.mediaDevices.getUserMedia(
-      constraints ? constraints : this.config
-    )
+    return navigator.mediaDevices
+      .getUserMedia(constraints ? constraints : this.config)
+      .then((stream) => {
+        this._active.next(stream.active)
+        return stream
+      })
   }
 
   stopStream(): void {

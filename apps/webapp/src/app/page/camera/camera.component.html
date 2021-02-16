@@ -48,6 +48,6 @@
   </mat-card-content>
 </mat-card>
 
-<button type="button" [disabled]="form.invalid" mat-fab (click)="onSave()">
+<button type="button" [disabled]="!form.dirty" mat-fab (click)="onSave()">
   <mat-icon>check</mat-icon>
 </button>
