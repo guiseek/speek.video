@@ -17,12 +17,20 @@ import { HallGuard } from './hall/hall.guard'
   imports: [
     RouterModule.forChild([
       { path: '', component: HomeComponent },
-      { path: 'dialup', component: DialupComponent },
-      { path: 'create', component: CreateComponent },
       { path: 'voice', component: VoiceComponent },
       { path: 'camera', component: CameraComponent },
-      { path: 'invite', component: InviteComponent },
-      { path: 'invite/:code', component: InviteComponent },
+      { path: 'create', component: CreateComponent },
+      { path: 'dialup', component: DialupComponent },
+      {
+        path: 'invite',
+        canActivate: [InviteGuard],
+        component: InviteComponent,
+      },
+      {
+        path: 'invite/:code',
+        canActivate: [InviteGuard],
+        component: InviteComponent,
+      },
       {
         path: ':code',
         canActivate: [RoomGuard],

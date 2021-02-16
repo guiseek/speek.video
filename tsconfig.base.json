@@ -14,6 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "plugins": [
+      {
+        "transform": "ts-auto-mock/transformer",
+        "cacheBetweenTests": false
+      }
+    ],
     "paths": {
       "@speek/core/entity": ["libs/core/entity/src/index.ts"],
       "@speek/core/stream": ["libs/core/stream/src/index.ts"],

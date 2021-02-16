@@ -1,3 +1,4 @@
+import { UserSetup } from '@speek/core/entity'
 import { UserSetupStorage } from '@speek/data/storage'
 import { Injectable } from '@angular/core'
 import {
@@ -27,13 +28,17 @@ export class InviteGuard
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    return component.code.valid && component.form.valid
+    return component.form.valid
   }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean | UrlTree> | boolean {
-    const { pitch } = this.userSetup.getStoredValue()
-    return !!pitch
+    const value: Partial<UserSetup> = this.userSetup.getStoredValue() ?? {}
+    if (!value.pitch) {
+      this.userSetup.store(Object.assign(value, { pitch: 0 }) as UserSetup)
+    }
+    return true
   }
 }

@@ -8,15 +8,16 @@ import { NestFactory } from '@nestjs/core'
 import { readFileSync } from 'fs'
 
 import { AppModule } from './app.module'
+import { environment } from './environments/environment'
+
+const certificates = {
+  key: readFileSync('./server/private/localhost.key.pem'),
+  cert: readFileSync('./server/private/localhost.cert.pem'),
+}
 
 async function bootstrap() {
-  const httpsOptions = {
-    key: readFileSync('./server/private/localhost.key.pem'),
-    cert: readFileSync('./server/private/localhost.cert.pem'),
-  }
-  const app = await NestFactory.create(AppModule, {
-    httpsOptions,
-  })
+  const httpsOptions = environment.certificate ? certificates : {}
+  const app = await NestFactory.create(AppModule, { httpsOptions })
   const globalPrefix = 'gateway'
   app.setGlobalPrefix(globalPrefix)
   const port = process.env.PORT || 3333

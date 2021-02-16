@@ -1,16 +1,16 @@
 export class UserRoom {
   code: string
 
-  private readonly start: number
+  readonly start: number
 
-  private end: number = 0
+  end: number = 0
 
   get duration() {
     return this.start - this.end
   }
 
-  constructor({ code, start, end = 0 }: UserRoom) {
-    if (!start) {
+  constructor({ code, start, end }: Pick<UserRoom, 'code' | 'start' | 'end'>) {
+    if (!start || start === 0) {
       start = new Date().getTime()
     }
     this.code = code
@@ -34,8 +34,8 @@ export class UserRoom {
   toJSON() {
     return {
       code: this.code,
-      start: new Date(this.start),
-      end: this.end === 0 ? null : new Date(this.end),
+      start: new Date(this.start).toISOString(),
+      end: this.end === 0 ? null : new Date(this.end).toISOString(),
       duration: this.duration,
     }
   }

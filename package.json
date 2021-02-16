@@ -59,10 +59,13 @@
     "@nestjs/platform-socket.io": "^7.6.11",
     "@nestjs/websockets": "^7.6.11",
     "@nrwl/angular": "11.2.10",
+    "jest-ts-auto-mock": "^2.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~6.6.3",
     "socket.io-client": "^2.4.0",
+    "ts-auto-mock": "^3.1.0",
     "tslib": "^2.0.0",
+    "ttypescript": "^1.5.12",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
@@ -84,6 +87,7 @@
     "@nrwl/node": "11.2.10",
     "@nrwl/tao": "11.2.10",
     "@nrwl/workspace": "11.2.10",
+    "@trellisorg/make-buildable": "0.0.10",
     "@types/dom-mediacapture-record": "^1.0.7",
     "@types/jest": "26.0.8",
     "@types/node": "12.12.38",
@@ -96,12 +100,12 @@
     "eslint": "7.10.0",
     "eslint-config-prettier": "6.0.0",
     "eslint-plugin-cypress": "^2.10.3",
-    "jest": "26.2.2",
+    "jest": "^26.2.2",
     "jest-preset-angular": "8.3.2",
     "ng-packagr": "^11.0.0",
     "prettier": "2.2.1",
-    "ts-jest": "26.4.0",
+    "ts-jest": "^26.4.0",
     "ts-node": "~9.1.1",
-    "typescript": "~4.0.3"
+    "typescript": "^4.0.7"
   }
 }

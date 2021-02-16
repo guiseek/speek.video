@@ -8,9 +8,11 @@
   .mat-card {
     display: flex;
     flex-direction: column;
-  }
-  canvas {
-    width: 100%
+
+    &-content {
+      padding-bottom: 4px;
+      margin-bottom: 0;
+    }
   }
 
   speek-door {
@@ -20,10 +22,6 @@
   .mat-form-field {
     width: 300px;
     margin: 10px;
-  }
-
-  .mat-slider {
-    width: 100%;
   }
 
   .mat-fab {

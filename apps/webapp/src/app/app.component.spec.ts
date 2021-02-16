@@ -5,10 +5,10 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { MaterialModule } from './shared/material.module'
 import { TestBed } from '@angular/core/testing'
 import { AppComponent } from './app.component'
-import { NavbarModule } from './navbar/navbar.module'
+import { NavbarModule } from '@speek/ui/components'
 import { DomSanitizer } from '@angular/platform-browser'
 import { createSpeekIcon, getLogo } from '@speek/util/format'
-import { SignalingAdapter } from './adapters/signaling.adapter'
+import { SignalingAdapter } from '@speek/core/adapter'
 
 describe('AppComponent', () => {
   let registry: MatIconRegistry
@@ -28,7 +28,9 @@ describe('AppComponent', () => {
 
     registry = TestBed.inject(MatIconRegistry)
     sanitize = TestBed.inject(DomSanitizer)
-    createSpeekIcon(registry, sanitize)
+    const name = 'speek-logo'
+    const icon = getLogo('#ffffff')
+    createSpeekIcon(registry, sanitize, [icon, name])
   })
 
   it('should create the app', () => {
