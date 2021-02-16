@@ -69,9 +69,21 @@ MIT
 @angular/service-worker
 MIT
 
+@speek/core/adapter
+
+@speek/core/entity
+
+@speek/core/stream
+
+@speek/data/storage
+
 @speek/ui/components
 
 @speek/util/device
+
+@speek/util/format
+
+@speek/util/share
 
 after
 MIT

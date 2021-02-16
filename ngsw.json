@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1613448130638,
+  "timestamp": 1613477248336,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,14 +11,14 @@
         "ignoreVary": true
       },
       "urls": [
-        "/4.16c5e6af7ed25ae962bb.js",
+        "/4.04cb10ee8d6ee4113923.js",
         "/assets/icons/icon-8.png",
         "/index.html",
-        "/main.df0eb7d51158d66bc085.js",
+        "/main.fd15440fbadaa190d387.js",
         "/manifest.webmanifest",
         "/polyfills.89e0e3a0918a2b154670.js",
-        "/runtime.976ea8a7ab9bb2e24b13.js",
-        "/styles.1f4734e540143b07f419.css"
+        "/runtime.08c11ae4820326893606.js",
+        "/styles.d1ec02cc07f0f706d1d7.css"
       ],
       "patterns": []
     },
@@ -31,6 +31,7 @@
       },
       "urls": [
         "/assets/arrow.svg",
+        "/assets/descentralized.svg",
         "/assets/icons/flag.svg",
         "/assets/icons/icon-1.png",
         "/assets/icons/icon-2.png",
@@ -39,6 +40,8 @@
         "/assets/icons/icon-5.png",
         "/assets/icons/icon-6.png",
         "/assets/icons/icon-7.png",
+        "/assets/images/beer.svg",
+        "/assets/images/loading-video.svg",
         "/assets/images/logo.svg",
         "/assets/images/network-dark.svg",
         "/assets/images/network-light.svg",
@@ -48,15 +51,18 @@
         "/assets/images/speek.svg",
         "/assets/images/spheers.svg",
         "/assets/images/spitfire.svg",
-        "/assets/images/terminal.svg"
+        "/assets/images/terminal.svg",
+        "/assets/images/timer.svg",
+        "/assets/images/waiting.svg"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/4.16c5e6af7ed25ae962bb.js": "d03ec79502dabdcc547c9c03aab586a37c6e1e40",
+    "/4.04cb10ee8d6ee4113923.js": "677a6cf44bc14a8c1360bf9ba8577db538d36540",
     "/assets/arrow.svg": "8f57dc3d0f7ff532ef2d8d25d73e5cf06a194b05",
+    "/assets/descentralized.svg": "0a3a3725f037437faf81d57defa50aa3030498e9",
     "/assets/icons/flag.svg": "dc6403dcc062cacdd56fe75f7f48750c55e3a117",
     "/assets/icons/icon-1.png": "d330fd4ad83a92c2f012a89f27ef9769f7956b96",
     "/assets/icons/icon-2.png": "2f335cf2d094d91a89ae92cfea05ccdf98cfcd73",
@@ -66,7 +72,9 @@
     "/assets/icons/icon-6.png": "dca005c5fe358ab37ad4a3c2e02139a6b3e61e33",
     "/assets/icons/icon-7.png": "7fa2750b0b5630a4b014077f7db7a709a763c869",
     "/assets/icons/icon-8.png": "08a846742fffb39d11c566db1c4165a3e7f97558",
-    "/assets/images/logo.svg": "0f47dfaedd5a023e38b0fe2fe7a1531393569896",
+    "/assets/images/beer.svg": "6f4d8da7ba4e8fd263f193fa4ae45162d532d111",
+    "/assets/images/loading-video.svg": "0daad904391f14da2d8b2f73d1ece0cb9ea83abe",
+    "/assets/images/logo.svg": "a846e035adda2d085041c5e8eb78351f0ee54058",
     "/assets/images/network-dark.svg": "d5ba745509a9e22aa13f0fb0f1b981795eda64df",
     "/assets/images/network-light.svg": "7b26b0b0f0f323a18017efd8a82cb56deaa9a2b9",
     "/assets/images/network.svg": "4428fbba5f9939bae6bab1d862421f54d5b44bbb",
@@ -76,12 +84,14 @@
     "/assets/images/spheers.svg": "b102c971f907c4fead273231c389a3e4fcda3f2e",
     "/assets/images/spitfire.svg": "0d013c5f89a72f6bdefabeb77e5793271b01b7a9",
     "/assets/images/terminal.svg": "27aee2bff975eca24295f220acacd1602527b836",
-    "/index.html": "2fc0fb2a058f6710f5acc7d335fb113bf48c9723",
-    "/main.df0eb7d51158d66bc085.js": "832b7448c3a3abba2d81902cbb2d81734234c624",
+    "/assets/images/timer.svg": "1a3413a523bc43be53d444f9b472b39cc5f178a9",
+    "/assets/images/waiting.svg": "219308ee47b8c27c71774f5114c66e9d6ec7c73f",
+    "/index.html": "a8faa8b7fb1ea06470e84c3232c6ab1f48eb4007",
+    "/main.fd15440fbadaa190d387.js": "ff883221da0b3664338850ba3339d27eb44e0626",
     "/manifest.webmanifest": "abc6d87192f6a9073c70ac5a646feb015b035d03",
     "/polyfills.89e0e3a0918a2b154670.js": "0bfc995eed6d8570cac2d221e0462cc45dbf7156",
-    "/runtime.976ea8a7ab9bb2e24b13.js": "2efef8281df1af333afd0ae4975e95efabeb2d46",
-    "/styles.1f4734e540143b07f419.css": "659ab02039535e27e25f716992132758b7b4488b"
+    "/runtime.08c11ae4820326893606.js": "be0a3d131bd96fe8543880adfe07c56fc32cf575",
+    "/styles.d1ec02cc07f0f706d1d7.css": "738b68b17be8375fc1fc9169dd4b196ba76f9374"
   },
   "navigationUrls": [
     {
