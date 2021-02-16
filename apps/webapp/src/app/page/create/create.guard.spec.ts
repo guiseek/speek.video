@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing'
 
 import { CreateGuard } from './create.guard'
@@ -6,7 +7,9 @@ describe('CreateGuard', () => {
   let guard: CreateGuard
 
   beforeEach(() => {
-    TestBed.configureTestingModule({})
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule]
+    })
     guard = TestBed.inject(CreateGuard)
   })
 

@@ -14,24 +14,21 @@ type MediaDeviceConfig = Pick<MediaStreamConstraints, 'video' | 'audio'>
  * @returns MediaDeviceConfig
  */
 export function configMediaDeviceSource(
-  device: MediaDeviceInfo,
-  kind: DeviceKind
-): MediaDeviceConfig {
-  return {
-    [kind]: { optional: [{ sourceId: device }] },
-  } as MediaStreamConstraints
-}
-
-export const configVideoSource = (
   device: MediaDeviceInfo
-): Pick<MediaStreamConstraints, 'video'> => {
-  return configMediaDeviceSource(device, 'video')
+): MediaTrackConstraints {
+  return {
+    optional: [{ sourceId: device }],
+  } as MediaTrackConstraints
 }
 
 export const configAudioSource = (
   device: MediaDeviceInfo
-): Pick<MediaStreamConstraints, 'audio'> => {
-  return configMediaDeviceSource(device, 'audio')
+): MediaTrackConstraints => {
+  return {
+    optional: [{ sourceId: device }],
+    echoCancellation: true,
+    noiseSuppression: true,
+  } as MediaTrackConstraints
 }
 
 export const getMediaDevices = async (params: MediaDeviceKind) => {

@@ -1,4 +1,4 @@
-import { getMediaDevices, configAudioSource } from '@speek/util/device'
+import { getMediaDevices, configMediaDeviceSource } from '@speek/util/device'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { UserSetup } from '@speek/core/entity'
 
@@ -32,7 +32,7 @@ export class UserSetupForm extends FormGroup {
   }
 
   config(device: MediaDeviceInfo) {
-    return configAudioSource(device)
+    return configMediaDeviceSource(device)
   }
 
   getDevices(kind: MediaDeviceKind) {

@@ -1,3 +1,4 @@
+import { UserRoomForm } from './../../../../../../libs/ui/components/src/lib/forms/user-room.form'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { drawOscilloscope } from '@speek/ui/components'
 import { UserSetupStorage } from '@speek/data/storage'
@@ -23,22 +24,11 @@ import {
 export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
   private _destroy = new Subject<void>()
 
-  @ViewChild('canvas')
-  private canvas: ElementRef<HTMLCanvasElement>
-
   stream: MediaStream
-
-  code = new FormControl('', [
-    Validators.required,
-    Validators.pattern(UUID.regex),
-  ])
-
-  form = this._fb.group({
-    pitch: [0, [Validators.min(-2), Validators.max(2)]],
-  })
-
   comeInOut = new BehaviorSubject<boolean>(false)
   enter = false
+
+  form = new UserRoomForm()
 
   constructor(
     private _fb: FormBuilder,
@@ -46,10 +36,10 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
     private _route: ActivatedRoute,
     readonly userSetup: UserSetupStorage
   ) {
-    const { code } = this._route.snapshot.params
+    const { code = '' } = this._route.snapshot.params
+    this.form.patchValue({ code })
     console.log(code)
-    if (code) {
-      this.code.setValue(code)
+    if (this.form.code) {
     }
   }
 
@@ -59,38 +49,7 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    navigator.mediaDevices
-      .getUserMedia({ audio: { echoCancellation: true } })
-      .then((stream) => this.gotStream(stream))
-  }
-
-  gotStream(stream: MediaStream) {
-    this.stream = stream
-    const audioContext = new AudioContext()
-    const microphone = audioContext.createMediaStreamSource(stream)
-
-    const analyser = audioContext.createAnalyser()
-
-    const delay = audioContext.createDelay()
-    delay.delayTime.value = 0
-
-    microphone.connect(delay)
-
-    const voice = new Voice(audioContext)
-    const { value } = this.form.get('pitch')
-    voice.setPitchOffset(value)
-
-    delay.connect(voice.input)
-    voice.output.connect(audioContext.destination)
-    voice.output.connect(analyser)
-
-    drawOscilloscope(this.canvas.nativeElement, analyser)
-
-    this.form.valueChanges
-      .pipe(takeUntil(this._destroy))
-      .subscribe(({ pitch }) => {
-        voice.setPitchOffset(pitch)
-      })
+    navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } })
   }
 
   onSave() {
@@ -103,11 +62,11 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onLogin() {
-    if (this.code.valid) {
+    if (this.form.code.valid) {
       this.comeInOut.next(!this.comeInOut.value)
       this.enter = true
       setTimeout(() => {
-        this._router.navigate(['/', this.code.value])
+        this._router.navigate(['/', this.form.code.value])
       }, 3000)
     } else {
       this.comeInOut.next(!this.comeInOut.value)
@@ -126,7 +85,7 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
   onSubmit() {
     if (this.form.valid) {
       this.userSetup.store(this.form.value)
-      this._router.navigate(['/', UUID.long()])
+      this._router.navigate(['/', this.form.code.value])
     }
   }
 }

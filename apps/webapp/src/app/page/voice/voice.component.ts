@@ -44,9 +44,6 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
     this.form.getDevices('audioinput').then((devices) => {
       this._devices.next(devices.map((d) => d.toJSON()))
     })
-    navigator.mediaDevices
-      .getUserMedia({ audio: { echoCancellation: true } })
-      .then((stream) => this.gotStream(stream))
   }
 
   onDeviceChange(device: MediaDeviceInfo) {
@@ -56,9 +53,12 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  async getStream(device: MediaDeviceInfo) {
+  async getStream({ deviceId }: MediaDeviceInfo) {
+    stopStream(this.stream)
     return navigator.mediaDevices
-      .getUserMedia(this.form.config(device))
+      .getUserMedia({
+        audio: { deviceId, echoCancellation: true, noiseSuppression: true },
+      })
       .then((stream) => this.gotStream(stream))
   }
 

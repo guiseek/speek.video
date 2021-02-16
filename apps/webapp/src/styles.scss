@@ -1,3 +1,4 @@
+@import '~@angular/cdk/text-field/text-field';
 @import '~@angular/material/theming';
 @import 'app/app.theme.scss';
 @import 'theming/palette';
@@ -5,6 +6,7 @@
 @import 'animtions';
 
 @include mat-core();
+@include cdk-a11y();
 
 $client-primary: mat-palette($speek-black);
 $client-accent: mat-palette($mat-cyan);

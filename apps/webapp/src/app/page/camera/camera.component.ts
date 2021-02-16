@@ -38,9 +38,9 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.form
-      .getDevices('videoinput')
-      .then((devices) => this._devices.next(devices))
+    this.form.getDevices('videoinput').then((devices) => {
+      this._devices.next(devices.map((d) => d.toJSON()))
+    })
   }
 
   onDeviceChange(device: MediaDeviceInfo) {
@@ -58,9 +58,9 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  async getStream(device: MediaDeviceInfo) {
+  async getStream({ deviceId }: MediaDeviceInfo) {
     return navigator.mediaDevices
-      .getUserMedia(this.form.config(device))
+      .getUserMedia({ video: { deviceId } })
       .then((stream) => this.gotStream(this.video, stream))
   }
 

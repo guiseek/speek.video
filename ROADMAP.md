@@ -2,6 +2,8 @@
 
 ### @ToDo
 
+1. [ ] - Adicionar alerta sobre usar fones de ouvido
+
 - [x] botão sair da chamada
   - [x] mat-fab warn canto left bottom room component
   - [x] guard canDeactivate room component

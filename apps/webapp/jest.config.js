@@ -2,8 +2,16 @@ module.exports = {
   displayName: 'webapp',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
+
+  transform: {
+    '.(ts|tsx)': 'ts-jest',
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+
   globals: {
     'ts-jest': {
+      compiler: 'ttypescript',
+
       tsConfig: '<rootDir>/tsconfig.spec.json',
       stringifyContentPathRegex: '\\.(html|svg)$',
       astTransformers: {
