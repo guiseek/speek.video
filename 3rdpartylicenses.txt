@@ -71,6 +71,8 @@ MIT
 
 @speek/ui/components
 
+@speek/util/device
+
 after
 MIT
 Copyright (c) 2011 Raynos.
