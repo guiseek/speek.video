@@ -8,6 +8,10 @@
 
   position: relative;
 
+  ::ng-deep speek-toolbar .mat-toolbar {
+    background-color: transparent;
+  }
+
   &::before {
     content: ' ';
     width: 100%;
@@ -18,14 +22,14 @@
     background-position-y: center;
     background-repeat: no-repeat;
     background-size: 420%;
-    filter: blur(3px);
+    // filter: blur(3px);
     opacity: 0.07;
 
     transition: filter 250ms ease-in-out, opacity 500ms ease-in-out,
-    background-size 400ms ease-in-out;
+      background-size 400ms ease-in-out;
   }
   &:hover::before {
-    filter: blur(0px);
+    // filter: blur(0px);
     opacity: 0.2;
     background-size: 210%;
   }

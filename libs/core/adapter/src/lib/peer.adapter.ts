@@ -3,6 +3,15 @@ import { Observable } from 'rxjs'
 
 export type PeerConfig = RTCConfiguration
 
+export const peerStateBadge: Record<RTCSignalingState, string> = {
+  closed: 'Fechado',
+  'have-local-offer': 'tem oferta local',
+  'have-local-pranswer': 'tem resposta local',
+  'have-remote-offer': 'tem oferta remota',
+  'have-remote-pranswer': 'tem resposta remota',
+  stable: 'estável',
+}
+
 export class PeerAdapter {
   connection: RTCPeerConnection
   onChange: Observable<RTCPeerConnection>

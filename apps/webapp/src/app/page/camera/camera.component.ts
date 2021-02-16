@@ -32,9 +32,6 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     const value = this.userSetup.getStoredValue()
     this.form.patchValue(!!value ? value : {})
-    if (this.form.video.value) {
-      this.getStream(this.form.video.value)
-    }
   }
 
   ngAfterViewInit(): void {

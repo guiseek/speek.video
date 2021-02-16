@@ -22,13 +22,10 @@ import {
   ViewChild,
 } from '@angular/core'
 
-function getAudioContext() {
-  return (
-    window.AudioContext || // Default
-    (window as any).webkitAudioContext || // Safari and old versions of Chrome
-    false
-  )
+type WithTarget<T> = Event & {
+  target: T
 }
+
 @Component({
   selector: 'speek-meet',
   templateUrl: './meet.component.html',
@@ -114,10 +111,12 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     })
 
-    this.peer.onNegotiationNeeded.subscribe(({ target }) => {
-      console.log('needed: ', target)
-      this.status.next(target.connectionState)
-    })
+    this.peer.onNegotiationNeeded.subscribe(
+      ({ target }: WithTarget<RTCPeerConnection>) => {
+        console.log('needed: ', target)
+        this.status.next(target.connectionState)
+      }
+    )
 
     this.peer.onWarning.subscribe(({ description }) => {
       console.log('needed: ', description)
