@@ -17,6 +17,13 @@ import {
   ViewChild,
 } from '@angular/core'
 
+function getAudioContext() {
+  return (
+    window.AudioContext || // Default
+    (window as any).webkitAudioContext || // Safari and old versions of Chrome
+    false
+  )
+}
 @Component({
   selector: 'speek-room',
   templateUrl: './room.component.html',
@@ -144,20 +151,33 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
         this.localStream = stream
         this.local.srcObject = stream
 
-        const destination = this.gotVoice(stream)
+        // const destination = this.gotVoice(stream)
 
-        const audio = destination.stream.getAudioTracks()
-        this.peer.connection.addTrack(audio.shift(), destination.stream)
+        // const audio = destination.stream.getAudioTracks()
+        // this.peer.connection.addTrack(audio.shift(), destination.stream)
 
         const video = stream.getVideoTracks()
-        this.peer.connection.addTrack(video.shift(), destination.stream)
+        this.peer.connection.addTrack(video.shift(), stream)
 
         this.peer.createOffer().then((sdp) => this.sendOffer({ sdp }))
       })
   }
 
   gotVoice(stream: MediaStream) {
-    const context = new AudioContext()
+    let context: AudioContext
+    let AudioContext = getAudioContext()
+    if (AudioContext) {
+      // Do whatever you want using the Web Audio API
+      context = new AudioContext()
+      // ...
+    } else {
+      // Web Audio API is not supported
+      // Alert the user
+      alert(
+        'Sorry, but the Web Audio API is not supported by your browser. Please, consider upgrading to the latest version or downloading Google Chrome or Mozilla Firefox'
+      )
+    }
+    // const context = new AudioContext()
     const source = context.createMediaStreamSource(stream)
     const destination = context.createMediaStreamDestination()
 
