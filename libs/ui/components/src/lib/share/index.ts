@@ -1,3 +1,4 @@
-export * from './share.component'
-export * from './share.service'
-export * from './share.module'
+export * from './message.dialog';
+export * from './share.component';
+export * from './share.module';
+export * from './share.service';

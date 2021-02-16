@@ -18,7 +18,8 @@ import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
-import { MatSliderModule } from '@angular/material/slider'
+import { MatSliderModule } from '@angular/material/slider';
+import { PeerStateBadgePipe } from './pipes/peer-state-badge.pipe'
 
 @NgModule({
   exports: [
@@ -42,6 +43,6 @@ import { MatSliderModule } from '@angular/material/slider'
     MatFormFieldModule,
     MatButtonToggleModule,
     MatProgressSpinnerModule,
-  ],
+  ]
 })
 export class MaterialModule {}

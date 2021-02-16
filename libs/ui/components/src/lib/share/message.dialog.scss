@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+
+  .mat-h3 {
+    white-space: break-spaces;
+  }
+}

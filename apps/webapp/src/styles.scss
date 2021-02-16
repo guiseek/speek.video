@@ -67,7 +67,7 @@ body .mat-fab.mat-accent {
   }
 }
 
-.flex {
+body .flex {
   display: flex;
 
   &.row {
@@ -85,6 +85,12 @@ body .mat-fab.mat-accent {
   }
   &.justify-center {
     justify-content: space-between;
+  }
+  &-start {
+    justify-content: flex-start;
+  }
+  &-end {
+    justify-content: flex-end;
   }
 
   &.center-center {

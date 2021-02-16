@@ -2,7 +2,7 @@
   <a routerLink="/" aria-label="Home" mat-icon-button>
     <mat-icon>arrow_backward</mat-icon>
   </a>
-  <span> {{ state$ | async }} </span>
+  <span> {{ (state$ | async) | peerStateBadge }} </span>
 </speek-toolbar>
 
 <video class="remote" #remote autoplay playsinline muted></video>

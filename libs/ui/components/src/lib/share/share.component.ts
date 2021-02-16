@@ -6,7 +6,7 @@ import {
   ValueOf,
   ShareTool,
   shareOption,
-  share,
+  Share,
 } from '@speek/util/share'
 import {
   MatBottomSheet,
@@ -24,18 +24,21 @@ export class ShareComponent {
   options: ValueOf<ShareLanguage> = shareLang[getLang()]
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: string,
-    readonly sheetRef: MatBottomSheetRef<ShareComponent>,
+    readonly sheetRef: MatBottomSheetRef<ShareComponent, Share>,
     readonly sheet: MatBottomSheet
   ) {}
 
   shareLink(item: ShareTool) {
-    const data = {
+    console.log(item)
+    console.log(this.data)
+    const text = `Olá 👋 tudo bem?
+Podemos falar por pelo Speek? basta clicar no link em anexo.
+Obrigado 👍`
+    this.sheetRef.dismiss({
+      hashtags: item,
       title: 'Speek',
+      text: text,
       url: `https://speek.video/#/${this.data}`,
-      text: 'Pode falar? Clica aqui por favor',
-    }
-    share(data, item).then((value) => {
-      this.sheetRef.dismiss(this.data)
     })
   }
 

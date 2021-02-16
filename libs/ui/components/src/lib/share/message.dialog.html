@@ -1,0 +1,23 @@
+<form [formGroup]="form">
+  <mat-dialog-content>
+    <h3 class="mat-h3">{{ form.text.value }}</h3>
+    <p>Enviando via <em> {{ form.hashtags.value }} </em></p>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Escreva uma mensagem</mat-label>
+      <textarea
+      matInput
+      spellcheck="false"
+      formControlName="text"
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="2"
+      cdkAutosizeMaxRows="4"
+      ></textarea>
+      <mat-error>Obrigatório</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex flex-end">
+    <button mat-stroked-button color="accent" [matDialogClose]="form.value">
+      Enviar
+    </button>
+  </mat-dialog-actions>
+</form>

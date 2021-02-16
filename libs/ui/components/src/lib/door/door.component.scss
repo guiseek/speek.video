@@ -29,7 +29,7 @@
   }
 
   .door {
-    background-color: #191919;
+    background-color: #121212;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -38,12 +38,147 @@
     transform-origin: left;
     /*Speed of the Door animation*/
     transition: all 0.5s ease-in-out;
+
+    -box-reflect: below 8px
+      linear-gradient(
+        to bottom,
+        to top,
+        from(transparent),
+        to(rgba(255, 255, 255, 0.8))
+      );
   }
 
   .opened {
     /*prespectiv creates the door open effect*/
     transform: perspective(1200px) translateZ(0px) translateX(0px)
       translateY(0px) rotateY(-105deg);
+  }
+
+  .sun {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: white;
+    filter: blur(3px);
+    opacity: 0.9;
+    box-shadow: 0px 0px 40px 15px white;
+  }
+  .ray_box {
+    position: absolute;
+    margin: auto;
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 70px;
+    animation: ray_anim 120s linear infinite;
+    animation: ray_anim 120s linear infinite;
+  }
+  .ray {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    margin-left: 10px;
+    border-radius: 80% 80% 0 0;
+    position: absolute;
+    opacity: 0.1;
+  }
+
+  .ray1 {
+    height: 170px;
+    width: 30px;
+    transform: rotate(180deg);
+    top: -175px;
+    left: 15px;
+  }
+  .ray2 {
+    height: 100px;
+    width: 8px;
+    transform: rotate(220deg);
+    top: -90px;
+    left: 75px;
+  }
+  .ray3 {
+    height: 170px;
+    width: 50px;
+    transform: rotate(250deg);
+    top: -80px;
+    left: 100px;
+  }
+  .ray4 {
+    height: 120px;
+    width: 14px;
+    transform: rotate(305deg);
+    top: 30px;
+    left: 100px;
+  }
+  .ray5 {
+    height: 140px;
+    width: 30px;
+    transform: rotate(-15deg);
+    top: 60px;
+    left: 40px;
+  }
+  .ray6 {
+    height: 90px;
+    width: 50px;
+    transform: rotate(30deg);
+    top: 60px;
+    left: -40px;
+  }
+  .ray7 {
+    height: 180px;
+    width: 10px;
+    transform: rotate(70deg);
+    top: -35px;
+    left: -40px;
+  }
+  .ray8 {
+    height: 120px;
+    width: 30px;
+    transform: rotate(100deg);
+    top: -45px;
+    left: -90px;
+  }
+  .ray9 {
+    height: 80px;
+    width: 10px;
+    transform: rotate(120deg);
+    top: -65px;
+    left: -60px;
+  }
+  .ray10 {
+    height: 190px;
+    width: 23px;
+    transform: rotate(150deg);
+    top: -185px;
+    left: -60px;
+  }
+
+  @keyframes ray_anim {
+    0% {
+      transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
   }
 }
 
@@ -83,28 +218,23 @@
 @keyframes shake-horizontal {
   0%,
   100% {
-    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
   10%,
   30%,
   50%,
   70% {
-    -webkit-transform: translateX(-10px);
     transform: translateX(-10px);
   }
   20%,
   40%,
   60% {
-    -webkit-transform: translateX(10px);
     transform: translateX(10px);
   }
   80% {
-    -webkit-transform: translateX(8px);
     transform: translateX(8px);
   }
   90% {
-    -webkit-transform: translateX(-8px);
     transform: translateX(-8px);
   }
 }

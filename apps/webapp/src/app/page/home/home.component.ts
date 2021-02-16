@@ -16,7 +16,11 @@ export class HomeComponent implements OnDestroy {
     this._share
       .open()
       .pipe(takeUntil(this.destroy))
-      .subscribe((res) => this.go(res))
+      .subscribe((res) => {
+        console.log(res)
+
+        // this.go(res)
+      })
   }
 
   go(code: string) {
@@ -24,7 +28,6 @@ export class HomeComponent implements OnDestroy {
       this._router.navigate(['/', code])
     }
   }
-
 
   ngOnDestroy(): void {
     this.destroy.next()

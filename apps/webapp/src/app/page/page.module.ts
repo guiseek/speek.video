@@ -28,6 +28,7 @@ import { HomeComponent } from './home/home.component'
 import { RoomComponent } from './room/room.component'
 import { HallComponent } from './hall/hall.component';
 import { MeetComponent } from './meet/meet.component'
+import { PeerStateBadgePipe } from '../shared/pipes/peer-state-badge.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MeetComponent } from './meet/meet.component'
     InviteComponent,
     CameraComponent,
     MeetComponent,
+    PeerStateBadgePipe
   ],
   imports: [
     CommonModule,
@@ -62,5 +64,8 @@ import { MeetComponent } from './meet/meet.component'
     // PageRoutingModule
     PageRoutingModule
   ],
+  providers: [
+    PeerStateBadgePipe
+  ]
 })
 export class PageModule {}
