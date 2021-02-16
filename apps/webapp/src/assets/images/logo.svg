@@ -1,35 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="116" height="131" viewBox="0 0 116 131">
-  <g id="Black" transform="translate(-741 -473)">
-    <g id="Connections" transform="translate(745.311 476.311)">
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_1" data-name="Linha 1" x2="52.521" y2="8.623" transform="translate(54.873 23.517)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_2" data-name="Linha 2" y1="8.623" x2="54.873" transform="translate(0 23.517)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_3" data-name="Linha 3" x1="21.165" y1="48.602" transform="translate(0 32.14)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_4" data-name="Linha 4" y1="12.542" x2="21.949" transform="translate(0 80.741)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_5" data-name="Linha 5" x1="54.873" y1="30.572" transform="translate(0 93.284)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_6" data-name="Linha 6" x1="52.521" y2="30.572" transform="translate(54.873 93.284)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_7" data-name="Linha 7" y2="61.144" transform="translate(108.394 32.14)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_8" data-name="Linha 8" x2="52.521" y2="32.14" transform="translate(54.873)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_9" data-name="Linha 9" y1="32.14" x2="54.873"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_10" data-name="Linha 10" y1="23.517" transform="translate(54.873)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_11" data-name="Linha 11" y1="57.225" x2="33.708" transform="translate(21.165 23.517)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_12" data-name="Linha 12" x1="65.847" transform="translate(21.165 80.741)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_13" data-name="Linha 13" x1="20.381" y2="48.602" transform="translate(87.013 32.14)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_14" data-name="Linha 14" x2="32.14" y2="57.225" transform="translate(54.873 23.517)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_15" data-name="Linha 15" x2="32.924" y2="43.114" transform="translate(21.165 80.741)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_16" data-name="Linha 16" y2="61.144" transform="translate(-1 32.14)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_17" data-name="Linha 17" x2="20.381" y2="12.542" transform="translate(87.013 80.741)"/>
-      <line fill="none" stroke="#000" stroke-width="2" id="Linha_18" data-name="Linha 18" x1="32.924" y2="43.114" transform="translate(54.089 80.741)"/>
-    </g>
-    <g id="Peers" transform="translate(741 472)">
-      <circle id="Elipse_8" data-name="Elipse 8" cx="4" cy="4" r="4" transform="translate(21 81)"/>
-      <circle id="Elipse_9" data-name="Elipse 9" cx="4" cy="4" r="4" transform="translate(54 124)"/>
-      <circle id="Elipse_10" data-name="Elipse 10" cx="4" cy="4" r="4" transform="translate(108 33)"/>
-      <circle id="Elipse_11" data-name="Elipse 11" cx="4" cy="4" r="4" transform="translate(87 81)"/>
-      <circle id="Elipse_12" data-name="Elipse 12" cx="4" cy="4" r="4" transform="translate(107 93)"/>
-      <circle id="Elipse_13" data-name="Elipse 13" cx="4" cy="4" r="4" transform="translate(0 32)"/>
-      <circle id="Elipse_14" data-name="Elipse 14" cx="4" cy="4" r="4" transform="translate(55 24)"/>
-      <circle id="Elipse_15" data-name="Elipse 15" cx="4" cy="4" r="4" transform="translate(55 1)"/>
-      <circle id="Elipse_16" data-name="Elipse 16" cx="4" cy="4" r="4" transform="translate(0 93)"/>
-    </g>
-  </g>
+<svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M139.387 266C139.036 266 138.691 265.908 138.387 265.732L31 203.732C30.696 203.556 30.4435 203.304 30.268 203C30.0924 202.696 30 202.351 30 202V78C30 77.6489 30.0924 77.3041 30.268 77C30.4435 76.696 30.696 76.4435 31 76.268L138.387 14.268C138.691 14.0925 139.036 14 139.387 14C139.738 14 140.083 14.0925 140.387 14.268L247.774 76.268C248.078 76.4435 248.33 76.696 248.506 77C248.682 77.3041 248.774 77.6489 248.774 78V202C248.774 202.351 248.682 202.696 248.506 203C248.33 203.304 248.078 203.556 247.774 203.732L140.387 265.732C140.083 265.908 139.738 266 139.387 266V266ZM34 200.845L139.387 261.69L244.774 200.845V79.155L139.387 18.31L34 79.155V200.845Z" fill="black"/>
+  <path d="M139.387 70C138.857 70 138.348 69.7893 137.973 69.4142C137.598 69.0391 137.387 68.5304 137.387 68V16C137.387 15.4696 137.598 14.9609 137.973 14.5858C138.348 14.2107 138.857 14 139.387 14C139.917 14 140.426 14.2107 140.801 14.5858C141.176 14.9609 141.387 15.4696 141.387 16V68C141.387 68.5304 141.176 69.0391 140.801 69.4142C140.426 69.7893 139.917 70 139.387 70Z" fill="black"/>
+  <path d="M206.222 178.4H72.552C72.1962 178.4 71.8469 178.304 71.5402 178.124C71.2335 177.943 70.9805 177.685 70.8072 177.374C70.634 177.063 70.5468 176.712 70.5547 176.356C70.5626 176 70.6652 175.653 70.852 175.35L137.687 66.95C137.866 66.6593 138.117 66.4192 138.415 66.2527C138.713 66.0861 139.049 65.9987 139.39 65.9987C139.731 65.9987 140.067 66.0861 140.365 66.2527C140.663 66.4192 140.914 66.6593 141.093 66.95L207.928 175.35C208.115 175.653 208.217 176 208.225 176.356C208.233 176.712 208.146 177.063 207.973 177.374C207.8 177.685 207.546 177.943 207.24 178.124C206.933 178.304 206.584 178.4 206.228 178.4H206.222ZM76.135 174.4H202.635L139.387 71.81L76.135 174.4Z" fill="black"/>
+  <path d="M139.387 266C139.079 266 138.776 265.929 138.5 265.792C138.224 265.656 137.984 265.458 137.797 265.213L70.962 177.613C70.7362 177.317 70.5977 176.963 70.5621 176.592C70.5265 176.221 70.5953 175.848 70.7606 175.514C70.9259 175.18 71.1812 174.899 71.4977 174.702C71.8143 174.505 72.1794 174.401 72.552 174.401H206.222C206.595 174.401 206.96 174.505 207.276 174.702C207.593 174.899 207.848 175.18 208.014 175.514C208.179 175.848 208.248 176.221 208.212 176.592C208.176 176.963 208.038 177.317 207.812 177.613L140.977 265.213C140.79 265.458 140.55 265.656 140.274 265.792C139.998 265.929 139.695 266 139.387 266V266ZM76.5921 178.4L139.387 260.7L202.181 178.4H76.5921Z" fill="black"/>
+  <path d="M246.772 204C246.395 203.999 246.025 203.892 245.706 203.69L205.152 178.09C204.754 177.838 204.457 177.454 204.314 177.005C204.171 176.556 204.191 176.072 204.371 175.636L243.894 79.736L139.387 70.009L34.88 79.74L74.399 175.64C74.5785 176.075 74.5985 176.56 74.4557 177.009C74.3128 177.458 74.0162 177.842 73.618 178.093L33.068 203.693C32.6196 203.976 32.0769 204.07 31.5595 203.953C31.0421 203.836 30.5923 203.518 30.309 203.07C30.0258 202.622 29.9323 202.079 30.0491 201.561C30.166 201.044 30.4836 200.594 30.932 200.311L70.06 175.611L30.151 78.762C30.0319 78.4728 29.9823 78.1596 30.0061 77.8478C30.03 77.5359 30.1267 77.2339 30.2884 76.9662C30.4501 76.6985 30.6724 76.4724 30.9374 76.3062C31.2023 76.1399 31.5026 76.0381 31.814 76.009L139.201 66.009C139.325 65.997 139.449 65.997 139.573 66.009L246.96 76.009C247.271 76.0381 247.572 76.1399 247.837 76.3062C248.102 76.4724 248.324 76.6985 248.486 76.9662C248.647 77.2339 248.744 77.5359 248.768 77.8478C248.792 78.1596 248.742 78.4728 248.623 78.762L208.71 175.6L247.842 200.3C248.209 200.531 248.491 200.876 248.645 201.282C248.799 201.687 248.817 202.132 248.697 202.549C248.576 202.966 248.323 203.332 247.976 203.592C247.628 203.852 247.206 203.993 246.772 203.992V204Z" fill="black"/>
+  <circle cx="139" cy="69" r="9" fill="black"/>
+  <circle cx="246" cy="78" r="9" fill="black"/>
+  <circle cx="33" cy="78" r="9" fill="black"/>
+  <circle cx="33" cy="200" r="9" fill="black"/>
+  <circle cx="246" cy="200" r="9" fill="black"/>
+  <circle cx="206" cy="176" r="9" fill="black"/>
+  <circle cx="73" cy="176" r="9" fill="black"/>
+  <circle cx="139" cy="261" r="9" fill="black"/>
+  <circle cx="139" cy="19" r="9" fill="black"/>
 </svg>

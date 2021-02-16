@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+  svg {
+    opacity: 0;
+    animation: show 2s ease-in-out infinite alternate;
+  }
+  .container,
+  .play,
+  .bullet {
+    animation: move 2s ease-in-out infinite alternate;
+  }
+  .container {
+    stroke-dasharray: 232px;
+    stroke-dashoffset: 232px;
+  }
+  .play {
+    stroke-dasharray: 64px;
+    stroke-dashoffset: 64px;
+  }
+  .bullet {
+    stroke-dasharray: 0.7px;
+    stroke-dashoffset: 0.7px;
+  }
+
+  @keyframes move {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes show {
+    100% {
+      opacity: 1;
+    }
+  }
+}

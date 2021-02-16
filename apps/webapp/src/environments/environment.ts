@@ -8,7 +8,10 @@ export const environment = {
     url: 'https://localhost:3000',
   },
   configs: {
-    iceServers: [{ urls: 'stun:stun.stunprotocol.org:3478' }],
+    iceServers: [
+      { urls: 'stun:stun.services.mozilla.com' },
+      { urls: 'stun:stun.stunprotocol.org:3478' },
+    ],
   },
   constraints: {
     audio: {

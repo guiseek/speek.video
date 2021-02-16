@@ -23,6 +23,10 @@
   </mat-card-actions>
 </mat-card>
 
+<ng-container *ngIf="(onState | async) != 'stable'">
+  <speek-splash></speek-splash>
+</ng-container>
+
 <button
   mat-fab
   [disabled]="(onState | async) != 'stable'"

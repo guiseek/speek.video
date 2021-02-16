@@ -7,6 +7,7 @@ export class PeerAdapter {
   onChange: Observable<RTCPeerConnection>
   onCandidate: Observable<RTCIceCandidate>
   onTrack: Observable<MediaStream>
+  onStreams: Observable<readonly MediaStream[]>
 
   constructor(config: PeerConfig) {
     this.connection = new RTCPeerConnection(config)
@@ -26,6 +27,12 @@ export class PeerAdapter {
     this.onTrack = new Observable<MediaStream>((subscriber) => {
       this.connection.addEventListener('track', ({ streams }) =>
         subscriber.next(streams[0])
+      )
+    })
+
+    this.onStreams = new Observable<readonly MediaStream[]>((subscriber) => {
+      this.connection.addEventListener('track', ({ streams }) =>
+        subscriber.next(streams)
       )
     })
   }

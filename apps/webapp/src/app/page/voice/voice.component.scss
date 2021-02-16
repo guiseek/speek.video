@@ -15,6 +15,9 @@
       .mat-divider {
         position: unset;
       }
+      .mat-list.mat-list-base {
+        padding-top: 0px;
+      }
       > section {
         display: flex;
         align-items: center;
