@@ -10,6 +10,9 @@
     flex-direction: column;
 
     .mat-card-content {
+      .mat-list.mat-list-base {
+        padding-top: 0px;
+      }
       > section {
         position: relative;
         padding-bottom: 56.25%;

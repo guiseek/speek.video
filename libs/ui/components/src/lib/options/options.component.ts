@@ -28,7 +28,7 @@ export class OptionsComponent<T> implements OnInit {
 
   ngOnInit(): void {}
 
-  onClick() {
+  onClick(val?: any) {
     this._ref.dismiss()
   }
 }

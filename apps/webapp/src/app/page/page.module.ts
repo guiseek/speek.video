@@ -16,6 +16,7 @@ import {
   DialpadModule,
   AudioModule,
   ShareModule,
+  SplashModule,
   ToolbarModule,
 } from '@speek/ui/components'
 import { VoiceComponent } from './voice/voice.component'
@@ -25,7 +26,8 @@ import { DialupComponent } from './dialup/dialup.component'
 import { CreateComponent } from './create/create.component'
 import { HomeComponent } from './home/home.component'
 import { RoomComponent } from './room/room.component'
-import { HallComponent } from './hall/hall.component'
+import { HallComponent } from './hall/hall.component';
+import { MeetComponent } from './meet/meet.component'
 
 @NgModule({
   declarations: [
@@ -37,11 +39,13 @@ import { HallComponent } from './hall/hall.component'
     VoiceComponent,
     InviteComponent,
     CameraComponent,
+    MeetComponent,
   ],
   imports: [
     CommonModule,
     A11yModule,
     PortalModule,
+    SplashModule,
     DoorModule,
     WaveModule,
     AudioModule,

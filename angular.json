@@ -278,6 +278,18 @@
             "jestConfig": "libs/core/entity/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/core/entity",
+            "tsConfig": "libs/core/entity/tsconfig.lib.json",
+            "packageJson": "libs/core/entity/package.json",
+            "main": "libs/core/entity/src/index.ts",
+            "assets": [
+              "libs/core/entity/*.md"
+            ]
+          }
         }
       }
     },
@@ -302,6 +314,18 @@
           "options": {
             "jestConfig": "libs/core/stream/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/core/stream",
+            "tsConfig": "libs/core/stream/tsconfig.lib.json",
+            "packageJson": "libs/core/stream/package.json",
+            "main": "libs/core/stream/src/index.ts",
+            "assets": [
+              "libs/core/stream/*.md"
+            ]
           }
         }
       }
@@ -367,6 +391,18 @@
             "jestConfig": "libs/util/format/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/util/format",
+            "tsConfig": "libs/util/format/tsconfig.lib.json",
+            "packageJson": "libs/util/format/package.json",
+            "main": "libs/util/format/src/index.ts",
+            "assets": [
+              "libs/util/format/*.md"
+            ]
+          }
         }
       }
     },
@@ -407,6 +443,18 @@
             "jestConfig": "libs/core/adapter/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/core/adapter",
+            "tsConfig": "libs/core/adapter/tsconfig.lib.json",
+            "packageJson": "libs/core/adapter/package.json",
+            "main": "libs/core/adapter/src/index.ts",
+            "assets": [
+              "libs/core/adapter/*.md"
+            ]
+          }
         }
       }
     },
@@ -432,6 +480,18 @@
             "jestConfig": "libs/data/storage/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/data/storage",
+            "tsConfig": "libs/data/storage/tsconfig.lib.json",
+            "packageJson": "libs/data/storage/package.json",
+            "main": "libs/data/storage/src/index.ts",
+            "assets": [
+              "libs/data/storage/*.md"
+            ]
+          }
         }
       }
     },
@@ -456,6 +516,18 @@
           "options": {
             "jestConfig": "libs/util/share/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/util/share",
+            "tsConfig": "libs/util/share/tsconfig.lib.json",
+            "packageJson": "libs/util/share/package.json",
+            "main": "libs/util/share/src/index.ts",
+            "assets": [
+              "libs/util/share/*.md"
+            ]
           }
         }
       }
