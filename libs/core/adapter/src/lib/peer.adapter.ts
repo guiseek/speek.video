@@ -1,3 +1,4 @@
+import { Warning } from '@speek/core/entity'
 import { Observable } from 'rxjs'
 
 export type PeerConfig = RTCConfiguration
@@ -6,7 +7,9 @@ export class PeerAdapter {
   connection: RTCPeerConnection
   onChange: Observable<RTCPeerConnection>
   onCandidate: Observable<RTCIceCandidate>
+  onNegotiationNeeded: Observable<any>
   onTrack: Observable<MediaStream>
+  onWarning: Observable<Warning>
   onStreams: Observable<readonly MediaStream[]>
 
   constructor(config: PeerConfig) {
@@ -30,10 +33,26 @@ export class PeerAdapter {
       )
     })
 
+    this.onNegotiationNeeded = new Observable((subscriber) => {
+      this.connection.addEventListener('negotiationneeded', (ev) => {
+        subscriber.next(ev)
+      })
+    })
+
     this.onStreams = new Observable<readonly MediaStream[]>((subscriber) => {
       this.connection.addEventListener('track', ({ streams }) =>
         subscriber.next(streams)
       )
+    })
+
+    this.onWarning = new Observable((subscriber) => {
+      this.connection.addEventListener('icecandidateerror', (ev) => {
+        subscriber.next({
+          error: new Error(`Code: ${ev.errorCode}: ${ev.errorText}`),
+          description: `Type: ${ev.type}. URL: ${ev.url}, HostCandidate: ${ev.hostCandidate}`,
+          component: 'PeerAdapter',
+        })
+      })
     })
   }
 
@@ -66,5 +85,11 @@ export class PeerAdapter {
 
   addCandidate = (candidate: RTCIceCandidate) => {
     return this.connection.addIceCandidate(new RTCIceCandidate(candidate))
+  }
+
+  addStream(stream: MediaStream): void {
+    stream
+      .getTracks()
+      .forEach((track) => this.connection.addTrack(track, stream))
   }
 }

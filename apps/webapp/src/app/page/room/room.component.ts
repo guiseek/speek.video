@@ -1,5 +1,6 @@
+import { getAudioConfig, getVideoConfig } from '@speek/util/device'
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
-import { PeerAdapter, SignalingAdapter } from '@speek/core/adapter'
+import { PeerAdapter, SignalingAdapter, StreamAdapter } from '@speek/core/adapter'
 import { DrawerService, ShareService } from '@speek/ui/components'
 import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -65,6 +66,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     private share: ShareService,
     private route: ActivatedRoute,
     readonly drawer: DrawerService,
+    readonly stream: StreamAdapter,
     readonly userRoom: UserRoomStorage,
     readonly userSetup: UserSetupStorage,
     readonly signaling: SignalingAdapter
@@ -144,17 +146,27 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setLocal(payload?: SpeekPayload) {
-    navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+    this.stream.getStream({ video: getVideoConfig(), audio: getAudioConfig() })
       .then((stream) => {
         this.local.muted = true
         this.localStream = stream
         this.local.srcObject = stream
 
+
+        stream.getTracks().forEach(track => {
+          console.log(track.getCapabilities())
+          console.log(track.getSettings())
+          console.log(track.getConstraints())
+          track.addEventListener('isolationchange', console.log)
+          // track.applyConstraints({
+          //   deviceId:
+          // })
+        })
+
         // const destination = this.gotVoice(stream)
 
-        // const audio = destination.stream.getAudioTracks()
-        // this.peer.connection.addTrack(audio.shift(), destination.stream)
+        const audio = stream.getAudioTracks()
+        this.peer.connection.addTrack(audio.shift(), stream)
 
         const video = stream.getVideoTracks()
         this.peer.connection.addTrack(video.shift(), stream)

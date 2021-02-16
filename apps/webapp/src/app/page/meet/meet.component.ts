@@ -1,20 +1,34 @@
-import { SpeekPayload, SpeekAction, SpeekData } from '@speek/core/entity'
-import { UserRoomStorage, UserSetupStorage } from '@speek/data/storage'
-import { PeerAdapter, SignalingAdapter } from '@speek/core/adapter'
+import { getAudioConfig, getVideoConfig } from '@speek/util/device'
+import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
+import {
+  PeerAdapter,
+  SignalingAdapter,
+  StreamAdapter,
+} from '@speek/core/adapter'
+import { DrawerService, ShareService } from '@speek/ui/components'
 import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
-import { stopStream } from '@speek/core/stream'
+import { stopStream, Voice } from '@speek/core/stream'
+import { UserSetupStorage } from '@speek/data/storage'
+import { UserRoomStorage } from '@speek/data/storage'
+import { takeUntil, takeWhile } from 'rxjs/operators'
 import { BehaviorSubject, Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
 import {
-  OnInit,
-  Component,
-  ViewChild,
-  OnDestroy,
-  ElementRef,
   AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
 } from '@angular/core'
 
+function getAudioContext() {
+  return (
+    window.AudioContext || // Default
+    (window as any).webkitAudioContext || // Safari and old versions of Chrome
+    false
+  )
+}
 @Component({
   selector: 'speek-meet',
   templateUrl: './meet.component.html',
@@ -22,6 +36,12 @@ import {
 })
 export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy = new Subject<void>()
+
+  _audio = new BehaviorSubject<boolean>(true)
+  audio = this._audio.asObservable()
+
+  _video = new BehaviorSubject<boolean>(true)
+  video = this._video.asObservable()
 
   @ViewChild('local')
   localRef: ElementRef<HTMLVideoElement>
@@ -33,25 +53,27 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   remote: HTMLVideoElement
   remoteStream: MediaStream
 
-  _audio = new BehaviorSubject<boolean>(true)
-  audio = this._audio.asObservable()
-
-  _video = new BehaviorSubject<boolean>(true)
-  video = this._video.asObservable()
-
+  // peer: PeerAdapter
   sender = UUID.short()
   code: string
+  pitch: number
 
   private state = new Subject<RTCSignalingState>()
   state$ = this.state.asObservable()
 
   private track = new Subject<MediaStream>()
-  track$ = this.track.asObservable()
+  onTrack = this.track.asObservable()
+
+  private status = new Subject<string>()
+  status$ = this.status.asObservable()
 
   constructor(
     private router: Router,
     private peer: PeerAdapter,
+    private share: ShareService,
     private route: ActivatedRoute,
+    readonly drawer: DrawerService,
+    readonly stream: StreamAdapter,
     readonly userRoom: UserRoomStorage,
     readonly userSetup: UserSetupStorage,
     readonly signaling: SignalingAdapter
@@ -69,6 +91,19 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     const payload = new SpeekPayload(this.sender, this.code)
     this.signaling.send(SpeekAction.CreateOrJoin, payload)
 
+    this.peer.onChange.subscribe((state) => {
+      this.state.next(state.signalingState)
+      this.status.next(state.connectionState)
+    })
+
+    this.peer.onCandidate
+      .pipe(takeUntil(this.destroy))
+      .subscribe((candidate) => {
+        if (candidate) {
+          this.sendOffer({ ice: candidate })
+        }
+      })
+
     this.peer.onTrack.pipe(takeUntil(this.destroy)).subscribe((track) => {
       this.track.next(track)
       if (track) {
@@ -78,6 +113,28 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     })
+
+    this.peer.onNegotiationNeeded.subscribe(({ target }) => {
+      console.log('needed: ', target)
+      this.status.next(target.connectionState)
+    })
+
+    this.peer.onWarning.subscribe(({ description }) => {
+      console.log('needed: ', description)
+      this.status.next(description)
+    })
+  }
+
+  ngAfterViewInit(): void {
+    this.local = this.localRef.nativeElement
+    this.remote = this.remoteRef.nativeElement
+    this.signaling
+      .on(SpeekAction.Created)
+      .subscribe((payload) => this.setLocal(payload))
+
+    this.signaling
+      .on(SpeekAction.Joined)
+      .subscribe((payload) => this.setLocal(payload))
   }
 
   async handle({ data, sender }: SpeekPayload) {
@@ -106,43 +163,43 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  sendOffer(data: SpeekData) {
-    this.signaling.send(
-      SpeekAction.Offer,
-      new SpeekPayload(this.sender, this.code, data)
-    )
-  }
-
-  ngAfterViewInit(): void {
-    this.local = this.localRef.nativeElement
-    this.remote = this.remoteRef.nativeElement
-    this.signaling
-      .on(SpeekAction.Created)
-      .subscribe((payload) => this.setLocal(payload))
-
-    this.signaling
-      .on(SpeekAction.Joined)
-      .subscribe((payload) => this.setLocal(payload))
-  }
-
   setLocal(payload?: SpeekPayload) {
-    console.log('payload: ', payload)
-    const { audio, video } = this.userSetup.getStoredValue()
-    navigator.mediaDevices
-      .getUserMedia({ video, audio })
+    // navigator.mediaDevices
+    //   .getUserMedia({ video: getVideoConfig(), audio: getAudioConfig() })
+    this.stream
+      .getStream({ video: getVideoConfig(), audio: getAudioConfig() })
       .then((stream) => {
         this.local.muted = true
         this.localStream = stream
         this.local.srcObject = stream
 
-        const audioTrack = stream.getAudioTracks()
-        this.peer.connection.addTrack(audioTrack.shift(), stream)
+        stream.getTracks().forEach((track) => {
+          console.log(track.getCapabilities())
+          console.log(track.getSettings())
+          console.log(track.getConstraints())
+          track.addEventListener('isolationchange', console.log)
+          // track.applyConstraints({
+          //   deviceId:
+          // })
+        })
 
-        const videoTrack = stream.getVideoTracks()
-        this.peer.connection.addTrack(videoTrack.shift(), stream)
+        // const destination = this.gotVoice(stream)
+
+        const audio = stream.getAudioTracks()
+        this.peer.connection.addTrack(audio.shift(), stream)
+
+        const video = stream.getVideoTracks()
+        this.peer.connection.addTrack(video.shift(), stream)
 
         this.peer.createOffer().then((sdp) => this.sendOffer({ sdp }))
       })
+  }
+
+  sendOffer(data: SpeekData) {
+    this.signaling.send(
+      SpeekAction.Offer,
+      new SpeekPayload(this.sender, this.code, data)
+    )
   }
 
   toggleAudio() {
@@ -159,6 +216,10 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     this._video.next(enabled)
   }
 
+  hangup() {
+    this.router.navigate(['/'])
+  }
+
   ngOnDestroy(): void {
     this.destroy.next()
     this.destroy.complete()
@@ -168,9 +229,5 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.peer?.connection) {
       console.log('close')
     }
-  }
-
-  hangup() {
-    this.router.navigate(['/'])
   }
 }
