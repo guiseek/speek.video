@@ -170,8 +170,8 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       .then((stream) => {
         this.local.muted = true
         this.localStream = stream
-        this.remote.srcObject = stream
-        // this.local.srcObject = stream
+        // this.remote.srcObject = stream
+        this.local.srcObject = stream
 
         stream.getTracks().forEach((track) => {
           console.log(track.getCapabilities())
