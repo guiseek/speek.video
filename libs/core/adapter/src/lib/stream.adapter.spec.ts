@@ -1,7 +1,7 @@
-import { Stream } from './stream.adapter'
+import { StreamAdapter } from './stream.adapter'
 
-describe('Stream', () => {
+describe('StreamAdapter', () => {
   it('should create an instance', () => {
-    expect(new Stream()).toBeTruthy()
+    expect(new StreamAdapter({})).toBeTruthy()
   })
 })

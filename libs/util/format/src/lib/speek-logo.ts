@@ -1,7 +1,3 @@
-import { DomSanitizer } from '@angular/platform-browser'
-import { MatIconRegistry } from '@angular/material/icon'
-
-
 export function getLogo(color: string) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="116" height="132" viewBox="0 0 116 132">
   <g id="Black" transform="translate(-741 -472)">
@@ -39,13 +35,3 @@ export function getLogo(color: string) {
   </g>
 </svg>`
 }
-// export function createSpeekLogo(
-//   registry: MatIconRegistry,
-//   sanitizer: DomSanitizer
-// ) {
-//   const speekDarkIcon = sanitizer.bypassSecurityTrustHtml(getLogo('#d32f2f'))
-//   registry.addSvgIconLiteral('speek-dark', speekDarkIcon)
-
-//   const speekLightIcon = sanitizer.bypassSecurityTrustHtml(getLogo('#03a9f4'))
-//   registry.addSvgIconLiteral('speek-light', speekLightIcon)
-// }

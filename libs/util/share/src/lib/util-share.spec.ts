@@ -2,6 +2,6 @@ import { utilShare } from './util-share'
 
 describe('utilShare', () => {
   it('should work', () => {
-    expect(utilShare()).toEqual('util-share')
+    expect(utilShare({ title: '', url: '', text: '' }, 'copy')).toEqual('util-share')
   })
 })
