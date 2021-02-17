@@ -77,6 +77,8 @@ MIT
 
 @speek/data/storage
 
+@speek/ui/addons
+
 @speek/ui/components
 
 @speek/util/device
