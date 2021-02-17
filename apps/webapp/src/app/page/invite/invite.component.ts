@@ -45,7 +45,7 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     const value = this.userSetup.getStoredValue()
-    this.form.patchValue(!!value ? value : {})
+    // this.form.patchValue(!!value ? value : {})
   }
 
   ngAfterViewInit(): void {

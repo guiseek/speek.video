@@ -8,6 +8,9 @@
   .mat-card {
     display: flex;
     flex-direction: column;
+    border-width: 2px;
+    border-color: #464646;
+    border-style: dotted;
     form {
       display: flex;
       flex-direction: column;

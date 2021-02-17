@@ -34,10 +34,13 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy = new Subject<void>()
 
   _audio = new BehaviorSubject<boolean>(true)
-  audio = this._audio.asObservable()
+  audio$ = this._audio.asObservable()
 
   _video = new BehaviorSubject<boolean>(true)
-  video = this._video.asObservable()
+  video$ = this._video.asObservable()
+
+  _screen = new BehaviorSubject<boolean>(true)
+  screen$ = this._screen.asObservable()
 
   @ViewChild('local')
   localRef: ElementRef<HTMLVideoElement>
@@ -48,6 +51,11 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   remoteRef: ElementRef<HTMLVideoElement>
   remote: HTMLVideoElement
   remoteStream: MediaStream
+
+  @ViewChild('screen')
+  screenRef: ElementRef<HTMLVideoElement>
+  screen: HTMLVideoElement
+  screenStream: MediaStream
 
   // peer: PeerAdapter
   sender = UUID.short()
@@ -110,6 +118,8 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.local = this.localRef.nativeElement
     this.remote = this.remoteRef.nativeElement
+    this.screen = this.screenRef.nativeElement
+
     this.signaling
       .on(SpeekAction.Created)
       .subscribe((payload) => this.setLocal(payload))
@@ -145,6 +155,10 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  setScreen(payload?: SpeekPayload) {
+    // this.screen.
+  }
+
   setLocal(payload?: SpeekPayload) {
     this.stream.getStream({ video: getVideoConfig(), audio: getAudioConfig() })
       .then((stream) => {
@@ -158,18 +172,15 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
           console.log(track.getSettings())
           console.log(track.getConstraints())
           track.addEventListener('isolationchange', console.log)
-          // track.applyConstraints({
-          //   deviceId:
-          // })
         })
 
-        // const destination = this.gotVoice(stream)
+        const destination = this.gotVoice(stream)
 
-        const audio = stream.getAudioTracks()
-        this.peer.connection.addTrack(audio.shift(), stream)
+        const audio = destination.stream.getAudioTracks()
+        this.peer.connection.addTrack(audio.shift(), destination.stream)
 
-        const video = stream.getVideoTracks()
-        this.peer.connection.addTrack(video.shift(), stream)
+        const video = destination.stream.getVideoTracks()
+        this.peer.connection.addTrack(video.shift(), destination.stream)
 
         this.peer.createOffer().then((sdp) => this.sendOffer({ sdp }))
       })
@@ -222,6 +233,13 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   toggleVideo() {
+    const enabled = !this._video.getValue()
+    const tracks = this.localStream.getVideoTracks()
+    tracks.forEach((t) => (t.enabled = enabled))
+    this._video.next(enabled)
+  }
+
+  toggleScreen() {
     const enabled = !this._video.getValue()
     const tracks = this.localStream.getVideoTracks()
     tracks.forEach((t) => (t.enabled = enabled))

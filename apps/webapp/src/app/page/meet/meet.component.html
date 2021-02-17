@@ -2,10 +2,16 @@
   <a routerLink="/" aria-label="Home" mat-icon-button>
     <mat-icon>arrow_backward</mat-icon>
   </a>
-  <span> {{ (state$ | async) | peerStateBadge }} </span>
+  <span> {{ state$ | async | peerStateBadge }} </span>
 </speek-toolbar>
 
-<video class="remote" #remote autoplay playsinline muted></video>
+<section class="meeting-room">
+
+  <video class="remote" #remote autoplay playsinline muted></video>
+
+  <speek-lamp></speek-lamp>
+
+</section>
 
 <mat-card>
   <video class="local" #local autoplay playsinline muted></video>
@@ -21,7 +27,10 @@
 </mat-card>
 
 <ng-container *ngIf="(state$ | async) != 'stable'">
-  <speek-splash width="200px" message="Aguardando entrada do participante..."></speek-splash>
+  <speek-splash
+    width="200px"
+    message="Aguardando entrada do participante..."
+  ></speek-splash>
 </ng-container>
 
 <button
