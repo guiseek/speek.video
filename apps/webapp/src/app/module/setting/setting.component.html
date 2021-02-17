@@ -1,0 +1,21 @@
+<speek-toolbar>
+  <a routerLink="/" aria-label="Home" mat-icon-button>
+    <mat-icon>arrow_backward</mat-icon>
+  </a>
+  <span class="brand-name"> configurações </span>
+</speek-toolbar>
+
+<mat-card>
+  <nav mat-tab-nav-bar mat-stretch-tabs dynamicHeight [backgroundColor]="'primary'">
+    <a
+      mat-tab-link
+      *ngFor="let link of links"
+      [routerLink]="link.route"
+      [active]="router.url == link.route"
+    >
+      {{ link.label }}
+    </a>
+    <!-- <a mat-tab-link disabled>Disabled Link</a> -->
+  </nav>
+  <router-outlet></router-outlet>
+</mat-card>
