@@ -4,6 +4,10 @@
 
 1. [ ] - Adicionar alerta sobre usar fones de ouvido
 
+- [ ] Aspect ratio
+  - [ ] Corrigir formato de visualização na horizontal
+  - [ ] Corrigirtamanho da visualização local, quando na vertical (muito alta)
+
 - [x] botão sair da chamada
   - [x] mat-fab warn canto left bottom room component
   - [x] guard canDeactivate room component

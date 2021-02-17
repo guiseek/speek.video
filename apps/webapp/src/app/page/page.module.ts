@@ -3,6 +3,7 @@ import { MaterialModule } from '../shared/material.module'
 import { ClipboardModule } from '@angular/cdk/clipboard'
 import { ReactiveFormsModule } from '@angular/forms'
 import { PageRoutingModule } from './page.routing'
+import { LampAddonModule } from '@speek/ui/addons'
 import { LayoutModule } from '@angular/cdk/layout'
 import { PortalModule } from '@angular/cdk/portal'
 import { CommonModule } from '@angular/common'
@@ -16,7 +17,6 @@ import {
   DialpadModule,
   AudioModule,
   ShareModule,
-  LampModule,
   SplashModule,
   ToolbarModule,
 } from '@speek/ui/components'
@@ -47,8 +47,8 @@ import { PeerStateBadgePipe } from '../shared/pipes/peer-state-badge.pipe'
   imports: [
     CommonModule,
     A11yModule,
+    LampAddonModule,
     PortalModule,
-    LampModule,
     SplashModule,
     DoorModule,
     WaveModule,

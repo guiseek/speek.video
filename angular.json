@@ -504,6 +504,43 @@
           }
         }
       }
+    },
+    "ui-addons": {
+      "projectType": "library",
+      "root": "libs/ui/addons",
+      "sourceRoot": "libs/ui/addons/src",
+      "prefix": "speek",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "tsConfig": "libs/ui/addons/tsconfig.lib.json",
+            "project": "libs/ui/addons/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/ui/addons/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ui/addons/src/**/*.ts",
+              "libs/ui/addons/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/addons"],
+          "options": {
+            "jestConfig": "libs/ui/addons/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
