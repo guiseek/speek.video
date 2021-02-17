@@ -1,18 +1,13 @@
-import { getAudioConfig, getVideoConfig } from '@speek/util/device'
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
-import {
-  PeerAdapter,
-  SignalingAdapter,
-  StreamAdapter,
-} from '@speek/core/adapter'
+import { getAudioConfig, getVideoConfig } from '@speek/util/device'
 import { DrawerService, ShareService } from '@speek/ui/components'
 import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
-import { stopStream, Voice } from '@speek/core/stream'
 import { UserSetupStorage } from '@speek/data/storage'
 import { UserRoomStorage } from '@speek/data/storage'
-import { takeUntil, takeWhile } from 'rxjs/operators'
+import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject, Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 import {
   AfterViewInit,
   Component,
@@ -21,6 +16,11 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core'
+import {
+  PeerAdapter,
+  SignalingAdapter,
+  StreamAdapter,
+} from '@speek/core/adapter'
 
 type WithTarget<T> = Event & {
   target: T
@@ -170,7 +170,8 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       .then((stream) => {
         this.local.muted = true
         this.localStream = stream
-        this.local.srcObject = stream
+        this.remote.srcObject = stream
+        // this.local.srcObject = stream
 
         stream.getTracks().forEach((track) => {
           console.log(track.getCapabilities())

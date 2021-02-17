@@ -6,19 +6,24 @@
 </speek-toolbar>
 
 <video class="remote" #remote autoplay playsinline muted></video>
+<video class="screen" #screen autoplay playsinline muted></video>
+
 
 <mat-card>
   <video class="local" #local autoplay playsinline muted></video>
 
   <mat-card-actions>
     <button mat-button (click)="toggleAudio()">
-      <mat-icon>{{ (audio | async) ? 'mic' : 'mic_off' }}</mat-icon>
+      <mat-icon>{{ (audio$ | async) ? 'mic' : 'mic_off' }}</mat-icon>
     </button>
     <button mat-button (click)="toggleVideo()">
-      <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
+      <mat-icon>{{ (video$ | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
     </button>
-    <button mat-button (click)="drawer.toggle()">
-      <mat-icon>settings</mat-icon>
+    <button mat-button (click)="toggleScreen()">
+      <mat-icon>{{
+        (screen$ | async) ? 'screen_share' : 'stop_screen_share'
+      }}</mat-icon>
+      <mat-icon>screen_share</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

@@ -6,6 +6,7 @@ import { ShareComponent } from './share.component'
 import { map, switchMap } from 'rxjs/operators'
 import { Injectable } from '@angular/core'
 import { UUID } from '@speek/util/format'
+import { EMPTY } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,9 @@ export class ShareService {
       .afterDismissed()
       .pipe(
         switchMap((data) =>
-          this._dialog.open(ShareMessageDialog, { data }).afterClosed()
+          data
+            ? this._dialog.open(ShareMessageDialog, { data }).afterClosed()
+            : EMPTY
         ),
         map((result: Share) => share(result, result.hashtags as ShareTool))
       )

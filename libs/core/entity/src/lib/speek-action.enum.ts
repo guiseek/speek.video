@@ -9,4 +9,5 @@ export enum SpeekAction {
   Connection = 'connection',
   Offer = 'offer',
   Answer = 'answer',
+  Screen = 'screen'
 }

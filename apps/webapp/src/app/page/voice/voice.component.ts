@@ -36,7 +36,7 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
     const value = this.userSetup.getStoredValue()
     this.form.patchValue(!!value ? value : {})
     if (this.form.audio.value) {
-      this.getStream(this.form.audio.value)
+      this.getStream(this.form.get('audio').value)
     }
   }
 

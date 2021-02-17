@@ -52,6 +52,16 @@ export class SignalingGateway
     room.broadcast.emit(SpeekAction.Offer, payload)
   }
 
+  @UseGuards(SignalingGuard)
+  @SubscribeMessage(SpeekAction.Screen)
+  screenShare(
+    @ConnectedSocket() contact: Socket,
+    @MessageBody() payload: SpeekPayload
+  ) {
+    const room = contact.to(payload.code)
+    room.broadcast.emit(SpeekAction.Screen, payload)
+  }
+
   private _room({ code }) {
     const adapter = this.server.sockets.adapter
     return adapter.rooms[code] ?? { length: 0 }
