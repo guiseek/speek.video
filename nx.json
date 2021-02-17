@@ -21,12 +21,13 @@
     "gateway": { "tags": [] },
     "core-entity": { "tags": [] },
     "core-stream": { "tags": [] },
-    "ui-components": { "tags": [] },
-    "util-format": { "tags": [] },
-    "ui-stylesheets": { "tags": [] },
+    "ui-components": { "tags": ["type:ui"] },
+    "util-format": { "tags": ["type:util"] },
+    "ui-stylesheets": { "tags": ["type:ui"] },
     "core-adapter": { "tags": [] },
     "data-storage": { "tags": ["type:data"] },
-    "util-share": { "tags": [] },
-    "util-device": { "tags": [] }
+    "util-share": { "tags": ["type:util"] },
+    "util-device": { "tags": ["type:util"] },
+    "ui-addons": { "tags": ["type:ui"] }
   }
 }
