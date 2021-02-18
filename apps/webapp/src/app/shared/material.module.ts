@@ -42,6 +42,6 @@ import { MatSliderModule } from '@angular/material/slider'
     MatFormFieldModule,
     MatButtonToggleModule,
     MatProgressSpinnerModule,
-  ]
+  ],
 })
 export class MaterialModule {}

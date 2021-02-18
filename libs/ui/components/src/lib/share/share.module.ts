@@ -1,9 +1,9 @@
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatCardModule } from '@angular/material/card'
+import { MatInputModule } from '@angular/material/input'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { ReactiveFormsModule } from '@angular/forms'
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet'
 import { MatIconModule } from '@angular/material/icon'
 import { MatListModule } from '@angular/material/list'

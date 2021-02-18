@@ -14,7 +14,6 @@ Client
 
 `npm run webapp`
 
-
 ### SSL Certificate localhost
 
 ```sh

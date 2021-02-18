@@ -1,6 +1,5 @@
 import { Router } from '@angular/router'
 import { Component } from '@angular/core'
-import { routerTransition } from '../../app.animation'
 
 @Component({
   selector: 'speek-setting',

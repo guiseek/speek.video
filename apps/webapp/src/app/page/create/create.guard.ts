@@ -1,25 +1,14 @@
-import { UUID } from '@speek/util/format'
+import { UrlTree, CanDeactivate, Router } from '@angular/router'
 import { CreateComponent } from './create.component'
 import { Injectable } from '@angular/core'
-import {
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  UrlTree,
-  CanDeactivate,
-  Router,
-} from '@angular/router'
+import { UUID } from '@speek/util/format'
 
 @Injectable({
   providedIn: 'root',
 })
 export class CreateGuard implements CanDeactivate<CreateComponent> {
   constructor(private _router: Router) {}
-  canDeactivate(
-    component: CreateComponent,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot
-  ): Promise<boolean | UrlTree> {
+  canDeactivate(component: CreateComponent): Promise<boolean | UrlTree> {
     console.log(component.code)
 
     if (component.code) {

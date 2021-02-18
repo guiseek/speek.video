@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   gateway: {
-    url: 'https://gateway.speek.video'
+    url: 'https://gateway.speek.video',
   },
   configs: {
     iceServers: [{ urls: 'stun:stun.stunprotocol.org:3478' }],

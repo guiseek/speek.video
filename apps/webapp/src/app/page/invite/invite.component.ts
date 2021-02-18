@@ -1,7 +1,7 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { takeUntil, debounceTime } from 'rxjs/operators'
 import { ActivatedRoute, Router } from '@angular/router'
-import { UserRoomStorage} from '@speek/data/storage'
+import { UserRoomStorage } from '@speek/data/storage'
 import { MatInput } from '@angular/material/input'
 import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject, Subject } from 'rxjs'
@@ -48,8 +48,7 @@ export class InviteComponent implements OnInit, OnDestroy {
     private _router: Router,
     private _route: ActivatedRoute,
     private _userRoom: UserRoomStorage
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     const { code } = this._route.snapshot.params

@@ -1,10 +1,10 @@
 <section>
   <video
-  muted
-  #video
-  autoplay
-  playsinline
-  poster="/assets/images/speek-light.svg"
+    muted
+    #video
+    autoplay
+    playsinline
+    poster="/assets/images/speek-light.svg"
   ></video>
 </section>
 <mat-divider></mat-divider>
@@ -13,7 +13,12 @@
   <mat-list-item>
     <mat-icon mat-list-icon>video_settings</mat-icon>
     <h3 mat-line>Vídeo</h3>
-    <button type="button" mat-icon-button [disabled]="!form.video.value" (click)="toggleVideo()">
+    <button
+      type="button"
+      mat-icon-button
+      [disabled]="!form.video.value"
+      (click)="toggleVideo()"
+    >
       <mat-icon>
         {{ stream?.active ? 'videocam' : 'videocam_off' }}
       </mat-icon>

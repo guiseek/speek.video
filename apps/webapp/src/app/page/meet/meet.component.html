@@ -6,9 +6,7 @@
 </speek-toolbar>
 
 <section class="meeting-room">
-
   <video class="remote" #remote autoplay playsinline muted></video>
-
 </section>
 
 <mat-card>
@@ -27,7 +25,7 @@
 <ng-container *ngIf="(signal$ | async) != 'stable'">
   <speek-splash
     width="200px"
-    [message]="(signal$ | async) | peerSignalBadge"
+    [message]="signal$ | async | peerSignalBadge"
   ></speek-splash>
 </ng-container>
 

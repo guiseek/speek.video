@@ -24,8 +24,7 @@
     background-size: 210%;
     opacity: 0.1;
 
-    transition: opacity 350ms ease-in-out,
-      background-size 400ms ease;
+    transition: opacity 350ms ease-in-out, background-size 400ms ease;
   }
   &:hover::before {
     opacity: 0.08;

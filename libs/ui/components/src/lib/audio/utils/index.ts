@@ -1,2 +1,2 @@
-export * from './draw-frequency';
-export * from './draw-oscilloscope';
+export * from './draw-frequency'
+export * from './draw-oscilloscope'

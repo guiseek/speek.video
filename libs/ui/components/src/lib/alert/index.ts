@@ -1,2 +1,2 @@
-export * from './confirm';
-export * from './alert.module';
+export * from './confirm'
+export * from './alert.module'

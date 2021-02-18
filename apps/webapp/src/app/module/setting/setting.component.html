@@ -6,7 +6,12 @@
 </speek-toolbar>
 
 <mat-card>
-  <nav mat-tab-nav-bar mat-stretch-tabs dynamicHeight [backgroundColor]="'primary'">
+  <nav
+    mat-tab-nav-bar
+    mat-stretch-tabs
+    dynamicHeight
+    [backgroundColor]="'primary'"
+  >
     <a
       mat-tab-link
       *ngFor="let link of links"

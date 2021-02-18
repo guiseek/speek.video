@@ -2,17 +2,11 @@
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "outDir": "../../../dist/out-tsc",
     "target": "ES2019"
   },
-  "exclude": [
-    "**/*.spec.ts"
-  ],
-  "include": [
-    "**/*.ts"
-  ],
+  "exclude": ["**/*.spec.ts"],
+  "include": ["**/*.ts"],
   "extends": "./tsconfig.json"
 }

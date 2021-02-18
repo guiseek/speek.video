@@ -12,7 +12,6 @@ function changeColor(bar: number, hex: string) {
   const g = parseInt(hex.slice(3, 5), 16)
   const b = parseInt(hex.slice(5, 7), 16)
   return `rgb(${bar},${g},${b})`
-
 }
 export function drawFrequency(
   canvas: HTMLCanvasElement,

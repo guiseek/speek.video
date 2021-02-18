@@ -1,7 +1,7 @@
-import { UserSetupForm } from './user-setup.form';
+import { UserSetupForm } from './user-setup.form'
 
 describe('UserSetupForm', () => {
   it('should create an instance', () => {
-    expect(new UserSetupForm()).toBeTruthy();
-  });
-});
+    expect(new UserSetupForm()).toBeTruthy()
+  })
+})

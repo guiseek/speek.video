@@ -1,6 +1,10 @@
 import { getAudioConfig, getVideoConfig } from '@speek/util/device'
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
-import { PeerAdapter, SignalingAdapter, StreamAdapter } from '@speek/core/adapter'
+import {
+  PeerAdapter,
+  SignalingAdapter,
+  StreamAdapter,
+} from '@speek/core/adapter'
 import { DrawerService, ShareService } from '@speek/ui/components'
 import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -25,6 +29,7 @@ function getAudioContext() {
     false
   )
 }
+
 @Component({
   selector: 'speek-room',
   templateUrl: './room.component.html',
@@ -160,14 +165,14 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setLocal(payload?: SpeekPayload) {
-    this.stream.getStream({ video: getVideoConfig(), audio: getAudioConfig() })
+    this.stream
+      .getStream({ video: getVideoConfig(), audio: getAudioConfig() })
       .then((stream) => {
         this.local.muted = true
         this.localStream = stream
         this.local.srcObject = stream
 
-
-        stream.getTracks().forEach(track => {
+        stream.getTracks().forEach((track) => {
           console.log(track.getCapabilities())
           console.log(track.getSettings())
           console.log(track.getConstraints())
@@ -188,7 +193,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
 
   gotVoice(stream: MediaStream) {
     let context: AudioContext
-    let AudioContext = getAudioContext()
+    const AudioContext = getAudioContext()
     if (AudioContext) {
       // Do whatever you want using the Web Audio API
       context = new AudioContext()
@@ -197,7 +202,9 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
       // Web Audio API is not supported
       // Alert the user
       alert(
-        'Sorry, but the Web Audio API is not supported by your browser. Please, consider upgrading to the latest version or downloading Google Chrome or Mozilla Firefox'
+        `Sorry, but the Web Audio API is not supported by your browser.
+        Please, consider upgrading to the latest version or downloading
+        Google Chrome or Mozilla Firefox`
       )
     }
     // const context = new AudioContext()

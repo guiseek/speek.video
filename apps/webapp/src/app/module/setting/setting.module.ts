@@ -8,15 +8,17 @@ import { VideoComponent } from './video/video.component'
 import { MaterialModule } from '../../shared/material.module'
 import { ToolbarModule } from '@speek/ui/components'
 
-const routes: Routes = [{
-  path: '',
-  component: SettingComponent,
-  children: [
-    { path: '', redirectTo: 'audio' },
-    { path: 'audio', component: AudioComponent },
-    { path: 'video', component: VideoComponent }
-  ]
-}]
+const routes: Routes = [
+  {
+    path: '',
+    component: SettingComponent,
+    children: [
+      { path: '', redirectTo: 'audio' },
+      { path: 'audio', component: AudioComponent },
+      { path: 'video', component: VideoComponent },
+    ],
+  },
+]
 
 @NgModule({
   declarations: [SettingComponent, AudioComponent, VideoComponent],
