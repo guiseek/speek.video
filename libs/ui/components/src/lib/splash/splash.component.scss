@@ -9,12 +9,12 @@
   z-index: 1;
   svg {
     opacity: 0;
-    animation: show 2s ease-in-out infinite alternate 2s;
+    animation: show 2.6s ease-in-out infinite alternate 2s;
   }
   .container,
   .play,
   .bullet {
-    animation: move 2s ease-in-out infinite alternate 2s;
+    animation: move 2.6s ease-in-out infinite alternate 2s;
   }
   .container {
     stroke-dasharray: 232px;

@@ -1,7 +1,7 @@
-import { UserSetup } from './user-setup.form';
+import { UserSetupForm } from './user-setup.form';
 
-describe('UserSetup', () => {
+describe('UserSetupForm', () => {
   it('should create an instance', () => {
-    expect(new UserSetup()).toBeTruthy();
+    expect(new UserSetupForm()).toBeTruthy();
   });
 });

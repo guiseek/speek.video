@@ -1,7 +1,7 @@
-import { UserSetup } from './user-setup.adapter';
+import { UserSetupAdapter } from './user-setup.adapter';
 
-describe('UserSetup', () => {
+describe('UserSetupAdapter', () => {
   it('should create an instance', () => {
-    expect(new UserSetup()).toBeTruthy();
+    expect(new UserSetupAdapter()).toBeTruthy();
   });
 });

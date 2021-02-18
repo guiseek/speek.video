@@ -1,6 +1,7 @@
 import { isDefined, notNull } from '@speek/util/format'
 import { deepMerge } from '@speek/util/format'
 import { Subject } from 'rxjs'
+
 export abstract class DataStorage<T = any> {
   onUpdate = new Subject<T>()
 

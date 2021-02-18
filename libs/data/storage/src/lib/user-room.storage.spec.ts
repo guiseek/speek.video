@@ -1,7 +1,7 @@
-import { UserRoom } from './user-room.storage';
+import { UserRoomStorage } from './user-room.storage';
 
-describe('UserRoom', () => {
+describe('UserRoomStorage', () => {
   it('should create an instance', () => {
-    expect(new UserRoom()).toBeTruthy();
+    expect(new UserRoomStorage()).toBeTruthy();
   });
 });

@@ -12,20 +12,19 @@ import {
 } from '@angular/core'
 
 @Component({
-  selector: 'speek-camera',
-  templateUrl: './camera.component.html',
-  styleUrls: ['./camera.component.scss'],
+  selector: 'speek-video',
+  templateUrl: './video.component.html',
+  styleUrls: ['./video.component.scss'],
 })
-export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
+export class VideoComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('video')
   private video: ElementRef<HTMLVideoElement>
 
+  form = new UserSetupForm()
   stream: MediaStream
 
   private _devices = new BehaviorSubject<MediaDeviceInfo[]>([])
   devices$ = this._devices.asObservable()
-
-  form = new UserSetupForm()
 
   constructor(readonly userSetup: UserSetupStorage) {}
 
@@ -36,22 +35,17 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.form.getDevices('videoinput').then((devices) => {
+      // Criamos a lista de dispositivos disponíveis
       this._devices.next(devices.map((d) => d.toJSON()))
     })
   }
 
   onDeviceChange(device: MediaDeviceInfo) {
-    stopStream(this.stream)
     if (device) {
       this.getStream(device)
     }
-  }
-
-  toggleVideo() {
-    if (this.stream?.active) {
-      stopStream(this.stream)
-    } else {
-      this.getStream(this.form.video.value)
+    if (this.form.valid) {
+      this.userSetup.update(this.form.value)
     }
   }
 
@@ -66,15 +60,21 @@ export class CameraComponent implements OnInit, AfterViewInit, OnDestroy {
     this.stream = stream
   }
 
-  compareFn(d1: MediaDeviceInfo, d2: MediaDeviceInfo): boolean {
-    return d1 && d2 ? d1.deviceId === d2.deviceId : d1 === d2
+  toggleVideo() {
+    if (this.stream?.active) {
+      stopStream(this.stream)
+      this.stopVideo(this.video)
+    } else {
+      this.getStream(this.form.video.value)
+    }
   }
 
-  onSave() {
-    if (this.form.valid) {
-      this.userSetup.update(this.form.getUserSetup())
-      this.form.markAsPristine()
-    }
+  stopVideo({ nativeElement }) {
+    nativeElement.srcObject = null
+  }
+
+  compareFn(d1: MediaDeviceInfo, d2: MediaDeviceInfo): boolean {
+    return d1 && d2 ? d1.deviceId === d2.deviceId : d1 === d2
   }
 
   ngOnDestroy(): void {

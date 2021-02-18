@@ -1,4 +1,4 @@
-import { getLogo } from './speek-icon'
+import { getLogo } from './speek-logo'
 
 describe('getLogo', () => {
   it('should create an instance', () => {

@@ -1,29 +1,21 @@
 <div
-  [ngClass]="{ shake: (shake | async) }"
   class="backDoor"
+  [ngClass]="{ shake: (shake | async) }"
   [ngClass]="{ enter: io }"
 >
-  <div class="sun">
-    <div class="ray_box">
-      <div class="ray ray1"></div>
-      <div class="ray ray2"></div>
-      <div class="ray ray3"></div>
-      <div class="ray ray4"></div>
-      <div class="ray ray5"></div>
-      <div class="ray ray6"></div>
-      <div class="ray ray7"></div>
-      <div class="ray ray8"></div>
-      <div class="ray ray9"></div>
-      <div class="ray ray10"></div>
-    </div>
-  </div>
-  <div class="door" (click)="toggleDoor()" [ngClass]="{ opened: opened }"></div>
+  <div class="door" [ngClass]="{ opened: opened }"></div>
 
-  <svg (click)="toggleInOut()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 231.065 71.245">
-    <g id="Grupo_8" data-name="Grupo 8" transform="matrix(0, -0.454, 1, 0, 14.922, 26.394)">
-      <path fill="#121212" id="Caminho_6" data-name="Caminho 6"
+  <svg
+    (click)="toggleInOut()"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 231.065 71.245"
+  >
+    <g transform="matrix(0, -0.454, 1, 0, 14.922, 26.394)">
+      <path
+        fill="#121212"
+        transform="translate(-59.283 -1.897)"
         d="M26.583,198.051l93.706-93.706L26.583,10.639,0,37.223l67.122,67.122L0,171.467Z"
-        transform="translate(-59.283 -1.897)" />
+      />
     </g>
   </svg>
 </div>

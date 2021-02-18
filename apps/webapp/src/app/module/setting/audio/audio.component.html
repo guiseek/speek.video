@@ -1,0 +1,37 @@
+<form [formGroup]="form">
+  <canvas #canvas></canvas>
+  <mat-divider></mat-divider>
+  <mat-list>
+    <h3 mat-subheader>Arraste para ajustar o tom da sua voz</h3>
+  </mat-list>
+  <section>
+    <span>-1.2</span>
+    <mat-slider
+    min="-1.2"
+    max="1.2"
+    step="0.2"
+    thumbLabel
+    formControlName="pitch"
+    ></mat-slider>
+    <span>1.2</span>
+  </section>
+  <mat-list>
+    <h3 mat-subheader>Sua voz é normalizada fica em 0 (zero)</h3>
+  </mat-list>
+  <mat-divider></mat-divider>
+  <mat-form-field color="accent" appearance="outline">
+    <mat-select
+      placeholder="Selecione um dispositivo"
+      formControlName="audio"
+      [compareWith]="compareFn"
+      (selectionChange)="onDeviceChange($event.value)"
+    >
+      <mat-option value=""> Selecione um dispositivo </mat-option>
+      <mat-option *ngFor="let d of devices$ | async" [value]="d">
+        {{ d.label }}
+      </mat-option>
+    </mat-select>
+    <mat-hint>Este será seu microfone</mat-hint>
+    <mat-error>Selecione um dispositivo</mat-error>
+  </mat-form-field>
+</form>

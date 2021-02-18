@@ -1,55 +1,77 @@
-import { UserSetupForm, drawOscilloscope } from '@speek/ui/components'
-import { BehaviorSubject, Observable, Subject } from 'rxjs'
+import { drawOscilloscope, UserSetupForm } from '@speek/ui/components'
 import { stopStream, Voice } from '@speek/core/stream'
 import { UserSetupStorage } from '@speek/data/storage'
+import { BehaviorSubject, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import {
-  AfterViewInit,
   Component,
+  AfterViewInit,
+  ViewChild,
   ElementRef,
   OnDestroy,
   OnInit,
-  ViewChild,
 } from '@angular/core'
 
 @Component({
-  selector: 'speek-voice',
-  templateUrl: './voice.component.html',
-  styleUrls: ['./voice.component.scss'],
+  selector: 'speek-audio',
+  templateUrl: './audio.component.html',
+  styleUrls: ['./audio.component.scss'],
 })
-export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AudioComponent implements OnInit, AfterViewInit, OnDestroy {
+  private _destroy = new Subject<void>()
+
   @ViewChild('canvas')
   private canvas: ElementRef<HTMLCanvasElement>
 
+  form = new UserSetupForm()
   stream: MediaStream
-  stream$: Observable<MediaStream>
+  voice: Voice
 
   private _devices = new BehaviorSubject<MediaDeviceInfo[]>([])
   devices$ = this._devices.asObservable()
 
-  form = new UserSetupForm()
-
-  private _destroy = new Subject<void>()
   constructor(readonly userSetup: UserSetupStorage) {}
 
   ngOnInit(): void {
     const value = this.userSetup.getStoredValue()
     this.form.patchValue(!!value ? value : {})
-    if (this.form.audio.value) {
-      this.getStream(this.form.get('audio').value)
-    }
   }
 
   ngAfterViewInit(): void {
     this.form.getDevices('audioinput').then((devices) => {
+      // Criamos a lista de dispositivos disponíveis
       this._devices.next(devices.map((d) => d.toJSON()))
+
+      if (!this.form.audio.value && this.form.pitch.enabled) {
+        this.form.pitch.disable()
+      }
+
+      if (this.form.audio.value) {
+        this.getStream(this.form.audio.value)
+      }
     })
+
+    /**
+     * A cada alteração, verificamos se está válido
+     * então executamos alteração na voz e salvamos
+     */
+    this.form.valueChanges
+      .pipe(takeUntil(this._destroy))
+      .subscribe(({ pitch }) => {
+        if (this.form.valid) {
+          this.voice.setPitchOffset(pitch)
+          this.userSetup.update(this.form.value)
+        }
+      })
   }
 
   onDeviceChange(device: MediaDeviceInfo) {
-    stopStream(this.stream)
     if (device) {
       this.getStream(device)
+
+      if (this.form.pitch.disabled) {
+        this.form.pitch.enable()
+      }
     }
   }
 
@@ -74,32 +96,21 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
 
     microphone.connect(delay)
 
-    const voice = new Voice(audioContext)
-    const { value } = this.form.get('pitch')
-    voice.setPitchOffset(value)
+    this.voice = new Voice(audioContext)
+    const { value } = this.form.pitch
+    this.voice.setPitchOffset(value)
 
-    delay.connect(voice.input)
-    voice.output.connect(audioContext.destination)
-    voice.output.connect(analyser)
+    delay.connect(this.voice.input)
+    this.voice.output.connect(audioContext.destination)
+    this.voice.output.connect(analyser)
 
     drawOscilloscope(this.canvas.nativeElement, analyser)
 
-    this.form.valueChanges
-      .pipe(takeUntil(this._destroy))
-      .subscribe(({ pitch }) => {
-        voice.setPitchOffset(pitch)
-      })
+    this.voice.setPitchOffset(this.form.pitch.value)
   }
 
   compareFn(d1: MediaDeviceInfo, d2: MediaDeviceInfo): boolean {
     return d1 && d2 ? d1.deviceId === d2.deviceId : d1 === d2
-  }
-
-  onSave() {
-    if (this.form.valid) {
-      this.userSetup.update(this.form.getUserSetup())
-      this.form.markAsPristine()
-    }
   }
 
   ngOnDestroy(): void {

@@ -1,7 +1,11 @@
-import { dataStorage } from './data-storage'
+import { DataStorage } from './data-storage'
 
-describe('dataStorage', () => {
+class TestDataStorage extends DataStorage<any> {
+  protected key: string = 'test'
+}
+
+describe('DataStorage', () => {
   it('should work', () => {
-    expect(dataStorage()).toEqual('data-storage')
+    expect(new TestDataStorage()).toBeDefined()
   })
 })

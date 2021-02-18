@@ -14,7 +14,7 @@ import { ServiceWorkerModule } from '@angular/service-worker'
 import { UserSetupAdapter } from '@speek/core/adapter'
 import { AppComponent } from './app.component'
 
-import { environment } from './../environments/environment';
+import { environment } from './../environments/environment'
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +25,13 @@ import { environment } from './../environments/environment';
     ReactiveFormsModule,
     RouterModule.forRoot(
       [
+        {
+          path: 'setting',
+          loadChildren: () =>
+            import('./module/setting/setting.module').then(
+              (m) => m.SettingModule
+            ),
+        },
         {
           path: '',
           loadChildren: () =>
