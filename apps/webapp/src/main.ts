@@ -6,8 +6,6 @@ import { environment } from './environments/environment'
 
 if (environment.production) {
   enableProdMode()
-} else {
-  ;(window as any).uuid = 'b27b7635-f0de-4ea9-9773-e23cb951d752'
 }
 
 platformBrowserDynamic()

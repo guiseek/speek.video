@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { FrequencyComponent } from './frequency.component';
+import { FrequencyComponent } from './frequency.component'
 
 describe('FrequencyComponent', () => {
-  let component: FrequencyComponent;
-  let fixture: ComponentFixture<FrequencyComponent>;
+  let component: FrequencyComponent
+  let fixture: ComponentFixture<FrequencyComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FrequencyComponent ]
-    })
-    .compileComponents();
-  });
+      declarations: [FrequencyComponent],
+    }).compileComponents()
+  })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FrequencyComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(FrequencyComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

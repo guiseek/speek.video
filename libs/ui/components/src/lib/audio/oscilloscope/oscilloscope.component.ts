@@ -11,7 +11,13 @@ import { drawOscilloscope } from '../utils'
 @Component({
   selector: 'speek-oscilloscope',
   template: '<canvas #canvas></canvas>',
-  styles: [`canvas { width: 100%; }`],
+  styles: [
+    `
+      canvas {
+        width: 100%;
+      }
+    `,
+  ],
 })
 export class OscilloscopeComponent implements OnDestroy {
   @ViewChild('canvas')

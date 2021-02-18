@@ -1,1 +1,1 @@
-export * from './switch.addon';
+export * from './switch.addon'

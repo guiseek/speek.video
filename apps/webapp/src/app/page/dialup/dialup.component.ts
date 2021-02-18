@@ -1,5 +1,5 @@
 import { FormBuilder, FormControl } from '@angular/forms'
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, ViewChild } from '@angular/core'
 import { DialpadComponent } from '@speek/ui/components'
 
 @Component({
@@ -7,7 +7,7 @@ import { DialpadComponent } from '@speek/ui/components'
   templateUrl: './dialup.component.html',
   styleUrls: ['./dialup.component.scss'],
 })
-export class DialupComponent implements OnInit {
+export class DialupComponent {
   @ViewChild('localAudio')
   audioRef: ElementRef<HTMLAudioElement>
   audio: HTMLAudioElement
@@ -23,8 +23,6 @@ export class DialupComponent implements OnInit {
   gap = new FormControl(50)
   duration = new FormControl(500)
   constructor(private _fb: FormBuilder) {}
-
-  ngOnInit(): void {}
 
   onClicked($event: string | number) {
     console.log($event)

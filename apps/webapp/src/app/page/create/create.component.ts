@@ -1,4 +1,3 @@
-import { delay, take } from 'rxjs/operators'
 import { UserRoom } from '@speek/core/entity'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatTooltip } from '@angular/material/tooltip'
@@ -77,7 +76,10 @@ export class CreateComponent implements OnInit, AfterViewInit, OnDestroy {
 
     setTimeout(() => toolTip.hide(), 750)
     setTimeout(() => this.comeInOut.next(true), 1000)
-    setTimeout(() => this._router.navigate(['/', this.code.value, 'meet']), 3000)
+    setTimeout(
+      () => this._router.navigate(['/', this.code.value, 'meet']),
+      3000
+    )
   }
 
   ngOnDestroy(): void {

@@ -8,8 +8,12 @@ export class ControlAccessor implements ControlValueAccessor {
     return this._disabled
   }
 
-  onChange: any = () => {}
-  onTouched: any = () => {}
+  onChange: any = (val?: any) => {
+    console.log(val)
+  }
+  onTouched: any = (val?: any) => {
+    console.log(val)
+  }
 
   writeValue(obj: any): void {
     if (this._value !== obj) {

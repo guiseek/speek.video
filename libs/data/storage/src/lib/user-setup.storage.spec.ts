@@ -1,7 +1,7 @@
-import { UserSetup } from './user-setup.storage';
+import { UserSetup } from './user-setup.storage'
 
 describe('UserSetup', () => {
   it('should create an instance', () => {
-    expect(new UserSetup()).toBeTruthy();
-  });
-});
+    expect(new UserSetup()).toBeTruthy()
+  })
+})

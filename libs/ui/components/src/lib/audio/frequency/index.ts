@@ -1,1 +1,1 @@
-export * from './frequency.component';
+export * from './frequency.component'

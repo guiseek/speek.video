@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'speek-snack',
   templateUrl: './snack.component.html',
-  styleUrls: ['./snack.component.scss']
+  styleUrls: ['./snack.component.scss'],
 })
 export class SnackComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

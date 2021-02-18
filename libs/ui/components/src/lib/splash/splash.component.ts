@@ -1,8 +1,4 @@
-import {
-  Input,
-  Component,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Input, Component, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'speek-splash',
