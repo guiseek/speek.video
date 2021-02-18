@@ -2,19 +2,11 @@ import { Warning } from '@speek/core/entity'
 import { Observable } from 'rxjs'
 
 export type PeerConfig = RTCConfiguration
-
-export const peerStateBadge: Record<RTCSignalingState, string> = {
-  closed: 'Fechado',
-  'have-local-offer': 'tem oferta local',
-  'have-local-pranswer': 'tem resposta local',
-  'have-remote-offer': 'tem oferta remota',
-  'have-remote-pranswer': 'tem resposta remota',
-  stable: 'estável',
-}
-
 export class PeerAdapter {
   connection: RTCPeerConnection
+  onSignal: Observable<RTCSignalingState>
   onChange: Observable<RTCPeerConnection>
+  onState: Observable<RTCPeerConnectionState>
   onCandidate: Observable<RTCIceCandidate>
   onNegotiationNeeded: Observable<any>
   onTrack: Observable<MediaStream>
@@ -24,9 +16,15 @@ export class PeerAdapter {
   constructor(config: PeerConfig) {
     this.connection = new RTCPeerConnection(config)
 
-    this.onChange = new Observable<RTCPeerConnection>((subscriber) => {
+    this.onState = new Observable((subscriber) => {
+      this.connection.addEventListener('connectionstatechange', (event) => {
+        subscriber.next(this.connection.connectionState)
+      })
+    })
+
+    this.onSignal = new Observable<RTCSignalingState>((subscriber) => {
       this.connection.addEventListener('signalingstatechange', ({ target }) =>
-        subscriber.next(target as RTCPeerConnection)
+        subscriber.next((target as RTCPeerConnection).signalingState)
       )
     })
 
