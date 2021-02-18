@@ -13,7 +13,7 @@ import {
 
 export const PEER_CONFIG_TOKEN = new InjectionToken<PeerConfig>('PeerConfig')
 export class PeerProvider {
-  static config(config: RTCConfiguration): Provider[] {
+  static withConfig(config: RTCConfiguration): Provider[] {
     return [
       { provide: PEER_CONFIG_TOKEN, useValue: config },
       {
@@ -29,7 +29,7 @@ export const STREAM_CONFIG_TOKEN = new InjectionToken<StreamConfig>(
   'StreamConfig'
 )
 export class StreamProvider {
-  static config(config: StreamConfig): Provider[] {
+  static withConfig(config: StreamConfig): Provider[] {
     return [
       { provide: STREAM_CONFIG_TOKEN, useValue: config },
       {
@@ -45,7 +45,7 @@ export const SIGNALING_CONFIG_TOKEN = new InjectionToken<SignalingConfig>(
   'SignalingConfig'
 )
 export class SignalingProvider {
-  static config(config: SignalingConfig): Provider[] {
+  static withConfig(config: SignalingConfig): Provider[] {
     return [
       { provide: SIGNALING_CONFIG_TOKEN, useValue: config },
       {
