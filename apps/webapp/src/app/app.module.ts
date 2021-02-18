@@ -54,9 +54,9 @@ import { environment } from './../environments/environment'
     UserRoomStorage,
     UserSetupStorage,
     UserSetupAdapter,
-    PeerProvider.config(environment.configs),
-    StreamProvider.config(environment.constraints),
-    SignalingProvider.config(environment.gateway),
+    PeerProvider.withConfig(environment.configs),
+    StreamProvider.withConfig(environment.constraints),
+    SignalingProvider.withConfig(environment.gateway),
   ],
   bootstrap: [AppComponent],
 })

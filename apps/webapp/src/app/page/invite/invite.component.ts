@@ -5,11 +5,12 @@ import { UserRoomStorage } from '@speek/data/storage'
 import { MatInput } from '@angular/material/input'
 import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject, Subject } from 'rxjs'
-import { UserRoom } from '@speek/core/entity'
+import { UserRoom, WithTarget } from '@speek/core/entity'
 import { UUID } from '@speek/util/format'
 import {
   Component,
   HostBinding,
+  HostListener,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -31,6 +32,23 @@ export class InviteComponent implements OnInit, OnDestroy {
   @HostBinding('class.zoom')
   public get enter(): boolean {
     return this.comeInOut.value
+  }
+
+  @HostListener('document:paste', ['$event'])
+  onPaste(event: WithTarget<HTMLInputElement>) {
+    event.stopPropagation()
+    event.preventDefault()
+    if ('clipboardData' in event || 'clipboardData' in window) {
+      const clipboardData: DataTransfer =
+        (event as any).clipboardData || (window as any).clipboardData
+
+      this.code.patchValue(
+        clipboardData
+          .getData('Text')
+          .replace('https://speek.video/#/invite/', '')
+      )
+      event.target.blur()
+    }
   }
 
   form = new FormGroup({
