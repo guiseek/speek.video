@@ -21,15 +21,15 @@
     background-position-x: center;
     background-position-y: center;
     background-repeat: no-repeat;
-    background-size: 420%;
-    opacity: 0.06;
+    background-size: 200%;
+    opacity: 0.16;
 
     transition: filter 250ms ease-in-out, opacity 500ms ease-in-out,
       background-size 400ms ease-in-out;
   }
   &:hover::before {
-    opacity: 0.2;
-    background-size: 210%;
+    opacity: 0.06;
+    background-size: 360%;
   }
 
   .mat-nav-list {
