@@ -24,10 +24,10 @@
   </mat-card-actions>
 </mat-card>
 
-<ng-container *ngIf="(state$ | async) != 'stable'">
+<ng-container *ngIf="(signal$ | async) != 'stable'">
   <speek-splash
     width="200px"
-    message="Aguardando entrada do participante..."
+    [message]="(signal$ | async) | peerSignalBadge"
   ></speek-splash>
 </ng-container>
 

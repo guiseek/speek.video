@@ -20,13 +20,13 @@ import {
   SplashModule,
   ToolbarModule,
 } from '@speek/ui/components'
+import { PeerStateBadgePipe, PeerSignalBadgePipe } from '../shared/pipes'
 import { InviteComponent } from './invite/invite.component'
 import { DialupComponent } from './dialup/dialup.component'
 import { CreateComponent } from './create/create.component'
 import { HomeComponent } from './home/home.component'
 import { RoomComponent } from './room/room.component'
 import { MeetComponent } from './meet/meet.component'
-import { PeerStateBadgePipe } from '../shared/pipes'
 
 @NgModule({
   declarations: [
@@ -37,6 +37,7 @@ import { PeerStateBadgePipe } from '../shared/pipes'
     InviteComponent,
     MeetComponent,
     PeerStateBadgePipe,
+    PeerSignalBadgePipe,
   ],
   imports: [
     CommonModule,

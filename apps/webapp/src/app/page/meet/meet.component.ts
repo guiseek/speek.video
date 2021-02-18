@@ -50,25 +50,27 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   remote: HTMLVideoElement
   remoteStream: MediaStream
 
-  // peer: PeerAdapter
   sender = UUID.short()
   code: string
   pitch: number
 
-  private state = new Subject<RTCSignalingState>()
-  state$ = this.state.asObservable()
+  readonly signal = new BehaviorSubject<RTCSignalingState>('closed')
+  readonly signal$ = this.signal.asObservable()
 
-  private track = new Subject<MediaStream>()
-  onTrack = this.track.asObservable()
+  readonly state = new BehaviorSubject<RTCPeerConnectionState>('disconnected')
+  readonly state$ = this.state.asObservable()
 
-  private status = new Subject<string>()
-  status$ = this.status.asObservable()
+  readonly track = new Subject<MediaStream>()
+  readonly onTrack = this.track.asObservable()
+
+  readonly status = new Subject<string>()
+  readonly status$ = this.status.asObservable()
 
   constructor(
     private router: Router,
-    private peer: PeerAdapter,
     private share: ShareService,
     private route: ActivatedRoute,
+    readonly peer: PeerAdapter,
     readonly drawer: DrawerService,
     readonly stream: StreamAdapter,
     readonly userRoom: UserRoomStorage,
@@ -88,9 +90,16 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     const payload = new SpeekPayload(this.sender, this.code)
     this.signaling.send(SpeekAction.CreateOrJoin, payload)
 
-    this.peer.onChange.subscribe((state) => {
-      this.state.next(state.signalingState)
-      this.status.next(state.connectionState)
+    this.peer.onSignal.subscribe((state) => {
+      this.signal.next(state)
+    })
+
+    this.peer.onState.subscribe((state) => {
+      console.log('state: ', state)
+      this.state.next(state)
+      if (state === 'disconnected') {
+        this.remote.srcObject = null
+      }
     })
 
     this.peer.onCandidate
@@ -163,27 +172,12 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setLocal(payload?: SpeekPayload) {
-    // navigator.mediaDevices
-    //   .getUserMedia({ video: getVideoConfig(), audio: getAudioConfig() })
     this.stream
       .getStream({ video: getVideoConfig(), audio: getAudioConfig() })
       .then((stream) => {
         this.local.muted = true
         this.localStream = stream
-        // this.remote.srcObject = stream
         this.local.srcObject = stream
-
-        stream.getTracks().forEach((track) => {
-          console.log(track.getCapabilities())
-          console.log(track.getSettings())
-          console.log(track.getConstraints())
-          track.addEventListener('isolationchange', console.log)
-          // track.applyConstraints({
-          //   deviceId:
-          // })
-        })
-
-        // const destination = this.gotVoice(stream)
 
         const audio = stream.getAudioTracks()
         this.peer.connection.addTrack(audio.shift(), stream)

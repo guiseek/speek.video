@@ -1,16 +1,15 @@
-import { UserRoomForm } from './../../../../../../libs/ui/components/src/lib/forms/user-room.form'
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
-import { drawOscilloscope } from '@speek/ui/components'
-import { UserSetupStorage } from '@speek/data/storage'
-import { stopStream, Voice } from '@speek/core/stream'
-import { takeUntil } from 'rxjs/operators'
-import { UUID } from '@speek/util/format'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { takeUntil, debounceTime } from 'rxjs/operators'
 import { ActivatedRoute, Router } from '@angular/router'
+import { UserRoomStorage} from '@speek/data/storage'
+import { MatInput } from '@angular/material/input'
+import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject, Subject } from 'rxjs'
+import { UserRoom } from '@speek/core/entity'
+import { UUID } from '@speek/util/format'
 import {
-  AfterViewInit,
   Component,
-  ElementRef,
+  HostBinding,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -21,56 +20,51 @@ import {
   templateUrl: './invite.component.html',
   styleUrls: ['./invite.component.scss'],
 })
-export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
+export class InviteComponent implements OnInit, OnDestroy {
   private _destroy = new Subject<void>()
+
+  @ViewChild(MatInput) input: MatInput
 
   stream: MediaStream
   comeInOut = new BehaviorSubject<boolean>(false)
-  enter = false
 
-  form = new UserRoomForm()
+  @HostBinding('class.zoom')
+  public get enter(): boolean {
+    return this.comeInOut.value
+  }
+
+  form = new FormGroup({
+    code: new FormControl('', [
+      Validators.required,
+      Validators.pattern(UUID.regex),
+    ]),
+  })
+
+  get code() {
+    return this.form.get('code') as FormControl
+  }
 
   constructor(
-    private _fb: FormBuilder,
     private _router: Router,
     private _route: ActivatedRoute,
-    readonly userSetup: UserSetupStorage
+    private _userRoom: UserRoomStorage
   ) {
-    const { code = '' } = this._route.snapshot.params
-    this.form.patchValue({ code })
-    console.log(code)
-    if (this.form.code) {
-    }
   }
 
   ngOnInit(): void {
-    const value = this.userSetup.getStoredValue()
-    // this.form.patchValue(!!value ? value : {})
+    const { code } = this._route.snapshot.params
+    this.form.patchValue({ code: code ?? '' })
+    this.form.valueChanges
+      .pipe(debounceTime(600), takeUntil(this._destroy))
+      .subscribe(() => this.onCodeChange())
   }
 
-  ngAfterViewInit(): void {
-    navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } })
-  }
-
-  onSave() {
+  onCodeChange() {
     if (this.form.valid) {
-      this.userSetup.store(this.form.value)
-      this.form.markAsPristine()
-      this._router.navigate(['/', 'newcode'])
-      console.log(this.form.value)
-    }
-  }
-
-  onLogin() {
-    if (this.form.code.valid) {
-      this.comeInOut.next(!this.comeInOut.value)
-      this.enter = true
-      setTimeout(() => {
-        this._router.navigate(['/', this.form.code.value])
-      }, 3000)
-    } else {
-      this.comeInOut.next(!this.comeInOut.value)
-      this.comeInOut.next(!this.comeInOut.value)
+      const code = this.code.value
+      setTimeout(() => this.comeInOut.next(true), 1000)
+      this._userRoom.update(UserRoom.fromJson(this.form.value))
+      setTimeout(() => this._router.navigate(['/', code, 'meet']), 3000)
     }
   }
 
@@ -80,12 +74,5 @@ export class InviteComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this._destroy.next()
     this._destroy.complete()
-  }
-
-  onSubmit() {
-    if (this.form.valid) {
-      this.userSetup.store(this.form.value)
-      this._router.navigate(['/', this.form.code.value])
-    }
   }
 }

@@ -2,10 +2,9 @@ import { UserSetupStorage } from '@speek/data/storage'
 import { ConfirmDialog } from '@speek/ui/components'
 import { MatDialog } from '@angular/material/dialog'
 import { MeetComponent } from './meet.component'
-import { UserSetup } from '@speek/core/entity'
 import { Injectable } from '@angular/core'
 import { UUID } from '@speek/util/format'
-import { EMPTY, Observable } from 'rxjs'
+import { EMPTY, Observable, of } from 'rxjs'
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -14,15 +13,13 @@ import {
   CanDeactivate,
 } from '@angular/router'
 
-
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
   constructor(
     private _dialog: MatDialog,
     readonly userSetup: UserSetupStorage
   ) {}
+
   canDeactivate(
     component: MeetComponent,
     currentRoute: ActivatedRouteSnapshot,
@@ -31,11 +28,16 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
   ): Observable<boolean | UrlTree> {
     const data = {
       header: 'Finalizar chamada',
-      body: 'Cancele para continuar na chamada ou encerre confirmando',
+      body: `
+        Você ainda está conectado.
+        Cancele para continuar na
+        chamada ou encerre confirmando
+      `,
     }
-
-    const OK = this._dialog.open(ConfirmDialog, { data })
-    return component.localStream?.active ? OK.afterClosed() : EMPTY
+    const state = component.state?.value
+    return state === 'connected' || state === 'connecting'
+      ? this._dialog.open(ConfirmDialog, { data }).afterClosed()
+      : of(true)
   }
 
   canActivate(
@@ -45,9 +47,9 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
     const code = route.paramMap.get('code')
 
     if (UUID.isValid(code)) {
-      const value: Partial<UserSetup> = this.userSetup.getStoredValue() ?? {}
+      const value = this.userSetup.getStoredValue()
       if (!value.pitch) {
-        this.userSetup.store(Object.assign(value, { pitch: 0 }) as UserSetup)
+        this.userSetup.update({ ...value, pitch: 0 })
       }
       return true
     }
