@@ -26,9 +26,14 @@ export class UUID {
   }
 
   static base = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+  static reg = /(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})/
   static regex = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$/i
   static isValid(value: string) {
     return UUID.regex.test(value)
+  }
+
+  static getFromText(value: string) {
+    return new RegExp(UUID.reg).exec(value)
   }
 
   private static time() {

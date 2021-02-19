@@ -42,11 +42,16 @@ export class InviteComponent implements OnInit, OnDestroy {
       const clipboardData: DataTransfer =
         (event as any).clipboardData || (window as any).clipboardData
 
-      this.code.patchValue(
-        clipboardData
-          .getData('Text')
-          .replace('https://speek.video/#/invite/', '')
-      )
+      // Take content from paste by user
+      const content = clipboardData.getData('Text')
+      // Check if UUID code exist from content
+      const hasUUID = UUID.getFromText(content)
+
+      let uuid: string
+      // if it exists, take the first
+      if ((uuid = hasUUID?.shift())) {
+        this.code.patchValue(uuid)
+      }
       event.target.blur()
     }
   }
@@ -79,9 +84,9 @@ export class InviteComponent implements OnInit, OnDestroy {
   onCodeChange() {
     if (this.form.valid) {
       const code = this.code.value
-      setTimeout(() => this.comeInOut.next(true), 1000)
+      setTimeout(() => this.comeInOut.next(true), 400)
       this._userRoom.update(UserRoom.fromJson(this.form.value))
-      setTimeout(() => this._router.navigate(['/', code, 'meet']), 3000)
+      setTimeout(() => this._router.navigate(['/', code, 'meet']), 2400)
     }
   }
 
