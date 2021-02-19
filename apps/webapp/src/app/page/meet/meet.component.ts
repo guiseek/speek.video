@@ -1,4 +1,4 @@
-import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
+import { SpeekAction, SpeekData, SpeekPayload, WithTarget } from '@speek/core/entity'
 import { getAudioConfig, getVideoConfig } from '@speek/util/device'
 import { DrawerService, ShareService } from '@speek/ui/components'
 import { isDefined, notNull, UUID } from '@speek/util/format'
@@ -21,10 +21,6 @@ import {
   SignalingAdapter,
   StreamAdapter,
 } from '@speek/core/adapter'
-
-type WithTarget<T> = Event & {
-  target: T
-}
 
 @Component({
   selector: 'speek-meet',

@@ -1,3 +1,4 @@
+import { UserSetup } from '@speek/core/entity'
 import { UserSetupStorage } from '@speek/data/storage'
 import { ConfirmDialog } from '@speek/ui/components'
 import { MatDialog } from '@angular/material/dialog'
@@ -47,7 +48,7 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
     const code = route.paramMap.get('code')
 
     if (UUID.isValid(code)) {
-      const value = this.userSetup.getStoredValue()
+      const value: Partial<UserSetup> = this.userSetup.getStoredValue() ?? {}
       if (!value.pitch) {
         this.userSetup.update({ ...value, pitch: 0 })
       }
