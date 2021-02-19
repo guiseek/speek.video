@@ -1,6 +1,17 @@
-# SpeekVideo
+# Speek Video - Liberdade em áudio e vídeo
 
-## Development
+<div style="display: flex">
+  <img alt="Speek" src="design/logo-speek.svg">
+  <div style="padding: 10px">
+    <h3>
+      Comunicação livre em áudio e vídeo, sua ligação funciona ponto a ponto, sem passar por servidores. Sem persistência em banco de dados. Sem registros
+    </h3>
+  </div>
+</div>
+
+[Como contribuir](CONTRIBUTING.md)
+
+<!-- ## Development
 
 `npm start`
 
@@ -32,4 +43,4 @@ npm run gen-csr
 
 ---
 
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Visit [Nx Cloud](https://nx.app/) to learn more. -->
