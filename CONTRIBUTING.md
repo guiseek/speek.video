@@ -23,7 +23,6 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
 - [Propondo uma oficina](#workshops) (em progresso)
 - [Fazendo um treinamento](#trainings) (em progresso)
 
-
 ## <a name="todo"></a> Para fazer
 
 - [x] botão sair da chamada
@@ -80,23 +79,22 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
   - [ ] SIP ([asterisk](https://wiki.asterisk.org/wiki/display/AST/Configuring+Asterisk+for+WebRTC+Clients))
 
 - [ ] Chat em grupo
-  <br>_até 10 peers (limitação de banda user)_ -->
-
+      <br>_até 10 peers (limitação de banda user)_ -->
 
 ## <a name="cli"></a> Comandos de desenvolvimento
 
-| Comando | Descrição |
-| --- | --- |
-| `npm start` | Inicia o client e server para desenvolvimento |
-| `npm run webapp` | Inicia o client |
-| `npm run gateway` | Inicia o server |
-| `npm test` | Executam testes unitários (ainda precisamos escreve-los / corrigi-los) |
-| `npm run e2e` | Executam os testes de integração / end to end |
-| `npm run format` | Executa o prettier formatando os arquivos |
+1 - Instale as dependencias `npm install`
+2 - Crie o arquivo configurações de ambiente,
+
+| Comando             | Descrição                                                                            |
+| ------------------- | ------------------------------------------------------------------------------------ |
+| `npm start`         | Inicia o client e server para desenvolvimento                                        |
+| `npm run webapp`    | Inicia o client                                                                      |
+| `npm run gateway`   | Inicia o server                                                                      |
+| `npm test`          | Executam testes unitários (ainda precisamos escreve-los / corrigi-los)               |
+| `npm run e2e`       | Executam os testes de integração / end to end                                        |
+| `npm run format`    | Executa o prettier formatando os arquivos                                            |
 | `npm run dep-graph` | Abre o gráfico de dependências do repositório com o relacionamento entre apps e libs |
-
-
-
 
 ## <a name="question"></a> Tem alguma dúvida ou problema?
 
@@ -298,9 +296,7 @@ O `footer` é opcional. O formato [Commit Message Footer](#commit-footer) descre
 
 Qualquer linha da mensagem de confirmação não pode ter mais de 100 caracteres.
 
-
 ---
-
 
 ## Nossa stack
 
@@ -353,8 +349,6 @@ Qualquer linha da mensagem de confirmação não pode ter mais de 100 caracteres
   </div>
 </div>
 
-
-
 <!-- # Todo
 
 > ### **_Luiz_**
@@ -377,4 +371,3 @@ Qualquer linha da mensagem de confirmação não pode ter mais de 100 caracteres
 
 Poderia ser algo amigável como "Entre na nossa reunião do Peek por este link: ..."
 R: Mas sim, isso faz sentido tbm..
-
