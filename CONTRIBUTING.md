@@ -83,9 +83,6 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
 
 ## <a name="cli"></a> Comandos de desenvolvimento
 
-1 - Instale as dependencias `npm install`
-2 - Crie o arquivo configurações de ambiente,
-
 | Comando             | Descrição                                                                            |
 | ------------------- | ------------------------------------------------------------------------------------ |
 | `npm start`         | Inicia o client e server para desenvolvimento                                        |
