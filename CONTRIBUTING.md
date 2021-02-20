@@ -15,73 +15,12 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
 ## <a name="how-to"></a> Como você pode contribuir
 
 - [Codificando](#code)
-  - [Tarefas](#todo)
   - [Comandos](#cli)
 - [Desenhando](#design) (em progresso)
 - [Divulgando](#adversiting) (em progresso)
 - [Organizando um evento](#events) (em progresso)
 - [Propondo uma oficina](#workshops) (em progresso)
 - [Fazendo um treinamento](#trainings) (em progresso)
-
-
-Algumas tarefas no roadmap de curto prazo
-### <a name="todo"></a> Para fazer
-
-- [x] botão sair da chamada
-
-  - [x] mat-fab warn canto left bottom room component
-  - [x] guard canDeactivate room component
-
-- [x] Chamadas
-
-  - [x] ID da chamada
-  - [x] Chamada sem alteração no tom de voz
-
-- [ ] Tela Filtro de voz
-
-  - [x] Melhorar design
-  - [x] Salvar em storage local
-  - [ ] Outros filtros
-
-- [ ] MediaStream
-
-  - [x] Áudio e vídeo
-  - [ ] Salvar em storage local a permissão
-  - [ ] Validar permissões de acesso
-  - [x] Adicionar select com devices, separados por áudio e vídeo
-
-- [ ] Chamada de áudio e vídeo
-
-  - [x] Não precisar dar refresh
-  - [x] Hablitar/desabilitar áudio
-  - [x] Hablitar/desabilitar vídeo
-  - [x] Crop do vídeo remoto (aproveitar a tela na vertical)
-
-- [ ] Auth (senha opcional)
-
-  - [ ] Enviar código por email
-  - [ ] Enviar código por sms
-  - [ ] Lista de contatos com outras contas
-
-- [ ] Compartilhar link da reunião em várias mídias
-
-  - [ ] Enviar link por email
-  - [x] Whatsapp
-  - [x] Telegram
-  - [x] Twitter
-  - [ ] SMS
-  - [ ] Contatos
-
-- [ ] Recursos
-
-  - [ ] STUN TURN ([coturn](https://github.com/coturn/coturn))
-
-- [ ] Integrações
-
-  - [ ] SIP ([asterisk](https://wiki.asterisk.org/wiki/display/AST/Configuring+Asterisk+for+WebRTC+Clients))
-
-- [ ] Chat em grupo
-  <br>_até 10 peers (limitação de banda user)_ -->
 
 
 ## <a name="code"></a> Codificando
@@ -304,6 +243,107 @@ O `footer` é opcional. O formato [Commit Message Footer](#commit-footer) descre
 Qualquer linha da mensagem de confirmação não pode ter mais de 100 caracteres.
 
 
+
+#### <a name="commit-header"> </a> Cabeçalho da mensagem do commit
+
+```
+<tipo>(<escopo>): <breve resumo>
+  │       │             │
+  │       │             └─⫸ Resumo no tempo presente. Em caixa baixa. Sem ponto final.
+  │       │
+  │       └─⫸ Commit Scope: gateway|webapp|core-adapter|core-entity|core-stream|
+  │                          data-storage|ui-addons|ui-components|ui-stylesheets|
+  │                          util-device|util-format|util-share|tools|design
+  │
+  │
+  │
+  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test
+```
+
+Os campos `<type>` e `<summary>` são obrigatórios, o campo `(<scope>)` é opcional.
+
+##### Type
+
+Deve ser um dos seguintes:
+
+* **build**: Mudanças que afetam o sistema de build ou dependências externas (escopos de exemplo: gulp, broccoli, npm)
+* **ci**: Mudanças em nossos arquivos e scripts de configuração de CI (escopos de exemplo: Circle, BrowserStack, SauceLabs)
+* **docs**: Alterações apenas na documentação
+* **feat**: Uma nova feature
+* **fix**: Uma correção de bug
+* **perf**: Alteração de código que melhora o desempenho
+* **refactor**: Alteração de código que não corrige um bug nem adiciona um recurso
+* **test**: Adicionar testes ausentes ou corrigir testes existentes
+
+
+
+##### Escopo
+O escopo deve ser o nome do pacote npm afetado (conforme percebido pela pessoa lendo o changelog gerado a partir de mensagens de confirmação).
+
+A seguir está a lista de escopos compatíveis:
+
+* `gateway`
+* `webapp`
+* `core-adapter`
+* `core-entity`
+* `core-stream`
+* `data-storage`
+* `ui-addons`
+* `ui-components`
+* `ui-stylesheets`
+* `util-device`
+* `util-format`
+* `util-share`
+* `design`
+* `tools`
+
+Atualmente, existem algumas exceções à regra que usa o nome do projeto:
+
+* `design`: Arquivos e configurações do design system _Speek_
+
+* `tools`: diretórios que guarda schematics para alterações de layout do repositório em todos ou alguns projetos, por exemplo, alterações em apis públicas, alterações no package.json feitas em todos os projetos, alterações de arquivo, etc.
+
+<!-- * `scripts`: scripts utilitários em geral, por exemplo criar documentações e etc. -->
+
+
+##### Resumo
+
+Use o campo de resumo para fornecer uma descrição sucinta da mudança:
+
+* use o tempo presente imperativo: "mudar", não "mudou" nem "mudanças"
+* não coloque a primeira letra em maiúscula
+* sem ponto (.) no final
+
+
+#### <a name="commit-body"> </a> Corpo da mensagem do commit
+
+Assim como no resumo, use o tempo presente imperativo: "conserta" e não "consertado" nem "consertos".
+
+Explique a motivação para a mudança no corpo da mensagem de confirmação. Esta mensagem de confirmação deve explicar _porquê_ você está fazendo a mudança.
+Você pode incluir uma comparação do comportamento anterior com o novo comportamento para ilustrar o impacto da mudança.
+
+
+#### <a name="commit-footer"> </a> Mensagem do rodapé do commit
+
+O rodapé pode conter informações sobre alterações importantes e também é o local para fazer referência a problemas do GitHub, tíquetes Jira e outros PRs aos quais este commit fecha ou está relacionado.
+
+
+```
+BREAKING CHANGE: <resumo das alterações importantes>
+<LINHA EM BRANCO>
+<descrição da mudança significativa + instruções de migração>
+<LINHA EM BRANCO>
+<LINHA EM BRANCO>
+Fixes #<issue number>
+```
+
+> **Atenção**
+>
+> **_BREAKING CHANGE_** e **_Fixes_** devem ser em inglês para que o _`semantic-release`_ entenda o que é pra fazer.
+
+
+
+
 ---
 
 
@@ -357,6 +397,10 @@ Qualquer linha da mensagem de confirmação não pode ter mais de 100 caracteres
     <p>Framework também popular no backend que permite um server robusto com qualidade</p>
   </div>
 </div>
+
+
+
+
 
 
 
