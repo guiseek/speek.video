@@ -15,8 +15,8 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
 ## <a name="how-to"></a> Como você pode contribuir
 
 - [Codificando](#code)
-  - [Para fazer](#todo)
-  - [Comandos de desenvolvimento](#cli)
+  - [Tarefas](#todo)
+  - [Comandos](#cli)
 - [Desenhando](#design) (em progresso)
 - [Divulgando](#adversiting) (em progresso)
 - [Organizando um evento](#events) (em progresso)
@@ -24,7 +24,8 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
 - [Fazendo um treinamento](#trainings) (em progresso)
 
 
-## <a name="todo"></a> Para fazer
+Algumas tarefas no roadmap de curto prazo
+### <a name="todo"></a> Para fazer
 
 - [x] botão sair da chamada
 
@@ -36,20 +37,20 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
   - [x] ID da chamada
   - [x] Chamada sem alteração no tom de voz
 
-- [-] Tela Filtro de voz
+- [ ] Tela Filtro de voz
 
   - [x] Melhorar design
   - [x] Salvar em storage local
   - [ ] Outros filtros
 
-- [-] MediaStream
+- [ ] MediaStream
 
   - [x] Áudio e vídeo
   - [ ] Salvar em storage local a permissão
   - [ ] Validar permissões de acesso
   - [x] Adicionar select com devices, separados por áudio e vídeo
 
-- [x] Chamada de áudio e vídeo
+- [ ] Chamada de áudio e vídeo
 
   - [x] Não precisar dar refresh
   - [x] Hablitar/desabilitar áudio
@@ -62,7 +63,7 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
   - [ ] Enviar código por sms
   - [ ] Lista de contatos com outras contas
 
-- [-] Compartilhar link da reunião em várias mídias
+- [ ] Compartilhar link da reunião em várias mídias
 
   - [ ] Enviar link por email
   - [x] Whatsapp
@@ -83,7 +84,11 @@ Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga
   <br>_até 10 peers (limitação de banda user)_ -->
 
 
-## <a name="cli"></a> Comandos de desenvolvimento
+## <a name="code"></a> Codificando
+
+Antes de executar o projeto você deve ter as variáveis de ambiente, deixei um exemplo como `.env-sample` na raíz do projeto, copie ou altere o nome dele para `.env`, só assim o gateway irá executar na devida porta configurada
+
+### <a name="cli"></a> Comandos de desenvolvimento
 
 | Comando | Descrição |
 | --- | --- |
