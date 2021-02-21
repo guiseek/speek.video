@@ -29,6 +29,13 @@ export class InviteComponent implements OnInit, OnDestroy {
   stream: MediaStream
   comeInOut = new BehaviorSubject<boolean>(false)
 
+  form = new FormGroup({
+    code: new FormControl('', [
+      Validators.required,
+      Validators.pattern(UUID.regex),
+    ]),
+  })
+
   @HostBinding('class.zoom')
   public get enter(): boolean {
     return this.comeInOut.value
@@ -56,13 +63,6 @@ export class InviteComponent implements OnInit, OnDestroy {
     }
   }
 
-  form = new FormGroup({
-    code: new FormControl('', [
-      Validators.required,
-      Validators.pattern(UUID.regex),
-    ]),
-  })
-
   get code() {
     return this.form.get('code') as FormControl
   }
@@ -75,10 +75,10 @@ export class InviteComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const { code } = this._route.snapshot.params
-    this.form.patchValue({ code: code ?? '' })
     this.form.valueChanges
       .pipe(debounceTime(600), takeUntil(this._destroy))
       .subscribe(() => this.onCodeChange())
+    this.form.patchValue({ code: code ?? '' })
   }
 
   onCodeChange() {

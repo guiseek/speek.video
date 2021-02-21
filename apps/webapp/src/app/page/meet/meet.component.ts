@@ -1,10 +1,12 @@
-import { SpeekAction, SpeekData, SpeekPayload, WithTarget } from '@speek/core/entity'
+import {
+  SpeekAction,
+  SpeekData,
+  SpeekPayload,
+  WithTarget,
+} from '@speek/core/entity'
 import { getAudioConfig, getVideoConfig } from '@speek/util/device'
-import { DrawerService, ShareService } from '@speek/ui/components'
 import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
-import { UserSetupStorage } from '@speek/data/storage'
-import { UserRoomStorage } from '@speek/data/storage'
 import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -64,13 +66,9 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private share: ShareService,
     private route: ActivatedRoute,
     readonly peer: PeerAdapter,
-    readonly drawer: DrawerService,
     readonly stream: StreamAdapter,
-    readonly userRoom: UserRoomStorage,
-    readonly userSetup: UserSetupStorage,
     readonly signaling: SignalingAdapter
   ) {
     const { code } = this.route.snapshot.params
