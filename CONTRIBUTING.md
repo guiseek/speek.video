@@ -3,43 +3,13 @@
 Adoraríamos que você contribuísse com o projeto e ajudasse a torná-la ainda melhor do que é hoje! Como contribuidor, aqui estão as diretrizes que gostaríamos que você seguisse:
 
 - [Código de Conduta](#coc)
-- [Como posso contribuir](#how-to)
 - [Dúvidas ou problemas?](#question)
 - [Issues and Bugs](#issue)
 - [Feature Requests](#feature)
-
+- [Regras de codificação](#rules)
 ## <a name="coc"></a> Código de Conduta
 
 Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga nosso [Código de Conduta](CODE_OF_CONDUCT.md).
-
-## <a name="how-to"></a> Como você pode contribuir
-
-- [Codificando](#code)
-  - [Comandos](#cli)
-- [Desenhando](#design) (em progresso)
-- [Divulgando](#adversiting) (em progresso)
-- [Organizando um evento](#events) (em progresso)
-- [Propondo uma oficina](#workshops) (em progresso)
-- [Fazendo um treinamento](#trainings) (em progresso)
-
-
-## <a name="code"></a> Codificando
-
-Antes de executar o projeto você deve ter as variáveis de ambiente, deixei um exemplo como `.env-sample` na raíz do projeto, copie ou altere o nome dele para `.env`, só assim o gateway irá executar na devida porta configurada
-
-### <a name="cli"></a> Comandos de desenvolvimento
-
-| Comando | Descrição |
-| --- | --- |
-| `npm start` | Inicia o client e server para desenvolvimento |
-| `npm run webapp` | Inicia o client |
-| `npm run gateway` | Inicia o server |
-| `npm test` | Executam testes unitários (ainda precisamos escreve-los / corrigi-los) |
-| `npm run e2e` | Executam os testes de integração / end to end |
-| `npm run format` | Executa o prettier formatando os arquivos |
-| `npm run dep-graph` | Abre o gráfico de dependências do repositório com o relacionamento entre apps e libs |
-
-
 
 
 ## <a name="question"></a> Tem alguma dúvida ou problema?
@@ -96,22 +66,22 @@ Antes de enviar sua solicitação de pull (PR), considere as seguintes diretrize
 1. Pesquise no [GitHub](https://github.com/guiseek/speek.video/pulls) um PR aberto ou fechado relacionado ao seu envio.
    Você não quer duplicar os esforços existentes.
 
-2. Certifique-se de que um problema descreve o problema que você está corrigindo ou documenta o design do recurso que você deseja adicionar.
+1. Certifique-se de que um problema descreve o problema que você está corrigindo ou documenta o design do recurso que você deseja adicionar.
    Discutir o design antecipadamente ajuda a garantir que estamos prontos para aceitar seu trabalho.
 
-3. Faça um fork do repositório guiseek/speek.video.
+1. Faça um fork do repositório guiseek/speek.video.
 
-4. Faça suas alterações em um novo branch:
+1. Faça suas alterações em um novo branch:
 
    ```shell
    git checkout -b my-fix-branch main
    ```
 
-5. Crie seu patch, **incluindo casos de teste apropriados**.
+1. Crie seu patch, **incluindo casos de teste apropriados**.
 
-6. Siga nossas [Regras de codificação] (#rules).
+1. Siga nossas [Regras de codificação](#rules).
 
-7. Faça commit de suas mudanças usando uma mensagem de commit descritiva que segue nossas [convenções de mensagem de commit](#commit).
+1. Faça commit de suas mudanças usando uma mensagem de commit descritiva que segue nossas [convenções de mensagem de commit](#commit).
    A adesão a essas convenções é necessária porque as notas de versão são geradas automaticamente a partir dessas mensagens.
 
    ```shell
@@ -120,13 +90,13 @@ Antes de enviar sua solicitação de pull (PR), considere as seguintes diretrize
 
    > **\*Nota**: a opção de linha de comando opcional commit `-a` irá automaticamente" adicionar "e" rm "os arquivos editados.\*
 
-8. Envie seu branch para o GitHub:
+1. Envie seu branch para o GitHub:
 
    ```shell
    git push origin my-fix-branch
    ```
 
-9. No GitHub, envie uma solicitação de pull para `speek.video:main`.
+1. No GitHub, envie uma solicitação de pull para `speek.video:main`.
 
 ### Revisão de uma solicitação pull
 
@@ -138,16 +108,14 @@ Se solicitarmos alterações por meio de revisões de código:
 
 1. Faça as atualizações necessárias para o código.
 
-2. Execute novamente os conjuntos de teste Speek para garantir que os testes ainda estejam passando.
+1. Execute novamente os conjuntos de teste Speek para garantir que os testes ainda estejam passando.
 
-3. Crie um commit de correção e envie para seu repositório GitHub (isso atualizará sua solicitação de pull):
+1. Crie um commit de correção e envie para seu repositório GitHub (isso atualizará sua solicitação de pull):
 
    ```shell
    git commit --all --fixup HEAD
    git push
    ```
-
-   <!-- Para obter mais informações sobre como trabalhar com commits de correção, consulte [aqui](docs/FIXUP_COMMITS.md). -->
 
 É isso aí! Obrigado pela sua contribuição!
 
@@ -156,7 +124,7 @@ Se solicitarmos alterações por meio de revisões de código:
 Um revisor pode frequentemente sugerir mudanças em uma mensagem de confirmação (por exemplo, para adicionar mais contexto para uma mudança ou aderir às nossas [diretrizes de mensagem de confirmação] (# commit)).
 Para atualizar a mensagem de commit do último commit em seu branch:
 
-1. Confira sua filial:
+1. Confira sua branch:
 
    ```shell
    git checkout my-fix-branch
@@ -194,7 +162,7 @@ Depois que sua solicitação pull for mesclada, você pode excluir com seguranç
   git checkout main -f
   ```
 
-- Exclua a filial local:
+- Exclua a branch local:
 
   ```shell
   git branch -D my-fix-branch
@@ -212,136 +180,111 @@ Para garantir a consistência em todo o código-fonte, lembre-se destas regras e
 
 - Todos os recursos ou correções de bugs **devem ser testados** por uma ou mais especificações (testes de unidade).
 - Todos os métodos de API públicos **devem ser documentados**.
-- Seguimos o [Guia de estilo JavaScript do Google][guia-estilo-js], mas agrupamos todo o código em **100 caracteres**.
 
-  Um formatador automatizado está disponível, see [DEVELOPER.md](docs/DEVELOPER.md#clang-format).
+### Formato para mensagem de commit
 
-Formato de mensagem de confirmação
+A mensagem do commit deve ser estruturada da seguinte forma:
 
-_Esta especificação é inspirada e substitui o [formato de mensagem de confirmação AngularJS] [formato de mensagem de confirmação] ._
-
-Temos regras muito precisas sobre como nossas mensagens de commit do Git devem ser formatadas.
-Este formato leva ao **histórico de commits mais fácil de ler**.
-
-Cada mensagem de confirmação consiste em um **cabeçalho** _(head)_, um **corpo** _(body)_ e um **rodapé** _(footer)_.
+---
 
 ```
-<head>
-<LINHA EM BRANCO>
-<body>
-<LINHA EM BRANCO>
-<footer>
+<tipo>[escopo opcional]: <descrição>
+
+[corpo opcional]
+
+[rodapé opcional]
 ```
+---
 
-O `header` é obrigatório e deve estar de acordo com o formato [Commit Message Header](#commit-header).
+O commit contém os seguintes elementos estruturais, para comunicar a intenção ao utilizador da sua biblioteca:
 
-O `body` é obrigatório para todos os commits exceto para aqueles do tipo" docs ".
-Quando o corpo está presente, deve ter pelo menos 20 caracteres e deve estar em conformidade com o formato [Corpo da Mensagem de Confirmação](#commit-body).
+1. **fix**: um commit do _tipo_ `fix` soluciona um problema na sua base de código (isso se correlaciona com [PATCH](https://semver.org/lang/pt-BR/#sum%C3%A1rio) do versionamento semântico).
 
-O `footer` é opcional. O formato [Commit Message Footer](#commit-footer) descreve para que o footer é usado e a estrutura que deve ter.
+1. **feat**: um commit do _tipo_ `feat` inclui um novo recurso na sua base de código (isso se correlaciona com [MINOR](https://semver.org/lang/pt-BR/#sum%C3%A1rio) do versionamento semântico).
 
-Qualquer linha da mensagem de confirmação não pode ter mais de 100 caracteres.
+1. **BREAKING CHANGE**: um commit que contém o texto `BREAKING CHANGE`:, no começo do texto do corpo opcional ou do rodapé opcional, inclui uma modificação que quebra a compatibilidade da API (isso se correlaciona com [MAJOR](https://semver.org/lang/pt-BR/#sum%C3%A1rio) do versionamento semântico). Uma BREAKING CHANGE pode fazer parte de commits de qualquer tipo.
 
+1. Outros: _tipos_ adicionais são permitidos além de `fix:` e `feat:`, por exemplo [@commitlint/config-conventional](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) (baseado na Convenção do Angular) recomenda-se `chore:`, `docs:`, `style:`, `refactor:`, `perf:`, `test:`, entre outros.
 
+Também recomendamos `improvement` para commits que melhoram uma implementação atual sem adicionar um novo recurso ou consertar um bug. Observe que esses tipos não são obrigatórios pela especificação do Conventional Commits e não têm efeito implícito no versionamento semântico (a menos que incluam uma BREAKING CHANGE). Um escopo pode ser adicionado ao tipo do commit, para fornecer informações contextuais adicionais e está contido entre parênteses, por exemplo `feat(parser): adiciona capacidade de interpretar arrays`.
 
-#### <a name="commit-header"> </a> Cabeçalho da mensagem do commit
+#### Exemplos
 
-```
-<tipo>(<escopo>): <breve resumo>
-  │       │             │
-  │       │             └─⫸ Resumo no tempo presente. Em caixa baixa. Sem ponto final.
-  │       │
-  │       └─⫸ Commit Scope: gateway|webapp|core-adapter|core-entity|core-stream|
-  │                          data-storage|ui-addons|ui-components|ui-stylesheets|
-  │                          util-device|util-format|util-share|tools|design
-  │
-  │
-  │
-  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test
-```
-
-Os campos `<type>` e `<summary>` são obrigatórios, o campo `(<scope>)` é opcional.
-
-##### Type
-
-Deve ser um dos seguintes:
-
-* **build**: Mudanças que afetam o sistema de build ou dependências externas (escopos de exemplo: gulp, broccoli, npm)
-* **ci**: Mudanças em nossos arquivos e scripts de configuração de CI (escopos de exemplo: Circle, BrowserStack, SauceLabs)
-* **docs**: Alterações apenas na documentação
-* **feat**: Uma nova feature
-* **fix**: Uma correção de bug
-* **perf**: Alteração de código que melhora o desempenho
-* **refactor**: Alteração de código que não corrige um bug nem adiciona um recurso
-* **test**: Adicionar testes ausentes ou corrigir testes existentes
-
-
-
-##### Escopo
-O escopo deve ser o nome do pacote npm afetado (conforme percebido pela pessoa lendo o changelog gerado a partir de mensagens de confirmação).
-
-A seguir está a lista de escopos compatíveis:
-
-* `gateway`
-* `webapp`
-* `core-adapter`
-* `core-entity`
-* `core-stream`
-* `data-storage`
-* `ui-addons`
-* `ui-components`
-* `ui-stylesheets`
-* `util-device`
-* `util-format`
-* `util-share`
-* `design`
-* `tools`
-
-Atualmente, existem algumas exceções à regra que usa o nome do projeto:
-
-* `design`: Arquivos e configurações do design system _Speek_
-
-* `tools`: diretórios que guarda schematics para alterações de layout do repositório em todos ou alguns projetos, por exemplo, alterações em apis públicas, alterações no package.json feitas em todos os projetos, alterações de arquivo, etc.
-
-<!-- * `scripts`: scripts utilitários em geral, por exemplo criar documentações e etc. -->
-
-
-##### Resumo
-
-Use o campo de resumo para fornecer uma descrição sucinta da mudança:
-
-* use o tempo presente imperativo: "mudar", não "mudou" nem "mudanças"
-* não coloque a primeira letra em maiúscula
-* sem ponto (.) no final
-
-
-#### <a name="commit-body"> </a> Corpo da mensagem do commit
-
-Assim como no resumo, use o tempo presente imperativo: "conserta" e não "consertado" nem "consertos".
-
-Explique a motivação para a mudança no corpo da mensagem de confirmação. Esta mensagem de confirmação deve explicar _porquê_ você está fazendo a mudança.
-Você pode incluir uma comparação do comportamento anterior com o novo comportamento para ilustrar o impacto da mudança.
-
-
-#### <a name="commit-footer"> </a> Mensagem do rodapé do commit
-
-O rodapé pode conter informações sobre alterações importantes e também é o local para fazer referência a problemas do GitHub, tíquetes Jira e outros PRs aos quais este commit fecha ou está relacionado.
-
+##### Mensagem de commit com descrição e modificação que quebra a compatibilidade no corpo
 
 ```
-BREAKING CHANGE: <resumo das alterações importantes>
-<LINHA EM BRANCO>
-<descrição da mudança significativa + instruções de migração>
-<LINHA EM BRANCO>
-<LINHA EM BRANCO>
-Fixes #<issue number>
+feat: permitir que o objeto de configuração fornecido estenda outras configurações
+
+BREAKING CHANGE: a chave `extends`, no arquivo de configuração, agora é utilizada
+para estender outro arquivo de configuração
 ```
 
-> **Atenção**
->
-> **_BREAKING CHANGE_** e **_Fixes_** devem ser em inglês para que o _`semantic-release`_ entenda o que é pra fazer.
+##### Mensagem de commit com ! opcional para chamar a atenção para quebra a compatibilidade
+
+```
+chore!: remove Node 6 da matriz de testes
+BREAKING CHANGE: removendo Node 6 que atinge o final de vida em Abril
+```
+
+##### Mensagem de commit sem corpo
+
+```
+docs: ortografia correta de CHANGELOG
+```
+
+##### Mensagem de commit com escopo
+
+```
+feat(lang): adiciona tradução para português brasileiro
+```
+
+##### Mensagem de commit de uma correção utilizando número de ticket (opcional)
+
+```
+fix: corrige pequenos erros de digitação no código
+
+veja o ticket para detalhes sobre os erros de digitação corrigidos
+
+closes issue #12
+```
+
+#### Especificação
+
+As palavras-chaves "DEVE" ("MUST"), "NÃO DEVE" ("MUST NOT"), "OBRIGATÓRIO" ("REQUIRED"), "DEVERÁ" ("SHALL"), "NÃO DEVERÁ" ("SHALL NOT"), "PODEM" ("SHOULD"), "NÃO PODEM" ("SHOULD NOT"), "RECOMENDADO" ("RECOMMENDED"), "PODE" ("MAY") e "OPCIONAL" ("OPTIONAL"), nesse documento, devem ser interpretados como descrito na [RFC 2119](http://tools.ietf.org/html/rfc2119).
 
 
+1. A mensagem de commit DEVE ser prefixado com um tipo, que consiste em um substantivo, `feat`, `fix`, etc., seguido por um escopo OPCIONAL, e OBRIGATÓRIO terminar com dois-pontos e um espaço.
+
+1. O tipo `feat` DEVE ser usado quando um commit adiciona um novo recurso ao seu aplicativo ou biblioteca.
+
+1. O tipo `fix` DEVE ser usado quando um commit representa a correção de um problema em seu aplicativo ou biblioteca.
+
+1. Um escopo PODE ser fornecido após um tipo. Um escopo DEVE consistir em um substantivo que descreve uma seção da base de código entre parênteses, por exemplo, `fix(parser):`
+
+1. Uma descrição DEVE existir depois do espaço após o prefixo tipo/escopo. A descrição é um breve resumo das alterações de código, por exemplo, _fix: problema na interpretação do array quando uma string tem vários espaços_.
+
+1. Um corpo de mensagem de commit mais longo PODE ser fornecido após a descrição curta, fornecendo informações contextuais adicionais sobre as alterações no código. O corpo DEVE começar depois de uma linha em branco após a descrição.
+
+1. Um rodapé de uma ou mais linhas PODE ser fornecido depois de uma linha em branco após o corpo. O rodapé DEVE conter informações adicionais sobre o commit, por exemplo, pull-requests, revisores, modificações que quebram a compatibilidade, com uma informação adicional por linha.
+
+1. A modificação que quebra a compatibilidade DEVE ser indicadas logo no início da seção do corpo ou no início de uma linha na seção de rodapé. Uma modificação que quebra a compatibilidade DEVE consistir de um texto em maiúsculas BREAKING CHANGE, seguido por dois-pontos e um espaço.
+
+1. Uma descrição DEVE ser fornecida após o texto “BREAKING CHANGE:”, descrevendo o que mudou na API, por exemplo, _BREAKING CHANGE: as variáveis de ambiente agora têm preferência sobre os arquivos de configuração_.
+
+1. Além de `feat` e `fix`, outro tipo PODE ser usados em suas mensagens de commit.
+
+1. Cada bloco de informação que compõem o commit convencional NÃO DEVE ser tratado como sensível a maiúscula e minúscula pelos implementadores, com exceção de BREAKING CHANGE, que DEVE ser maiúscula.
+
+1. Um `!` PODE ser acrescentado antes do `:` no prefixo tipo/escopo, para chamar a atenção para modificações que quebram a compatibilidade. `BREAKING CHANGE: description` também DEVE ser incluído no corpo ou no rodapé, junto com o `!` no prefixo.
+
+
+#### Porque utilizar Conventional Commits
+
+- Criação automatizada de CHANGELOGs.
+- Determinar automaticamente um aumento de versionamento semântico (com base nos tipos de commits).
+- Comunicar a natureza das mudanças para colegas de equipe, o público e outras partes interessadas.
+- Disparar processos de build e deploy.
+- Facilitar a contribuição de outras pessoas em seus projetos, permitindo que eles explorem um histórico de commits mais estruturado.
 
 
 ---
