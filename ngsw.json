@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1613903898943,
+  "timestamp": 1613938475343,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -12,14 +12,14 @@
       },
       "urls": [
         "/1.88aad1d01258a6cbe6b4.js",
-        "/5.9f944dc1805181eca28e.js",
-        "/6.17650a17d7cb08cdf3a0.js",
+        "/5.3ac3d25d1cec977df771.js",
+        "/6.00b424df987b434cc5b3.js",
         "/assets/icons/icon-8.png",
         "/index.html",
         "/main.5c6ec45398cb7c361e5a.js",
         "/manifest.webmanifest",
         "/polyfills.4e010715580a3f76fd3d.js",
-        "/runtime.949cd8bcf5061d545db2.js",
+        "/runtime.2da8347f4fa90b626919.js",
         "/styles.8683d978f0fdcfd973e5.css"
       ],
       "patterns": []
@@ -63,8 +63,8 @@
   "dataGroups": [],
   "hashTable": {
     "/1.88aad1d01258a6cbe6b4.js": "44e4c0c13f5a25fa66d29b740f426e727d638937",
-    "/5.9f944dc1805181eca28e.js": "5c7e635ed8a3115a1c539daaf24bf2296da18036",
-    "/6.17650a17d7cb08cdf3a0.js": "759681500c13abf327b7ceadde5deb8fa9d0d09e",
+    "/5.3ac3d25d1cec977df771.js": "f5557fa27f9936072caf9dff3e055aa28377586e",
+    "/6.00b424df987b434cc5b3.js": "75f21c0c870df9c8df0af4267396b4063bd48f08",
     "/assets/arrow.svg": "8f57dc3d0f7ff532ef2d8d25d73e5cf06a194b05",
     "/assets/descentralized.svg": "9051faabd54bb922c862b7fea64affa1eadc7b17",
     "/assets/icons/flag.svg": "dc6403dcc062cacdd56fe75f7f48750c55e3a117",
@@ -90,11 +90,11 @@
     "/assets/images/terminal.svg": "27aee2bff975eca24295f220acacd1602527b836",
     "/assets/images/timer.svg": "1a3413a523bc43be53d444f9b472b39cc5f178a9",
     "/assets/images/waiting.svg": "219308ee47b8c27c71774f5114c66e9d6ec7c73f",
-    "/index.html": "35ac62bf8075e04ceefd0419090a22ec46d3c6bd",
+    "/index.html": "14af59f4b71ad23f91a453138877f723d96cc68d",
     "/main.5c6ec45398cb7c361e5a.js": "52935c37284bab4a251458193a213630ac41f097",
     "/manifest.webmanifest": "abc6d87192f6a9073c70ac5a646feb015b035d03",
     "/polyfills.4e010715580a3f76fd3d.js": "43676cd3c727a9f04d4c48396a61cce84df4ddb5",
-    "/runtime.949cd8bcf5061d545db2.js": "0218b89cdf3e379e8edb7154716e3c7f5947ea7f",
+    "/runtime.2da8347f4fa90b626919.js": "45202e1a1889ffc4ecf9760fa37f7f0a8d654dae",
     "/styles.8683d978f0fdcfd973e5.css": "7f7be1a72eebf3c6bcfd3d04066d1002a7b5cfc3"
   },
   "navigationUrls": [
