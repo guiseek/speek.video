@@ -1,5 +1,5 @@
 <speek-toolbar>
-  <a routerLink="/" aria-label="Home" mat-icon-button>
+  <a routerLink="/" aria-label="Página inicial" mat-icon-button>
     <mat-icon>arrow_backward</mat-icon>
   </a>
   <span> {{ state$ | async | peerStateBadge }} </span>
@@ -10,13 +10,37 @@
 </section>
 
 <mat-card>
-  <video class="local" #local autoplay playsinline muted></video>
+  <video
+    [ngClass]="{
+      enabled: (video | async) === true,
+      disabled: (video | async) === false
+    }"
+    class="local"
+    #local
+    autoplay
+    playsinline
+    muted
+  ></video>
 
-  <mat-card-actions>
-    <button mat-button (click)="toggleAudio()">
+  <mat-card-actions aria-live="polite">
+    <button
+      type="button"
+      [attr.aria-label]="
+        (audio | async) ? 'Desabilitar áudio' : 'Habilitar áudio'
+      "
+      mat-button
+      (click)="toggleAudio()"
+    >
       <mat-icon>{{ (audio | async) ? 'mic' : 'mic_off' }}</mat-icon>
     </button>
-    <button mat-button (click)="toggleVideo()">
+    <button
+      type="button"
+      [attr.aria-label]="
+        (video | async) ? 'Desabilitar vídeo' : 'Habilitar vídeo'
+      "
+      mat-button
+      (click)="toggleVideo()"
+    >
       <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
     </button>
   </mat-card-actions>
@@ -31,8 +55,9 @@
 
 <button
   mat-fab
-  [disabled]="(state$ | async) != 'stable'"
+  [disabled]="(state$ | async) != 'connected'"
   (click)="hangup()"
+  aria-label="Encerrar ligação"
   class="call-end"
   color="warn"
 >
