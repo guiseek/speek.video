@@ -1,5 +1,11 @@
+import { PeerDataAdapter } from './peer-data.adapter'
 import { Warning } from '@speek/core/entity'
 import { Observable } from 'rxjs'
+
+function stereoOpus({ type, sdp }: RTCSessionDescriptionInit) {
+  sdp = sdp.replace(/a=fmtp:111/, 'a=fmtp:111 stereo=1\r\na=fmtp:111')
+  return { type, sdp }
+}
 
 export type PeerConfig = RTCConfiguration
 export class PeerAdapter {
@@ -98,5 +104,14 @@ export class PeerAdapter {
     stream
       .getTracks()
       .forEach((track) => this.connection.addTrack(track, stream))
+  }
+
+  createChannel(label: string, options?: RTCDataChannelInit) {
+    return new Promise<PeerDataAdapter>((resolve, reject) => {
+      const channel = this.connection.createDataChannel(label, options)
+      channel.addEventListener('open', ({ target }) => {
+        resolve(new PeerDataAdapter(target as RTCDataChannel))
+      })
+    })
   }
 }

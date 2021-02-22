@@ -23,6 +23,7 @@ import {
   SignalingAdapter,
   StreamAdapter,
 } from '@speek/core/adapter'
+import { TransferService } from '@speek/ui/components'
 
 @Component({
   selector: 'speek-meet',
@@ -69,6 +70,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     readonly peer: PeerAdapter,
     readonly stream: StreamAdapter,
+    readonly transfer: TransferService,
     readonly signaling: SignalingAdapter
   ) {
     const { code } = this.route.snapshot.params
@@ -88,9 +90,14 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       this.signal.next(state)
     })
 
+    this.peer.createChannel('channel').then((c) => {})
+
     this.peer.onState.subscribe((state) => {
       console.log('state: ', state)
       this.state.next(state)
+      if (state === 'connected') {
+        console.log('CONNECTED')
+      }
       if (state === 'disconnected') {
         this.remote.srcObject = null
       }
@@ -202,6 +209,12 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     const tracks = this.localStream.getVideoTracks()
     tracks.forEach((t) => (t.enabled = enabled))
     this._video.next(enabled)
+  }
+
+  openTransfer() {
+    this.transfer.open(this.peer.connection).subscribe((res) => {
+      console.log(res)
+    })
   }
 
   hangup() {

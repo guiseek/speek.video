@@ -43,6 +43,14 @@
     >
       <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
     </button>
+    <button
+      type="button"
+      aria-label="Transferir dados"
+      mat-button
+      (click)="openTransfer()"
+    >
+      <mat-icon>swap_horiz</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>
 
