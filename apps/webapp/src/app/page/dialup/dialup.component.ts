@@ -29,7 +29,6 @@ export class DialupComponent {
   }
   call() {
     console.log(this.audio)
-    // this.dtmf.call(this.audio)
   }
   sendTones() {
     // this.dtmf.sendTones(this.form.value)

@@ -5,7 +5,6 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { MaterialModule } from './shared/material.module'
 import { TestBed } from '@angular/core/testing'
 import { AppComponent } from './app.component'
-import { NavbarModule } from '@speek/ui/components'
 import { DomSanitizer } from '@angular/platform-browser'
 import { createSpeekIcon, getLogo } from '@speek/util/format'
 import { SignalingAdapter } from '@speek/core/adapter'
@@ -20,7 +19,6 @@ describe('AppComponent', () => {
         RouterTestingModule,
         BrowserAnimationsModule,
         UiComponentsModule,
-        NavbarModule,
         MaterialModule,
       ],
       providers: [SignalingAdapter],
