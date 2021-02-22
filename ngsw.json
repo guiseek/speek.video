@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1613987268764,
+  "timestamp": 1613988141897,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -12,14 +12,14 @@
       },
       "urls": [
         "/1.757386a9b5e1d7f782a3.js",
-        "/5.d3347ab4098e7d75fd43.js",
-        "/6.f672d7faaa64819fee1d.js",
+        "/5.598dda336719fb132fde.js",
+        "/6.4670e6fabb518816a2bc.js",
         "/assets/icons/icon-8.png",
         "/index.html",
-        "/main.0c8eed8585996397f43f.js",
+        "/main.a57cbf84650c98f2f3dd.js",
         "/manifest.webmanifest",
         "/polyfills.4e010715580a3f76fd3d.js",
-        "/runtime.3fcce724978d035eabd4.js",
+        "/runtime.d1492d646c4b65738b8c.js",
         "/styles.558a32fb2bd7d183d294.css"
       ],
       "patterns": []
@@ -70,8 +70,8 @@
   "dataGroups": [],
   "hashTable": {
     "/1.757386a9b5e1d7f782a3.js": "529fc99622daefc681ff09f28994fea3cc84f201",
-    "/5.d3347ab4098e7d75fd43.js": "685c052aa551082f82208ad77fab086886bec8a6",
-    "/6.f672d7faaa64819fee1d.js": "bc902f612426f69c34fb2bad90da77ec8d4bea2b",
+    "/5.598dda336719fb132fde.js": "2b4ecddd79a58ce57eeeba49194807a2c227afd5",
+    "/6.4670e6fabb518816a2bc.js": "4943dfcf2f190cb749b588c3af39797f80d31beb",
     "/assets/descentralized.svg": "379893fd32ed1e32cf4af15a5f6cd22169d535b3",
     "/assets/icons/flag.svg": "dc6403dcc062cacdd56fe75f7f48750c55e3a117",
     "/assets/icons/icon-1.png": "d330fd4ad83a92c2f012a89f27ef9769f7956b96",
@@ -104,11 +104,11 @@
     "/assets/images/terminal.svg": "27aee2bff975eca24295f220acacd1602527b836",
     "/assets/images/timer.svg": "1a3413a523bc43be53d444f9b472b39cc5f178a9",
     "/assets/images/waiting.svg": "219308ee47b8c27c71774f5114c66e9d6ec7c73f",
-    "/index.html": "00db00effa0dadfd6a8917514f5cedf6eb7d2e90",
-    "/main.0c8eed8585996397f43f.js": "d1c96ebe7036bd60ac8e84f312304e72787bd4f0",
+    "/index.html": "b6cc9537f4922069a35590f6cebec16347d5d6d4",
+    "/main.a57cbf84650c98f2f3dd.js": "0c37d438cd01ad8f21fe196275cb9e2653389e15",
     "/manifest.webmanifest": "9b9ba33ed54ba1f3aba8c505e0afb44d317e027f",
     "/polyfills.4e010715580a3f76fd3d.js": "43676cd3c727a9f04d4c48396a61cce84df4ddb5",
-    "/runtime.3fcce724978d035eabd4.js": "b744322fbf2ec3d841d47aa7a76c48045145283f",
+    "/runtime.d1492d646c4b65738b8c.js": "02d41582fd648edcc5cc9eb4f90be92bce3c16cf",
     "/styles.558a32fb2bd7d183d294.css": "169d4a567b4f9c43f61dca98256e7664dbd75961"
   },
   "navigationUrls": [
