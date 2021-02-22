@@ -1,5 +1,6 @@
 @import '~@angular/cdk/text-field/text-field';
 @import '~@angular/material/theming';
+@import 'app/mat.theme.scss';
 @import 'app/app.theme.scss';
 @import 'theming/palette';
 @import 'components';
@@ -29,7 +30,7 @@ $client-theme: mat-dark-theme(
   )
 );
 
-@include angular-material-theme($client-theme);
+@include mat-theme($client-theme);
 @include app-theme($client-theme);
 
 /* You can add global styles to this file, and also import other style files */

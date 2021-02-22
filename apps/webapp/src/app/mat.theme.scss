@@ -1,0 +1,26 @@
+// Create a theme.
+@mixin mat-theme($theme-or-color-config) {
+  $dedupe-key: 'angular-material-theme';
+  @include mat-private-check-duplicate-theme-styles(
+    $theme-or-color-config,
+    $dedupe-key
+  ) {
+    @include mat-core-theme($theme-or-color-config);
+    @include mat-bottom-sheet-theme($theme-or-color-config);
+    @include mat-button-theme($theme-or-color-config);
+    @include mat-card-theme($theme-or-color-config);
+    @include mat-dialog-theme($theme-or-color-config);
+    @include mat-divider-theme($theme-or-color-config);
+    @include mat-select-theme($theme-or-color-config);
+    @include mat-slider-theme($theme-or-color-config);
+    @include mat-form-field-theme($theme-or-color-config);
+    @include mat-icon-theme($theme-or-color-config);
+    @include mat-input-theme($theme-or-color-config);
+    @include mat-list-theme($theme-or-color-config);
+    @include mat-sidenav-theme($theme-or-color-config);
+    @include mat-tabs-theme($theme-or-color-config);
+    @include mat-toolbar-theme($theme-or-color-config);
+    @include mat-tooltip-theme($theme-or-color-config);
+    @include mat-snack-bar-theme($theme-or-color-config);
+  }
+}
