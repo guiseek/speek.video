@@ -7,7 +7,6 @@ import { ClipboardModule } from '@angular/cdk/clipboard'
 import { MatInputModule } from '@angular/material/input'
 import { MatIconModule } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms'
-import { CodeComponent, CodeDialog } from './code'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
@@ -25,7 +24,5 @@ import { NgModule } from '@angular/core'
     ReactiveFormsModule,
     MatSidenavModule,
   ],
-  declarations: [CodeComponent, CodeDialog],
-  exports: [CodeComponent, CodeDialog],
 })
 export class UiComponentsModule {}
