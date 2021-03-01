@@ -3,14 +3,14 @@
 @import 'app/mat.theme.scss';
 @import 'app/app.theme.scss';
 @import 'theming/palette';
-@import 'components';
+// @import 'components';
 @import 'animtions';
 
 @include mat-core();
 @include cdk-a11y();
 
-$client-primary: mat-palette($speek-black);
-$client-accent: mat-palette($mat-cyan);
+$client-primary: mat-palette($mat-deep-purple);
+$client-accent: mat-palette($mat-light-blue);
 $client-warn: mat-palette($mat-red);
 
 $peek-typography: mat-typography-config(
@@ -20,7 +20,7 @@ $peek-typography: mat-typography-config(
 );
 @include angular-material-typography($peek-typography);
 
-$client-theme: mat-dark-theme(
+$client-theme: mat-light-theme(
   (
     color: (
       primary: $client-primary,

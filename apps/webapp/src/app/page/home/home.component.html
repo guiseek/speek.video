@@ -5,29 +5,49 @@
   <span class="brand-name">speek</span>
 </speek-toolbar>
 
-<mat-card>
-  <mat-card-header>
-    <h1 mat-card-subtitle>Como quer começar?</h1>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/create" aria-label="Iniciar conversa">
-        <mat-icon>voice_chat</mat-icon>
-        <span>Iniciar conversa</span>
-      </a>
-      <a mat-list-item routerLink="/invite" aria-label="Acessar conversa">
-        <mat-icon>mark_chat_unread</mat-icon>
-        <span>Acessar conversa</span>
-      </a>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/setting" aria-label="Configurações">
-        <mat-icon>settings</mat-icon>
-        <span>Configurações</span>
-      </a>
-    </mat-nav-list>
-  </mat-card-content>
-</mat-card>
+<section class="flex col justify-center">
+  <h3 class="mat-h3">
+    The most private way of chatting
+  </h3>
+  <button
+    color="primary"
+    mat-raised-button
+    (click)="create()"
+    aria-label="Iniciar conversa"
+  >
+    Create new private room
+  </button>
+</section>
 
-<button mat-fab (click)="share()" aria-label="Compartilhar">
+<section class="flex col justify-center">
+  <h2 class="mat-h2">OR</h2>
+</section>
+
+<form class="flex col justify-center" [formGroup]="form">
+  <mat-form-field appearance="outline" color="primary">
+    <mat-label>
+      enter existing room key or link
+    </mat-label>
+    <input
+      matInput
+      autofocus
+      type="text"
+      name="code"
+      cdkFocusInitial
+      spellcheck="false"
+      autocomplete="off"
+      formControlName="code"
+    />
+    <mat-hint>
+      provided by a host
+    </mat-hint>
+    <mat-error>
+      your key doesn't work here
+    </mat-error>
+  </mat-form-field>
+</form>
+
+
+<!-- <button mat-fab (click)="share()" color="primary" aria-label="Compartilhar">
   <mat-icon>share</mat-icon>
-</button>
+</button> -->

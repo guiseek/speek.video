@@ -9,18 +9,13 @@
   <video class="remote" #remote autoplay playsinline muted></video>
 </section>
 
-<mat-card>
-  <video
-    [ngClass]="{
-      enabled: (video | async) === true,
-      disabled: (video | async) === false
-    }"
-    class="local"
-    #local
-    autoplay
-    playsinline
-    muted
-  ></video>
+<mat-card
+  [ngClass]="{
+    enabled: (video | async) === true,
+    disabled: (video | async) === false
+  }"
+>
+  <video class="local" #local autoplay playsinline muted></video>
 
   <mat-card-actions aria-live="polite">
     <button

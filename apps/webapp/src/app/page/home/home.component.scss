@@ -6,7 +6,33 @@
   align-items: center;
   justify-content: space-evenly;
 
+  text-transform: initial;
+
   position: relative;
+
+  form {
+    display: inline-flex;
+  }
+
+  .mat-card {
+    visibility: visible;
+    color: #fff;
+    transition: visibility 1500ms ease-in-out, opacity 1500ms ease-in-out;
+    &.hide {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  .mat-form-field {
+    width: 300px;
+    margin: 10px;
+
+    .mat-icon {
+      -webkit-animation: flicker-1 2s linear infinite both;
+      animation: flicker-1 2s linear infinite both;
+    }
+  }
 
   ::ng-deep speek-toolbar .mat-toolbar {
     background-color: transparent;
@@ -21,15 +47,15 @@
     background-position-x: center;
     background-position-y: center;
     background-repeat: no-repeat;
-    background-size: 210%;
-    opacity: 0.1;
+    background-size: 105%;
+    opacity: 0.02;
 
     transition: opacity 350ms ease-in-out, background-size 400ms ease;
   }
-  &:hover::before {
-    opacity: 0.08;
-    background-size: 260%;
-  }
+  // &:hover::before {
+  //   opacity: 0.08;
+  //   background-size: 260%;
+  // }
 
   .mat-nav-list {
     letter-spacing: 1.2px;
@@ -38,15 +64,24 @@
     }
   }
 
-  .mat-form-field {
-    width: 120px;
-    position: absolute;
-    visibility: hidden;
-    transition: visibility 600ms ease-in-out;
-    &.active {
-      visibility: visible;
-    }
-  }
+  // .mat-form-field {
+  //   width: 300px;
+  //   margin: 10px;
+
+  //   .mat-icon {
+  //     -webkit-animation: flicker-1 2s linear infinite both;
+  //     animation: flicker-1 2s linear infinite both;
+  //   }
+  // }
+  // .mat-form-field {
+  //   width: 120px;
+  //   position: absolute;
+  //   visibility: hidden;
+  //   transition: visibility 600ms ease-in-out;
+  //   &.active {
+  //     visibility: visible;
+  //   }
+  // }
 
   .mat-fab {
     position: absolute;

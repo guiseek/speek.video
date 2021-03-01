@@ -7,7 +7,7 @@
   $is-dark-theme: map-get($theme, is-dark);
 
   .speek-container {
-    background: mat-color($background, app-bar);
+    // background: mat-color($background, app-bar);
     color: mat-color($foreground, text);
   }
 }
