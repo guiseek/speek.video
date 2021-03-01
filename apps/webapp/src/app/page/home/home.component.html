@@ -1,9 +1,15 @@
-<speek-toolbar>
-  <a routerLink="/" aria-label="Página inicial" mat-icon-button>
-    <mat-icon svgIcon="speek-logo"></mat-icon>
+<mat-toolbar>
+  <a routerLink="/" aria-label="Página inicial">
+    <!-- <mat-icon svgIcon="speek-logo"></mat-icon> -->
+    <img src="/assets/images/logo.svg" alt="Speek">
   </a>
+  <span class="spacer"></span>
   <span class="brand-name">speek</span>
-</speek-toolbar>
+  <span class="spacer"></span>
+  <button routerLink="/setting" aria-label="Configurações" mat-icon-button>
+    <mat-icon>settings</mat-icon>
+  </button>
+</mat-toolbar>
 
 <section class="flex col justify-center">
   <h3 class="mat-h3">

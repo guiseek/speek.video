@@ -1,6 +1,6 @@
 import { PeerDataAdapter } from './peer-data.adapter'
-import { Warning } from '@speek/core/entity'
-import { Observable } from 'rxjs'
+import { SpeekMessage, Warning } from '@speek/core/entity'
+import { Observable, Subject } from 'rxjs'
 
 function stereoOpus({ type, sdp }: RTCSessionDescriptionInit) {
   sdp = sdp.replace(/a=fmtp:111/, 'a=fmtp:111 stereo=1\r\na=fmtp:111')
@@ -10,6 +10,12 @@ function stereoOpus({ type, sdp }: RTCSessionDescriptionInit) {
 export type PeerConfig = RTCConfiguration
 export class PeerAdapter {
   connection: RTCPeerConnection
+  sendChannel: RTCDataChannel
+  receiveChannel: RTCDataChannel
+
+  _onMessage = new Subject<SpeekMessage>()
+  onMessage = this._onMessage.asObservable()
+
   onSignal: Observable<RTCSignalingState>
   onChange: Observable<RTCPeerConnection>
   onState: Observable<RTCPeerConnectionState>
@@ -21,6 +27,15 @@ export class PeerAdapter {
 
   constructor(config: PeerConfig) {
     this.connection = new RTCPeerConnection(config)
+
+    this.sendChannel = this.connection.createDataChannel('connection')
+    this.connection.addEventListener('datachannel', ({ channel }) => {
+      channel.addEventListener('message', ({ data }) => {
+        this._onMessage.next(JSON.parse(data))
+      })
+
+      this.receiveChannel = channel
+    })
 
     this.onState = new Observable((subscriber) => {
       this.connection.addEventListener('connectionstatechange', (event) => {
@@ -62,7 +77,7 @@ export class PeerAdapter {
       this.connection.addEventListener('icecandidateerror', (ev) => {
         subscriber.next({
           error: new Error(`Code: ${ev.errorCode}: ${ev.errorText}`),
-          description: `Type: ${ev.type}. URL: ${ev.url}, HostCandidate: ${ev.hostCandidate}`,
+          description: `Type: ${ev.type}. URL: ${ev.url} at ${ev.timeStamp}`,
           component: 'PeerAdapter',
         })
       })
@@ -104,6 +119,10 @@ export class PeerAdapter {
     stream
       .getTracks()
       .forEach((track) => this.connection.addTrack(track, stream))
+  }
+
+  sendMessage(message: SpeekMessage) {
+    this.sendChannel.send(JSON.stringify(message))
   }
 
   createChannel(label: string, options?: RTCDataChannelInit) {

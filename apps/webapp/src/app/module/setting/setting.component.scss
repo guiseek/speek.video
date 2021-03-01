@@ -5,9 +5,8 @@
   justify-content: center;
   align-items: center;
   .mat-card {
-    border-width: 2px;
-    border-color: #464646;
-    border-style: dotted;
-    transition: height 500ms ease-in-out;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 6px;
   }
 }

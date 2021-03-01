@@ -34,7 +34,7 @@
     min-width: 200px;
     max-width: 260px;
     overflow: hidden;
-    bottom: 24px;
+    bottom: 28px;
     width: 25%;
     padding: 0;
     right: 0px;
@@ -50,7 +50,7 @@
       }
     }
     &.disabled {
-      opacity: 0.6;
+      opacity: 0.2;
       video {
         -webkit-animation: swing-out-bottom-bck 0.45s
           cubic-bezier(0.6, -0.28, 0.735, 0.045) both;
@@ -81,15 +81,15 @@
   }
   .call-end {
     position: absolute;
-    bottom: 20px;
+    bottom: 24px;
     left: 20px;
     opacity: 0.8;
   }
-  .room-code {
+  .meet-code {
     position: absolute;
     right: 4px;
     bottom: 4px;
-    opacity: 0.3;
+    opacity: 0.2;
   }
 }
 

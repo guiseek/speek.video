@@ -1,0 +1,34 @@
+:host {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    padding: 16px;
+    margin-top: 64px;
+    flex-direction: column;
+    flex-direction: column;
+    position: relative;
+    gap: 24px;
+    .mat-divider {
+      position: unset;
+    }
+    .mat-form-field {
+      margin-bottom: 10px;
+    }
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+
+      video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

@@ -1,4 +1,8 @@
-import { drawOscilloscope, UserSetupForm } from '@speek/ui/components'
+import {
+  AudioSettingForm,
+  drawOscilloscope,
+  UserSetupForm,
+} from '@speek/ui/components'
 import { stopStream, Voice } from '@speek/core/stream'
 import { UserSetupStorage } from '@speek/data/storage'
 import { BehaviorSubject, Subject } from 'rxjs'
@@ -22,6 +26,8 @@ export class AudioComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('canvas')
   private canvas: ElementRef<HTMLCanvasElement>
+
+  audio = new AudioSettingForm()
 
   form = new UserSetupForm()
   stream: MediaStream

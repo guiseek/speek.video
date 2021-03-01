@@ -16,6 +16,7 @@
     @include mat-form-field-theme($theme-or-color-config);
     @include mat-icon-theme($theme-or-color-config);
     @include mat-input-theme($theme-or-color-config);
+    @include mat-checkbox-theme($theme-or-color-config);
     @include mat-list-theme($theme-or-color-config);
     @include mat-sidenav-theme($theme-or-color-config);
     @include mat-tabs-theme($theme-or-color-config);

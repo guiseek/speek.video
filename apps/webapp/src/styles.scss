@@ -110,3 +110,11 @@ body .flex {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.audio-dialog .mat-dialog-container {
+  padding: 0;
+}
+.video-dialog .mat-dialog-container {
+  padding: 0;
+  min-width: 320px;
+}

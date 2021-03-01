@@ -12,6 +12,10 @@ export class UserSetupForm extends FormGroup {
       ]),
       audio: new FormControl(audio),
       video: new FormControl(video),
+      state: new FormGroup({
+        audio: new FormControl(true),
+        video: new FormControl(true),
+      }),
     })
   }
 
@@ -29,6 +33,18 @@ export class UserSetupForm extends FormGroup {
 
   get video() {
     return this.get('video') as FormControl
+  }
+
+  get state() {
+    return this.get('state') as FormGroup
+  }
+
+  get audioState() {
+    return this.state.get('audio') as FormControl
+  }
+
+  get videoState() {
+    return this.state.get('video') as FormControl
   }
 
   config(device: MediaDeviceInfo) {

@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog'
 import { NgModule } from '@angular/core'
 import { ScrollingModule } from '@angular/cdk/scrolling'
 import { MatIconModule } from '@angular/material/icon'
@@ -27,6 +28,7 @@ import { MatSliderModule } from '@angular/material/slider'
     MatTabsModule,
     MatIconModule,
     MatSliderModule,
+    MatDialogModule,
     MatGridListModule,
     MatSelectModule,
     MatTooltipModule,

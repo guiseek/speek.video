@@ -1,4 +1,3 @@
-import { DrawerService } from '@speek/ui/components'
 import { routerTransition } from './app.animation'
 import { Component } from '@angular/core'
 
@@ -8,6 +7,4 @@ import { Component } from '@angular/core'
   styleUrls: ['./app.component.scss'],
   animations: [routerTransition],
 })
-export class AppComponent {
-  constructor(readonly drawer: DrawerService) {}
-}
+export class AppComponent {}
