@@ -66,7 +66,7 @@ export class AppModule {
     readonly sanitizer: DomSanitizer
   ) {
     const name = 'speek-logo'
-    const icon = getLogo('#ffffff')
+    const icon = getLogo('#999')
     createSpeekIcon(iconRegistry, sanitizer, [icon, name])
   }
 }

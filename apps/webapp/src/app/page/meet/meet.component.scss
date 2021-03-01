@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #121212;
   .brand-name {
     opacity: 0.5;
   }
@@ -28,30 +27,39 @@
   }
 
   .mat-card {
-    border-top-left-radius: 12px;
+    border-top-left-radius: 6px;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     position: absolute;
     min-width: 200px;
     max-width: 260px;
-    width: 25%;
+    overflow: hidden;
     bottom: 24px;
+    width: 25%;
+    padding: 0;
     right: 0px;
     z-index: 2;
-    video {
-      width: 100%;
-      &.enabled {
+    opacity: 1;
+    transition: opacity 800ms ease-out;
+    &.enabled {
+      video {
         -webkit-animation: swing-in-bottom-fwd 0.5s
           cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         animation: swing-in-bottom-fwd 0.5s
           cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
       }
-      &.disabled {
+    }
+    &.disabled {
+      opacity: 0.6;
+      video {
         -webkit-animation: swing-out-bottom-bck 0.45s
           cubic-bezier(0.6, -0.28, 0.735, 0.045) both;
         animation: swing-out-bottom-bck 0.45s
           cubic-bezier(0.6, -0.28, 0.735, 0.045) both;
       }
+    }
+    video {
+      width: 100%;
     }
     video.remote {
       object-fit: cover;

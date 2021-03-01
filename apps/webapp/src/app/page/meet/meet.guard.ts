@@ -5,13 +5,13 @@ import { MatDialog } from '@angular/material/dialog'
 import { MeetComponent } from './meet.component'
 import { Injectable } from '@angular/core'
 import { UUID } from '@speek/util/format'
-import { EMPTY, Observable, of } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
   UrlTree,
+  CanActivate,
   CanDeactivate,
+  RouterStateSnapshot,
+  ActivatedRouteSnapshot,
 } from '@angular/router'
 
 @Injectable({ providedIn: 'root' })

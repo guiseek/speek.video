@@ -1,15 +1,16 @@
+import { getAudioConfig, getVideoConfig } from '@speek/util/device'
+import { isDefined, notNull, UUID } from '@speek/util/format'
+import { ActivatedRoute, Router } from '@angular/router'
+import { TransferService } from '@speek/ui/components'
+import { stopStream } from '@speek/core/stream'
+import { BehaviorSubject, Subject } from 'rxjs'
+import { takeUntil } from 'rxjs/operators'
 import {
   SpeekAction,
   SpeekData,
   SpeekPayload,
   WithTarget,
 } from '@speek/core/entity'
-import { getAudioConfig, getVideoConfig } from '@speek/util/device'
-import { isDefined, notNull, UUID } from '@speek/util/format'
-import { ActivatedRoute, Router } from '@angular/router'
-import { stopStream } from '@speek/core/stream'
-import { BehaviorSubject, Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
 import {
   AfterViewInit,
   Component,
@@ -23,7 +24,6 @@ import {
   SignalingAdapter,
   StreamAdapter,
 } from '@speek/core/adapter'
-import { TransferService } from '@speek/ui/components'
 
 @Component({
   selector: 'speek-meet',
