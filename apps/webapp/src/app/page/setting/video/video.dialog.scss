@@ -1,10 +1,13 @@
 :host {
-  .mat-dialog-content {
+  display: block;
+  min-width: 280px;
+  .video-container {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
 
     video {
+      object-fit: none;
       position: absolute;
       top: 0;
       left: 0;

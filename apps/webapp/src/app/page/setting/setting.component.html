@@ -61,12 +61,24 @@
       <mat-list-item>
         <mat-icon mat-list-icon>mic</mat-icon>
         <h3 mat-line>Áudio</h3>
-        <mat-checkbox formControlName="audio"> habilitado </mat-checkbox>
+        <mat-checkbox
+          formControlName="audio"
+          labelPosition="before"
+          color="primary"
+        >
+          {{ form.audioState.value ? 'habilitado' : 'desabilitado' }}
+        </mat-checkbox>
       </mat-list-item>
       <mat-list-item>
         <mat-icon mat-list-icon>videocam</mat-icon>
         <h3 mat-line>Vídeo</h3>
-        <mat-checkbox formControlName="video"> habilitado </mat-checkbox>
+        <mat-checkbox
+          formControlName="video"
+          labelPosition="before"
+          color="primary"
+        >
+          {{ form.videoState.value ? 'habilitado' : 'desabilitado' }}
+        </mat-checkbox>
       </mat-list-item>
     </mat-list>
   </section>

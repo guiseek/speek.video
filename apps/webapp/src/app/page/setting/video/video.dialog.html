@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<div class="video-container">
   <video
     muted
     #video
@@ -7,8 +7,8 @@
     [srcObject]="stream"
     poster="/assets/icons/speek-7.png"
   ></video>
-</mat-dialog-content>
-
+</div>
+<mat-divider></mat-divider>
 <mat-dialog-actions>
-  <button mat-button matDialogClose>Close dialog</button>
+  <button mat-button matDialogClose>Close</button>
 </mat-dialog-actions>
