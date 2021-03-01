@@ -5,7 +5,9 @@ import {
 import { MatDialog } from '@angular/material/dialog'
 import { Injectable } from '@angular/core'
 import { TransferDialog } from './transfer.dialog'
-import { Subject } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
+import { WithTarget } from '@speek/core/entity'
+import { typeOfFile } from '@speek/util/format'
 
 @Injectable({
   providedIn: 'root',
@@ -75,6 +77,22 @@ export class TransferService {
     return this._dialog
       .open<ConfirmDialog, DialogConfirmData, boolean>(ConfirmDialog, { data })
       .afterClosed()
+  }
+
+  public selectFile() {
+    const input = document.createElement('input')
+    return new Observable((subscriber) => {
+      input.type = 'file'
+      input.click()
+      input.addEventListener('change', ({ target }) => {
+        const input = target as HTMLInputElement
+        const file = input.files?.item(0)
+        typeOfFile(file as File).then((res) => {
+          console.log(res)
+        })
+        subscriber.next(target)
+      })
+    })
   }
 
   private downloadFile(blob: Blob, name: string) {

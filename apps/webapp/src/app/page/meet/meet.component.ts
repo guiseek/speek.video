@@ -25,6 +25,7 @@ import {
   SignalingAdapter,
   StreamAdapter,
 } from '@speek/core/adapter'
+import { UserSetupStorage } from '@speek/data/storage'
 
 @Component({
   selector: 'speek-meet',
@@ -50,7 +51,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   remote: HTMLVideoElement
   remoteStream: MediaStream
 
-  peerData: PeerDataAdapter
+  data: PeerDataAdapter
   peerChannel: RTCDataChannel
 
   sender = UUID.short()
@@ -76,10 +77,14 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     readonly peer: PeerAdapter,
     readonly stream: StreamAdapter,
     readonly transfer: TransferService,
-    readonly signaling: SignalingAdapter
+    readonly signaling: SignalingAdapter,
+    readonly userSetup: UserSetupStorage
   ) {
     const { code } = this.route.snapshot.params
     this.code = code
+
+    this.data = new PeerDataAdapter(this.peer.connection)
+    this.data.state$.subscribe(console.log)
   }
 
   ngOnInit(): void {
@@ -94,18 +99,6 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     this.peer.onSignal.subscribe((state) => {
       this.signal.next(state)
     })
-
-    // this.peer.connection.addEventListener('datachannel', ({ channel }) => {
-    //   console.log(channel)
-    //   channel.onmessage = console.log
-    //   this.peerChannel = channel
-    // })
-    // this.peer.createChannel('channel').then((data) => {
-    //   console.log(data)
-    //   data.channel.onmessage = console.log
-    //   this.peerData = data
-    //   data.message$.subscribe(console.log)
-    // })
 
     this.peer.onMessage.subscribe((message) => {
       console.log('message: ', message)
@@ -199,21 +192,31 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   setLocal(payload?: SpeekPayload) {
-    this.stream
-      .getStream({ video: getVideoConfig(), audio: getAudioConfig() })
-      .then((stream) => {
-        this.local.muted = true
-        this.localStream = stream
-        this.local.srcObject = stream
+    const audio = this.userSetup.getAudioConfig()
+    const video = this.userSetup.getVideoConfig()
 
-        const audio = stream.getAudioTracks()
-        this.peer.connection.addTrack(audio.shift(), stream)
+    this.stream.getStream({ video, audio }).then((stream) => {
+      this.local.muted = true
+      this.localStream = stream
+      this.local.srcObject = stream
 
-        const video = stream.getVideoTracks()
-        this.peer.connection.addTrack(video.shift(), stream)
+      const audio = stream.getAudioTracks()
+      this.peer.connection.addTrack(audio.shift(), stream)
 
-        this.peer.createOffer().then((sdp) => this.sendOffer({ sdp }))
-      })
+      const video = stream.getVideoTracks()
+      this.peer.connection.addTrack(video.shift(), stream)
+
+      this.peer.createOffer().then((sdp) => this.sendOffer({ sdp }))
+
+      const state = this.userSetup.getStateConfig()
+
+      if (state.video === false) {
+        this.toggleVideo()
+      }
+      if (state.audio === false) {
+        this.toggleAudio()
+      }
+    })
   }
 
   sendOffer(data: SpeekData) {
@@ -238,11 +241,16 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openTransfer() {
-    this.peer.sendMessage({
-      from: this.code,
-      type: 'file',
-      data: 'Daeeeee maluco, aceita aew',
+    this.transfer.selectFile().subscribe((response) => {
+      console.log(response)
+      this.data.sendFile(response as File)
     })
+
+    // this.peer.sendMessage({
+    //   from: this.code,
+    //   type: 'file',
+    //   data: 'Daeeeee maluco, aceita aew',
+    // })
     // this.peerData.send({ message: 'dae doido' })
     // this.transfer.open(this.peer.connection).subscribe((res) => {
     //   console.log(res)

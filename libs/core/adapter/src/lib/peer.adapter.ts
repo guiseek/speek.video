@@ -28,14 +28,14 @@ export class PeerAdapter {
   constructor(config: PeerConfig) {
     this.connection = new RTCPeerConnection(config)
 
-    this.sendChannel = this.connection.createDataChannel('connection')
-    this.connection.addEventListener('datachannel', ({ channel }) => {
-      channel.addEventListener('message', ({ data }) => {
-        this._onMessage.next(JSON.parse(data))
-      })
+    // this.sendChannel = this.connection.createDataChannel('connection')
+    // this.connection.addEventListener('datachannel', ({ channel }) => {
+    //   channel.addEventListener('message', ({ data }) => {
+    //     this._onMessage.next(JSON.parse(data))
+    //   })
 
-      this.receiveChannel = channel
-    })
+    //   this.receiveChannel = channel
+    // })
 
     this.onState = new Observable((subscriber) => {
       this.connection.addEventListener('connectionstatechange', (event) => {
@@ -122,15 +122,15 @@ export class PeerAdapter {
   }
 
   sendMessage(message: SpeekMessage) {
-    this.sendChannel.send(JSON.stringify(message))
+    // this.sendChannel.send(JSON.stringify(message))
   }
 
-  createChannel(label: string, options?: RTCDataChannelInit) {
-    return new Promise<PeerDataAdapter>((resolve, reject) => {
-      const channel = this.connection.createDataChannel(label, options)
-      channel.addEventListener('open', ({ target }) => {
-        resolve(new PeerDataAdapter(target as RTCDataChannel))
-      })
-    })
-  }
+  // createChannel(label: string, options?: RTCDataChannelInit) {
+  //   return new Promise<PeerDataAdapter>((resolve, reject) => {
+  //     const channel = this.connection.createDataChannel(label, options)
+  //     channel.addEventListener('open', ({ target }) => {
+  //       resolve(new PeerDataAdapter(target as RTCDataChannel))
+  //     })
+  //   })
+  // }
 }

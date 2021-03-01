@@ -14,4 +14,9 @@ export class UserSetupStorage extends DataStorage<UserSetup> {
     const { video } = this.getStoredValue() ?? {}
     return getVideoConfig(video?.deviceId)
   }
+
+  getStateConfig() {
+    const { state } = this.getStoredValue() ?? {}
+    return state ? state : { audio: true, video: true }
+  }
 }
