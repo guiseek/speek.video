@@ -45,7 +45,10 @@ export class OscilloscopeComponent implements OnDestroy {
       const microphoneNode = audioCtx.createMediaStreamSource(stream)
 
       const analyserNode = audioCtx.createAnalyser()
-      drawOscilloscope(this.canvas.nativeElement, analyserNode)
+      drawOscilloscope(this.canvas.nativeElement, analyserNode, {
+        stroke: '#666',
+        fill: '#fff',
+      })
 
       const speakerNode = audioCtx.destination
 

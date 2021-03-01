@@ -1,4 +1,8 @@
-<speek-drawer>
+<main [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path">
+  <router-outlet #o="outlet"></router-outlet>
+</main>
+
+<!-- <speek-drawer>
   <section class="app-sidenav">
     <h1>Opa</h1>
     <h3>Guenta aí</h3>
@@ -10,10 +14,5 @@
     <p>Tem alguma sugestão? me conta?</p>
     <h3 class="mat-h3">email@guiseek.dev</h3>
     <p class="mat-hint">Thx</p>
-  </section>
-  <main
-    [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path"
-  >
-    <router-outlet #o="outlet"></router-outlet>
-  </main>
-</speek-drawer>
+  </section> -->
+<!-- </speek-drawer> -->

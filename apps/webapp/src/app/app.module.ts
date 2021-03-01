@@ -25,13 +25,13 @@ import { environment } from './../environments/environment'
     ReactiveFormsModule,
     RouterModule.forRoot(
       [
-        {
-          path: 'setting',
-          loadChildren: () =>
-            import('./module/setting/setting.module').then(
-              (m) => m.SettingModule
-            ),
-        },
+        // {
+        //   path: 'setting',
+        //   loadChildren: () =>
+        //     import('./module/setting/setting.module').then(
+        //       (m) => m.SettingModule
+        //     ),
+        // },
         {
           path: '',
           loadChildren: () =>

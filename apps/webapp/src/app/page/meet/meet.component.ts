@@ -1,7 +1,7 @@
 import { getAudioConfig, getVideoConfig } from '@speek/util/device'
 import { isDefined, notNull, UUID } from '@speek/util/format'
 import { ActivatedRoute, Router } from '@angular/router'
-import { TransferService } from '@speek/ui/components'
+import { AlertService, TransferService } from '@speek/ui/components'
 import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
@@ -21,6 +21,7 @@ import {
 } from '@angular/core'
 import {
   PeerAdapter,
+  PeerDataAdapter,
   SignalingAdapter,
   StreamAdapter,
 } from '@speek/core/adapter'
@@ -49,6 +50,9 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   remote: HTMLVideoElement
   remoteStream: MediaStream
 
+  peerData: PeerDataAdapter
+  peerChannel: RTCDataChannel
+
   sender = UUID.short()
   code: string
   pitch: number
@@ -68,6 +72,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private alert: AlertService,
     readonly peer: PeerAdapter,
     readonly stream: StreamAdapter,
     readonly transfer: TransferService,
@@ -90,7 +95,29 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       this.signal.next(state)
     })
 
-    this.peer.createChannel('channel').then((c) => {})
+    // this.peer.connection.addEventListener('datachannel', ({ channel }) => {
+    //   console.log(channel)
+    //   channel.onmessage = console.log
+    //   this.peerChannel = channel
+    // })
+    // this.peer.createChannel('channel').then((data) => {
+    //   console.log(data)
+    //   data.channel.onmessage = console.log
+    //   this.peerData = data
+    //   data.message$.subscribe(console.log)
+    // })
+
+    this.peer.onMessage.subscribe((message) => {
+      console.log('message: ', message)
+      if (message.type === 'file') {
+        this.alert
+          .openConfirm({
+            header: 'Transferência',
+            body: 'Aceita receber um arquivo?',
+          })
+          .afterClosed()
+      }
+    })
 
     this.peer.onState.subscribe((state) => {
       console.log('state: ', state)
@@ -123,7 +150,6 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.peer.onNegotiationNeeded.subscribe(
       ({ target }: WithTarget<RTCPeerConnection>) => {
-        console.log('needed: ', target)
         this.status.next(target.connectionState)
       }
     )
@@ -212,9 +238,15 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openTransfer() {
-    this.transfer.open(this.peer.connection).subscribe((res) => {
-      console.log(res)
+    this.peer.sendMessage({
+      from: this.code,
+      type: 'file',
+      data: 'Daeeeee maluco, aceita aew',
     })
+    // this.peerData.send({ message: 'dae doido' })
+    // this.transfer.open(this.peer.connection).subscribe((res) => {
+    //   console.log(res)
+    // })
   }
 
   hangup() {

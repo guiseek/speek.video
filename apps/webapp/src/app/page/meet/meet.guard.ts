@@ -1,5 +1,3 @@
-import { UserSetup } from '@speek/core/entity'
-import { UserSetupStorage } from '@speek/data/storage'
 import { ConfirmDialog } from '@speek/ui/components'
 import { MatDialog } from '@angular/material/dialog'
 import { MeetComponent } from './meet.component'
@@ -7,26 +5,16 @@ import { Injectable } from '@angular/core'
 import { UUID } from '@speek/util/format'
 import { Observable, of } from 'rxjs'
 import {
-  UrlTree,
   CanActivate,
   CanDeactivate,
-  RouterStateSnapshot,
   ActivatedRouteSnapshot,
 } from '@angular/router'
 
 @Injectable({ providedIn: 'root' })
 export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
-  constructor(
-    private _dialog: MatDialog,
-    readonly userSetup: UserSetupStorage
-  ) {}
+  constructor(private _dialog: MatDialog) {}
 
-  canDeactivate(
-    component: MeetComponent,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> {
+  canDeactivate(component: MeetComponent): Observable<boolean> {
     const data = {
       header: 'Finalizar chamada',
       body: `
@@ -41,18 +29,7 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
       : of(true)
   }
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean> | boolean {
-    const code = route.paramMap.get('code')
-
-    if (UUID.isValid(code)) {
-      const value: Partial<UserSetup> = this.userSetup.getStoredValue() ?? {}
-      if (!value.pitch) {
-        this.userSetup.update({ ...value, pitch: 0 })
-      }
-      return true
-    }
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    return UUID.isValid(route.paramMap.get('code'))
   }
 }

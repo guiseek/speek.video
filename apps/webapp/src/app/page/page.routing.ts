@@ -1,3 +1,4 @@
+import { SettingComponent } from './setting/setting.component'
 import { MeetComponent } from './meet/meet.component'
 import { HomeComponent } from './home/home.component'
 import { RouterModule } from '@angular/router'
@@ -12,6 +13,10 @@ import { MeetGuard } from './meet/meet.guard'
       {
         path: 'invite',
         component: HomeComponent,
+      },
+      {
+        path: 'setting',
+        component: SettingComponent,
       },
       {
         path: 'invite/:code',

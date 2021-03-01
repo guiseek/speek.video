@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common'
 import { A11yModule } from '@angular/cdk/a11y'
 import { NgModule } from '@angular/core'
 import {
+  AudioModule,
   DoorModule,
   ShareModule,
   SplashModule,
@@ -15,6 +16,9 @@ import {
 import { PeerStateBadgePipe, PeerSignalBadgePipe } from '../shared/pipes'
 import { HomeComponent } from './home/home.component'
 import { MeetComponent } from './meet/meet.component'
+import { SettingComponent } from './setting/setting.component'
+import { AudioDialog } from './setting/audio/audio.dialog'
+import { VideoDialog } from './setting/video/video.dialog'
 
 @NgModule({
   declarations: [
@@ -22,12 +26,15 @@ import { MeetComponent } from './meet/meet.component'
     MeetComponent,
     PeerStateBadgePipe,
     PeerSignalBadgePipe,
+    SettingComponent,
+    AudioDialog,
+    VideoDialog,
   ],
   imports: [
     CommonModule,
     A11yModule,
     SplashModule,
-    DoorModule,
+    AudioModule,
     ShareModule,
     LayoutModule,
     ToolbarModule,

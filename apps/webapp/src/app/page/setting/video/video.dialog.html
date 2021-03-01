@@ -1,0 +1,14 @@
+<mat-dialog-content>
+  <video
+    muted
+    #video
+    autoplay
+    playsinline
+    [srcObject]="stream"
+    poster="/assets/icons/speek-7.png"
+  ></video>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button matDialogClose>Close dialog</button>
+</mat-dialog-actions>

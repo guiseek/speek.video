@@ -10,7 +10,7 @@ export function drawOscilloscope(
 ) {
   if (!(<any>canvas).isDestroyed) {
     requestAnimationFrame(() => {
-      drawOscilloscope(canvas, analyser)
+      drawOscilloscope(canvas, analyser, style)
     })
   }
 

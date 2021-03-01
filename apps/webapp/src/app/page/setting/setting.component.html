@@ -1,0 +1,73 @@
+<speek-toolbar>
+  <a routerLink="/" aria-label="Home" mat-icon-button>
+    <mat-icon>arrow_backward</mat-icon>
+  </a>
+  <span class="brand-name"> Configurações </span>
+</speek-toolbar>
+<form [formGroup]="form">
+  <section *ngIf="stream?.active" class="video-container">
+    <canvas #canvas></canvas>
+  </section>
+  <section *ngIf="stream?.active" class="video-container">
+    <video
+      muted
+      #video
+      autoplay
+      playsinline
+      poster="/assets/icons/speek-7.png"
+    ></video>
+  </section>
+  <section>
+    <mat-list>
+      <h3 mat-subheader>Selecionar dispositivos</h3>
+    </mat-list>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Áudio</mat-label>
+      <mat-select
+        placeholder="Selecione um dispositivo"
+        formControlName="audio"
+        [compareWith]="compareFn"
+        (selectionChange)="onAudioChange($event.value)"
+      >
+        <mat-option value=""> Selecione um dispositivo </mat-option>
+        <mat-option *ngFor="let d of audioDevices$ | async" [value]="d">
+          {{ d.label }}
+        </mat-option>
+      </mat-select>
+      <mat-hint>Este será seu microfone</mat-hint>
+      <mat-error>Selecione um dispositivo</mat-error>
+    </mat-form-field>
+    <mat-form-field color="accent" appearance="outline">
+      <mat-label>Vídeo</mat-label>
+      <mat-select
+        placeholder="Selecione um dispositivo"
+        formControlName="video"
+        [compareWith]="compareFn"
+        (selectionChange)="onVideoChange($event.value)"
+      >
+        <mat-option value=""> Selecione um dispositivo </mat-option>
+        <mat-option *ngFor="let d of videoDevices$ | async" [value]="d">
+          {{ d.label }}
+        </mat-option>
+      </mat-select>
+      <mat-hint>Esta será sua câmera</mat-hint>
+      <mat-error>Selecione um dispositivo</mat-error>
+    </mat-form-field>
+  </section>
+  <mat-divider></mat-divider>
+  <section formGroupName="state">
+    <mat-list>
+      <h3 mat-subheader>Entrar nas reuniões sempre com</h3>
+      <mat-list-item>
+        <mat-icon mat-list-icon>mic</mat-icon>
+        <h3 mat-line>Áudio</h3>
+        <mat-checkbox formControlName="audio"> habilitado </mat-checkbox>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>videocam</mat-icon>
+        <h3 mat-line>Vídeo</h3>
+        <mat-checkbox formControlName="video"> habilitado </mat-checkbox>
+      </mat-list-item>
+    </mat-list>
+  </section>
+</form>
