@@ -41,20 +41,12 @@ export class PeerDataAdapter {
 
     connection.addEventListener('datachannel', ({ channel }) => {
       console.log(channel)
-
       const receiver = channel
-      receiver.addEventListener('open', () => {
-        this._state.next('opened')
-      })
-      receiver.addEventListener('close', () => {
-        this._state.next('closed')
-      })
-      receiver.addEventListener('error', () => {
-        this._state.next('closed')
-      })
+      receiver.addEventListener('open', () => this._state.next('opened'))
+      receiver.addEventListener('close', () => this._state.next('closed'))
+      receiver.addEventListener('error', () => this._state.next('closed'))
       receiver.addEventListener('message', ({ data }) => {
         console.log(data)
-
         const message = PeerDataMessage.toMessage(data)
         switch (message.type) {
           case 'file': {

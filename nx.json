@@ -1,14 +1,9 @@
 {
   "npmScope": "speek",
-  "affected": {
-    "defaultBase": "main"
-  },
+  "affected": { "defaultBase": "main" },
   "implicitDependencies": {
     "angular.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
@@ -17,75 +12,23 @@
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
   "projects": {
-    "webapp": {
-      "tags": []
-    },
-    "webapp-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "webapp"
-      ]
-    },
-    "gateway": {
-      "tags": []
-    },
-    "core-entity": {
-      "tags": []
-    },
-    "core-stream": {
-      "tags": []
-    },
-    "ui-components": {
-      "tags": [
-        "type:ui"
-      ]
-    },
-    "util-format": {
-      "tags": [
-        "type:util"
-      ]
-    },
-    "ui-stylesheets": {
-      "tags": [
-        "type:ui"
-      ]
-    },
-    "core-adapter": {
-      "tags": []
-    },
-    "data-storage": {
-      "tags": [
-        "type:data"
-      ]
-    },
-    "util-share": {
-      "tags": [
-        "type:util"
-      ]
-    },
-    "util-device": {
-      "tags": [
-        "type:util"
-      ]
-    },
-    "ui-addons": {
-      "tags": [
-        "type:ui"
-      ]
-    },
-    "workspace": {
-      "tags": []
-    }
+    "webapp": { "tags": [] },
+    "webapp-e2e": { "tags": [], "implicitDependencies": ["webapp"] },
+    "gateway": { "tags": [] },
+    "core-entity": { "tags": [] },
+    "core-stream": { "tags": [] },
+    "ui-components": { "tags": ["type:ui"] },
+    "util-format": { "tags": ["type:util"] },
+    "ui-stylesheets": { "tags": ["type:ui"] },
+    "core-adapter": { "tags": [] },
+    "data-storage": { "tags": ["type:data"] },
+    "util-share": { "tags": ["type:util"] },
+    "util-device": { "tags": ["type:util"] },
+    "ui-addons": { "tags": ["type:ui"] },
+    "workspace": { "tags": [] }
   }
 }

@@ -9,6 +9,8 @@
   <video class="remote" #remote autoplay playsinline muted></video>
 </section>
 
+<ng-template meetAddon></ng-template>
+
 <mat-card
   [ngClass]="{
     enabled: (video | async) === true,
@@ -42,7 +44,7 @@
       type="button"
       aria-label="Transferir dados"
       mat-button
-      (click)="openTransfer()"
+      (click)="inputFile.click()"
     >
       <mat-icon>swap_horiz</mat-icon>
     </button>
@@ -66,5 +68,11 @@
 >
   <mat-icon>call_end</mat-icon>
 </button>
-
+<input
+  type="file"
+  #inputFile
+  style="display: none"
+  (change)="onFileChange($event.target?.files)"
+  accept="image/jpeg, image/png, image/gif, application/pdf, application/zip"
+/>
 <span class="meet-code">{{ code }}</span>

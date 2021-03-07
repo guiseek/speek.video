@@ -1,3 +1,4 @@
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { UserRoom, WithTarget } from '@speek/core/entity'
 import { debounceTime, takeUntil } from 'rxjs/operators'
@@ -13,11 +14,14 @@ import {
   HostBinding,
   HostListener,
 } from '@angular/core'
+import { Clipboard } from '@angular/cdk/clipboard'
 
-function getSpeech() {
-  return (
-    new SpeechRecognition() || new (window as any).webkitSpeechRecognition()
-  )
+const copyText = (code: string) => {
+  const hello = 'Olá, conhece o Speek?'
+  const howto = 'É só acessar speek.video e usar este código:'
+  const link = 'Você pode acessar também clicando neste link:'
+  const url = `https://speek.video/#/${code}/meet`
+  return `${hello}\n\n${howto}\n${code}\n\n${link}\n${url}`
 }
 
 @Component({
@@ -70,7 +74,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     private _route: ActivatedRoute,
     private _share: ShareService,
     private _builder: FormBuilder,
-    private _userRoom: UserRoomStorage
+    private _userRoom: UserRoomStorage,
+    private _snackbar: MatSnackBar,
+    readonly clipboard: Clipboard
   ) {}
 
   ngOnInit(): void {
@@ -90,17 +96,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  share() {
-    this._share
-      .open()
-      .pipe(takeUntil(this.destroy))
-      .subscribe((res) => {
-        // this.go(res)
-      })
-  }
-
   create() {
-    this.go(UUID.long())
+    const uuid = UUID.long()
+    const config = { duration: 6000 }
+    this.clipboard.copy(copyText(uuid))
+
+    const message = this._snackbar.open(
+      'Compartilhar chave agora?',
+      'Sim',
+      config
+    )
+    message.afterDismissed().subscribe(() => this.go(uuid))
+    message.onAction().subscribe(() => {
+      this._share.open(uuid).subscribe(() => this.go(uuid))
+    })
   }
 
   go(code: string) {

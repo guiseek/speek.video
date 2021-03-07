@@ -1,3 +1,16 @@
+export function getMimeType(bytes: number) {
+  switch (bytes) {
+    case 0x89504e47:
+      return 'image/png'
+    case 0x47494638:
+      return 'image/gif'
+    case 0x25504446:
+      return 'application/pdf'
+    case 0x504b0304:
+      return 'application/zip'
+  }
+}
+
 export function typeOfFile(
   file: File & { verifiedType?: string }
 ): Promise<File> {
@@ -6,27 +19,14 @@ export function typeOfFile(
 
   return new Promise((resolve, reject) => {
     reader.readAsArrayBuffer(slice)
-    reader.addEventListener('load', ({ target }) => {
-      const view = new DataView(target.result as ArrayBuffer)
+    reader.addEventListener('load', () => {
+      const buffer = reader.result as ArrayBuffer
 
-      switch (view.getUint32(0, false)) {
-        case 0x89504e47: {
-          file.verifiedType = 'image/png'
-          break
-        }
-        case 0x47494638: {
-          file.verifiedType = 'image/gif'
-          break
-        }
-        case 0x25504446: {
-          file.verifiedType = 'application/pdf'
-          break
-        }
-        case 0x504b0304: {
-          file.verifiedType = 'application/zip'
-          break
-        }
-      }
+      const view = new DataView(buffer)
+      const magic = view.getUint32(0, false)
+
+      file.verifiedType = getMimeType(magic)
+
       resolve(file)
     })
   })

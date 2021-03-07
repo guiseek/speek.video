@@ -31,9 +31,8 @@ export class ShareComponent {
   shareLink(item: ShareTool) {
     console.log(item)
     console.log(this.data)
-    const text = `Olá 👋 tudo bem?
-Podemos falar por pelo Speek? basta clicar no link em anexo.
-Obrigado 👍`
+    const text = `Olá 👋
+Vamos conversar pelo Speek! Clique no link abaixo.`
     this.sheetRef.dismiss({
       hashtags: item,
       title: 'Speek',

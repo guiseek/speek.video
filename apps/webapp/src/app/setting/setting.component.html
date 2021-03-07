@@ -2,7 +2,7 @@
   <a routerLink="/" aria-label="Home" mat-icon-button>
     <mat-icon>arrow_backward</mat-icon>
   </a>
-  <span class="brand-name"> Configurações </span>
+  <span class="brand-name"> Configure </span>
 </speek-toolbar>
 <form [formGroup]="form">
   <section *ngIf="stream?.active" class="video-container">
@@ -19,7 +19,7 @@
   </section>
   <section>
     <mat-list>
-      <h3 mat-subheader>Selecionar dispositivos</h3>
+      <h3 mat-subheader>Selecione seus dispositivos</h3>
     </mat-list>
     <mat-form-field color="accent" appearance="outline">
       <mat-label>Áudio</mat-label>
@@ -57,7 +57,7 @@
   <mat-divider></mat-divider>
   <section formGroupName="state">
     <mat-list>
-      <h3 mat-subheader>Entrar nas reuniões sempre com</h3>
+      <h3 mat-subheader>Entre nas reuniões sempre</h3>
       <mat-list-item>
         <mat-icon mat-list-icon>mic</mat-icon>
         <h3 mat-line>Áudio</h3>
