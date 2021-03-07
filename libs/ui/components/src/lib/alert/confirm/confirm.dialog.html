@@ -3,10 +3,10 @@
 <mat-dialog-content> {{data.body}} </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-stroked-button color="accent" matDialogClose="false">
+  <button mat-stroked-button color="accent" [matDialogClose]="false">
     Cancelar
   </button>
-  <button mat-stroked-button color="warn" matDialogClose="true">
+  <button mat-stroked-button color="warn" [matDialogClose]="true">
     Confirmar
   </button>
 </mat-dialog-actions>

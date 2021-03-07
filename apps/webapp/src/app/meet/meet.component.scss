@@ -7,15 +7,6 @@
     opacity: 0.5;
   }
 
-  .meeting-room {
-    height: 100%;
-    position: relative;
-    speek-lamp,
-    video {
-      position: absolute;
-    }
-  }
-
   video {
     flex: 1;
     width: 100%;
@@ -26,18 +17,27 @@
     vertical-align: top;
   }
 
+  .meeting-room {
+    height: 100%;
+    position: relative;
+    video {
+      position: absolute;
+    }
+  }
+
   .mat-card {
     border-top-left-radius: 6px;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
     position: absolute;
     min-width: 200px;
-    max-width: 260px;
+    max-width: 240px;
+    max-height: 154px;
     overflow: hidden;
     bottom: 28px;
     width: 25%;
     padding: 0;
-    right: 0px;
+    right: 0;
     z-index: 2;
     opacity: 1;
     transition: opacity 800ms ease-out;
@@ -61,9 +61,7 @@
     video {
       width: 100%;
     }
-    video.remote {
-      object-fit: cover;
-    }
+
     &-actions {
       margin: 0;
       padding: 0;
@@ -76,6 +74,10 @@
       .mat-button-base {
         flex: 1;
         padding: 3px;
+
+        &:last-child {
+          padding-right: 24px;
+        }
       }
     }
   }

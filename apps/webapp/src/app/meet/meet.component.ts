@@ -1,8 +1,7 @@
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
 import { isDefined, notNull, typeOfFile, UUID } from '@speek/util/format'
-import { AlertService, TransferService } from '@speek/ui/components'
-import { TransferComponent } from './transfer/transfer.component'
 import { MeetAddonDirective } from './meet-addon.directive'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { ActivatedRoute, Router } from '@angular/router'
 import { UserSetupStorage } from '@speek/data/storage'
 import { stopStream } from '@speek/core/stream'
@@ -23,6 +22,7 @@ import {
   PeerDataAdapter,
   SignalingAdapter,
 } from '@speek/core/adapter'
+import { MeetService } from './meet.service'
 
 @Component({
   selector: 'speek-meet',
@@ -70,26 +70,33 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly status = new Subject<string>()
   readonly status$ = this.status.asObservable()
 
+  public readonly filesAllowed = [
+    'image/png',
+    'image/gif',
+    'application/pdf',
+    'image/jpeg',
+    'image/svg+xml',
+    'application/zip',
+    'application/json',
+    'video/mp4',
+    'video/quicktime',
+    'Unknown filetype',
+  ]
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private alert: AlertService,
+    private snackBar: MatSnackBar,
+    private service: MeetService,
     readonly peer: PeerAdapter,
     readonly stream: StreamAdapter,
-    readonly transfer: TransferService,
     readonly signaling: SignalingAdapter,
     readonly userSetup: UserSetupStorage,
     readonly resolver: ComponentFactoryResolver
   ) {
     const { code } = this.route.snapshot.params
     this.code = code
-
-    const sender = this.peer.connection.createDataChannel('send')
-
-    this.peer.connection.addEventListener('datachannel', ({ channel }) => {
-      const confirm = this.transfer.listen(channel)
-      confirm.subscribe((res: string) => channel.send(res))
-    })
+    this.service.listenFile(this.peer.connection)
   }
 
   ngOnInit(): void {
@@ -128,11 +135,13 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.signaling
       .on(SpeekAction.Created)
-      .subscribe((payload) => this.setLocal(payload))
+      .pipe(takeUntil(this.destroy))
+      .subscribe(this.setLocal)
 
     this.signaling
       .on(SpeekAction.Joined)
-      .subscribe((payload) => this.setLocal(payload))
+      .pipe(takeUntil(this.destroy))
+      .subscribe(this.setLocal)
   }
 
   async handle({ data, sender }: SpeekPayload) {
@@ -161,7 +170,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  setLocal(payload?: SpeekPayload) {
+  setLocal = () => {
     const audio = this.userSetup.getAudioConfig()
     const video = this.userSetup.getVideoConfig()
 
@@ -210,50 +219,17 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     this._video.next(enabled)
   }
 
-  loadTransfer(channel: RTCDataChannel) {
-    const factory = this.resolver.resolveComponentFactory(TransferComponent)
-
-    const viewRef = this.meetAddon.viewContainerRef
-    viewRef.clear()
-
-    const cmpRef = viewRef.createComponent<TransferComponent>(factory)
-    cmpRef.instance.data = channel
-  }
-
   onFileChange(files: FileList) {
     if (!!files.length) {
-      typeOfFile(files.item(0)).then((file) => {
-        if (file) {
-          const channel = this.peer.connection.createDataChannel(this.code)
-          this.transfer.send(channel, file)
+      typeOfFile(files.item(0)).then(({ verifiedType }) => {
+        if (this.filesAllowed.includes(verifiedType)) {
+          this.service.sendFile(this.peer.connection, files.item(0))
+        } else {
+          const message = 'Apenas arquivos conhecidos. Exemplo:'
+          this.snackBar.open(`${message} ${this.filesAllowed}`)
         }
       })
     }
-  }
-
-  openTransfer() {
-    const conn = this.peer.connection
-    const channel = conn.createDataChannel(this.code)
-    channel.onopen = () => {
-      channel.send('file')
-    }
-    channel.onmessage = ({ data }) => {
-      console.log('message: ', data)
-    }
-    // this.transfer.selectFile().subscribe((response) => {
-    //   console.log(response)
-    //   this.data.sendFile(response as File)
-    // })
-
-    // this.peer.sendMessage({
-    //   from: this.code,
-    //   type: 'file',
-    //   data: 'Daeeeee maluco, aceita aew',
-    // })
-    // this.peerData.send({ message: 'dae doido' })
-    // this.transfer.open(this.peer.connection).subscribe((res) => {
-    //   console.log(res)
-    // })
   }
 
   hangup() {

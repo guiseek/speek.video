@@ -116,5 +116,7 @@ body .flex {
 }
 .video-dialog .mat-dialog-container {
   padding: 0;
-  // min-width: 320px;
+}
+.confirm-dialog .mat-dialog-actions {
+  justify-content: space-between;
 }

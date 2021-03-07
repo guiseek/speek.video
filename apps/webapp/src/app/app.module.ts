@@ -17,7 +17,6 @@ import { ClipboardModule } from '@angular/cdk/clipboard'
 import { LayoutModule } from '@angular/cdk/layout'
 
 import { PeerSignalBadgePipe, PeerStateBadgePipe } from './shared/pipes'
-import { TransferComponent } from './meet/transfer/transfer.component'
 import { MeetAddonDirective } from './meet/meet-addon.directive'
 import { SettingComponent } from './setting/setting.component'
 import { AudioDialog } from './setting/audio/audio.dialog'
@@ -42,7 +41,6 @@ import { MeetGuard } from './meet/meet.guard'
     AudioDialog,
     VideoDialog,
     SettingComponent,
-    TransferComponent,
     MeetAddonDirective,
     PeerStateBadgePipe,
     PeerSignalBadgePipe,

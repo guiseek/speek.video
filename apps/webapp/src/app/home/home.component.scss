@@ -31,7 +31,6 @@
 
   .mat-form-field {
     width: 320px;
-    // margin: 10px;
   }
 
   &::before {
@@ -48,14 +47,4 @@
 
     transition: opacity 350ms ease-in-out, background-size 400ms ease;
   }
-  // &:hover::before {
-  //   opacity: 0.08;
-  //   background-size: 260%;
-  // }
-
-  // .mat-fab {
-  //   position: absolute;
-  //   right: 20px;
-  //   bottom: 20px;
-  // }
 }

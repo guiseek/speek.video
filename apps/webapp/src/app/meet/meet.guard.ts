@@ -23,9 +23,11 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
         chamada ou encerre confirmando
       `,
     }
+    const panelClass = 'confirm-dialog'
+    const config = { data, panelClass }
     const state = component.state?.value
     return state === 'connected' || state === 'connecting'
-      ? this._dialog.open(ConfirmDialog, { data }).afterClosed()
+      ? this._dialog.open(ConfirmDialog, config).afterClosed()
       : of(true)
   }
 
