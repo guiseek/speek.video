@@ -7,6 +7,11 @@ function stereoOpus({ type, sdp }: RTCSessionDescriptionInit) {
   return { type, sdp }
 }
 
+function maxMessageSize({ type, sdp }: RTCSessionDescriptionInit) {
+  sdp = sdp.replace(/a=max-message-size:262144/, 'a=max-message-size:65535')
+  return { type, sdp }
+}
+
 export type PeerConfig = RTCConfiguration
 export class PeerAdapter {
   connection: RTCPeerConnection
@@ -27,15 +32,6 @@ export class PeerAdapter {
 
   constructor(config: PeerConfig) {
     this.connection = new RTCPeerConnection(config)
-
-    // this.sendChannel = this.connection.createDataChannel('connection')
-    // this.connection.addEventListener('datachannel', ({ channel }) => {
-    //   channel.addEventListener('message', ({ data }) => {
-    //     this._onMessage.next(JSON.parse(data))
-    //   })
-
-    //   this.receiveChannel = channel
-    // })
 
     this.onState = new Observable((subscriber) => {
       this.connection.addEventListener('connectionstatechange', (event) => {
@@ -88,7 +84,7 @@ export class PeerAdapter {
     return new Promise<RTCSessionDescription>((resolve, reject) => {
       this.connection
         .createOffer(options)
-        .then((sdp) => this.connection.setLocalDescription(sdp))
+        .then((sdp) => this.connection.setLocalDescription(maxMessageSize(sdp)))
         .then(() => resolve(this.connection.localDescription))
         .catch((err) => reject(err))
     })
@@ -120,17 +116,4 @@ export class PeerAdapter {
       .getTracks()
       .forEach((track) => this.connection.addTrack(track, stream))
   }
-
-  sendMessage(message: SpeekMessage) {
-    // this.sendChannel.send(JSON.stringify(message))
-  }
-
-  // createChannel(label: string, options?: RTCDataChannelInit) {
-  //   return new Promise<PeerDataAdapter>((resolve, reject) => {
-  //     const channel = this.connection.createDataChannel(label, options)
-  //     channel.addEventListener('open', ({ target }) => {
-  //       resolve(new PeerDataAdapter(target as RTCDataChannel))
-  //     })
-  //   })
-  // }
 }

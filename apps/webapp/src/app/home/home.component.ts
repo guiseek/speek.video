@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const { code } = this._route.snapshot.params
     this.form.patchValue({ code: code ?? '' })
     this.form.valueChanges
-      .pipe(debounceTime(600), takeUntil(this.destroy))
+      .pipe(debounceTime(400), takeUntil(this.destroy))
       .subscribe(() => this.onCodeChange())
   }
 
@@ -98,7 +98,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   create() {
     const uuid = UUID.long()
-    const config = { duration: 6000 }
+    const config = { duration: 2800 }
     this.clipboard.copy(copyText(uuid))
 
     const message = this._snackbar.open(

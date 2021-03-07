@@ -46,7 +46,7 @@
       mat-button
       (click)="inputFile.click()"
     >
-      <mat-icon>swap_horiz</mat-icon>
+      <mat-icon>cloud_upload</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
@@ -73,6 +73,6 @@
   #inputFile
   style="display: none"
   (change)="onFileChange($event.target?.files)"
-  accept="image/jpeg, image/png, image/gif, application/pdf, application/zip"
+  [accept]="filesAllowed"
 />
 <span class="meet-code">{{ code }}</span>

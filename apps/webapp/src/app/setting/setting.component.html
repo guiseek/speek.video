@@ -31,7 +31,7 @@
       >
         <mat-option value=""> Selecione um dispositivo </mat-option>
         <mat-option *ngFor="let d of audioDevices$ | async" [value]="d">
-          {{ d.label }}
+          {{ d.label || 'Padrão' }}
         </mat-option>
       </mat-select>
       <mat-hint>Este será seu microfone</mat-hint>
