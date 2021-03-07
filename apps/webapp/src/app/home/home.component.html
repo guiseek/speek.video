@@ -13,7 +13,8 @@
 
 <section class="flex col justify-center">
   <h3 class="mat-h3">
-    The most private way of chatting
+    Sua maneira mais privada de conversar
+    <!-- The most private way of chatting -->
   </h3>
   <button
     color="primary"
@@ -21,39 +22,40 @@
     (click)="create()"
     aria-label="Iniciar conversa"
   >
-    Create new private room
+    Criar uma nova sala privada
+    <!-- Create new private room -->
   </button>
 </section>
 
 <section class="flex col justify-center">
-  <h2 class="mat-h2">OR</h2>
+  <h2 class="mat-h2">
+    OU
+    <!-- OR -->
+  </h2>
 </section>
 
 <form class="flex col justify-center" [formGroup]="form">
   <mat-form-field appearance="outline" color="primary">
     <mat-label>
-      enter existing room key or link
+      insira a chave ou link existente
+      <!-- enter existing room key or link -->
     </mat-label>
     <input
       matInput
       autofocus
       type="text"
       name="code"
-      cdkFocusInitial
       spellcheck="false"
       autocomplete="off"
       formControlName="code"
     />
     <mat-hint>
-      provided by a host
+      fornecido por um anfitrião
+      <!-- provided by a host -->
     </mat-hint>
     <mat-error>
-      your key doesn't work here
+      sua chave não funciona aqui
+      <!-- your key doesn't work here -->
     </mat-error>
   </mat-form-field>
 </form>
-
-
-<!-- <button mat-fab (click)="share()" color="primary" aria-label="Compartilhar">
-  <mat-icon>share</mat-icon>
-</button> -->

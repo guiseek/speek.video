@@ -1,31 +1,28 @@
-import { getAudioConfig, getVideoConfig } from '@speek/util/device'
-import { isDefined, notNull, UUID } from '@speek/util/format'
-import { ActivatedRoute, Router } from '@angular/router'
+import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
+import { isDefined, notNull, typeOfFile, UUID } from '@speek/util/format'
 import { AlertService, TransferService } from '@speek/ui/components'
+import { TransferComponent } from './transfer/transfer.component'
+import { MeetAddonDirective } from './meet-addon.directive'
+import { ActivatedRoute, Router } from '@angular/router'
+import { UserSetupStorage } from '@speek/data/storage'
 import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 import {
-  SpeekAction,
-  SpeekData,
-  SpeekPayload,
-  WithTarget,
-} from '@speek/core/entity'
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
   OnInit,
+  Component,
+  OnDestroy,
   ViewChild,
+  ElementRef,
+  AfterViewInit,
+  ComponentFactoryResolver,
 } from '@angular/core'
 import {
   PeerAdapter,
+  StreamAdapter,
   PeerDataAdapter,
   SignalingAdapter,
-  StreamAdapter,
 } from '@speek/core/adapter'
-import { UserSetupStorage } from '@speek/data/storage'
 
 @Component({
   selector: 'speek-meet',
@@ -35,11 +32,8 @@ import { UserSetupStorage } from '@speek/data/storage'
 export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy = new Subject<void>()
 
-  _audio = new BehaviorSubject<boolean>(true)
-  audio = this._audio.asObservable()
-
-  _video = new BehaviorSubject<boolean>(true)
-  video = this._video.asObservable()
+  @ViewChild(MeetAddonDirective, { static: true })
+  meetAddon: MeetAddonDirective
 
   @ViewChild('local')
   localRef: ElementRef<HTMLVideoElement>
@@ -50,6 +44,12 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   remoteRef: ElementRef<HTMLVideoElement>
   remote: HTMLVideoElement
   remoteStream: MediaStream
+
+  _audio = new BehaviorSubject<boolean>(true)
+  audio = this._audio.asObservable()
+
+  _video = new BehaviorSubject<boolean>(true)
+  video = this._video.asObservable()
 
   data: PeerDataAdapter
   peerChannel: RTCDataChannel
@@ -78,13 +78,18 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     readonly stream: StreamAdapter,
     readonly transfer: TransferService,
     readonly signaling: SignalingAdapter,
-    readonly userSetup: UserSetupStorage
+    readonly userSetup: UserSetupStorage,
+    readonly resolver: ComponentFactoryResolver
   ) {
     const { code } = this.route.snapshot.params
     this.code = code
 
-    this.data = new PeerDataAdapter(this.peer.connection)
-    this.data.state$.subscribe(console.log)
+    const sender = this.peer.connection.createDataChannel('send')
+
+    this.peer.connection.addEventListener('datachannel', ({ channel }) => {
+      const confirm = this.transfer.listen(channel)
+      confirm.subscribe((res: string) => channel.send(res))
+    })
   }
 
   ngOnInit(): void {
@@ -96,39 +101,14 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     const payload = new SpeekPayload(this.sender, this.code)
     this.signaling.send(SpeekAction.CreateOrJoin, payload)
 
-    this.peer.onSignal.subscribe((state) => {
-      this.signal.next(state)
-    })
+    this.peer.onSignal.subscribe((state) => this.signal.next(state))
 
-    this.peer.onMessage.subscribe((message) => {
-      console.log('message: ', message)
-      if (message.type === 'file') {
-        this.alert
-          .openConfirm({
-            header: 'Transferência',
-            body: 'Aceita receber um arquivo?',
-          })
-          .afterClosed()
-      }
-    })
-
-    this.peer.onState.subscribe((state) => {
-      console.log('state: ', state)
-      this.state.next(state)
-      if (state === 'connected') {
-        console.log('CONNECTED')
-      }
-      if (state === 'disconnected') {
-        this.remote.srcObject = null
-      }
-    })
+    this.peer.onState.subscribe((state) => this.state.next(state))
 
     this.peer.onCandidate
       .pipe(takeUntil(this.destroy))
       .subscribe((candidate) => {
-        if (candidate) {
-          this.sendOffer({ ice: candidate })
-        }
+        if (candidate) this.sendOffer({ ice: candidate })
       })
 
     this.peer.onTrack.pipe(takeUntil(this.destroy)).subscribe((track) => {
@@ -140,22 +120,12 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     })
-
-    this.peer.onNegotiationNeeded.subscribe(
-      ({ target }: WithTarget<RTCPeerConnection>) => {
-        this.status.next(target.connectionState)
-      }
-    )
-
-    this.peer.onWarning.subscribe(({ description }) => {
-      console.log('needed: ', description)
-      this.status.next(description)
-    })
   }
 
   ngAfterViewInit(): void {
     this.local = this.localRef.nativeElement
     this.remote = this.remoteRef.nativeElement
+
     this.signaling
       .on(SpeekAction.Created)
       .subscribe((payload) => this.setLocal(payload))
@@ -240,11 +210,40 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     this._video.next(enabled)
   }
 
+  loadTransfer(channel: RTCDataChannel) {
+    const factory = this.resolver.resolveComponentFactory(TransferComponent)
+
+    const viewRef = this.meetAddon.viewContainerRef
+    viewRef.clear()
+
+    const cmpRef = viewRef.createComponent<TransferComponent>(factory)
+    cmpRef.instance.data = channel
+  }
+
+  onFileChange(files: FileList) {
+    if (!!files.length) {
+      typeOfFile(files.item(0)).then((file) => {
+        if (file) {
+          const channel = this.peer.connection.createDataChannel(this.code)
+          this.transfer.send(channel, file)
+        }
+      })
+    }
+  }
+
   openTransfer() {
-    this.transfer.selectFile().subscribe((response) => {
-      console.log(response)
-      this.data.sendFile(response as File)
-    })
+    const conn = this.peer.connection
+    const channel = conn.createDataChannel(this.code)
+    channel.onopen = () => {
+      channel.send('file')
+    }
+    channel.onmessage = ({ data }) => {
+      console.log('message: ', data)
+    }
+    // this.transfer.selectFile().subscribe((response) => {
+    //   console.log(response)
+    //   this.data.sendFile(response as File)
+    // })
 
     // this.peer.sendMessage({
     //   from: this.code,

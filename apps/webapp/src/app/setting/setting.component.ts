@@ -1,6 +1,5 @@
 import { VideoDialog } from './video/video.dialog'
 import { MatDialog } from '@angular/material/dialog'
-import { stopStream } from '@speek/core/stream'
 import { UserSetupStorage } from '@speek/data/storage'
 import { UserSetupForm } from '@speek/ui/components'
 import { BehaviorSubject, Subject } from 'rxjs'

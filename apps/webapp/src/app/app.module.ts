@@ -12,34 +12,81 @@ import { createSpeekIcon, getFire, getLogo } from '@speek/util/format'
 import { UserSetupStorage, UserRoomStorage } from '@speek/data/storage'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { UserSetupAdapter } from '@speek/core/adapter'
-import { AppComponent } from './app.component'
+import { MaterialModule } from './shared/material.module'
+import { ClipboardModule } from '@angular/cdk/clipboard'
+import { LayoutModule } from '@angular/cdk/layout'
 
+import { PeerSignalBadgePipe, PeerStateBadgePipe } from './shared/pipes'
+import { TransferComponent } from './meet/transfer/transfer.component'
+import { MeetAddonDirective } from './meet/meet-addon.directive'
+import { SettingComponent } from './setting/setting.component'
+import { AudioDialog } from './setting/audio/audio.dialog'
+import { VideoDialog } from './setting/video/video.dialog'
+import { HomeComponent } from './home/home.component'
+import { MeetComponent } from './meet/meet.component'
+import { AppComponent } from './app.component'
+import {
+  AudioModule,
+  ShareModule,
+  SplashModule,
+  ToolbarModule,
+} from '@speek/ui/components'
 import { environment } from './../environments/environment'
+import { MeetGuard } from './meet/meet.guard'
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    MeetComponent,
+    AudioDialog,
+    VideoDialog,
+    SettingComponent,
+    TransferComponent,
+    MeetAddonDirective,
+    PeerStateBadgePipe,
+    PeerSignalBadgePipe,
+  ],
   imports: [
     A11yModule,
     DrawerModule,
     BrowserModule,
+    ToolbarModule,
+    SplashModule,
+    AudioModule,
+    ShareModule,
+    LayoutModule,
+    MaterialModule,
+    ClipboardModule,
     ReactiveFormsModule,
     RouterModule.forRoot(
       [
-        // {
-        //   path: 'setting',
-        //   loadChildren: () =>
-        //     import('./module/setting/setting.module').then(
-        //       (m) => m.SettingModule
-        //     ),
-        // },
+        { path: '', component: HomeComponent },
         {
-          path: '',
-          loadChildren: () =>
-            import('./page/page.module').then((m) => m.PageModule),
+          path: 'invite',
+          component: HomeComponent,
+        },
+        {
+          path: 'setting',
+          component: SettingComponent,
+        },
+        {
+          path: 'invite/:code',
+          component: HomeComponent,
+        },
+        {
+          path: ':code',
+          redirectTo: ':code/meet',
+        },
+        {
+          path: ':code/meet',
+          canActivate: [MeetGuard],
+          canDeactivate: [MeetGuard],
+          component: MeetComponent,
         },
       ],
       {
-        useHash: true,
+        // useHash: true,
         initialNavigation: 'enabled',
         relativeLinkResolution: 'legacy',
       }

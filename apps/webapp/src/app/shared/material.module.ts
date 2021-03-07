@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatSelectModule } from '@angular/material/select'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatStepperModule } from '@angular/material/stepper'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatSidenavModule } from '@angular/material/sidenav'
@@ -17,6 +18,7 @@ import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { MatSliderModule } from '@angular/material/slider'
@@ -31,6 +33,7 @@ import { MatSliderModule } from '@angular/material/slider'
     MatDialogModule,
     MatGridListModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatTooltipModule,
     MatInputModule,
     MatButtonModule,
@@ -42,6 +45,7 @@ import { MatSliderModule } from '@angular/material/slider'
     MatStepperModule,
     MatExpansionModule,
     MatFormFieldModule,
+    MatProgressBarModule,
     MatButtonToggleModule,
     MatProgressSpinnerModule,
   ],
