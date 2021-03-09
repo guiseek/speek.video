@@ -1,8 +1,8 @@
-import { MatSnackBar } from '@angular/material/snack-bar'
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
 import { UserRoom, WithTarget } from '@speek/core/entity'
-import { debounceTime, takeUntil } from 'rxjs/operators'
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { ActivatedRoute, Router } from '@angular/router'
+import { debounceTime, takeUntil } from 'rxjs/operators'
 import { UserRoomStorage } from '@speek/data/storage'
 import { ShareService } from '@speek/ui/components'
 import { BehaviorSubject, Subject } from 'rxjs'
@@ -15,6 +15,7 @@ import {
   HostListener,
 } from '@angular/core'
 import { Clipboard } from '@angular/cdk/clipboard'
+import { AppSound } from '../app.sound'
 
 const copyText = (code: string) => {
   const hello = 'Olá, conhece o Speek?'
@@ -71,6 +72,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private _router: Router,
+    private _sound: AppSound,
     private _route: ActivatedRoute,
     private _share: ShareService,
     private _builder: FormBuilder,
@@ -90,8 +92,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   onCodeChange() {
     if (this.form.valid) {
       const code = this.code.value
-      setTimeout(() => this.comeInOut.next(true), 400)
+
+      this._sound.play(this._sound.hero.decorative(3))
+
       this._userRoom.update(UserRoom.fromJson(this.form.value))
+
+      setTimeout(() => this.comeInOut.next(true), 400)
       setTimeout(() => this._router.navigate(['/', code, 'meet']), 2400)
     }
   }
@@ -100,6 +106,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     const uuid = UUID.long()
     const config = { duration: 2800 }
     this.clipboard.copy(copyText(uuid))
+
+    this._sound.play(this._sound.hero.decorative(1))
 
     const message = this._snackbar.open(
       'Compartilhar chave agora?',
