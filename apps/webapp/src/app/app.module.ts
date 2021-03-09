@@ -33,6 +33,7 @@ import {
 import { environment } from './../environments/environment'
 import { MeetGuard } from './meet/meet.guard'
 import { AppSound } from './app.sound'
+import { LocationStrategy, PathLocationStrategy } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -85,7 +86,7 @@ import { AppSound } from './app.sound'
         },
       ],
       {
-        // useHash: true,
+        useHash: false,
         initialNavigation: 'enabled',
         relativeLinkResolution: 'legacy',
       }
@@ -104,6 +105,7 @@ import { AppSound } from './app.sound'
     PeerProvider.withConfig(environment.configs),
     StreamProvider.withConfig(environment.constraints),
     SignalingProvider.withConfig(environment.gateway),
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })
