@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1615255954781,
+  "timestamp": 1615262120183,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -12,7 +12,7 @@
       },
       "urls": [
         "/index.html",
-        "/main.e15a4afdec1930b1efa8.js",
+        "/main.7f2a4ee5de176e45b250.js",
         "/manifest.webmanifest",
         "/polyfills.89e0e3a0918a2b154670.js",
         "/runtime.0e49e2b53282f40c8925.js",
@@ -62,8 +62,8 @@
     "/assets/images/speek-dark.svg": "674a69f5ec65780fb9eea9c8b895a15254c1b485",
     "/assets/images/speek-light.svg": "50f434ed0b5bd52c23d210a0a7f77863d4758b50",
     "/assets/images/speek.svg": "e51de86e116762ba2bd72a884bc5e45d4d7d207b",
-    "/index.html": "1ca4ccd3c0e5dea01a41da673a874290e7d2199b",
-    "/main.e15a4afdec1930b1efa8.js": "fb211ba1db0a05d0130d9b7d645ef39ef86359eb",
+    "/index.html": "165ffd28850d8800dfc1e093aa634cd530834fcb",
+    "/main.7f2a4ee5de176e45b250.js": "aa1dc2c4a5c96c146eacb56dbe5f6ddda2f5db32",
     "/manifest.webmanifest": "31dc43c39c8bf7f85deaaf64147351c921e3b5c6",
     "/polyfills.89e0e3a0918a2b154670.js": "0bfc995eed6d8570cac2d221e0462cc45dbf7156",
     "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
