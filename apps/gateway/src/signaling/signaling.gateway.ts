@@ -21,6 +21,22 @@ export class SignalingGateway
   users = new Map<string, string>()
 
   @UseGuards(SignalingGuard)
+  @SubscribeMessage(SpeekAction.KnockKnock)
+  knockKnock(
+    @ConnectedSocket() contact: Socket,
+    @MessageBody() payload: SpeekPayload
+  ) {
+    console.log(payload)
+
+    const room = this._room(payload)
+    if (room.length >= 0 && room.length < 2) {
+      contact.emit(SpeekAction.Available, true)
+    } else {
+      contact.emit(SpeekAction.Available, false)
+    }
+  }
+
+  @UseGuards(SignalingGuard)
   @SubscribeMessage(SpeekAction.CreateOrJoin)
   create(
     @ConnectedSocket() contact: Socket,

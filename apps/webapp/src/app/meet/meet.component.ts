@@ -94,8 +94,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     readonly userSetup: UserSetupStorage,
     readonly resolver: ComponentFactoryResolver
   ) {
-    const { code } = this.route.snapshot.params
-    this.code = code
+    this.code = this.route.snapshot.params.code
     this.service.listenFile(this.peer.connection)
   }
 
