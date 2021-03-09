@@ -32,6 +32,7 @@ import {
 } from '@speek/ui/components'
 import { environment } from './../environments/environment'
 import { MeetGuard } from './meet/meet.guard'
+import { AppSound } from './app.sound'
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { MeetGuard } from './meet/meet.guard'
     }),
   ],
   providers: [
+    AppSound,
     UserRoomStorage,
     UserSetupStorage,
     UserSetupAdapter,
