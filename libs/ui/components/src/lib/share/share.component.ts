@@ -37,7 +37,7 @@ Vamos conversar pelo Speek! Clique no link abaixo.`
       hashtags: item,
       title: 'Speek',
       text: text,
-      url: `https://speek.video/#/${this.data}`,
+      url: `https://speek.video/${this.data}/meet`,
     })
   }
 

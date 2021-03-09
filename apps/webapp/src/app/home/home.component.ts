@@ -20,7 +20,7 @@ const copyText = (code: string) => {
   const hello = 'Olá, conhece o Speek?'
   const howto = 'É só acessar speek.video e usar este código:'
   const link = 'Você pode acessar também clicando neste link:'
-  const url = `https://speek.video/#/${code}/meet`
+  const url = `https://speek.video/${code}/meet`
   return `${hello}\n\n${howto}\n${code}\n\n${link}\n${url}`
 }
 

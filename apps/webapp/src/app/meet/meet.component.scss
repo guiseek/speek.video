@@ -1,3 +1,5 @@
+@import 'libs/ui/stylesheets/src/mixins';
+
 :host {
   flex: 1;
   display: flex;
@@ -32,7 +34,6 @@
     position: absolute;
     min-width: 200px;
     max-width: 240px;
-    max-height: 154px;
     overflow: hidden;
     bottom: 28px;
     width: 25%;
@@ -43,6 +44,8 @@
     transition: opacity 800ms ease-out;
     &.enabled {
       video {
+        max-height: 154px;
+        object-fit: cover;
         -webkit-animation: swing-in-bottom-fwd 0.5s
           cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         animation: swing-in-bottom-fwd 0.5s
@@ -75,8 +78,10 @@
         flex: 1;
         padding: 3px;
 
-        &:last-child {
-          padding-right: 24px;
+        @include media('<=tablet') {
+          &:last-child {
+            padding-right: 24px;
+          }
         }
       }
     }
