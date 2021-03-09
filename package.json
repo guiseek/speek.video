@@ -101,6 +101,7 @@
     "@typescript-eslint/eslint-plugin": "4.3.0",
     "@typescript-eslint/parser": "4.3.0",
     "cypress": "^6.0.1",
+    "cz-customizable": "^6.3.0",
     "dotenv": "6.2.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "6.0.0",
@@ -119,7 +120,10 @@
   },
   "config": {
     "commitizen": {
-      "path": "cz-conventional-changelog"
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.js"
     }
   },
   "husky": {
