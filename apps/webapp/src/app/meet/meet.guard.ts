@@ -1,18 +1,18 @@
+import { SpeekAction, SpeekPayload } from '@speek/core/entity'
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { SignalingAdapter } from '@speek/core/adapter'
 import { ConfirmDialog } from '@speek/ui/components'
 import { MatDialog } from '@angular/material/dialog'
 import { MeetComponent } from './meet.component'
+import { noop, Observable, of } from 'rxjs'
 import { Injectable } from '@angular/core'
+import { take, tap } from 'rxjs/operators'
 import { UUID } from '@speek/util/format'
-import { Observable, of } from 'rxjs'
 import {
   CanActivate,
   CanDeactivate,
   ActivatedRouteSnapshot,
 } from '@angular/router'
-import { SignalingAdapter } from '@speek/core/adapter'
-import { SpeekAction, SpeekPayload } from '@speek/core/entity'
-import { map, take, tap } from 'rxjs/operators'
 
 @Injectable({ providedIn: 'root' })
 export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
@@ -53,21 +53,11 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
     const payload = new SpeekPayload('', params.code)
     this._signaling.send(SpeekAction.KnockKnock, payload)
 
-    // return the answer to the question asked
-    return (isFull$ as Observable<any>).pipe(
-      take(1),
-      tap((result) => {
-        if (result === false) {
-          this.showSnack('Já tem 2 pessoas na sala')
-        }
-      })
-    )
-  }
+    const ifFull = (full: boolean) => {
+      return !full ? this._snackbar.open('Sala cheia') : noop
+    }
 
-  private showSnack(message: string) {
-    return this._snackbar.open(message, 'Fechar', {
-      panelClass: 'available-snackbar',
-      duration: 4000,
-    })
+    // return the answer to the question asked
+    return (isFull$ as Observable<any>).pipe(take(1), tap(ifFull))
   }
 }
