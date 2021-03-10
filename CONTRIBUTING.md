@@ -7,10 +7,10 @@ Adoraríamos que você contribuísse com o projeto e ajudasse a torná-la ainda 
 - [Issues and Bugs](#issue)
 - [Feature Requests](#feature)
 - [Regras de codificação](#rules)
+
 ## <a name="coc"></a> Código de Conduta
 
 Ajude-nos a manter a comunidade Speek aberta e inclusiva. Por favor, leia e siga nosso [Código de Conduta](CODE_OF_CONDUCT.md).
-
 
 ## <a name="question"></a> Tem alguma dúvida ou problema?
 
@@ -194,6 +194,7 @@ A mensagem do commit deve ser estruturada da seguinte forma:
 
 [rodapé opcional]
 ```
+
 ---
 
 O commit contém os seguintes elementos estruturais, para comunicar a intenção ao utilizador da sua biblioteca:
@@ -252,7 +253,6 @@ closes issue #12
 
 As palavras-chaves "DEVE" ("MUST"), "NÃO DEVE" ("MUST NOT"), "OBRIGATÓRIO" ("REQUIRED"), "DEVERÁ" ("SHALL"), "NÃO DEVERÁ" ("SHALL NOT"), "PODEM" ("SHOULD"), "NÃO PODEM" ("SHOULD NOT"), "RECOMENDADO" ("RECOMMENDED"), "PODE" ("MAY") e "OPCIONAL" ("OPTIONAL"), nesse documento, devem ser interpretados como descrito na [RFC 2119](http://tools.ietf.org/html/rfc2119).
 
-
 1. A mensagem de commit DEVE ser prefixado com um tipo, que consiste em um substantivo, `feat`, `fix`, etc., seguido por um escopo OPCIONAL, e OBRIGATÓRIO terminar com dois-pontos e um espaço.
 
 1. O tipo `feat` DEVE ser usado quando um commit adiciona um novo recurso ao seu aplicativo ou biblioteca.
@@ -277,7 +277,6 @@ As palavras-chaves "DEVE" ("MUST"), "NÃO DEVE" ("MUST NOT"), "OBRIGATÓRIO" ("R
 
 1. Um `!` PODE ser acrescentado antes do `:` no prefixo tipo/escopo, para chamar a atenção para modificações que quebram a compatibilidade. `BREAKING CHANGE: description` também DEVE ser incluído no corpo ou no rodapé, junto com o `!` no prefixo.
 
-
 #### Porque utilizar Conventional Commits
 
 - Criação automatizada de CHANGELOGs.
@@ -286,9 +285,7 @@ As palavras-chaves "DEVE" ("MUST"), "NÃO DEVE" ("MUST NOT"), "OBRIGATÓRIO" ("R
 - Disparar processos de build e deploy.
 - Facilitar a contribuição de outras pessoas em seus projetos, permitindo que eles explorem um histórico de commits mais estruturado.
 
-
 ---
-
 
 ## Nossa stack
 
@@ -341,12 +338,6 @@ As palavras-chaves "DEVE" ("MUST"), "NÃO DEVE" ("MUST NOT"), "OBRIGATÓRIO" ("R
   </div>
 </div>
 
-
-
-
-
-
-
 <!-- # Todo
 
 > ### **_Luiz_**
@@ -369,4 +360,3 @@ As palavras-chaves "DEVE" ("MUST"), "NÃO DEVE" ("MUST NOT"), "OBRIGATÓRIO" ("R
 
 Poderia ser algo amigável como "Entre na nossa reunião do Peek por este link: ..."
 R: Mas sim, isso faz sentido tbm..
-

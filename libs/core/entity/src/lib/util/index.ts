@@ -1,2 +1,2 @@
-export * from './value-of';
-export * from './with-target';
+export * from './value-of'
+export * from './with-target'
