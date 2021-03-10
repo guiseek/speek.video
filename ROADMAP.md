@@ -1,4 +1,5 @@
 # ROADMAP
+
 ### @ToDo
 
 Algumas tarefas no roadmap de curto prazo
@@ -59,4 +60,4 @@ Algumas tarefas no roadmap de curto prazo
   - [ ] SIP ([asterisk](https://wiki.asterisk.org/wiki/display/AST/Configuring+Asterisk+for+WebRTC+Clients))
 
 - [ ] Chat em grupo
-  <br>_até 10 peers (limitação de banda user)_ -->
+      <br>_até 10 peers (limitação de banda user)_ -->

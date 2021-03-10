@@ -11,6 +11,7 @@ import { SpeekAction, SpeekPayload } from '@speek/core/entity'
 import { Server, Socket } from 'socket.io'
 import { UseGuards } from '@nestjs/common'
 import { SignalingGuard } from './signaling.guard'
+import { AppLogger } from '../app.logger'
 
 @WebSocketGateway()
 export class SignalingGateway
@@ -20,14 +21,17 @@ export class SignalingGateway
 
   users = new Map<string, string>()
 
+  constructor(readonly logger: AppLogger) {
+    logger.setContext('Signaling')
+  }
+
   @UseGuards(SignalingGuard)
   @SubscribeMessage(SpeekAction.KnockKnock)
   knockKnock(
     @ConnectedSocket() contact: Socket,
     @MessageBody() payload: SpeekPayload
   ) {
-    console.log(payload)
-
+    this.logger.debug(payload, SpeekAction.KnockKnock)
     const room = this._room(payload)
     if (room.length >= 0 && room.length < 2) {
       contact.emit(SpeekAction.Available, true)
@@ -42,7 +46,7 @@ export class SignalingGateway
     @ConnectedSocket() contact: Socket,
     @MessageBody() payload: SpeekPayload
   ) {
-    console.log(payload)
+    this.logger.debug(payload, SpeekAction.CreateOrJoin)
     if (!this.users.has(contact.id)) {
       this.users.set(contact.id, payload.sender)
     }
@@ -64,6 +68,7 @@ export class SignalingGateway
     @ConnectedSocket() contact: Socket,
     @MessageBody() payload: SpeekPayload
   ) {
+    this.logger.debug(payload, SpeekAction.Offer)
     const room = contact.to(payload.code)
     room.broadcast.emit(SpeekAction.Offer, payload)
   }
@@ -74,6 +79,7 @@ export class SignalingGateway
     @ConnectedSocket() contact: Socket,
     @MessageBody() payload: SpeekPayload
   ) {
+    this.logger.debug(payload, SpeekAction.Screen)
     const room = contact.to(payload.code)
     room.broadcast.emit(SpeekAction.Screen, payload)
   }

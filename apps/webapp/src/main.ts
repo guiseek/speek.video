@@ -9,9 +9,10 @@ const p: WithContext<WebApplication> = {
   '@type': 'WebApplication',
   name: 'Speek - Simples e seguro',
   about: 'Crie um link para conversar e pronto.',
-  description: 'Sua ligação funciona pessoa pra pessoa, sem servidores, sem persistência, direto ao ponto.',
+  description:
+    'Sua ligação funciona pessoa pra pessoa, sem servidores, sem persistência, direto ao ponto.',
   additionalType: 'Liberdade em áudio e vídeo',
-  url: 'https://speek.video'
+  url: 'https://speek.video',
 }
 
 if (environment.production) {
