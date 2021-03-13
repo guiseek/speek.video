@@ -41,9 +41,10 @@
       <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
     </button>
     <button
-      type="button"
-      aria-label="Transferir dados"
       mat-button
+      type="button"
+      aria-label="Transferir arquivo"
+      [disabled]="(state$ | async) != 'connected'"
       (click)="inputFile.click()"
     >
       <mat-icon>cloud_upload</mat-icon>

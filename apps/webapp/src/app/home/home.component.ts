@@ -107,7 +107,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     const config = { duration: 2800 }
     this.clipboard.copy(copyText(uuid))
 
-    this._sound.play(this._sound.hero.decorative(1))
+    setTimeout(() => {
+      this._sound.play(this._sound.hero.decorative(1))
+    }, 2000)
 
     const message = this._snackbar.open(
       'Compartilhar chave agora?',

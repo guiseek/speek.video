@@ -1,3 +1,4 @@
+import { UUID } from '@speek/util/format'
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
 import { IS_PUBLIC_KEY } from '../auth/auth.decorator'
 import { SpeekPayload } from '@speek/core/entity'
@@ -22,7 +23,7 @@ export class SignalingGuard implements CanActivate {
   }
 
   hasCode({ code }: SpeekPayload) {
-    if (!code) throw new WsException('Missing code.')
+    if (!code || !UUID.isValid(code)) throw new WsException('Missing code.')
     return !!code
   }
 }
