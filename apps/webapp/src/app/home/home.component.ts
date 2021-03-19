@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  create() {
+  create(route: string = 'meet') {
     const uuid = UUID.long()
     const config = { duration: 2800 }
     this.clipboard.copy(copyText(uuid))
@@ -116,15 +116,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       'Sim',
       config
     )
-    message.afterDismissed().subscribe(() => this.go(uuid))
+    message.afterDismissed().subscribe(() => this.go(uuid, route))
     message.onAction().subscribe(() => {
-      this._share.open(uuid).subscribe(() => this.go(uuid))
+      this._share.open(uuid).subscribe(() => this.go(uuid, route))
     })
   }
 
-  go(code: string) {
+  go(code: string, route: string) {
     if (code) {
-      this._router.navigate(['/', code, 'meet'])
+      this._router.navigate(['/', code, route])
     }
   }
 
