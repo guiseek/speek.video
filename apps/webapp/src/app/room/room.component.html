@@ -1,0 +1,72 @@
+<speek-toolbar>
+  <a routerLink="/" aria-label="Página inicial" mat-icon-button>
+    <mat-icon>arrow_backward</mat-icon>
+  </a>
+  <span> {{ state$ | async | peerStateBadge }} </span>
+</speek-toolbar>
+
+<section class="meeting-room">
+  <video class="remote" #remote autoplay playsinline muted></video>
+</section>
+
+<ng-template meetAddon></ng-template>
+
+<mat-card
+  [ngClass]="{
+    enabled: (video | async) === true,
+    disabled: (video | async) === false
+  }"
+>
+  <video class="local" #local autoplay playsinline muted></video>
+
+  <mat-card-actions aria-live="polite">
+    <button
+      type="button"
+      [attr.aria-label]="
+        (audio | async) ? 'Desabilitar áudio' : 'Habilitar áudio'
+      "
+      mat-button
+      (click)="toggleAudio()"
+    >
+      <mat-icon>{{ (audio | async) ? 'mic' : 'mic_off' }}</mat-icon>
+    </button>
+    <button
+      type="button"
+      [attr.aria-label]="
+        (video | async) ? 'Desabilitar vídeo' : 'Habilitar vídeo'
+      "
+      mat-button
+      (click)="toggleVideo()"
+    >
+      <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
+    </button>
+    <button
+      mat-button
+      type="button"
+      aria-label="Transferir arquivo"
+      [disabled]="(state$ | async) != 'connected'"
+    >
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<ng-container *ngIf="(signal$ | async) != 'stable'">
+  <speek-splash
+    width="200px"
+    [message]="signal$ | async | peerSignalBadge"
+  ></speek-splash>
+</ng-container>
+
+<button
+  mat-fab
+  [disabled]="(state$ | async) != 'connected'"
+  (click)="hangup()"
+  aria-label="Encerrar ligação"
+  class="call-end"
+  color="warn"
+>
+  <mat-icon>call_end</mat-icon>
+</button>
+
+<span class="meet-code">{{ code }}</span>

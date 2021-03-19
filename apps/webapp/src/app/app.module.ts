@@ -16,24 +16,26 @@ import { MaterialModule } from './shared/material.module'
 import { ClipboardModule } from '@angular/cdk/clipboard'
 import { LayoutModule } from '@angular/cdk/layout'
 
+import { environment } from './../environments/environment'
 import { PeerSignalBadgePipe, PeerStateBadgePipe } from './shared/pipes'
+import { LocationStrategy, PathLocationStrategy } from '@angular/common'
 import { MeetAddonDirective } from './meet/meet-addon.directive'
 import { SettingComponent } from './setting/setting.component'
 import { AudioDialog } from './setting/audio/audio.dialog'
 import { VideoDialog } from './setting/video/video.dialog'
 import { HomeComponent } from './home/home.component'
 import { MeetComponent } from './meet/meet.component'
+import { RoomComponent } from './room/room.component'
 import { AppComponent } from './app.component'
+import { RoomGuard } from './room/room.guard'
+import { MeetGuard } from './meet/meet.guard'
+import { AppSound } from './app.sound'
 import {
   AudioModule,
   ShareModule,
   SplashModule,
   ToolbarModule,
 } from '@speek/ui/components'
-import { environment } from './../environments/environment'
-import { MeetGuard } from './meet/meet.guard'
-import { AppSound } from './app.sound'
-import { LocationStrategy, PathLocationStrategy } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common'
     MeetAddonDirective,
     PeerStateBadgePipe,
     PeerSignalBadgePipe,
+    RoomComponent,
   ],
   imports: [
     A11yModule,
@@ -71,8 +74,10 @@ import { LocationStrategy, PathLocationStrategy } from '@angular/common'
           component: SettingComponent,
         },
         {
-          path: 'invite/:code',
-          component: HomeComponent,
+          path: ':code/room',
+          canActivate: [RoomGuard],
+          canDeactivate: [RoomGuard],
+          component: RoomComponent,
         },
         {
           path: ':code',
