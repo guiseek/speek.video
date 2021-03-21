@@ -50,7 +50,6 @@ module.exports = {
     { name: 'data-storage', description: 'Lib data-storage foi alterada' },
     { name: 'util-share', description: 'Lib util-share foi alterada' },
     { name: 'util-device', description: 'Lib util-device foi alterada' },
-    { name: 'ui-addons', description: 'Lib ui-addons- foi alterada' },
     {
       name: 'design-tokens',
       description: 'Valores de design tokens alterados',

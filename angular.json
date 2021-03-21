@@ -158,6 +158,20 @@
             "jestConfig": "apps/webapp/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "request": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "npx ts-node tools/tasks/request.ts"
+          }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": [],
+          "options": {
+            "command": "npx ts-node tools/tasks/release.ts"
+          }
         }
       }
     },
@@ -501,43 +515,6 @@
             "packageJson": "libs/util/device/package.json",
             "main": "libs/util/device/src/index.ts",
             "assets": ["libs/util/device/*.md"]
-          }
-        }
-      }
-    },
-    "ui-addons": {
-      "projectType": "library",
-      "root": "libs/ui/addons",
-      "sourceRoot": "libs/ui/addons/src",
-      "prefix": "speek",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:ng-packagr-lite",
-          "options": {
-            "tsConfig": "libs/ui/addons/tsconfig.lib.json",
-            "project": "libs/ui/addons/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/ui/addons/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/ui/addons/src/**/*.ts",
-              "libs/ui/addons/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui/addons"],
-          "options": {
-            "jestConfig": "libs/ui/addons/jest.config.js",
-            "passWithNoTests": true
           }
         }
       }
