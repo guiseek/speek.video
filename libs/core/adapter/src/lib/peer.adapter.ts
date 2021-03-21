@@ -1,5 +1,5 @@
 import { PeerDataAdapter } from './peer-data.adapter'
-import { SpeekMessage, Warning } from '@speek/core/entity'
+import { SpeekMessage, SpeekError } from '@speek/core/entity'
 import { Observable, Subject } from 'rxjs'
 
 function stereoOpus({ type, sdp }: RTCSessionDescriptionInit) {
@@ -27,11 +27,12 @@ export class PeerAdapter {
   onCandidate: Observable<RTCIceCandidate>
   onNegotiationNeeded: Observable<any>
   onTrack: Observable<MediaStream>
-  onWarning: Observable<Warning>
+  onError: Observable<SpeekError>
   onStreams: Observable<readonly MediaStream[]>
 
   constructor(config: PeerConfig) {
     this.connection = new RTCPeerConnection(config)
+    // this.sendChannel = new RTCDataChannel()
 
     this.onState = new Observable((subscriber) => {
       this.connection.addEventListener('connectionstatechange', (event) => {
@@ -69,7 +70,7 @@ export class PeerAdapter {
       )
     })
 
-    this.onWarning = new Observable((subscriber) => {
+    this.onError = new Observable((subscriber) => {
       this.connection.addEventListener('icecandidateerror', (ev) => {
         subscriber.next({
           error: new Error(`Code: ${ev.errorCode}: ${ev.errorText}`),
@@ -84,7 +85,8 @@ export class PeerAdapter {
     return new Promise<RTCSessionDescription>((resolve, reject) => {
       this.connection
         .createOffer(options)
-        .then((sdp) => this.connection.setLocalDescription(maxMessageSize(sdp)))
+        // .then((sdp) => this.connection.setLocalDescription(maxMessageSize(sdp)))
+        .then((sdp) => this.connection.setLocalDescription(sdp))
         .then(() => resolve(this.connection.localDescription))
         .catch((err) => reject(err))
     })
