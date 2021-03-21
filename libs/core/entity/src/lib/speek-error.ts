@@ -1,4 +1,4 @@
-export class Warning {
+export class SpeekError {
   constructor(
     public error: Error,
     public version?: string,

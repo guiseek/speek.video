@@ -38,6 +38,12 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
+    "prerelease": "nx affected:build",
+    "version": "nx run workspace:version --base-branch=main --sync-versions --push --dry-run",
+    "semantic-release": "semantic-release",
+    "lint-staged": "lint-staged || (npm run pop-stash >> /dev/null && exit 1)",
+    "stash-unstaged": "git stash save -k 'pre-linting-stash' >> /dev/null",
+    "pop-stash": "git stash && git stash pop stash@{1} && git read-tree stash && git stash drop",
     "commit": "cz"
   },
   "private": true,
@@ -132,9 +138,13 @@
     }
   },
   "lint-staged": {
-    "./**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write",
-      "git add ."
+    "./**/*.{js,ts,json,css,scss,md}": [
+      "prettier --write"
     ]
-  }
+  },
+  "pre-commit": [
+    "stash-unstaged",
+    "lint-staged",
+    "pop-stash"
+  ]
 }
