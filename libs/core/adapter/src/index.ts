@@ -1,3 +1,4 @@
+export * from './lib/permissions.adapter'
 export * from './lib/user-setup.adapter'
 export * from './lib/signaling.adapter'
 export * from './lib/peer-data.adapter'
