@@ -28,7 +28,6 @@
     "data-storage": { "tags": ["type:data"] },
     "util-share": { "tags": ["type:util"] },
     "util-device": { "tags": ["type:util"] },
-    "ui-addons": { "tags": ["type:ui"] },
     "workspace": { "tags": [] }
   }
 }

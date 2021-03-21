@@ -10,6 +10,5 @@ module.exports = {
     '<rootDir>/libs/data/storage',
     '<rootDir>/libs/util/share',
     '<rootDir>/libs/util/device',
-    '<rootDir>/libs/ui/addons',
   ],
 }

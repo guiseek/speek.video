@@ -28,8 +28,7 @@
       "@speek/core/adapter": ["libs/core/adapter/src/index.ts"],
       "@speek/data/storage": ["libs/data/storage/src/index.ts"],
       "@speek/util/share": ["libs/util/share/src/index.ts"],
-      "@speek/util/device": ["libs/util/device/src/index.ts"],
-      "@speek/ui/addons": ["libs/ui/addons/src/index.ts"]
+      "@speek/util/device": ["libs/util/device/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
