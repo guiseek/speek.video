@@ -1,0 +1,12 @@
+<h1 matDialogTitle>{{data?.header}}</h1>
+
+<mat-dialog-content>
+  <img [src]="'assets/icons/' + data?.type + '.svg'" alt="" />
+  <h3 class="mat-h3">{{data?.body}}</h3>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="warn" [matDialogClose]="true">
+    Entendi
+  </button>
+</mat-dialog-actions>

@@ -1,4 +1,9 @@
-import { PeerProvider, SignalingProvider, StreamProvider } from './app.adapter'
+import {
+  PeerProvider,
+  PermissionsProvider,
+  SignalingProvider,
+  StreamProvider,
+} from './app.adapter'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
@@ -39,11 +44,11 @@ import {
 
 @NgModule({
   declarations: [
+    AudioDialog,
+    VideoDialog,
     AppComponent,
     HomeComponent,
     MeetComponent,
-    AudioDialog,
-    VideoDialog,
     SettingComponent,
     MeetAddonDirective,
     PeerStateBadgePipe,
@@ -107,6 +112,7 @@ import {
     UserRoomStorage,
     UserSetupStorage,
     UserSetupAdapter,
+    PermissionsProvider.forRoot(),
     PeerProvider.withConfig(environment.configs),
     StreamProvider.withConfig(environment.constraints),
     SignalingProvider.withConfig(environment.gateway),

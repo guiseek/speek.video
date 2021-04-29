@@ -8,7 +8,7 @@ export type PermissionsQueryArgs = Parameters<
 export class PermissionsAdapter {
   constructor(
     private readonly permissions: Permissions,
-    private permissionsSupported: boolean
+    private permissionsSupported: boolean = true
   ) {}
 
   state(name: PermissionName): Observable<PermissionState>
@@ -32,7 +32,7 @@ export class PermissionsAdapter {
         .pipe(
           switchMap((status) =>
             fromEvent(status, 'change').pipe(
-              startWith(null),
+              startWith(''),
               map(() => status.state)
             )
           )

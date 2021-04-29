@@ -23,7 +23,7 @@ import {
   SignalingAdapter,
 } from '@speek/core/adapter'
 import { MeetService } from './meet.service'
-import { AppSound } from '../app.sound'
+// import { AppSound } from '../app.sound'
 
 @Component({
   selector: 'speek-meet',
@@ -86,7 +86,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private sound: AppSound,
+    // private sound: AppSound,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private service: MeetService,
@@ -99,7 +99,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     this.code = this.route.snapshot.params.code
     this.service.listenFile(this.peer.connection)
 
-    this.sound.play(this.sound.hero.decorative(2))
+    // this.sound.play(this.sound.hero.decorative(2))
   }
 
   ngOnInit(): void {
@@ -124,7 +124,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     this.peer.onTrack.pipe(takeUntil(this.destroy)).subscribe((track) => {
       this.track.next(track)
       if (track) {
-        this.sound.play(this.sound.hero.simple(2))
+        // this.sound.play(this.sound.hero.simple(2))
 
         this.remote.srcObject = track
         track.onremovetrack = (ev) => {

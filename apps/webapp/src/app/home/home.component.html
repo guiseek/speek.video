@@ -50,7 +50,8 @@
   </h2>
 </section>
 
-<form class="flex col justify-center" [formGroup]="form">
+<!-- <form class="flex col justify-center" [formGroup]="form"> -->
+<div class="flex col justify-center">
   <mat-form-field appearance="outline" color="primary">
     <mat-label>
       insira a chave ou link existente
@@ -63,7 +64,7 @@
       name="code"
       spellcheck="false"
       autocomplete="off"
-      formControlName="code"
+      [formControl]="code"
     />
     <mat-hint>
       fornecido por um anfitrião
@@ -74,4 +75,5 @@
       <!-- your key doesn't work here -->
     </mat-error>
   </mat-form-field>
-</form>
+</div>
+<!-- </form> -->
