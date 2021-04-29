@@ -4,76 +4,85 @@
   </a>
   <span> {{ state$ | async | peerStateBadge }} </span>
 </speek-toolbar>
-
 <section class="meeting-room">
   <video class="remote" #remote autoplay playsinline muted></video>
 </section>
 
 <ng-template meetAddon></ng-template>
 
-<mat-card
-  [ngClass]="{
-    enabled: (video | async) === true,
-    disabled: (video | async) === false
-  }"
->
-  <video class="local" #local autoplay playsinline muted></video>
+<div class="speek-box">
+  <mat-card
+    cdkDrag
+    [ngClass]="{
+      enabled: (video | async) === true,
+      disabled: (video | async) === false
+    }"
+  >
+    <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+      <path
+        d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+      ></path>
+      <path d="M0 0h24v24H0z" fill="none"></path>
+    </svg>
 
-  <mat-card-actions aria-live="polite">
-    <button
-      type="button"
-      [attr.aria-label]="
-        (audio | async) ? 'Desabilitar áudio' : 'Habilitar áudio'
-      "
-      mat-button
-      (click)="toggleAudio()"
-    >
-      <mat-icon>{{ (audio | async) ? 'mic' : 'mic_off' }}</mat-icon>
-    </button>
-    <button
-      type="button"
-      [attr.aria-label]="
-        (video | async) ? 'Desabilitar vídeo' : 'Habilitar vídeo'
-      "
-      mat-button
-      (click)="toggleVideo()"
-    >
-      <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
-    </button>
-    <button
-      mat-button
-      type="button"
-      aria-label="Transferir arquivo"
-      [disabled]="(state$ | async) != 'connected'"
-      (click)="inputFile.click()"
-    >
-      <mat-icon>cloud_upload</mat-icon>
-    </button>
-  </mat-card-actions>
-</mat-card>
+    <video class="local" #local autoplay playsinline muted></video>
 
-<ng-container *ngIf="(signal$ | async) != 'stable'">
-  <speek-splash
-    width="200px"
-    [message]="signal$ | async | peerSignalBadge"
-  ></speek-splash>
-</ng-container>
+    <mat-card-actions aria-live="polite">
+      <button
+        type="button"
+        [attr.aria-label]="
+          (audio | async) ? 'Desabilitar áudio' : 'Habilitar áudio'
+        "
+        mat-button
+        (click)="toggleAudio()"
+      >
+        <mat-icon>{{ (audio | async) ? 'mic' : 'mic_off' }}</mat-icon>
+      </button>
+      <button
+        type="button"
+        [attr.aria-label]="
+          (video | async) ? 'Desabilitar vídeo' : 'Habilitar vídeo'
+        "
+        mat-button
+        (click)="toggleVideo()"
+      >
+        <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
+      </button>
+      <button
+        mat-button
+        type="button"
+        aria-label="Transferir arquivo"
+        [disabled]="(state$ | async) != 'connected'"
+        (click)="inputFile.click()"
+      >
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
-<button
-  mat-fab
-  [disabled]="(state$ | async) != 'connected'"
-  (click)="hangup()"
-  aria-label="Encerrar ligação"
-  class="call-end"
-  color="warn"
->
-  <mat-icon>call_end</mat-icon>
-</button>
-<input
-  type="file"
-  #inputFile
-  style="display: none"
-  (change)="onFileChange($event.target?.files)"
-  [accept]="filesAllowed"
-/>
-<span class="meet-code">{{ code }}</span>
+  <ng-container *ngIf="(signal$ | async) != 'stable'">
+    <speek-splash
+      width="200px"
+      [message]="signal$ | async | peerSignalBadge"
+    ></speek-splash>
+  </ng-container>
+
+  <button
+    mat-fab
+    [disabled]="(state$ | async) != 'connected'"
+    (click)="hangup()"
+    aria-label="Encerrar ligação"
+    class="call-end"
+    color="warn"
+  >
+    <mat-icon>call_end</mat-icon>
+  </button>
+  <input
+    type="file"
+    #inputFile
+    style="display: none"
+    (change)="onFileChange($event.target?.files)"
+    [accept]="filesAllowed"
+  />
+  <span class="meet-code">{{ code }}</span>
+</div>

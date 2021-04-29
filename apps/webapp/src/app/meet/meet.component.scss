@@ -27,21 +27,31 @@
     }
   }
 
+  .speek-box {
+    position: relative;
+  }
   .mat-card {
+    position: absolute;
+    bottom: 28px;
+    right: 0;
     border-top-left-radius: 6px;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-    position: absolute;
     min-width: 200px;
     max-width: 240px;
     overflow: hidden;
-    bottom: 28px;
     width: 25%;
     padding: 0;
-    right: 0;
     z-index: 2;
     opacity: 1;
     transition: opacity 800ms ease-out;
+    > svg {
+      z-index: 10;
+      position: inherit;
+      filter: invert(1);
+      top: 2px;
+      right: 2px;
+    }
     &.enabled {
       video {
         max-height: 154px;
