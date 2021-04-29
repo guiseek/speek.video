@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
 import { MatIconRegistry } from '@angular/material/icon'
 import { ReactiveFormsModule } from '@angular/forms'
+import { DragDropModule } from '@angular/cdk/drag-drop'
 import { A11yModule } from '@angular/cdk/a11y'
 import { RouterModule } from '@angular/router'
 import { NgModule } from '@angular/core'
@@ -59,6 +60,7 @@ import {
     A11yModule,
     DrawerModule,
     BrowserModule,
+    DragDropModule,
     ToolbarModule,
     SplashModule,
     AudioModule,
