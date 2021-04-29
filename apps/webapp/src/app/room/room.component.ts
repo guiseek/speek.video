@@ -6,7 +6,7 @@ import { UserSetupStorage } from '@speek/data/storage'
 import { stopStream } from '@speek/core/stream'
 import { BehaviorSubject, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-import { AppSound } from '../app.sound'
+// import { AppSound } from '../app.sound'
 import {
   OnInit,
   Component,
@@ -81,7 +81,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private sound: AppSound,
+    // private sound: AppSound,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     readonly peer: PeerAdapter,
@@ -92,7 +92,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
     this.code = this.route.snapshot.params.code
 
-    this.sound.play(this.sound.hero.decorative(2))
+    // this.sound.play(this.sound.hero.decorative(2))
   }
 
   ngOnInit(): void {
@@ -117,7 +117,7 @@ export class RoomComponent implements OnInit, AfterViewInit, OnDestroy {
     this.peer.onTrack.pipe(takeUntil(this.destroy)).subscribe((track) => {
       this.track.next(track)
       if (track) {
-        this.sound.play(this.sound.hero.simple(2))
+        // this.sound.play(this.sound.hero.simple(2))
 
         this.remote.srcObject = track
         track.onremovetrack = (ev) => {

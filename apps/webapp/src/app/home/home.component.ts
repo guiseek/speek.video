@@ -15,7 +15,7 @@ import {
   HostListener,
 } from '@angular/core'
 import { Clipboard } from '@angular/cdk/clipboard'
-import { AppSound } from '../app.sound'
+// import { AppSound } from '../app.sound'
 
 const copyText = (code: string) => {
   const hello = 'Olá, conhece o Speek?'
@@ -33,16 +33,13 @@ const copyText = (code: string) => {
 export class HomeComponent implements OnInit, OnDestroy {
   destroy = new Subject<void>()
 
-  comeInOut = new BehaviorSubject<boolean>(false)
-
-  @HostBinding('class.zoom')
-  public get enter(): boolean {
-    return this.comeInOut.value
-  }
-
-  form = this._builder.group({
-    code: [Validators.required, Validators.pattern(UUID.regex)],
-  })
+  code = new FormControl('', [
+    Validators.required,
+    Validators.pattern(UUID.regex),
+  ])
+  // form = this._builder.group({
+  //   code: [Validators.required, Validators.pattern(UUID.regex)],
+  // })
 
   @HostListener('document:paste', ['$event'])
   onPaste(event: WithTarget<HTMLInputElement>) {
@@ -66,13 +63,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  get code() {
-    return this.form.get('code') as FormControl
-  }
-
   constructor(
     private _router: Router,
-    private _sound: AppSound,
+    // private _sound: AppSound,
     private _route: ActivatedRoute,
     private _share: ShareService,
     private _builder: FormBuilder,
@@ -83,22 +76,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const { code } = this._route.snapshot.params
-    this.form.patchValue({ code: code ?? '' })
-    this.form.valueChanges
+    this.code.patchValue(code ?? '')
+    this.code.valueChanges
       .pipe(debounceTime(400), takeUntil(this.destroy))
       .subscribe(() => this.onCodeChange())
   }
 
   onCodeChange() {
-    if (this.form.valid) {
-      const code = this.code.value
+    if (this.code.valid) {
+      // this._sound.play(this._sound.hero.decorative(3))
 
-      this._sound.play(this._sound.hero.decorative(3))
-
-      this._userRoom.update(UserRoom.fromJson(this.form.value))
-
-      setTimeout(() => this.comeInOut.next(true), 400)
-      setTimeout(() => this._router.navigate(['/', code, 'meet']), 2400)
+      // const code = this.code.value
+      // const room: UserRoom = { code: this.code.value}
+      // this._userRoom.update(UserRoom.fromJson(room))
+      this._router.navigate(['/', this.code.value, 'meet'])
     }
   }
 
@@ -107,9 +98,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     const config = { duration: 2800 }
     this.clipboard.copy(copyText(uuid))
 
-    setTimeout(() => {
-      this._sound.play(this._sound.hero.decorative(1))
-    }, 2000)
+    // setTimeout(() => {
+    //   this._sound.play(this._sound.hero.decorative(1))
+    // }, 2000)
 
     const message = this._snackbar.open(
       'Compartilhar chave agora?',

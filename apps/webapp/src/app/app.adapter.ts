@@ -1,4 +1,5 @@
-import { InjectionToken, Provider } from '@angular/core'
+import { inject, InjectionToken, Provider } from '@angular/core'
+import { DOCUMENT } from '@angular/common'
 import {
   PeerConfig,
   PeerAdapter,
@@ -9,6 +10,8 @@ import {
   SignalingConfig,
   SignalingAdapter,
   SignalingFactory,
+  PermissionsAdapter,
+  PermissionsFactory,
 } from '@speek/core/adapter'
 
 export const PEER_CONFIG_TOKEN = new InjectionToken<PeerConfig>('PeerConfig')
@@ -52,6 +55,56 @@ export class SignalingProvider {
         provide: SignalingAdapter,
         useFactory: SignalingFactory,
         deps: [SIGNALING_CONFIG_TOKEN],
+      },
+    ]
+  }
+}
+
+export const WINDOW = new InjectionToken<Window>(
+  'Abstração para o objeto global window',
+  {
+    factory: () => {
+      const { defaultView } = inject(DOCUMENT)
+
+      if (!defaultView) {
+        throw new Error('Window is not available')
+      }
+
+      return defaultView
+    },
+  }
+)
+
+export const NAVIGATOR = new InjectionToken<Navigator>(
+  'Abstração para o objeto window.navigator',
+  {
+    factory: () => inject(WINDOW).navigator,
+  }
+)
+
+export const PERMISSIONS = new InjectionToken<Permissions>(
+  'Abstração para o objeto window.navigator.permissions',
+  {
+    factory: () => inject(NAVIGATOR).permissions,
+  }
+)
+
+export const PERMISSIONS_SUPPORT = new InjectionToken<boolean>(
+  'Tem suporte a API Permissions?',
+  {
+    factory: () => {
+      return !!inject(PERMISSIONS)
+    },
+  }
+)
+
+export class PermissionsProvider {
+  static forRoot(): Provider[] {
+    return [
+      {
+        provide: PermissionsAdapter,
+        useFactory: PermissionsFactory,
+        deps: [PERMISSIONS],
       },
     ]
   }
