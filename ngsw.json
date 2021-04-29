@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1616328119259,
+  "timestamp": 1619658855143,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -12,7 +12,7 @@
       },
       "urls": [
         "/index.html",
-        "/main.f01625cca9530351dde0.js",
+        "/main.ed9a2b935de732a158b2.js",
         "/manifest.webmanifest",
         "/polyfills.89e0e3a0918a2b154670.js",
         "/runtime.0e49e2b53282f40c8925.js",
@@ -29,6 +29,8 @@
       },
       "urls": [
         "/assets/descentralized.svg",
+        "/assets/icons/error.svg",
+        "/assets/icons/info.svg",
         "/assets/icons/speek-1.png",
         "/assets/icons/speek-2.png",
         "/assets/icons/speek-3.png",
@@ -37,6 +39,7 @@
         "/assets/icons/speek-6.png",
         "/assets/icons/speek-7.png",
         "/assets/icons/speek.png",
+        "/assets/icons/warn.svg",
         "/assets/images/loading-video.svg",
         "/assets/images/logo.svg",
         "/assets/images/speek-dark.svg",
@@ -63,6 +66,8 @@
   "dataGroups": [],
   "hashTable": {
     "/assets/descentralized.svg": "379893fd32ed1e32cf4af15a5f6cd22169d535b3",
+    "/assets/icons/error.svg": "a56baa10c1235d32536d93de9117dca779bdfbfe",
+    "/assets/icons/info.svg": "9a5f0685bb7a5f0b3083ac94b9157737218299f0",
     "/assets/icons/speek-1.png": "4418ef5902f32b4b24cf1bd892dbcc4311779c4d",
     "/assets/icons/speek-2.png": "004bd96032c7608327876a2e2bd2cccb0b7d6ae3",
     "/assets/icons/speek-3.png": "91c8cb1158c197f4b0d6f4b654222b32c81a046b",
@@ -71,6 +76,7 @@
     "/assets/icons/speek-6.png": "2bb5791196626ad3e299dd48ad25fef2f04f28b8",
     "/assets/icons/speek-7.png": "9d672f6679f23ba2fd4f0c9b55fde3bf74df723f",
     "/assets/icons/speek.png": "7afaac7612288ffea4d3b4b41b981338678638f8",
+    "/assets/icons/warn.svg": "470543798a440a3fbbc26a3b6917584ffbbd3cc9",
     "/assets/images/loading-video.svg": "0daad904391f14da2d8b2f73d1ece0cb9ea83abe",
     "/assets/images/logo.svg": "a846e035adda2d085041c5e8eb78351f0ee54058",
     "/assets/images/speek-dark.svg": "674a69f5ec65780fb9eea9c8b895a15254c1b485",
@@ -90,8 +96,8 @@
     "/assets/sounds/notification/simple-2.ogg": "94743161defd1070dddbf83aaa64b76ce71c630a",
     "/assets/sounds/system/loading.ogg": "24cc5dc6f452f880857a04c2b06cd71ee2f3a2a0",
     "/assets/sounds/system/refresh-feed.ogg": "d4fd7c80e5571d4de41782cad9bab67b3c798a16",
-    "/index.html": "11566da9b30de7c6634dfe794b6c20bc6957ec68",
-    "/main.f01625cca9530351dde0.js": "ff4645e319809799c77ce59aeee2f6566cf880d0",
+    "/index.html": "35dc64c2abff8f48e9d334e078772c6db691e237",
+    "/main.ed9a2b935de732a158b2.js": "9010b9928e41e187d8d315f242ff47a9f56fd960",
     "/manifest.webmanifest": "31dc43c39c8bf7f85deaaf64147351c921e3b5c6",
     "/polyfills.89e0e3a0918a2b154670.js": "0bfc995eed6d8570cac2d221e0462cc45dbf7156",
     "/runtime.0e49e2b53282f40c8925.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
