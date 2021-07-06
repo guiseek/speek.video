@@ -42,6 +42,7 @@ import {
   SplashModule,
   ToolbarModule,
 } from '@speek/ui/components'
+import { VoiceComponent } from './voice/voice.component'
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {
     PeerStateBadgePipe,
     PeerSignalBadgePipe,
     RoomComponent,
+    VoiceComponent,
   ],
   imports: [
     A11yModule,
@@ -85,6 +87,12 @@ import {
           canActivate: [RoomGuard],
           canDeactivate: [RoomGuard],
           component: RoomComponent,
+        },
+        {
+          path: ':code/voice',
+          canActivate: [RoomGuard],
+          canDeactivate: [RoomGuard],
+          component: VoiceComponent,
         },
         {
           path: ':code',
