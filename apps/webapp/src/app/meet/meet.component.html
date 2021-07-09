@@ -1,4 +1,4 @@
-<speek-toolbar color="primary">
+<speek-toolbar>
   <a routerLink="/" aria-label="Página inicial" mat-icon-button>
     <mat-icon>arrow_backward</mat-icon>
   </a>
@@ -48,7 +48,7 @@
 
 <span class="meet-code">{{ code }}</span>
 
-<mat-toolbar color="primary">
+<mat-toolbar color="accent">
   <button
     mat-fab
     [disabled]="(state$ | async) != 'connected'"
