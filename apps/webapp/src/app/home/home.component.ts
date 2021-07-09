@@ -1,27 +1,20 @@
 import { FormBuilder, FormControl, Validators } from '@angular/forms'
-import { UserRoom, WithTarget } from '@speek/core/entity'
+import { KindRoom, WithTarget } from '@speek/core/entity'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { ActivatedRoute, Router } from '@angular/router'
 import { debounceTime, takeUntil } from 'rxjs/operators'
 import { UserRoomStorage } from '@speek/data/storage'
 import { ShareService } from '@speek/ui/components'
-import { BehaviorSubject, Subject } from 'rxjs'
 import { UUID } from '@speek/util/format'
-import {
-  OnInit,
-  OnDestroy,
-  Component,
-  HostBinding,
-  HostListener,
-} from '@angular/core'
+import { Subject } from 'rxjs'
+import { OnInit, OnDestroy, Component, HostListener } from '@angular/core'
 import { Clipboard } from '@angular/cdk/clipboard'
-// import { AppSound } from '../app.sound'
 
-const copyText = (code: string) => {
+const copyText = (code: string, kindRoom: KindRoom = 'meet') => {
   const hello = 'Olá, conhece o Speek?'
   const howto = 'É só acessar speek.video e usar este código:'
   const link = 'Você pode acessar também clicando neste link:'
-  const url = `https://speek.video/${code}/meet`
+  const url = `https://speek.video/#/${code}/${kindRoom}`
   return `${hello}\n\n${howto}\n${code}\n\n${link}\n${url}`
 }
 
@@ -37,9 +30,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.pattern(UUID.regex),
   ])
-  // form = this._builder.group({
-  //   code: [Validators.required, Validators.pattern(UUID.regex)],
-  // })
 
   @HostListener('document:paste', ['$event'])
   onPaste(event: WithTarget<HTMLInputElement>) {
@@ -84,8 +74,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onCodeChange() {
     if (this.code.valid) {
-      // this._sound.play(this._sound.hero.decorative(3))
-
       // const code = this.code.value
       // const room: UserRoom = { code: this.code.value}
       // this._userRoom.update(UserRoom.fromJson(room))
@@ -93,29 +81,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  create(route: string = 'meet') {
+  create(kindRoom: KindRoom = 'meet') {
     const uuid = UUID.long()
     const config = { duration: 2800 }
-    this.clipboard.copy(copyText(uuid))
-
-    // setTimeout(() => {
-    //   this._sound.play(this._sound.hero.decorative(1))
-    // }, 2000)
+    this.clipboard.copy(copyText(uuid, kindRoom))
 
     const message = this._snackbar.open(
       'Compartilhar chave agora?',
       'Sim',
       config
     )
-    message.afterDismissed().subscribe(() => this.go(uuid, route))
+    message.afterDismissed().subscribe(() => this.go(uuid, kindRoom))
     message.onAction().subscribe(() => {
-      this._share.open(uuid).subscribe(() => this.go(uuid, route))
+      this._share
+        .open({ uuid, kindRoom })
+        .subscribe(() => this.go(uuid, kindRoom))
     })
   }
 
-  go(code: string, route: string) {
+  go(code: string, kindRoom: KindRoom) {
     if (code) {
-      this._router.navigate(['/', code, route])
+      this._router.navigate(['/', code, kindRoom])
     }
   }
 
