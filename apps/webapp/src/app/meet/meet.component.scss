@@ -96,17 +96,26 @@
       }
     }
   }
-  .call-end {
-    position: absolute;
-    bottom: 24px;
-    left: 20px;
-    opacity: 0.8;
-  }
   .meet-code {
     position: absolute;
     right: 4px;
-    bottom: 4px;
+    top: 54px;
     opacity: 0.2;
+  }
+
+  .mat-fab {
+    position: absolute;
+    bottom: 24px;
+  }
+  .call-end {
+    left: 20px;
+  }
+  .send-file {
+    right: 20px;
+  }
+
+  .mat-toolbar {
+    z-index: 10;
   }
 }
 

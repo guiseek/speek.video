@@ -26,10 +26,7 @@ const copyText = (code: string, kindRoom: KindRoom = 'meet') => {
 export class HomeComponent implements OnInit, OnDestroy {
   destroy = new Subject<void>()
 
-  code = new FormControl('', [
-    Validators.required,
-    Validators.pattern(UUID.regex),
-  ])
+  code = new FormControl('', [Validators.pattern(UUID.regex)])
 
   @HostListener('document:paste', ['$event'])
   onPaste(event: WithTarget<HTMLInputElement>) {

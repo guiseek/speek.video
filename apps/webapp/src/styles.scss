@@ -10,15 +10,15 @@
 @include cdk-a11y();
 
 $client-primary: mat-palette($mat-deep-purple);
-$client-accent: mat-palette($mat-light-blue);
+$client-accent: mat-palette($mat-amber);
 $client-warn: mat-palette($mat-red);
 
-$peek-typography: mat-typography-config(
+$speek-typography: mat-typography-config(
   $font-family: '"Montserrat", sans-serif',
   $headline: mat-typography-level(32px, 48px, 700),
   $body-1: mat-typography-level(16px, 24px, 500),
 );
-@include angular-material-typography($peek-typography);
+@include angular-material-typography($speek-typography);
 
 $client-theme: mat-light-theme(
   (
