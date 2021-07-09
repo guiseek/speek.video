@@ -209,10 +209,6 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       }
 
       const channel = this.peer.connection.createDataChannel('track')
-      channel.onopen = () =>
-        (this.peerSpeech.onresult = ({ results, resultIndex }) => {
-          channel.send(results.item(resultIndex).item(0).transcript)
-        })
       channel.addEventListener('open', () => {
         this.peerSpeech.onresult = ({ results, resultIndex }) => {
           channel.send(results.item(resultIndex).item(0).transcript)

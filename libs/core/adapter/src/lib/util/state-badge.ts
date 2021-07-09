@@ -1,8 +1,8 @@
 export const peerStateBadge: Record<RTCPeerConnectionState, string> = {
-  new: 'novo',
-  failed: 'falha',
-  closed: 'fechado',
+  new: 'iniciando',
+  failed: 'falhou',
+  closed: 'aguardando',
   connected: 'conectado',
-  connecting: 'conectando',
+  connecting: 'conectando...',
   disconnected: 'desconectado',
 }

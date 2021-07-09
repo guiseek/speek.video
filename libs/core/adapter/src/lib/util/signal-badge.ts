@@ -1,8 +1,8 @@
 export const peerSignalBadge: Record<RTCSignalingState, string> = {
   closed: 'fechado',
-  'have-local-offer': 'proposta carregada',
-  'have-local-pranswer': 'resposta remota aceita',
-  'have-remote-offer': 'proposta remota carregada',
-  'have-remote-pranswer': 'proposta remota aceita',
+  'have-local-offer': 'preparando comunicação',
+  'have-local-pranswer': 'avaliando caminhos',
+  'have-remote-offer': 'sugerindo caminhos',
+  'have-remote-pranswer': 'caminho encontrado',
   stable: 'estável',
 }
