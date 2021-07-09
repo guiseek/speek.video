@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1625799203360,
+  "timestamp": 1625809018235,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -12,14 +12,14 @@
       },
       "urls": [
         "/index.html",
-        "/main-es2015.a51fc0f9c2160aba9bcd.js",
-        "/main-es5.a51fc0f9c2160aba9bcd.js",
+        "/main-es2015.0a260de093420eedefb7.js",
+        "/main-es5.0a260de093420eedefb7.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.3a00bddc340be8f76cdb.js",
         "/polyfills-es5.1bacda6d3d5073eb004b.js",
         "/runtime-es2015.a1ac991fc00ebf39524f.js",
         "/runtime-es5.a1ac991fc00ebf39524f.js",
-        "/styles.3ba1a115649ccc7c3d4b.css"
+        "/styles.7882ccbac9dfcac68282.css"
       ],
       "patterns": []
     },
@@ -45,9 +45,11 @@
         "/assets/icons/warn.svg",
         "/assets/images/loading-video.svg",
         "/assets/images/logo.svg",
+        "/assets/images/network.svg",
         "/assets/images/speek-dark.svg",
         "/assets/images/speek-light.svg",
         "/assets/images/speek.svg",
+        "/assets/images/thunder.svg",
         "/assets/sounds/hero/decorative-celebration-1.ogg",
         "/assets/sounds/hero/decorative-celebration-2.ogg",
         "/assets/sounds/hero/decorative-celebration-3.ogg",
@@ -82,9 +84,11 @@
     "/assets/icons/warn.svg": "470543798a440a3fbbc26a3b6917584ffbbd3cc9",
     "/assets/images/loading-video.svg": "0daad904391f14da2d8b2f73d1ece0cb9ea83abe",
     "/assets/images/logo.svg": "a846e035adda2d085041c5e8eb78351f0ee54058",
+    "/assets/images/network.svg": "da501b47cdadd3464a6c75ab78d41b8fbfdc79bc",
     "/assets/images/speek-dark.svg": "674a69f5ec65780fb9eea9c8b895a15254c1b485",
     "/assets/images/speek-light.svg": "50f434ed0b5bd52c23d210a0a7f77863d4758b50",
     "/assets/images/speek.svg": "e51de86e116762ba2bd72a884bc5e45d4d7d207b",
+    "/assets/images/thunder.svg": "9c75c24a13174a582ddea735ba023f11f9523bc0",
     "/assets/sounds/hero/decorative-celebration-1.ogg": "911e54fb8b39677624d4e614eb0e3c29a4c95135",
     "/assets/sounds/hero/decorative-celebration-2.ogg": "79aee23875edf20dfa3f61207a20d9f98b0c4338",
     "/assets/sounds/hero/decorative-celebration-3.ogg": "dc0389c82d00b86d6c3d73a5b12bd0a43b058acd",
@@ -99,15 +103,15 @@
     "/assets/sounds/notification/simple-2.ogg": "94743161defd1070dddbf83aaa64b76ce71c630a",
     "/assets/sounds/system/loading.ogg": "24cc5dc6f452f880857a04c2b06cd71ee2f3a2a0",
     "/assets/sounds/system/refresh-feed.ogg": "d4fd7c80e5571d4de41782cad9bab67b3c798a16",
-    "/index.html": "1b9dd8b16b7630a59e4c9a4fbf8f3ae3a20ed58a",
-    "/main-es2015.a51fc0f9c2160aba9bcd.js": "ae745a2a563b47b3911fb54482a3a5be49ce8550",
-    "/main-es5.a51fc0f9c2160aba9bcd.js": "493aca8eb62d4915b7a06819043c2124dd8870f6",
+    "/index.html": "85653c3b8daa1e0060106e57646e3cfd75999ad2",
+    "/main-es2015.0a260de093420eedefb7.js": "6546cdb040f5ea5c4b7f3c056dc27d163de35bed",
+    "/main-es5.0a260de093420eedefb7.js": "121e602ccbe3be9625da4ce50d284f4781a1e45c",
     "/manifest.webmanifest": "31dc43c39c8bf7f85deaaf64147351c921e3b5c6",
     "/polyfills-es2015.3a00bddc340be8f76cdb.js": "4aa8022a7fd4825391c4eb016619656a209df1f3",
     "/polyfills-es5.1bacda6d3d5073eb004b.js": "5cd8f89a6e6e9a082150d5f48a0e3086fa3bf8b2",
     "/runtime-es2015.a1ac991fc00ebf39524f.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "/runtime-es5.a1ac991fc00ebf39524f.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/styles.3ba1a115649ccc7c3d4b.css": "ac229ce45ed02bade2b35789f8c40ab230106d92"
+    "/styles.7882ccbac9dfcac68282.css": "958084e5fafbb3b67515b08ba4cae88b07bf941a"
   },
   "navigationUrls": [
     {
