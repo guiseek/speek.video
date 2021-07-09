@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs'
 import { Injectable } from '@angular/core'
 
 @Injectable({
@@ -6,6 +7,42 @@ import { Injectable } from '@angular/core'
 export class MeetService {
   private static MAX_SIZE = 65535
   private static END_OF_FILE = 'EOF'
+
+  private readonly speech: SpeechRecognition
+
+  private _textTrack = new Subject<VTTCue>()
+  textTrack$ = this._textTrack.asObservable()
+
+  constructor() {
+    this.speech = new SpeechRecognition()
+    this.speech.continuous = true
+    this.speech.lang = 'pt-BR'
+  }
+
+  createTextTrack(connection: RTCPeerConnection, video: HTMLVideoElement) {
+    const channel = connection.createDataChannel('text-track', {
+      ordered: true,
+      maxPacketLifeTime: 3600,
+    })
+
+    channel.addEventListener('error', ({ error }) => {
+      console.error('RTCError: ', error.message)
+    })
+
+    const textTrack = video.addTextTrack('subtitles', 'Português', 'pt-BR')
+
+    this.speech.onresult = ({ results, resultIndex, returnValue }) => {
+      console.log(returnValue, resultIndex, results)
+      const currentTime = video.currentTime
+      const captionTime = currentTime + 2000
+      const captionText = results.item(resultIndex).item(0).transcript
+      const vttCue = new VTTCue(currentTime, captionTime, captionText)
+      textTrack.addCue(vttCue)
+      this._textTrack.next()
+    }
+
+    this.speech.start()
+  }
 
   sendFile(connection: RTCPeerConnection, file: File) {
     const channel = connection.createDataChannel(file.name, {

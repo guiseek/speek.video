@@ -1,6 +1,5 @@
 import { SpeekAction, SpeekData, SpeekPayload } from '@speek/core/entity'
 import { isDefined, notNull, typeOfFile, UUID } from '@speek/util/format'
-import { MeetAddonDirective } from './meet-addon.directive'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { ActivatedRoute, Router } from '@angular/router'
 import { UserSetupStorage } from '@speek/data/storage'
@@ -14,7 +13,6 @@ import {
   ViewChild,
   ElementRef,
   AfterViewInit,
-  ComponentFactoryResolver,
 } from '@angular/core'
 import {
   PeerAdapter,
@@ -23,7 +21,6 @@ import {
   SignalingAdapter,
 } from '@speek/core/adapter'
 import { MeetService } from './meet.service'
-// import { AppSound } from '../app.sound'
 
 @Component({
   selector: 'speek-meet',
@@ -32,9 +29,6 @@ import { MeetService } from './meet.service'
 })
 export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy = new Subject<void>()
-
-  @ViewChild(MeetAddonDirective, { static: true })
-  meetAddon: MeetAddonDirective
 
   @ViewChild('local')
   localRef: ElementRef<HTMLVideoElement>
@@ -52,8 +46,13 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   _video = new BehaviorSubject<boolean>(true)
   video = this._video.asObservable()
 
+  _caption = new BehaviorSubject<boolean>(false)
+  caption = this._caption.asObservable()
+
   data: PeerDataAdapter
   peerChannel: RTCDataChannel
+
+  peerSpeech: SpeechRecognition
 
   sender = UUID.short()
   code: string
@@ -86,20 +85,19 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private router: Router,
-    // private sound: AppSound,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private service: MeetService,
     readonly peer: PeerAdapter,
     readonly stream: StreamAdapter,
     readonly signaling: SignalingAdapter,
-    readonly userSetup: UserSetupStorage,
-    readonly resolver: ComponentFactoryResolver
+    readonly userSetup: UserSetupStorage
   ) {
     this.code = this.route.snapshot.params.code
     this.service.listenFile(this.peer.connection)
-
-    // this.sound.play(this.sound.hero.decorative(2))
+    this.peerSpeech = new SpeechRecognition()
+    this.peerSpeech.continuous = true
+    this.peerSpeech.lang = 'pt-BR'
   }
 
   ngOnInit(): void {
@@ -124,8 +122,6 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     this.peer.onTrack.pipe(takeUntil(this.destroy)).subscribe((track) => {
       this.track.next(track)
       if (track) {
-        // this.sound.play(this.sound.hero.simple(2))
-
         this.remote.srcObject = track
         track.onremovetrack = (ev) => {
           this.remote.srcObject = null
@@ -190,6 +186,38 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       const video = stream.getVideoTracks()
       this.peer.connection.addTrack(video.shift(), stream)
 
+      /**
+       * Legendas
+       */
+      const track = this.remote.addTextTrack('subtitles', this.code)
+
+      track.mode = 'showing'
+
+      this.peer.connection.addEventListener('datachannel', ({ channel }) => {
+        channel.addEventListener('message', ({ data }) => {
+          if (typeof data === 'string') {
+            const time = this.remote.currentTime
+            const text = data
+
+            const end = time + (100 * text.length * 1.5) / 1000
+
+            const caption = new VTTCue(time, end, text)
+
+            track.addCue(caption)
+          }
+        })
+      })
+
+      this.peerSpeech.start()
+
+      const channel = this.peer.connection.createDataChannel('track')
+      channel.addEventListener('open', () => {
+        this.peerSpeech.onresult = ({ results, resultIndex }) => {
+          console.log(results.item(resultIndex).item(0))
+          channel.send(results.item(resultIndex).item(0).transcript)
+        }
+      })
+
       this.peer.createOffer().then((sdp) => this.sendOffer({ sdp }))
 
       const state = this.userSetup.getStateConfig()
@@ -222,6 +250,12 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     const tracks = this.localStream.getVideoTracks()
     tracks.forEach((t) => (t.enabled = enabled))
     this._video.next(enabled)
+  }
+
+  toggleCaption() {
+    const enabled = !this._caption.getValue()
+    this.service.createTextTrack(this.peer.connection, this.local)
+    this._caption.next(enabled)
   }
 
   onFileChange(files: FileList) {
