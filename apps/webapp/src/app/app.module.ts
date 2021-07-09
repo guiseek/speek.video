@@ -14,17 +14,16 @@ import { RouterModule } from '@angular/router'
 import { NgModule } from '@angular/core'
 
 import { DrawerModule, UiComponentsModule } from '@speek/ui/components'
-import { createSpeekIcon, getFire, getLogo } from '@speek/util/format'
 import { UserSetupStorage, UserRoomStorage } from '@speek/data/storage'
+import { createSpeekIcon, getLogo } from '@speek/util/format'
 import { ServiceWorkerModule } from '@angular/service-worker'
-import { UserSetupAdapter } from '@speek/core/adapter'
 import { MaterialModule } from './shared/material.module'
 import { ClipboardModule } from '@angular/cdk/clipboard'
+import { UserSetupAdapter } from '@speek/core/adapter'
 import { LayoutModule } from '@angular/cdk/layout'
 
 import { environment } from './../environments/environment'
 import { PeerSignalBadgePipe, PeerStateBadgePipe } from './shared/pipes'
-import { LocationStrategy, PathLocationStrategy } from '@angular/common'
 import { MeetAddonDirective } from './meet/meet-addon.directive'
 import { SettingComponent } from './setting/setting.component'
 import { AudioDialog } from './setting/audio/audio.dialog'
@@ -106,9 +105,7 @@ import { VoiceComponent } from './voice/voice.component'
         },
       ],
       {
-        useHash: false,
-        initialNavigation: 'enabled',
-        relativeLinkResolution: 'legacy',
+        useHash: true,
       }
     ),
     UiComponentsModule,
@@ -126,7 +123,6 @@ import { VoiceComponent } from './voice/voice.component'
     PeerProvider.withConfig(environment.configs),
     StreamProvider.withConfig(environment.constraints),
     SignalingProvider.withConfig(environment.gateway),
-    { provide: LocationStrategy, useClass: PathLocationStrategy },
   ],
   bootstrap: [AppComponent],
 })
