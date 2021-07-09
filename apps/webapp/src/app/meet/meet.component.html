@@ -80,6 +80,18 @@
   >
     <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
   </button>
+  <button
+    type="button"
+    [attr.aria-label]="
+      (caption | async) ? 'Desabilitar legendas' : 'Habilitar legendas'
+    "
+    mat-icon-button
+    (click)="toggleCaption()"
+  >
+    <mat-icon>{{
+      (caption | async) ? 'subtitles_off' : 'subtitles_off_off'
+    }}</mat-icon>
+  </button>
   <span class="spacer"></span>
   <button
     mat-fab
