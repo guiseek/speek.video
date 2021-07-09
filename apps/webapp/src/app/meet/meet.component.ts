@@ -46,13 +46,14 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   _video = new BehaviorSubject<boolean>(true)
   video = this._video.asObservable()
 
-  _caption = new BehaviorSubject<boolean>(false)
+  _caption = new BehaviorSubject<boolean>(true)
   caption = this._caption.asObservable()
 
   data: PeerDataAdapter
   peerChannel: RTCDataChannel
 
   peerSpeech: SpeechRecognition
+  remoteTrack: TextTrack
 
   sender = UUID.short()
   code: string
@@ -189,31 +190,31 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       /**
        * Legendas
        */
-      const track = this.remote.addTextTrack('subtitles', this.code)
-
-      track.mode = 'showing'
+      this.remoteTrack = this.remote.addTextTrack('subtitles', this.code)
 
       this.peer.connection.addEventListener('datachannel', ({ channel }) => {
         channel.addEventListener('message', ({ data }) => {
           if (typeof data === 'string') {
             const time = this.remote.currentTime
-            const text = data
-
-            const end = time + (100 * text.length * 1.5) / 1000
-
-            const caption = new VTTCue(time, end, text)
-
-            track.addCue(caption)
+            const end = time + (100 * data.length * 1.5) / 1000
+            const caption = new VTTCue(time, end, data)
+            this.remoteTrack.addCue(caption)
           }
         })
       })
 
-      this.peerSpeech.start()
+      if (this._caption.getValue()) {
+        this.remoteTrack.mode = 'showing'
+        this.peerSpeech.start()
+      }
 
       const channel = this.peer.connection.createDataChannel('track')
+      channel.onopen = () =>
+        (this.peerSpeech.onresult = ({ results, resultIndex }) => {
+          channel.send(results.item(resultIndex).item(0).transcript)
+        })
       channel.addEventListener('open', () => {
         this.peerSpeech.onresult = ({ results, resultIndex }) => {
-          console.log(results.item(resultIndex).item(0))
           channel.send(results.item(resultIndex).item(0).transcript)
         }
       })
@@ -254,7 +255,13 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   toggleCaption() {
     const enabled = !this._caption.getValue()
-    this.service.createTextTrack(this.peer.connection, this.local)
+    if (enabled) {
+      this.remoteTrack.mode = 'showing'
+      this.peerSpeech.start()
+    } else {
+      this.remoteTrack.mode = 'hidden'
+      this.peerSpeech.stop()
+    }
     this._caption.next(enabled)
   }
 
