@@ -1,4 +1,6 @@
 export * from './lib/speek-action.enum'
+export * from './lib/speek-peer-event'
+export * from './lib/speek-peer'
 export * from './lib/speek-message'
 export * from './lib/speek-payload'
 export * from './lib/speek-channel'

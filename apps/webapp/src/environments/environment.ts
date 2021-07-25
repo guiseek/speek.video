@@ -8,7 +8,15 @@ export const environment = {
     url: 'http://localhost:3333',
   },
   configs: {
-    iceServers: [{ urls: 'stun:stun.stunprotocol.org:3478' }],
+    // iceServers: [{ urls: 'stun:stun.stunprotocol.org:3478' }],
+    iceServers: [
+      {
+        urls: ['stun:54.90.98.123:3478'],
+        username: 'speek',
+        credential: 'contact',
+        credentialType: 'password',
+      },
+    ],
   },
   constraints: {
     audio: {
