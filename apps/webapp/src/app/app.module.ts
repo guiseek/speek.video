@@ -120,7 +120,7 @@ import { VoiceComponent } from './voice/voice.component'
     UserSetupStorage,
     UserSetupAdapter,
     PermissionsProvider.forRoot(),
-    PeerProvider.withConfig(environment.configs),
+    PeerProvider.withConfig(environment.configs as RTCConfiguration),
     StreamProvider.withConfig(environment.constraints),
     SignalingProvider.withConfig(environment.gateway),
   ],
