@@ -8,8 +8,8 @@
 @include mat-core();
 @include cdk-a11y();
 
-$client-primary: mat-palette($mat-orange);
-$client-accent: mat-palette($mat-deep-purple);
+$client-primary: mat-palette($mat-blue);
+$client-accent: mat-palette($mat-amber);
 $client-warn: mat-palette($mat-red);
 
 $speek-typography: mat-typography-config(
@@ -19,7 +19,7 @@ $speek-typography: mat-typography-config(
 );
 @include angular-material-typography($speek-typography);
 
-$client-theme: mat-dark-theme(
+$client-theme: mat-light-theme(
   (
     color: (
       primary: $client-primary,
@@ -40,7 +40,6 @@ body {
 }
 body {
   margin: 0;
-  background-color: #212121;
   font-family: 'Montserrat', sans-serif;
 }
 body .mat-drawer-backdrop.mat-drawer-shown {
@@ -50,7 +49,7 @@ body .mat-drawer-content {
   overflow: unset;
 }
 
-body .mat-fab.mat-accent {
+body .mat-fab {
   color: black;
 }
 
