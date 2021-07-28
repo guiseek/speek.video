@@ -80,6 +80,17 @@
           {{ form.videoState.value ? 'habilitado' : 'desabilitado' }}
         </mat-checkbox>
       </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>subtitles</mat-icon>
+        <h3 mat-line>Legenda</h3>
+        <mat-checkbox
+          formControlName="caption"
+          labelPosition="before"
+          color="primary"
+        >
+          {{ form.captionState.value ? 'habilitada' : 'desabilitada' }}
+        </mat-checkbox>
+      </mat-list-item>
     </mat-list>
   </section>
 </form>

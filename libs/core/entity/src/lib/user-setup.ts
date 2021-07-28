@@ -11,7 +11,7 @@ export class UserSetup {
   pitch: number
   audio: Omit<MediaDeviceInfo, 'toJSON'>
   video: Omit<MediaDeviceInfo, 'toJSON'>
-  state: Record<'audio' | 'video', boolean>
+  state: Record<'audio' | 'video' | 'caption', boolean>
   constructor(setup?: Partial<UserSetup>) {
     if (setup) {
       this.pitch = setup.pitch ?? 0
@@ -20,6 +20,7 @@ export class UserSetup {
       this.state = setup.state ?? {
         audio: true,
         video: true,
+        caption: false,
       }
     }
   }
