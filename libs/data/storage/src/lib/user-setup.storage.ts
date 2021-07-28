@@ -17,6 +17,6 @@ export class UserSetupStorage extends DataStorage<UserSetup> {
 
   getStateConfig() {
     const { state } = this.getStoredValue() ?? {}
-    return state ? state : { audio: true, video: true }
+    return state ? state : { audio: true, video: true, caption: false }
   }
 }

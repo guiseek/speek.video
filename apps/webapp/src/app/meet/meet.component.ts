@@ -22,6 +22,19 @@ import {
 } from '@speek/core/adapter'
 import { MeetService } from './meet.service'
 
+const filesAllowed: ReadonlyArray<string> = [
+  'image/png',
+  'image/gif',
+  'application/pdf',
+  'image/jpeg',
+  'image/svg+xml',
+  'application/zip',
+  'application/json',
+  'video/mp4',
+  'video/quicktime',
+  'Unknown filetype',
+]
+
 @Component({
   selector: 'speek-meet',
   templateUrl: './meet.component.html',
@@ -49,6 +62,9 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   _caption = new BehaviorSubject<boolean>(true)
   caption = this._caption.asObservable()
 
+  _subtitles = new BehaviorSubject<string>('')
+  substitles$ = this._subtitles.asObservable()
+
   data: PeerDataAdapter
   peerChannel: RTCDataChannel
 
@@ -58,6 +74,8 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   sender = UUID.short()
   code: string
   pitch: number
+
+  filesAllowed = filesAllowed
 
   readonly signal = new BehaviorSubject<RTCSignalingState>('closed')
   readonly signal$ = this.signal.asObservable()
@@ -71,19 +89,6 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   readonly status = new Subject<string>()
   readonly status$ = this.status.asObservable()
 
-  public readonly filesAllowed = [
-    'image/png',
-    'image/gif',
-    'application/pdf',
-    'image/jpeg',
-    'image/svg+xml',
-    'application/zip',
-    'application/json',
-    'video/mp4',
-    'video/quicktime',
-    'Unknown filetype',
-  ]
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -95,7 +100,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     readonly userSetup: UserSetupStorage
   ) {
     this.code = this.route.snapshot.params.code
-    this.service.listenFile(this.peer.connection)
+    // this.service.listenFile(this.peer.connection)
     this.peerSpeech = new SpeechRecognition()
     this.peerSpeech.continuous = true
     this.peerSpeech.lang = 'pt-BR'
@@ -187,33 +192,38 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       const video = stream.getVideoTracks()
       this.peer.connection.addTrack(video.shift(), stream)
 
-      /**
-       * Legendas
-       */
-      this.remoteTrack = this.remote.addTextTrack('subtitles', this.code)
+      const channel = this.peer.connection.createDataChannel('track')
+      channel.addEventListener('open', (ev) => {
+        console.log('popen: ', ev)
+      })
+
+      const onMessage = <T extends string>({ data }: MessageEvent<T>) => {
+        this._subtitles.next(data)
+      }
+      channel.onmessage = onMessage
 
       this.peer.connection.addEventListener('datachannel', ({ channel }) => {
-        channel.addEventListener('message', ({ data }) => {
-          if (typeof data === 'string') {
-            const time = this.remote.currentTime
-            const end = time + (100 * data.length * 1.5) / 1000
-            const caption = new VTTCue(time, end, data)
-            this.remoteTrack.addCue(caption)
-          }
-        })
+        if (channel.label === 'track') {
+          channel.onmessage = onMessage
+        }
+      })
+
+      this.remoteTrack = this.remote.addTextTrack('subtitles', this.code)
+
+      this.substitles$.subscribe((subtitle) => {
+        const time = this.remote.currentTime
+        const end = time + (100 * subtitle.length * 1.5) / 1000
+        const caption = new VTTCue(time, end, subtitle)
+        this.remoteTrack.addCue(caption)
       })
 
       if (this._caption.getValue()) {
         this.remoteTrack.mode = 'showing'
         this.peerSpeech.start()
-      }
-
-      const channel = this.peer.connection.createDataChannel('track')
-      channel.addEventListener('open', () => {
         this.peerSpeech.onresult = ({ results, resultIndex }) => {
           channel.send(results.item(resultIndex).item(0).transcript)
         }
-      })
+      }
 
       this.peer.createOffer().then((sdp) => this.sendOffer({ sdp }))
 
@@ -224,6 +234,9 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       if (state.audio === false) {
         this.toggleAudio()
+      }
+      if (state.caption === true) {
+        this.toggleCaption()
       }
     })
   }
@@ -264,11 +277,11 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   onFileChange(files: FileList) {
     if (!!files.length) {
       typeOfFile(files.item(0)).then(({ verifiedType }) => {
-        if (this.filesAllowed.includes(verifiedType)) {
+        if (filesAllowed.includes(verifiedType)) {
           this.service.sendFile(this.peer.connection, files.item(0))
         } else {
           const message = 'Apenas arquivos conhecidos. Exemplo:'
-          this.snackBar.open(`${message} ${this.filesAllowed}`)
+          this.snackBar.open(`${message} ${filesAllowed}`)
         }
       })
     }
