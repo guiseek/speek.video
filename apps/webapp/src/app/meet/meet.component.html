@@ -1,4 +1,4 @@
-<speek-toolbar color="accent">
+<speek-toolbar color="primary">
   <a routerLink="/" aria-label="Página inicial" mat-icon-button>
     <mat-icon>arrow_backward</mat-icon>
   </a>
@@ -48,7 +48,7 @@
 
 <span class="meet-code">{{ code }}</span>
 
-<mat-toolbar color="accent">
+<mat-toolbar color="primary">
   <button
     mat-fab
     [disabled]="(state$ | async) != 'connected'"
@@ -59,30 +59,30 @@
   >
     <mat-icon>call_end</mat-icon>
   </button>
+
   <span class="spacer"></span>
+
   <button
     type="button"
-    [attr.aria-label]="
-      (audio | async) ? 'Desabilitar áudio' : 'Habilitar áudio'
-    "
+    [matTooltip]="(audio | async) ? 'Desabilitar áudio' : 'Habilitar áudio'"
     mat-icon-button
     (click)="toggleAudio()"
   >
     <mat-icon>{{ (audio | async) ? 'mic' : 'mic_off' }}</mat-icon>
   </button>
+
   <button
     type="button"
-    [attr.aria-label]="
-      (video | async) ? 'Desabilitar vídeo' : 'Habilitar vídeo'
-    "
+    [matTooltip]="(video | async) ? 'Desabilitar vídeo' : 'Habilitar vídeo'"
     mat-icon-button
     (click)="toggleVideo()"
   >
     <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
   </button>
+
   <button
     type="button"
-    [attr.aria-label]="
+    [matTooltip]="
       (caption | async) ? 'Desabilitar legendas' : 'Habilitar legendas'
     "
     mat-icon-button
@@ -90,7 +90,24 @@
   >
     <mat-icon>{{ (caption | async) ? 'subtitles' : 'subtitles_off' }}</mat-icon>
   </button>
+
+  <ng-container *ngIf="source | async as src">
+    <button
+      type="button"
+      [matTooltip]="
+        src === 'screen' ? 'Compartilhar tela' : 'Parar de compartilhar tela'
+      "
+      mat-icon-button
+      (click)="swapStream(src)"
+    >
+      <mat-icon>{{
+        src === 'video' ? 'screen_share' : 'stop_screen_share'
+      }}</mat-icon>
+    </button>
+  </ng-container>
+
   <span class="spacer"></span>
+
   <button
     mat-fab
     type="button"

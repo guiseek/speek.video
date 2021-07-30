@@ -1,14 +1,13 @@
-import { FormBuilder, FormControl, Validators } from '@angular/forms'
+import { OnInit, OnDestroy, Component, HostListener } from '@angular/core'
 import { KindRoom, WithTarget } from '@speek/core/entity'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { ActivatedRoute, Router } from '@angular/router'
 import { debounceTime, takeUntil } from 'rxjs/operators'
-import { UserRoomStorage } from '@speek/data/storage'
+import { FormControl, Validators } from '@angular/forms'
 import { ShareService } from '@speek/ui/components'
+import { Clipboard } from '@angular/cdk/clipboard'
 import { UUID } from '@speek/util/format'
 import { Subject } from 'rxjs'
-import { OnInit, OnDestroy, Component, HostListener } from '@angular/core'
-import { Clipboard } from '@angular/cdk/clipboard'
 
 const copyText = (code: string, kindRoom: KindRoom = 'meet') => {
   const hello = 'Olá, conhece o Speek?'
@@ -36,7 +35,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       const clipboardData: DataTransfer =
         (event as any).clipboardData || (window as any).clipboardData
 
-      // Take content from paste by user
       const content = clipboardData.getData('Text')
       // Check if UUID code exist from content
       const hasUUID = UUID.getFromText(content)
@@ -52,11 +50,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private _router: Router,
-    // private _sound: AppSound,
     private _route: ActivatedRoute,
     private _share: ShareService,
-    private _builder: FormBuilder,
-    private _userRoom: UserRoomStorage,
     private _snackbar: MatSnackBar,
     readonly clipboard: Clipboard
   ) {}
@@ -71,9 +66,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onCodeChange() {
     if (this.code.valid) {
-      // const code = this.code.value
-      // const room: UserRoom = { code: this.code.value}
-      // this._userRoom.update(UserRoom.fromJson(room))
       this._router.navigate(['/', this.code.value, 'meet'])
     }
   }
