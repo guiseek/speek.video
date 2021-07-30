@@ -8,8 +8,8 @@
 @include mat-core();
 @include cdk-a11y();
 
-$client-primary: mat-palette($mat-blue);
-$client-accent: mat-palette($mat-amber);
+$client-primary: mat-palette($mat-deep-purple);
+$client-accent: mat-palette($mat-light-blue);
 $client-warn: mat-palette($mat-red);
 
 $speek-typography: mat-typography-config(

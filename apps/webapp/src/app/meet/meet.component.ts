@@ -35,6 +35,8 @@ const filesAllowed: ReadonlyArray<string> = [
   'Unknown filetype',
 ]
 
+export type MediaSource = 'screen' | 'video'
+
 @Component({
   selector: 'speek-meet',
   templateUrl: './meet.component.html',
@@ -58,6 +60,11 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   _video = new BehaviorSubject<boolean>(true)
   video = this._video.asObservable()
+
+  _source = new BehaviorSubject<MediaSource>('screen')
+  source = this._source.asObservable()
+
+  transceiver: Record<'audio' | 'video', RTCRtpTransceiver>
 
   _caption = new BehaviorSubject<boolean>(true)
   caption = this._caption.asObservable()
@@ -124,6 +131,11 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe((candidate) => {
         if (candidate) this.sendOffer({ ice: candidate })
       })
+
+    this.transceiver = {
+      video: this.peer.connection.addTransceiver('video'),
+      audio: this.peer.connection.addTransceiver('audio'),
+    }
 
     this.peer.onTrack.pipe(takeUntil(this.destroy)).subscribe((track) => {
       this.track.next(track)
@@ -258,6 +270,37 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   toggleVideo() {
     const enabled = !this._video.getValue()
     const tracks = this.localStream.getVideoTracks()
+    tracks.forEach((t) => (t.enabled = enabled))
+    this._video.next(enabled)
+  }
+
+  getStreamFrom(source: MediaSource) {
+    switch (source) {
+      case 'screen':
+        return this.stream.getDisplay()
+      case 'video':
+        return this.stream.getStream()
+    }
+  }
+
+  swapSource(source: MediaSource) {
+    return source === 'screen' ? 'video' : 'screen'
+  }
+
+  swapStream(source: MediaSource) {
+    const enabled = !this._video.getValue()
+
+    const sender = this.transceiver.video.sender
+
+    const tracks = this.localStream.getVideoTracks()
+
+    this.getStreamFrom(source).then((stream) => {
+      this.localStream = stream
+      const [track] = stream.getVideoTracks()
+      sender.replaceTrack(track)
+    })
+
+    this._source.next(this.swapSource(source))
     tracks.forEach((t) => (t.enabled = enabled))
     this._video.next(enabled)
   }
