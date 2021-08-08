@@ -138,7 +138,7 @@ export class VoiceComponent implements OnInit, AfterViewInit, OnDestroy {
     const audio = this.userSetup.getAudioConfig()
     const video = this.userSetup.getVideoConfig()
 
-    this.stream.getStream({ video, audio }).then((stream) => {
+    this.stream.getUser({ video, audio }).then((stream) => {
       this.local.srcObject = stream
       this.localStream = stream
       this.local.muted = true

@@ -193,16 +193,15 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     const audio = this.userSetup.getAudioConfig()
     const video = this.userSetup.getVideoConfig()
 
-    this.stream.getStream({ video, audio }).then((stream) => {
+    this.stream.getUser({ video, audio }).then((stream) => {
       this.local.muted = true
-      this.localStream = stream
-      this.local.srcObject = stream
 
-      const audio = stream.getAudioTracks()
-      this.peer.connection.addTrack(audio.shift(), stream)
+      const audio = stream.getAudioTracks().shift()
+      this.peer.connection.addTrack(audio, stream)
 
-      const video = stream.getVideoTracks()
-      this.peer.connection.addTrack(video.shift(), stream)
+      const video = stream.getVideoTracks().shift()
+      this.peer.connection.addTrack(video, stream)
+      this.swapLocalMedia(video)
 
       const channel = this.peer.connection.createDataChannel('track')
       channel.addEventListener('open', (ev) => {
@@ -262,15 +261,15 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   toggleAudio() {
     const enabled = !this._audio.getValue()
-    const tracks = this.localStream.getAudioTracks()
-    tracks.forEach((t) => (t.enabled = enabled))
+    this.transceiver.audio.sender.track.enabled = enabled
+    console.log(this.transceiver.audio.sender)
     this._audio.next(enabled)
   }
 
   toggleVideo() {
     const enabled = !this._video.getValue()
-    const tracks = this.localStream.getVideoTracks()
-    tracks.forEach((t) => (t.enabled = enabled))
+    this.transceiver.video.sender.track.enabled = enabled
+    console.log(this.transceiver.video.sender)
     this._video.next(enabled)
   }
 
@@ -279,7 +278,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       case 'screen':
         return this.stream.getDisplay()
       case 'video':
-        return this.stream.getStream()
+        return this.stream.getUser()
     }
   }
 
@@ -288,21 +287,21 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   swapStream(source: MediaSource) {
-    const enabled = !this._video.getValue()
-
     const sender = this.transceiver.video.sender
 
-    const tracks = this.localStream.getVideoTracks()
-
     this.getStreamFrom(source).then((stream) => {
-      this.localStream = stream
       const [track] = stream.getVideoTracks()
       sender.replaceTrack(track)
+      this.swapLocalMedia(track)
     })
 
     this._source.next(this.swapSource(source))
-    tracks.forEach((t) => (t.enabled = enabled))
-    this._video.next(enabled)
+  }
+
+  swapLocalMedia(video: MediaStreamTrack) {
+    const media = new MediaStream()
+    media.addTrack(video)
+    this.local.srcObject = media
   }
 
   toggleCaption() {
