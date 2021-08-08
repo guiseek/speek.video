@@ -14,7 +14,7 @@ export class StreamAdapter {
 
   constructor(public config: StreamConfig) {}
 
-  async getStream(constraints?: MediaStreamConstraints) {
+  async getUser(constraints?: MediaStreamConstraints) {
     return navigator.mediaDevices
       .getUserMedia(constraints ? constraints : this.config)
       .then((stream) => {
@@ -51,16 +51,5 @@ export class StreamAdapter {
       audio.getTracks().shift(),
       stream.getTracks().shift(),
     ])
-    // const configuration = { video: true }
-    // const mediaDevices = navigator.mediaDevices
-    // if ('getDisplayMedia' in navigator) {
-    //   return (navigator as any).getDisplayMedia(configuration)
-    // } else if ('getDisplayMedia' in mediaDevices) {
-    //   return (mediaDevices as any).getDisplayMedia(configuration)
-    // } else {
-    //   return mediaDevices.getUserMedia({
-    //     video: { mediaSourcee: 'screen' },
-    //   } as MediaStreamConstraints)
-    // }
   }
 }
