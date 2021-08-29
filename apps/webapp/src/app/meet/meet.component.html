@@ -80,16 +80,20 @@
     <mat-icon>{{ (video | async) ? 'videocam' : 'videocam_off' }}</mat-icon>
   </button>
 
-  <button
-    type="button"
-    [matTooltip]="
-      (caption | async) ? 'Desabilitar legendas' : 'Habilitar legendas'
-    "
-    mat-icon-button
-    (click)="toggleCaption()"
-  >
-    <mat-icon>{{ (caption | async) ? 'subtitles' : 'subtitles_off' }}</mat-icon>
-  </button>
+  <ng-container *ngIf="!isFirefox">
+    <button
+      type="button"
+      [matTooltip]="
+        (caption | async) ? 'Desabilitar legendas' : 'Habilitar legendas'
+      "
+      mat-icon-button
+      (click)="toggleCaption()"
+    >
+      <mat-icon>{{
+        (caption | async) ? 'subtitles' : 'subtitles_off'
+      }}</mat-icon>
+    </button>
+  </ng-container>
 
   <ng-container *ngIf="source | async as src">
     <button
