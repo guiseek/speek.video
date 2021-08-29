@@ -61,4 +61,6 @@ import 'zone.js/dist/zone' // Included with Angular CLI.
  * APPLICATION IMPORTS
  */
 
-import '@speek/core/stream'
+import { SpeechRecognition } from '@speek/core/stream'
+
+window.SpeechRecognition = SpeechRecognition

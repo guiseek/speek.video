@@ -1,11 +1,12 @@
 import { map, takeUntil } from 'rxjs/operators'
 import { AlertDialog, AlertConfig, AlertService } from '@speek/ui/components'
+import { isFirefox } from '@speek/util/device'
 import { PermissionsAdapter } from '@speek/core/adapter'
 import { MatDialogRef } from '@angular/material/dialog'
 import { routerTransition } from './app.animation'
 import { Component, OnDestroy } from '@angular/core'
-import { alert } from './config'
 import { Observable, Subject } from 'rxjs'
+import { alert } from './config'
 
 @Component({
   selector: 'speek-root',
@@ -24,7 +25,7 @@ export class AppComponent implements OnDestroy {
     private readonly permissions: PermissionsAdapter,
     private readonly alertService: AlertService
   ) {
-    if (navigator.userAgent.toLowerCase().indexOf('firefox') === -1) {
+    if (!isFirefox()) {
       const camera$ = this.permissions.state('camera')
       this.camera$ = camera$.pipe(map((state) => state === 'granted'))
 

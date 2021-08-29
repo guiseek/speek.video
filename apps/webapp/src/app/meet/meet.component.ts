@@ -21,6 +21,7 @@ import {
   SignalingAdapter,
 } from '@speek/core/adapter'
 import { MeetService } from './meet.service'
+import { isFirefox } from '@speek/util/device'
 
 const filesAllowed: ReadonlyArray<string> = [
   'image/png',
@@ -84,6 +85,8 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   filesAllowed = filesAllowed
 
+  isFirefox = isFirefox()
+
   readonly signal = new BehaviorSubject<RTCSignalingState>('closed')
   readonly signal$ = this.signal.asObservable()
 
@@ -108,9 +111,11 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {
     this.code = this.route.snapshot.params.code
     // this.service.listenFile(this.peer.connection)
-    this.peerSpeech = new SpeechRecognition()
-    this.peerSpeech.continuous = true
-    this.peerSpeech.lang = 'pt-BR'
+    if (!isFirefox()) {
+      this.peerSpeech = new SpeechRecognition()
+      this.peerSpeech.continuous = true
+      this.peerSpeech.lang = 'pt-BR'
+    }
   }
 
   ngOnInit(): void {
@@ -228,7 +233,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
         this.remoteTrack.addCue(caption)
       })
 
-      if (this._caption.getValue()) {
+      if (!isFirefox() && this._caption.getValue()) {
         this.remoteTrack.mode = 'showing'
         this.peerSpeech.start()
         this.peerSpeech.onresult = ({ results, resultIndex }) => {
@@ -246,7 +251,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       if (state.audio === false) {
         this.toggleAudio()
       }
-      if (state.caption === true) {
+      if (!isFirefox() && state.caption === true) {
         this.toggleCaption()
       }
     })
