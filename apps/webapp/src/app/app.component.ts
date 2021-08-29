@@ -24,23 +24,25 @@ export class AppComponent implements OnDestroy {
     private readonly permissions: PermissionsAdapter,
     private readonly alertService: AlertService
   ) {
-    const camera$ = this.permissions.state('camera')
-    this.camera$ = camera$.pipe(map((state) => state === 'granted'))
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') === -1) {
+      const camera$ = this.permissions.state('camera')
+      this.camera$ = camera$.pipe(map((state) => state === 'granted'))
 
-    const microphone$ = this.permissions.state('microphone')
-    this.microphone$ = microphone$.pipe(map((state) => state === 'granted'))
+      const microphone$ = this.permissions.state('microphone')
+      this.microphone$ = microphone$.pipe(map((state) => state === 'granted'))
 
-    camera$.pipe(takeUntil(this.destroy)).subscribe((permission) => {
-      let config: AlertConfig
-      if ((config = this.getConfig(permission))) {
-        if (this.alert === undefined || this.alert?.getState() > 0) {
-          this.alert = this.alertService.openAlert(config)
+      camera$.pipe(takeUntil(this.destroy)).subscribe((permission) => {
+        let config: AlertConfig
+        if ((config = this.getConfig(permission))) {
+          if (this.alert === undefined || this.alert?.getState() > 0) {
+            this.alert = this.alertService.openAlert(config)
+          }
         }
-      }
-      if (this.alert && permission === 'granted') {
-        this.alert.close()
-      }
-    })
+        if (this.alert && permission === 'granted') {
+          this.alert.close()
+        }
+      })
+    }
   }
 
   getConfig(permission: PermissionState): AlertConfig | null {
