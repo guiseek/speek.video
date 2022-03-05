@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @mixin app-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -8,6 +9,6 @@
 
   .speek-container {
     // background: mat-color($background, app-bar);
-    color: mat-color($foreground, text);
+    color: mat.get-color-from-palette($foreground, text);
   }
 }
