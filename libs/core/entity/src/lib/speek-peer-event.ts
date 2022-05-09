@@ -1,5 +1,5 @@
 export type SpeekPeerEventMap = {
-  error: RTCErrorEvent | RTCError
+  error: RTCPeerConnectionIceErrorEvent
   offer: RTCSessionDescription
   answer: RTCSessionDescription
   candidate: RTCIceCandidate

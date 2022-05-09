@@ -1,3 +1,12 @@
-<main [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path">
-  <router-outlet #o="outlet"></router-outlet>
-</main>
+<mat-drawer-container
+  [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path"
+>
+
+  <mat-drawer-content>
+
+    <router-outlet #o="outlet"></router-outlet>
+
+  </mat-drawer-content>
+
+</mat-drawer-container>
+

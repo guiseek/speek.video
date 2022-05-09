@@ -26,23 +26,21 @@ export class AppComponent implements OnDestroy {
     private readonly alertService: AlertService
   ) {
     if (!isFirefox()) {
-      const camera$ = this.permissions.state('camera')
-      this.camera$ = camera$.pipe(map((state) => state === 'granted'))
-
-      const microphone$ = this.permissions.state('microphone')
-      this.microphone$ = microphone$.pipe(map((state) => state === 'granted'))
-
-      camera$.pipe(takeUntil(this.destroy)).subscribe((permission) => {
-        let config: AlertConfig
-        if ((config = this.getConfig(permission))) {
-          if (this.alert === undefined || this.alert?.getState() > 0) {
-            this.alert = this.alertService.openAlert(config)
-          }
-        }
-        if (this.alert && permission === 'granted') {
-          this.alert.close()
-        }
-      })
+      // const camera$ = this.permissions.state('camera')
+      // this.camera$ = camera$.pipe(map((state) => state === 'granted'))
+      // const microphone$ = this.permissions.state('microphone')
+      // this.microphone$ = microphone$.pipe(map((state) => state === 'granted'))
+      // camera$.pipe(takeUntil(this.destroy)).subscribe((permission) => {
+      //   let config: AlertConfig
+      //   if ((config = this.getConfig(permission))) {
+      //     if (this.alert === undefined || this.alert?.getState() > 0) {
+      //       this.alert = this.alertService.openAlert(config)
+      //     }
+      //   }
+      //   if (this.alert && permission === 'granted') {
+      //     this.alert.close()
+      //   }
+      // })
     }
   }
 

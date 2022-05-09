@@ -6,7 +6,7 @@
     "outDir": "../../../dist/out-tsc",
     "target": "ES2019"
   },
-  "exclude": ["**/*.spec.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "jest.config.ts"],
   "include": ["**/*.ts"],
   "extends": "./tsconfig.json"
 }

@@ -1,25 +1,25 @@
-@import '~@angular/cdk/text-field/text-field';
-@import '~@angular/material/theming';
-@import 'app/mat.theme.scss';
+@use '@angular/material' as mat;
+@use '@angular/cdk' as cdk;
+// @import 'app/mat.theme.scss';
 @import 'app/app.theme.scss';
 @import 'theming/palette';
 @import 'animtions';
 
-@include mat-core();
-@include cdk-a11y();
+@include mat.core();
+@include cdk.a11y-visually-hidden();
 
-$client-primary: mat-palette($mat-deep-purple);
-$client-accent: mat-palette($mat-light-blue);
-$client-warn: mat-palette($mat-red);
+$client-primary: mat.define-palette(mat.$amber-palette);
+$client-accent: mat.define-palette(mat.$green-palette);
+$client-warn: mat.define-palette(mat.$red-palette);
 
-$speek-typography: mat-typography-config(
+$speek-typography: mat.define-typography-config(
   $font-family: '"Montserrat", sans-serif',
-  $headline: mat-typography-level(32px, 48px, 700),
-  $body-1: mat-typography-level(16px, 24px, 500),
+  $headline: mat.define-typography-level(32px, 48px, 700),
+  $body-1: mat.define-typography-level(16px, 24px, 500),
 );
-@include angular-material-typography($speek-typography);
+@include mat.all-component-typographies($speek-typography);
 
-$client-theme: mat-light-theme(
+$client-theme: mat.define-dark-theme(
   (
     color: (
       primary: $client-primary,
@@ -29,8 +29,9 @@ $client-theme: mat-light-theme(
   )
 );
 
-@include mat-theme($client-theme);
+// @include mat-theme($client-theme);
 @include app-theme($client-theme);
+@include mat.all-component-themes($client-theme);
 
 /* You can add global styles to this file, and also import other style files */
 

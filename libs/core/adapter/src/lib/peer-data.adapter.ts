@@ -26,7 +26,7 @@ export class PeerDataAdapter {
   private _state = new BehaviorSubject<PeerDataState>('closed')
   readonly state$ = this._state.asObservable()
 
-  private _error = new Subject<RTCErrorEvent>()
+  private _error = new Subject<RTCPeerConnectionIceErrorEvent>()
   readonly error$ = this._error.asObservable()
 
   private _file = new Subject<PeerDataMessage>()

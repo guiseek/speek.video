@@ -71,13 +71,16 @@ export class PeerAdapter {
     })
 
     this.onError = new Observable((subscriber) => {
-      this.connection.addEventListener('icecandidateerror', (ev) => {
-        subscriber.next({
-          error: new Error(`Code: ${ev.errorCode}: ${ev.errorText}`),
-          description: `Type: ${ev.type}. URL: ${ev.url} at ${ev.timeStamp}`,
-          component: 'PeerAdapter',
-        })
-      })
+      this.connection.addEventListener(
+        'icecandidateerror',
+        (ev: RTCPeerConnectionIceErrorEvent) => {
+          subscriber.next({
+            error: new Error(`Code: ${ev.errorCode}: ${ev.errorText}`),
+            description: `Type: ${ev.type}. URL: ${ev.url} at ${ev.timeStamp}`,
+            component: 'PeerAdapter',
+          })
+        }
+      )
     })
   }
 
