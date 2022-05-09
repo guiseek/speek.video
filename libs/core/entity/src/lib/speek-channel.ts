@@ -21,6 +21,6 @@ export class SpeekChannel {
       console.log('open')
       this.sender.send('oi')
     })
-    this.sender.addEventListener('open', () => {})
+    this.sender.addEventListener('open', () => null)
   }
 }

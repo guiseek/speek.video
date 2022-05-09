@@ -14,13 +14,16 @@ export class MeetService {
       ordered: true,
       maxPacketLifeTime: 3600,
     })
-    channel.addEventListener('error', ({ error }) => {
-      console.error('RTCError: ', error.message)
-    })
+    channel.addEventListener(
+      'error',
+      (error: RTCPeerConnectionIceErrorEvent) => {
+        console.error('RTCError: ', error)
+      }
+    )
     channel.binaryType = 'arraybuffer'
     channel.addEventListener('open', async (ev) => {
-      console.log('SCTP: ', connection.sctp)
-      const MAX_SIZE = connection.sctp.maxMessageSize
+      console.log('SCTP: ', connection.getTransceivers())
+      // const MAX_SIZE = connection.sctp.maxMessageSize
       const arrayBuffer = await file.arrayBuffer()
       let i = 0
       console.log(arrayBuffer.byteLength)
@@ -37,11 +40,14 @@ export class MeetService {
       ordered: true,
     })
     connection.addEventListener('datachannel', ({ channel }) => {
-      console.log('SCTP: ', connection.sctp.maxMessageSize)
+      // console.log('SCTP: ', connection.sctp.maxMessageSize)
 
-      channel.addEventListener('error', ({ error }) => {
-        console.error('RTCError: ', error.message)
-      })
+      channel.addEventListener(
+        'error',
+        (error: RTCPeerConnectionIceErrorEvent) => {
+          console.error('RTCError: ', error)
+        }
+      )
       channel.binaryType = 'arraybuffer'
       const receiveBuffers: ArrayBuffer[] = []
       channel.addEventListener('message', async ({ data }) => {

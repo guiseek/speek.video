@@ -1,9 +1,14 @@
 {
   "npmScope": "speek",
-  "affected": { "defaultBase": "main" },
+  "affected": {
+    "defaultBase": "main"
+  },
   "implicitDependencies": {
     "angular.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
@@ -11,23 +16,51 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "ZmU0NGY5OGUtMTQwZi00NjZlLWI3YjUtY2ZjYTg1YTM5ODRjfHJlYWQtd3JpdGU=",
+        "parallel": 1
+      }
     }
   },
-  "projects": {
-    "webapp": { "tags": [] },
-    "webapp-e2e": { "tags": [], "implicitDependencies": ["webapp"] },
-    "gateway": { "tags": [] },
-    "core-entity": { "tags": [] },
-    "core-stream": { "tags": [] },
-    "ui-components": { "tags": ["type:ui"] },
-    "util-format": { "tags": ["type:util"] },
-    "ui-stylesheets": { "tags": ["type:ui"] },
-    "core-adapter": { "tags": [] },
-    "data-storage": { "tags": ["type:data"] },
-    "util-share": { "tags": ["type:util"] },
-    "util-device": { "tags": ["type:util"] },
-    "workspace": { "tags": [] }
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "webapp",
+  "generators": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "strict": true
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
   }
 }

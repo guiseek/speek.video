@@ -1,6 +1,7 @@
 export type UserPermissions = Pick<
   Record<PermissionName, PermissionState>,
-  'camera' | 'speaker' | 'microphone'
+  // 'camera' | 'speaker' | 'microphone'
+  'notifications'
 >
 
 export type UserDevices = Partial<

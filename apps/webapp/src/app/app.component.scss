@@ -4,7 +4,9 @@
   vertical-align: top;
   height: 100%;
 
-  main {
+  .mat-drawer-content,
+  .mat-drawer-container {
+    flex: 1;
     flex: 1;
     display: flex;
     flex-direction: column;
