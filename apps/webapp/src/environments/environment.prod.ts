@@ -7,7 +7,7 @@ export const environment = {
     // iceServers: [{ urls: 'stun:stun.stunprotocol.org:3478' }],
     iceServers: [
       {
-        urls: ['stun:54.90.98.123:3478'],
+        urls: ['stun:3.82.157.149:3478'],
         username: 'speek',
         credential: 'contact',
         credentialType: 'password',

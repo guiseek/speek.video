@@ -1,11 +1,6 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { Logger } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
-import { readFileSync } from 'fs'
+// import { readFileSync } from 'fs'
 import { AppLogger } from './app.logger'
 
 import { AppModule } from './app.module'
@@ -18,14 +13,14 @@ import { AppModule } from './app.module'
 
 async function bootstrap() {
   // const httpsOptions = environment.certificate ? certificates : {}
-  const app = await NestFactory.create(AppModule, {
-    logger: new AppLogger(),
-  })
+  const app = await NestFactory.create(AppModule, { logger: new AppLogger() })
+
   const globalPrefix = 'gateway'
+
   app.setGlobalPrefix(globalPrefix)
-  const port = process.env.PORT || 3333
-  await app.listen(port, () => {
-    Logger.log('Listening at http://localhost:' + port + '/' + globalPrefix)
+
+  await app.listen(process.env.PORT || 3333, async () => {
+    Logger.log(`Listening at ${await app.getUrl()}/${globalPrefix}`)
   })
 }
 

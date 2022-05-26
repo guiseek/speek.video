@@ -1,7 +1,7 @@
 import { environment } from './environments/environment'
-import { LoggerService, Logger } from '@nestjs/common'
+import { LoggerService, ConsoleLogger } from '@nestjs/common'
 
-export class AppLogger extends Logger implements LoggerService {
+export class AppLogger extends ConsoleLogger implements LoggerService {
   context: string
 
   setContext(context: string) {

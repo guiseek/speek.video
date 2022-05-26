@@ -6,7 +6,7 @@ export const environment = {
   configs: {
     iceServers: [
       {
-        urls: ['stun:54.90.98.123:3478'],
+        urls: ['stun:3.82.157.149:3478'],
         username: 'speek',
         credential: 'contact',
         credentialType: 'password',

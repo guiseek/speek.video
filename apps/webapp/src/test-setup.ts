@@ -1,5 +1,5 @@
 import 'jest-preset-angular'
-import 'jest-ts-auto-mock'
+// import 'jest-ts-auto-mock'
 
 import { getTestBed } from '@angular/core/testing'
 import {

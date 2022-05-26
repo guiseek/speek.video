@@ -43,3 +43,4 @@ asterisk.pem
 server/private/localhost.cert.pem
 server/private/localhost.key.pem
 server/private/localhost.req.pem
+.angular
