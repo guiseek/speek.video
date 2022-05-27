@@ -1,4 +1,7 @@
-import { CanvasStyle } from '@speek/core/entity'
+export interface CanvasStyle {
+  fill?: string
+  stroke?: string
+}
 
 function hexToRgba(hex: string, alpha: number = 1) {
   const r = parseInt(hex.slice(1, 3), 16)

@@ -1,4 +1,4 @@
-export interface CanvasStyle {
+interface CanvasStyle {
   fill?: string
   stroke?: string
 }

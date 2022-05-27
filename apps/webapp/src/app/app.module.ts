@@ -30,9 +30,7 @@ import { AudioDialog } from './setting/audio/audio.dialog'
 import { VideoDialog } from './setting/video/video.dialog'
 import { HomeComponent } from './home/home.component'
 import { MeetComponent } from './meet/meet.component'
-import { RoomComponent } from './room/room.component'
 import { AppComponent } from './app.component'
-import { RoomGuard } from './room/room.guard'
 import { MeetGuard } from './meet/meet.guard'
 import { AppSound } from './app.sound'
 import {
@@ -41,7 +39,6 @@ import {
   SplashModule,
   ToolbarModule,
 } from '@speek/ui/components'
-import { VoiceComponent } from './voice/voice.component'
 
 @NgModule({
   declarations: [
@@ -54,8 +51,6 @@ import { VoiceComponent } from './voice/voice.component'
     MeetAddonDirective,
     PeerStateBadgePipe,
     PeerSignalBadgePipe,
-    RoomComponent,
-    VoiceComponent,
   ],
   imports: [
     A11yModule,
@@ -80,18 +75,6 @@ import { VoiceComponent } from './voice/voice.component'
         {
           path: 'setting',
           component: SettingComponent,
-        },
-        {
-          path: ':code/room',
-          canActivate: [RoomGuard],
-          canDeactivate: [RoomGuard],
-          component: RoomComponent,
-        },
-        {
-          path: ':code/voice',
-          canActivate: [RoomGuard],
-          canDeactivate: [RoomGuard],
-          component: VoiceComponent,
         },
         {
           path: ':code',

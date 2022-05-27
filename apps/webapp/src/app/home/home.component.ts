@@ -1,20 +1,24 @@
 import { OnInit, OnDestroy, Component, HostListener } from '@angular/core'
-import { KindRoom, WithTarget } from '@speek/core/entity'
+import { debounceTime, filter, takeUntil } from 'rxjs/operators'
+import { EventWithTarget } from '@speek/core/entity'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { ActivatedRoute, Router } from '@angular/router'
-import { debounceTime, takeUntil } from 'rxjs/operators'
 import { FormControl, Validators } from '@angular/forms'
 import { ShareService } from '@speek/ui/components'
 import { Clipboard } from '@angular/cdk/clipboard'
 import { UUID } from '@speek/util/format'
 import { Subject } from 'rxjs'
 
-const copyText = (code: string, kindRoom: KindRoom = 'meet') => {
+const copyText = (code: string) => {
   const hello = 'Olá, conhece o Speek?'
   const howto = 'É só acessar speek.video e usar este código:'
   const link = 'Você pode acessar também clicando neste link:'
-  const url = `https://speek.video/#/${code}/${kindRoom}`
+  const url = `https://speek.video/#/${code}/meet`
   return `${hello}\n\n${howto}\n${code}\n\n${link}\n${url}`
+}
+
+function getClipboardData(event: ClipboardEvent): DataTransfer {
+  return event.clipboardData ?? globalThis.clipboardData
 }
 
 @Component({
@@ -28,22 +32,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   code = new FormControl('', [Validators.pattern(UUID.regex)])
 
   @HostListener('document:paste', ['$event'])
-  onPaste(event: WithTarget<HTMLInputElement>) {
-    event.stopPropagation()
-    event.preventDefault()
-    if ('clipboardData' in event || 'clipboardData' in window) {
-      const clipboardData: DataTransfer =
-        (event as any).clipboardData || (window as any).clipboardData
-
-      const content = clipboardData.getData('Text')
-      // Check if UUID code exist from content
-      const hasUUID = UUID.getFromText(content)
-
-      let uuid: string
-      // if it exists, take the first
-      if ((uuid = hasUUID?.shift())) {
-        this.code.patchValue(uuid)
-      }
+  onPaste(event: EventWithTarget<ClipboardEvent>) {
+    if ('clipboardData' in event) {
+      const content = getClipboardData(event).getData('Text')
+      const textPasted = UUID.getFromText(content)
+      this.code.patchValue(textPasted.shift() ?? '')
       event.target.blur()
     }
   }
@@ -58,40 +51,36 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const { code } = this._route.snapshot.params
-    this.code.patchValue(code ?? '')
+    this.code.patchValue(code)
     this.code.valueChanges
-      .pipe(debounceTime(400), takeUntil(this.destroy))
-      .subscribe(() => this.onCodeChange())
+      .pipe(
+        debounceTime(400),
+        takeUntil(this.destroy),
+        filter(() => this.code.valid)
+      )
+      .subscribe((value) => this.go(value))
   }
 
-  onCodeChange() {
-    if (this.code.valid) {
-      this._router.navigate(['/', this.code.value, 'meet'])
-    }
-  }
-
-  create(kindRoom: KindRoom = 'meet') {
+  create() {
     const uuid = UUID.long()
-    const config = { duration: 2800 }
-    this.clipboard.copy(copyText(uuid, kindRoom))
+    const config = { duration: 3600 }
+    const textToShare = 'Compartilhar chave agora?'
 
-    const message = this._snackbar.open(
-      'Compartilhar chave agora?',
-      'Sim',
-      config
-    )
-    message.afterDismissed().subscribe(() => this.go(uuid, kindRoom))
-    message.onAction().subscribe(() => {
-      this._share
-        .open({ uuid, kindRoom })
-        .subscribe(() => this.go(uuid, kindRoom))
-    })
+    this.clipboard.copy(copyText(uuid))
+
+    const message = this._snackbar.open(textToShare, 'Sim', config)
+
+    message
+      .onAction()
+      .pipe(takeUntil(this.destroy))
+      .subscribe(() => this._share.open({ uuid, kindRoom: 'meet' }))
+
+    this.go(uuid)
   }
 
-  go(code: string, kindRoom: KindRoom) {
-    if (code) {
-      this._router.navigate(['/', code, kindRoom])
-    }
+  go(code: string) {
+    const url = ['/', code, 'meet']
+    this._router.navigate(url)
   }
 
   ngOnDestroy(): void {

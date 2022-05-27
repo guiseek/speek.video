@@ -322,7 +322,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onFileChange(files: FileList) {
-    if (!!files.length) {
+    if (files.length) {
       typeOfFile(files.item(0)).then(({ verifiedType }) => {
         if (filesAllowed.includes(verifiedType)) {
           this.service.sendFile(this.peer.connection, files.item(0))

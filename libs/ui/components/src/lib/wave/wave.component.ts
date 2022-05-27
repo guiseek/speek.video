@@ -15,8 +15,53 @@ import {
 
 @Component({
   selector: 'speek-wave',
-  templateUrl: './wave.component.html',
-  styleUrls: ['./wave.component.scss'],
+  template: `
+    <canvas #theCanvas id="theCanvas" width="1024" height="256"></canvas>
+    <mat-toolbar #toolbar>
+      <mat-slider
+        min="-1"
+        max="2"
+        step="0.1"
+        thumbLabel
+        [formControl]="shiftSlider"
+      ></mat-slider>
+      <button
+        mat-icon-button
+        [ngClass]="{ off: (audio | async) }"
+        (click)="toggleAudio()"
+      >
+        <mat-icon> {{ (audio | async) ? 'mic' : 'mic_off' }} </mat-icon>
+      </button>
+    </mat-toolbar>
+  `,
+  styles: [
+    `
+      :host {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 80px;
+      }
+      canvas {
+        width: 100%;
+        max-width: 100%;
+        position: absolute;
+        bottom: 0;
+      }
+      .mat-toolbar {
+        width: 100%;
+        max-width: 100%;
+        position: absolute;
+        bottom: 0;
+        background-color: transparent;
+        justify-content: space-between;
+      }
+      .mat-slider {
+        flex: 1;
+      }
+    `,
+  ],
 })
 export class WaveComponent implements AfterViewInit, OnDestroy {
   @ViewChild('theCanvas')

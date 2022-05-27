@@ -3,7 +3,7 @@ export class UserRoom {
 
   readonly start: number
 
-  end: number = 0
+  end = 0
 
   get duration() {
     return this.start - this.end

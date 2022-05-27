@@ -8,7 +8,7 @@ import { Input, Component, ChangeDetectionStrategy } from '@angular/core'
 })
 export class SplashComponent {
   @Input()
-  width: string = '200px'
+  width = '200px'
 
-  @Input() message: string = ''
+  @Input() message = ''
 }
