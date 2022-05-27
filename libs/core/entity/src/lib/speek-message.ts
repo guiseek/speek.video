@@ -1,5 +1,5 @@
-export interface SpeekMessage {
+export interface SpeekMessage<T = any> {
   from: string
   type: 'message' | 'file'
-  data: any
+  data: T
 }
