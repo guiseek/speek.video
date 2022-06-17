@@ -8,9 +8,7 @@
   <video class="remote" #remote autoplay playsinline muted></video>
 </section>
 
-<ng-template meetAddon></ng-template>
-
-<ng-container *ngIf="(signal$ | async) != 'stable'">
+<ng-container *ngIf="(signal$ | async) !== 'stable'">
   <speek-splash
     width="200px"
     [message]="signal$ | async | peerSignalBadge"
@@ -51,7 +49,7 @@
 <mat-toolbar>
   <button
     mat-fab
-    [disabled]="(state$ | async) != 'connected'"
+    [disabled]="(state$ | async) !== 'connected'"
     (click)="hangup()"
     aria-label="Encerrar ligação"
     class="call-end"
@@ -117,7 +115,7 @@
     type="button"
     class="send-file"
     aria-label="Transferir arquivo"
-    [disabled]="(state$ | async) != 'connected'"
+    [disabled]="(state$ | async) !== 'connected'"
     (click)="inputFile.click()"
   >
     <mat-icon>cloud_upload</mat-icon>

@@ -24,7 +24,6 @@ import { LayoutModule } from '@angular/cdk/layout'
 
 import { environment } from './../environments/environment'
 import { PeerSignalBadgePipe, PeerStateBadgePipe } from './shared/pipes'
-import { MeetAddonDirective } from './meet/meet-addon.directive'
 import { SettingComponent } from './setting/setting.component'
 import { AudioDialog } from './setting/audio/audio.dialog'
 import { VideoDialog } from './setting/video/video.dialog'
@@ -48,7 +47,6 @@ import {
     HomeComponent,
     MeetComponent,
     SettingComponent,
-    MeetAddonDirective,
     PeerStateBadgePipe,
     PeerSignalBadgePipe,
   ],

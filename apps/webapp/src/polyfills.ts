@@ -52,13 +52,10 @@ import 'zone.js/dist/zone' // Included with Angular CLI.
  */
 
 import '@speek/core/stream'
-
 ;(window as any).SpeechRecognition = ((window as any).SpeechRecognition ||
   (window as any).webkitSpeechRecognition) as SpeechRecognition
-
 ;(window as any).SpeechGrammarList = ((window as any).SpeechGrammarList ||
   (window as any).webkitSpeechGrammarList) as SpeechGrammarList
-
 ;(window as any).SpeechRecognitionEvent =
   (window as any).SpeechRecognitionEvent ||
   (window as any).webkitSpeechRecognitionEvent
