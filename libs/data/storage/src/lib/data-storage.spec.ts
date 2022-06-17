@@ -1,6 +1,6 @@
 import { DataStorage } from './data-storage'
 
-class TestDataStorage extends DataStorage<any> {
+class TestDataStorage extends DataStorage<unknown> {
   protected key = 'test'
 }
 

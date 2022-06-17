@@ -83,7 +83,7 @@ export class WaveComponent implements AfterViewInit, OnDestroy {
 
   @Input() color = '#212121'
 
-  @Output() onStream = new EventEmitter<MediaStream>()
+  @Output() streamed = new EventEmitter<MediaStream>()
   @Output() valueChange = new EventEmitter<number>()
 
   ngAfterViewInit(): void {
@@ -98,7 +98,7 @@ export class WaveComponent implements AfterViewInit, OnDestroy {
   }
 
   gotStream = (stream: MediaStream) => {
-    this.onStream.emit(stream)
+    this.streamed.emit(stream)
     if (this.audioContext === null) {
       this.audioContext = new AudioContext()
     }

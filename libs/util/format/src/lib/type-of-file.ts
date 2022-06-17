@@ -58,7 +58,7 @@ export function typeOfFile(
       // file.verifiedType = getMimeType(magic)
 
       const uint = new Uint8Array(buffer)
-      let bytes = []
+      const bytes = []
       uint.forEach((byte) => bytes.push(byte.toString(16)))
       const hex = (file.verifiedType = getMimetype(
         bytes.join('').toUpperCase()

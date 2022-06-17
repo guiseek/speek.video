@@ -1,6 +1,4 @@
-import { Subject } from 'rxjs'
 import { Injectable } from '@angular/core'
-import { isFirefox } from '@speek/util/device'
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +19,7 @@ export class MeetService {
       }
     )
     channel.binaryType = 'arraybuffer'
-    channel.addEventListener('open', async (ev) => {
+    channel.addEventListener('open', async () => {
       console.log('SCTP: ', connection.getTransceivers())
       // const MAX_SIZE = connection.sctp.maxMessageSize
       const arrayBuffer = await file.arrayBuffer()

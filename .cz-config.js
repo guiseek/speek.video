@@ -40,7 +40,6 @@ module.exports = {
       description: 'Lib ui-components app foi alterado',
     },
     { name: 'util-format', description: 'Lib util-format foi alterado' },
-    { name: 'ui-stylesheets', description: 'Estilos Sass foram alterados' },
     { name: 'core-adapter', description: 'Lib core-adapter foi alterada' },
     { name: 'data-storage', description: 'Lib data-storage foi alterada' },
     { name: 'util-share', description: 'Lib util-share foi alterada' },

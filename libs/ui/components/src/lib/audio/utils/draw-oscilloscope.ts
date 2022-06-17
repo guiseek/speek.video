@@ -34,12 +34,12 @@ export function drawOscilloscope(
 
   canvasCtx.beginPath()
 
-  var sliceWidth = (canvas.width * 1.0) / bufferLength
-  var x = 0
+  const sliceWidth = (canvas.width * 1.0) / bufferLength
+  let x = 0
 
-  for (var i = 0; i < bufferLength; i++) {
-    var v = dataArray[i] / 128.0
-    var y = (v * canvas.height) / 2
+  for (let i = 0; i < bufferLength; i++) {
+    const v = dataArray[i] / 128.0
+    const y = (v * canvas.height) / 2
 
     if (i === 0) {
       canvasCtx.moveTo(x, y)

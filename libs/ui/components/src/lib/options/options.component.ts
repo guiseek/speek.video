@@ -26,7 +26,9 @@ export class OptionsComponent<T> implements OnInit {
     event.preventDefault()
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    return
+  }
 
   onClick(val?: any) {
     this._ref.dismiss()

@@ -1,4 +1,5 @@
 export * from './lib/util-share'
+export * from './lib/json-ld'
 export * from './lib/types'
 export * from './lib/lang'
 export * from './lib/icon'

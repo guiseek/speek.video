@@ -4,7 +4,6 @@ import { Component, Inject } from '@angular/core'
 import { Share } from '@speek/util/share'
 
 @Component({
-  selector: 'share-message',
   templateUrl: './message.dialog.html',
   styleUrls: ['./message.dialog.scss'],
 })

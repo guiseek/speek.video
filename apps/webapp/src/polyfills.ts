@@ -51,14 +51,24 @@ import 'zone.js/dist/zone' // Included with Angular CLI.
  * APPLICATION IMPORTS
  */
 
+declare global {
+  interface Window {
+    SpeechRecognition: SpeechRecognition
+    webkitSpeechRecognition: SpeechRecognition
+    SpeechGrammarList: SpeechGrammarList
+    webkitSpeechGrammarList: SpeechGrammarList
+    SpeechRecognitionEvent: SpeechRecognitionEvent
+    webkitSpeechRecognitionEvent: SpeechRecognitionEvent
+  }
+}
+
 import '@speek/core/stream'
-;(window as any).SpeechRecognition = ((window as any).SpeechRecognition ||
-  (window as any).webkitSpeechRecognition) as SpeechRecognition
-;(window as any).SpeechGrammarList = ((window as any).SpeechGrammarList ||
-  (window as any).webkitSpeechGrammarList) as SpeechGrammarList
-;(window as any).SpeechRecognitionEvent =
-  (window as any).SpeechRecognitionEvent ||
-  (window as any).webkitSpeechRecognitionEvent
+window.SpeechRecognition = (window.SpeechRecognition ||
+  window.webkitSpeechRecognition) as SpeechRecognition
+window.SpeechGrammarList = (window.SpeechGrammarList ||
+  window.webkitSpeechGrammarList) as SpeechGrammarList
+window.SpeechRecognitionEvent =
+  window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent
 
 // declare global {
 //   interface SpeechGrammar {

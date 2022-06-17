@@ -37,11 +37,11 @@ export function drawFrequency(
   canvasCtx.fillStyle = style.fill ?? '#212121'
   canvasCtx.fillRect(0, 0, canvas.width, canvas.height)
 
-  var barWidth = (canvas.width / bufferLength) * 2.5
-  var barHeight
-  var x = 0
+  const barWidth = (canvas.width / bufferLength) * 2.5
+  let barHeight
+  let x = 0
 
-  for (var i = 0; i < bufferLength; i++) {
+  for (let i = 0; i < bufferLength; i++) {
     barHeight = dataArray[i] / 2
 
     canvasCtx.fillStyle = changeColor(barHeight + 100, '#bb86fc')

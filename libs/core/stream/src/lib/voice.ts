@@ -113,8 +113,8 @@ export class Voice {
     mix2.connect(output)
 
     // Start
-    let t = context.currentTime + 0.05
-    let t2 = t + bufferTime - fadeTime
+    const t = context.currentTime + 0.05
+    const t2 = t + bufferTime - fadeTime
     mod1.start(t)
     mod2.start(t2)
     mod3.start(t)
