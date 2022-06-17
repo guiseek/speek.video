@@ -13,7 +13,7 @@ export const environment = {
         credentialType: 'password',
       },
     ],
-  },
+  } as RTCConfiguration,
   constraints: {
     audio: {
       channelCount: {
