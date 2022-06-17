@@ -1,9 +1,9 @@
 @use '@angular/material' as mat;
 @use '@angular/cdk' as cdk;
 // @import 'app/mat.theme.scss';
-@import 'app/app.theme.scss';
-@import 'theming/palette';
-@import 'animtions';
+@import './app/app.theme.scss';
+@import './theming/palette';
+@import './stylesheets/animtions';
 
 @include mat.core();
 @include cdk.a11y-visually-hidden();

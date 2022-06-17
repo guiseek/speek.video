@@ -46,6 +46,8 @@ export abstract class DataStorage<T = any> {
   clearStorage() {
     try {
       localStorage.removeItem(this.key)
-    } catch {}
+    } catch {
+      return
+    }
   }
 }

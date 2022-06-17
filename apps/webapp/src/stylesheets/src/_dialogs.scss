@@ -1,0 +1,15 @@
+body .mat-dialog {
+  &-container {
+    overflow: hidden;
+    border-radius: 6px;
+    // background-color: rgba(48, 48, 48, 1);
+  }
+  &-content {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  &-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}

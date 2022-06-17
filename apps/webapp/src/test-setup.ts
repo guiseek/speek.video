@@ -1,5 +1,5 @@
 import 'jest-preset-angular'
-// import 'jest-ts-auto-mock'
+import 'jest-ts-auto-mock'
 
 // import { getTestBed } from '@angular/core/testing'
 // import {
@@ -13,3 +13,7 @@ import 'jest-preset-angular'
 //   platformBrowserDynamicTesting(),
 //   { teardown: { destroyAfterEach: false } }
 // )
+
+Object.defineProperty(window, 'RTCPeerConnectionState', {
+  value: 'stable',
+})

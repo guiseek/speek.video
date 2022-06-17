@@ -151,7 +151,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       this.track.next(track)
       if (track) {
         this.remote.srcObject = track
-        track.onremovetrack = (ev) => {
+        track.onremovetrack = () => {
           this.remote.srcObject = null
         }
       }

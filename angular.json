@@ -225,21 +225,6 @@
       },
       "tags": ["type:ui"]
     },
-    "ui-stylesheets": {
-      "root": "libs/ui/stylesheets",
-      "sourceRoot": "libs/ui/stylesheets/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/ui/stylesheets/**/*.ts"]
-          },
-          "outputs": ["{options.outputFile}"]
-        }
-      },
-      "tags": ["type:ui"]
-    },
     "util-device": {
       "root": "libs/util/device",
       "sourceRoot": "libs/util/device/src",
@@ -360,9 +345,6 @@
               "apps/webapp/src/manifest.webmanifest"
             ],
             "styles": ["apps/webapp/src/styles.scss"],
-            "stylePreprocessorOptions": {
-              "includePaths": ["libs/ui/stylesheets"]
-            },
             "allowedCommonJsDependencies": ["socket.io-client"],
             "scripts": []
           },
@@ -481,18 +463,6 @@
           }
         }
       },
-      "tags": []
-    },
-    "workspace": {
-      "architect": {
-        "version": {
-          "builder": "@jscutlery/semver:version",
-          "options": {
-            "syncVersions": true
-          }
-        }
-      },
-      "root": ".",
       "tags": []
     }
   }
