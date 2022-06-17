@@ -8,7 +8,7 @@ module.exports = {
 
   globals: {
     'ts-jest': {
-      compiler: 'ttypescript',
+      compiler: 'typescript',
 
       stringifyContentPathRegex: '\\.(html|svg)$',
 

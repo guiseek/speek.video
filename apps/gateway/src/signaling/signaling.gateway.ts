@@ -13,9 +13,14 @@ import { UseGuards } from '@nestjs/common'
 import { SignalingGuard } from './signaling.guard'
 import { AppLogger } from '../app.logger'
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: '*',
+  },
+})
 export class SignalingGateway
-  implements OnGatewayConnection, OnGatewayDisconnect {
+  implements OnGatewayConnection, OnGatewayDisconnect
+{
   @WebSocketServer()
   server: Server
 
@@ -70,7 +75,7 @@ export class SignalingGateway
   ) {
     this.logger.debug(payload, SpeekAction.Offer)
     const room = contact.to(payload.code)
-    room.broadcast.emit(SpeekAction.Offer, payload)
+    room.emit(SpeekAction.Offer, payload)
   }
 
   @UseGuards(SignalingGuard)
@@ -81,7 +86,7 @@ export class SignalingGateway
   ) {
     this.logger.debug(payload, SpeekAction.Screen)
     const room = contact.to(payload.code)
-    room.broadcast.emit(SpeekAction.Screen, payload)
+    room.emit(SpeekAction.Screen, payload)
   }
 
   private _room({ code }) {
@@ -96,6 +101,7 @@ export class SignalingGateway
   handleDisconnect(contact: Socket) {
     contact.broadcast.emit(SpeekAction.Exited, contact.id)
     this.users.delete(contact.id)
-    contact.leaveAll()
+    contact.rooms.forEach((room) => contact.leave(room))
+    // contact.leaveAll()
   }
 }

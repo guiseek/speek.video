@@ -1,6 +1,6 @@
 import { SpeekAction, SpeekPayload } from '@speek/core/entity'
 import { Observable, Subject } from 'rxjs'
-import * as io from 'socket.io-client'
+import { io, Socket } from 'socket.io-client'
 
 export interface SignalingConfig {
   url: string
@@ -11,7 +11,7 @@ export class SignalingAdapter {
   private message = new Subject<SpeekPayload>()
   onMessage = this.message.asObservable()
 
-  io: SocketIOClient.Socket
+  io: Socket
 
   constructor(config: SignalingConfig) {
     this.io = io(config.url)

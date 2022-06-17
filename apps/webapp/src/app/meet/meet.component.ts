@@ -22,6 +22,8 @@ import {
 } from '@speek/core/adapter'
 import { MeetService } from './meet.service'
 import { isFirefox } from '@speek/util/device'
+import { PeerProvider } from '../app.adapter'
+import { environment } from '../../environments/environment'
 
 const filesAllowed: ReadonlyArray<string> = [
   'image/png',
@@ -42,6 +44,7 @@ export type MediaSource = 'screen' | 'video'
   selector: 'speek-meet',
   templateUrl: './meet.component.html',
   styleUrls: ['./meet.component.scss'],
+  providers: [PeerProvider.withConfig(environment.configs)],
 })
 export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   destroy = new Subject<void>()
@@ -87,6 +90,8 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isFirefox = isFirefox()
 
+  peer: PeerAdapter
+
   readonly signal = new BehaviorSubject<RTCSignalingState>('closed')
   readonly signal$ = this.signal.asObservable()
 
@@ -104,13 +109,11 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private service: MeetService,
-    readonly peer: PeerAdapter,
     readonly stream: StreamAdapter,
     readonly signaling: SignalingAdapter,
     readonly userSetup: UserSetupStorage
   ) {
     this.code = this.route.snapshot.params.code
-    // this.service.listenFile(this.peer.connection)
     if (!isFirefox()) {
       this.peerSpeech = new SpeechRecognition()
       this.peerSpeech.continuous = true
@@ -119,6 +122,8 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.peer = new PeerAdapter(environment.configs)
+
     this.signaling
       .on(SpeekAction.Offer)
       .pipe(takeUntil(this.destroy))
@@ -346,6 +351,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     if (this.peer?.connection) {
       console.log('close')
+      this.peer.connection.close()
     }
   }
 }

@@ -103,7 +103,6 @@ import {
     UserSetupStorage,
     UserSetupAdapter,
     PermissionsProvider.forRoot(),
-    PeerProvider.withConfig(environment.configs as RTCConfiguration),
     StreamProvider.withConfig(environment.constraints),
     SignalingProvider.withConfig(environment.gateway),
   ],

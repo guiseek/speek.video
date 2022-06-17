@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   gateway: {
-    url: 'https://gateway.speek.video',
+    url: 'http://localhost:3333',
   },
   configs: {
     // iceServers: [{ urls: 'stun:stun.stunprotocol.org:3478' }],
@@ -18,7 +18,7 @@ export const environment = {
         credentialType: 'password',
       },
     ],
-  },
+  } as RTCConfiguration,
   constraints: {
     audio: {
       channelCount: {

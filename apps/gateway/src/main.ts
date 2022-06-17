@@ -17,7 +17,7 @@ async function bootstrap() {
 
   const globalPrefix = 'gateway'
 
-  app.setGlobalPrefix(globalPrefix)
+  // app.setGlobalPrefix(globalPrefix)
 
   await app.listen(process.env.PORT || 3333, async () => {
     Logger.log(`Listening at ${await app.getUrl()}/${globalPrefix}`)
