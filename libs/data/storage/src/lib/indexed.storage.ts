@@ -367,9 +367,7 @@ export class IndexedStorage implements Storage {
    * @param mode `readonly` or `readwrite`
    * @returns An `indexedDB` transaction store and events, wrapped in an RxJS `Observable`
    */
-  protected transaction(
-    mode: IDBTransactionMode
-  ): Observable<{
+  protected transaction(mode: IDBTransactionMode): Observable<{
     store: IDBObjectStore
     events: Observable<Event>
   }> {

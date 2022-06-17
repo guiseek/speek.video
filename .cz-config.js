@@ -9,28 +9,23 @@ module.exports = {
     },
     {
       value: 'build',
-      name:
-        'build:    Alteração no sistema de compilação ou dependências externas (exemplos de escopos: gulp, broccoli, npm)',
+      name: 'build:    Alteração no sistema de compilação ou dependências externas (exemplos de escopos: gulp, broccoli, npm)',
     },
     {
       value: 'ci',
-      name:
-        'ci:       Alteração de arquivos e scripts para configuração de CI (exemplos de escopo: Travis, Circle, BrowserStack, SauceLabs)',
+      name: 'ci:       Alteração de arquivos e scripts para configuração de CI (exemplos de escopo: Travis, Circle, BrowserStack, SauceLabs)',
     },
     {
       value: 'refactor',
-      name:
-        'refactor: Uma mudança de código que não corrige um bug nem adiciona uma funcionalidade',
+      name: 'refactor: Uma mudança de código que não corrige um bug nem adiciona uma funcionalidade',
     },
     {
       value: 'style',
-      name:
-        'style:    Alterações que não afeta a regra ou lógica do código (espaço em branco, formatação, ponto e vírgula ausente, etc)',
+      name: 'style:    Alterações que não afeta a regra ou lógica do código (espaço em branco, formatação, ponto e vírgula ausente, etc)',
     },
     {
       value: 'chore',
-      name:
-        'chore:    Outras mudanças que não modificam os arquivos em src ou de testes',
+      name: 'chore:    Outras mudanças que não modificam os arquivos em src ou de testes',
     },
     { value: 'wip', name: 'wip:      Trabalho em progresso' },
   ],
@@ -79,8 +74,7 @@ module.exports = {
     // used if allowCustomScopes is true
     customScope: 'Indique o escopo desta alteração:',
     subject: 'Escreva uma descrição CURTA e IMPERATIVA da mudança:\n',
-    body:
-      'Forneça uma descrição mais detalhada da alteração (optional). Use "|" para quebras de linha:\n',
+    body: 'Forneça uma descrição mais detalhada da alteração (optional). Use "|" para quebras de linha:\n',
     breaking:
       'Listar quaisquer ALTERAÇÕES DE QUEBRA / BREAKING CHANGES (opcional):\n',
     footer:

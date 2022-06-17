@@ -1,7 +1,7 @@
 import { DataStorage } from './data-storage'
 
 class TestDataStorage extends DataStorage<any> {
-  protected key: string = 'test'
+  protected key = 'test'
 }
 
 describe('DataStorage', () => {
