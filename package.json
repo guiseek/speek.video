@@ -61,7 +61,7 @@
     "@angular/service-worker": "13.3.6",
     "@nestjs/common": "8.4.5",
     "@nestjs/core": "^8.0.0",
-    "@nestjs/mapped-types": "^0.3.0",
+    "@nestjs/mapped-types": "^1.0.1",
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/platform-socket.io": "8.4.5",
     "@nestjs/websockets": "8.4.5",
