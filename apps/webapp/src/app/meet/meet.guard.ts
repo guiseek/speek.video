@@ -47,9 +47,11 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
       return false
     }
     /* listening to availability response */
-    const isFull$ = this._signaling
-      .on(SpeekAction.Available)
-      .pipe(map((value) => value.code === params.code))
+    const isFull$ = this._signaling.on(SpeekAction.Available).pipe(
+      map((value: SpeekPayload & { full: boolean }) => {
+        return value.code === params.code && value.full
+      })
+    )
 
     /* ask if there is anyone in the meeting room */
     const payload = new SpeekPayload('', params.code)

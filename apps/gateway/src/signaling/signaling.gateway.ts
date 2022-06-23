@@ -39,9 +39,9 @@ export class SignalingGateway
     this.logger.debug(payload, SpeekAction.KnockKnock)
     const room = this._room(payload)
     if (room.length >= 0 && room.length < 2) {
-      contact.emit(SpeekAction.Available, true)
+      contact.emit(SpeekAction.Available, { ...payload, full: false })
     } else {
-      contact.emit(SpeekAction.Available, false)
+      contact.emit(SpeekAction.Available, { ...payload, full: true })
     }
   }
 

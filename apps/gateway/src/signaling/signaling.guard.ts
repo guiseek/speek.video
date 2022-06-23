@@ -22,7 +22,9 @@ export class SignalingGuard implements CanActivate {
     return this.hasCode(context.switchToWs().getData())
   }
 
-  hasCode({ code }: SpeekPayload) {
+  hasCode({ code, sender }: SpeekPayload) {
+    console.log(code, sender)
+
     if (!code || !UUID.isValid(code)) throw new WsException('Missing code.')
     return !!code
   }

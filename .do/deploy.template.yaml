@@ -1,0 +1,8 @@
+spec:
+  name: sample-expressjs
+  services:
+  - environment_slug: node-js
+    git:
+      branch: main
+      repo_clone_url: https://github.com/guiseek/speek.video.git
+    name: speek-video
