@@ -1,4 +1,5 @@
 {
+  "schema": "./node_modules/nx/schemas/nx-schema.json",
   "npmScope": "speek",
   "affected": {
     "defaultBase": "main"
@@ -20,6 +21,7 @@
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "ZmU0NGY5OGUtMTQwZi00NjZlLWI3YjUtY2ZjYTg1YTM5ODRjfHJlYWQtd3JpdGU=",
+        "cacheDirectory": "/tmp/nx",
         "parallel": 1
       }
     }
