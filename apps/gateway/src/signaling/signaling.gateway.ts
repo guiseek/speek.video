@@ -36,12 +36,11 @@ export class SignalingGateway
     @ConnectedSocket() contact: Socket,
     @MessageBody() payload: SpeekPayload
   ) {
-    this.logger.debug(payload, SpeekAction.KnockKnock)
     const room = this._room(payload)
-    if (room.length >= 2) {
-      contact.emit(SpeekAction.Available, { ...payload, full: true })
+    if (room.length >= 0 && room.length < 2) {
+      contact.emit(SpeekAction.Available, true)
     } else {
-      contact.emit(SpeekAction.Available, { ...payload, full: false })
+      contact.emit(SpeekAction.Available, false)
     }
   }
 
@@ -51,7 +50,6 @@ export class SignalingGateway
     @ConnectedSocket() contact: Socket,
     @MessageBody() payload: SpeekPayload
   ) {
-    this.logger.debug(payload, SpeekAction.CreateOrJoin)
     if (!this.users.has(contact.id)) {
       this.users.set(contact.id, payload.sender)
     }
@@ -73,7 +71,6 @@ export class SignalingGateway
     @ConnectedSocket() contact: Socket,
     @MessageBody() payload: SpeekPayload
   ) {
-    this.logger.debug(payload, SpeekAction.Offer)
     const room = contact.to(payload.code)
     room.emit(SpeekAction.Offer, payload)
   }
@@ -84,7 +81,6 @@ export class SignalingGateway
     @ConnectedSocket() contact: Socket,
     @MessageBody() payload: SpeekPayload
   ) {
-    this.logger.debug(payload, SpeekAction.Screen)
     const room = contact.to(payload.code)
     room.emit(SpeekAction.Screen, payload)
   }

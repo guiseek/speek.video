@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { MeetComponent } from './meet.component'
 import { noop, Observable, of } from 'rxjs'
 import { Injectable } from '@angular/core'
-import { take, tap, map } from 'rxjs/operators'
+import { take, tap } from 'rxjs/operators'
 import { UUID } from '@speek/util/format'
 import {
   CanActivate,
@@ -42,26 +42,23 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
   canActivate({
     params,
   }: ActivatedRouteSnapshot): boolean | Observable<boolean> {
-    /* if the code is wrong, return */
     if (UUID.isValid(params.code) === false) {
       return false
     }
     /* listening to availability response */
-    const isFull$ = this._signaling.on(SpeekAction.Available).pipe(
-      map((value: SpeekPayload & { full: boolean }) => {
-        return value.code === params.code && value.full === true
-      })
-    )
+    const isFull$ = this._signaling.on(SpeekAction.Available)
 
     /* ask if there is anyone in the meeting room */
     const payload = new SpeekPayload('', params.code)
     this._signaling.send(SpeekAction.KnockKnock, payload)
 
-    const ifFull = (full: boolean) => {
+    const ifFull = (full: SpeekPayload) => {
       return !full ? this._snackbar.open('Sala cheia') : noop
     }
 
     // return the answer to the question asked
-    return isFull$.pipe(take(1), tap(ifFull))
+    // return isFull$.pipe(take(1), tap(ifFull))
+
+    return (isFull$ as any).pipe(take(1), tap(ifFull))
   }
 }
