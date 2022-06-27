@@ -49,7 +49,7 @@ export class MeetGuard implements CanActivate, CanDeactivate<MeetComponent> {
     /* listening to availability response */
     const isFull$ = this._signaling.on(SpeekAction.Available).pipe(
       map((value: SpeekPayload & { full: boolean }) => {
-        return value.code === params.code && value.full
+        return value.code === params.code && value.full === true
       })
     )
 
