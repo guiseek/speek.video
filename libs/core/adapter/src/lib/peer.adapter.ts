@@ -18,6 +18,8 @@ export class PeerAdapter {
   sendChannel: RTCDataChannel
   receiveChannel: RTCDataChannel
 
+  isOffer = true
+
   _onMessage = new Subject<SpeekMessage>()
   onMessage = this._onMessage.asObservable()
 
@@ -35,7 +37,7 @@ export class PeerAdapter {
     // this.sendChannel = new RTCDataChannel()
 
     this.onState = new Observable((subscriber) => {
-      this.connection.addEventListener('connectionstatechange', (event) => {
+      this.connection.addEventListener('connectionstatechange', () => {
         subscriber.next(this.connection.connectionState)
       })
     })
@@ -97,6 +99,7 @@ export class PeerAdapter {
 
   createAnswer = (options?: RTCSessionDescription) => {
     return new Promise<RTCSessionDescription>((resolve, reject) => {
+      this.isOffer = false
       this.connection
         .setRemoteDescription(options)
         .then(() => this.connection.createAnswer())

@@ -178,6 +178,7 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
       if (sender !== this.sender) {
         if (notNull(this.peer.connection) && isDefined(data.ice)) {
           this.peer.addCandidate(data.ice)
+          console.log(this.peer.isOffer)
         }
         if (data.sdp) {
           this.makeChoice(data.sdp)
@@ -189,13 +190,16 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async makeChoice(sdp: RTCSessionDescription) {
+    console.log(sdp)
+
     switch (sdp.type) {
       case SpeekAction.Offer:
         return this.peer.createAnswer(sdp).then((answer) => {
           this.sendOffer({ sdp: answer })
         })
-      case SpeekAction.Answer:
+      case SpeekAction.Answer: {
         return this.peer.setRemote(sdp)
+      }
     }
   }
 
@@ -215,7 +219,10 @@ export class MeetComponent implements OnInit, AfterViewInit, OnDestroy {
 
       const channel = this.peer.connection.createDataChannel('track')
       channel.addEventListener('open', (ev) => {
-        console.log('popen: ', ev)
+        if (!this.peer.isOffer && !isDefined(this.remoteStream)) {
+          console.log('popen: ', ev)
+          location.reload()
+        }
       })
 
       const onMessage = <T extends string>({ data }: MessageEvent<T>) => {
